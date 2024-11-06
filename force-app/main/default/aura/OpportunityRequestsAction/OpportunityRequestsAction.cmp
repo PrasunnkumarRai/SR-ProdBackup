@@ -1,0 +1,30 @@
+<!--
+	Author      : M&S
+	Description : It is having Select Request Type(select list) with below “CNA”, ”Production”, “Research Request” values.
+                  Redirects to New CNA Record page with auto populated fields.
+-->
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" controller="OpportunityRequestsActionController">
+	<aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="selectedRequest" type="string" default="cna"/>
+    
+    <div class="slds-page-header">
+        <div class="slds-media">
+            <div class="slds-media__body">
+                <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="New Digital Campaign">Create New Request</h1>
+            </div>
+        </div>
+    </div>
+    <div class="slds-form slds-form_stacked slds-m-top_small">
+        <div class="slds-form-element">
+            <div class="slds-form-element__control">
+                <lightning:select name="request_select" value="{!v.selectedRequest}" label="Select Request Type" aura:id="request_select">
+                    <option value="cna">CNA</option>
+                    <option value="production">Production</option>
+                    <option value="research_request">Research Request</option>
+                </lightning:select>
+                <lightning:button variant="brand" label="Next" class="slds-float_right slds-m-top_small" onclick="{!c.createNewRequest}" />
+                <lightning:button variant="neutral" label="Cancel" class="slds-float_right slds-m-top_small slds-m-right_small" onclick="{!c.dismissQuickAction}" />
+            </div>
+        </div>
+    </div>
+</aura:component>

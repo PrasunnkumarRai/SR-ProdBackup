@@ -1,0 +1,8 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global">
+	<aura:attribute name="boxFrame" type="String"/>
+	<aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+
+	<div aura:id="boxEmbedDiv">
+		<aura:unescapedHtml value="{!v.boxFrame}" />
+	</div>
+</aura:component>

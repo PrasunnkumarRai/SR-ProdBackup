@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>creator</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>Sales_DOS</submitter>
+        <type>group</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>Sales_Manager</submitter>
+        <type>group</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Owner</field>
+        <field>SAM_Designation__c</field>
+        <field>Target_Conversion_Approval_Date__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>jeff.schultz@charter.com</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>Unanimous</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Enters if Division is East or West</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Account_SAM_Mapping__c.Division__c</field>
+                <operation>equals</operation>
+                <value>West,East</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>ASM - LSM/DOS - Key East/West</label>
+        <name>ASM_LSM_DOS_Key_East_West</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>jeff.schultz@charter.com</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Enters if Division is Central</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Account_SAM_Mapping__c.Division__c</field>
+                <operation>equals</operation>
+                <value>Central</value>
+            </criteriaItems>
+        </entryCriteria>
+        <label>ASM - LSM/DOS - Key Central</label>
+        <name>ASM_LSM_DOS_Key_Central</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <emailTemplate>Account_SAM_Mapping/ASM_Target_Conversion_Approval_Notification</emailTemplate>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(
+OR(
+$Profile.Name = &apos;Master - Local Sales Manager&apos;,
+$Profile.Name = &apos;Master - Director of Sales&apos;
+)
+,
+ISPICKVAL(SAM_Designation__c, &quot;Update to Key&quot;)
+)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>ASM_Request_Approved_Notification</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>ASM_Stamp_Target_Conversion_Approval_Dat</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>ASM_Update_ASM_to_Key</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>ASM_Request_Rejected_Notification</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>ASM_Update_ASM_to_Secondary</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Update_SAM_Des_to_In_Approval</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>ASM - LSM/DOS Update to Key</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Approving_Manager__c</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>2</processOrder>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

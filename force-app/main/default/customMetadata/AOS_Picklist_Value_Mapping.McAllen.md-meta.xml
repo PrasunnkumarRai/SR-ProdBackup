@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>McAllen</label>
+    <protected>false</protected>
+    <values>
+        <field>Field_API_Name__c</field>
+        <value xsi:type="xsd:string">Sales_Office__c</value>
+    </values>
+    <values>
+        <field>Production_Id__c</field>
+        <value xsi:type="xsd:string">94605caa-c8a8-4533-ac2a-bae30363b519</value>
+    </values>
+    <values>
+        <field>Staging_Id__c</field>
+        <value xsi:type="xsd:string">b3fca170-4be6-4ed1-9ff5-5234ca0b09db</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,72 @@
+<!--
+    Author : MAndS 
+    Date   : 11/05/2017
+    Description : Digital Addressability Zones Component for Digital Campaign  
+    Modification History : 
+-->
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction" access="global" controller="CM_DigAZoneLCController">
+	<ltng:require styles="/resource/SLDS/assets/styles/salesforce-lightning-design-system.css,
+                           /resource/SLDS/assets/styles/salesforce-lightning-design-system.min.css"
+                  />
+    <ltng:require styles="{!$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.css'}"/>   
+    <ltng:require styles="{! $Resource.select2 + '/select2-4.0.3/dist/css/select2.min.css'}" 
+      scripts="{!join(',',             
+        $Resource.Jquery224 ,      
+        $Resource.select2 + '/select2-4.0.3/dist/js/select2.js')
+      }" afterScriptsLoaded="{!c.scriptsLoaded}"/>
+    <!--init handler event call "doInit" function on component load and fetch picklist values-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	<aura:attribute name="lockRecord" type="Boolean" default="true"/>    
+    <aura:attribute name="recordId" type="String" /><!--default="a0Ig00000084dqe"/>-->
+    <!--<aura:attribute name="RecId" type="string" default="a0Ig00000084dqe" description="RecordId"/>-->
+    <!--<aura:attribute name="picklistDigAZoneOptsList" type="String[]"/>-->
+    <aura:attribute name="Zipcode" type="string" description="Zipcode Information"/>
+    <aura:attribute name="DigAZoneTooltip" type="string" description="Tooltip of DigAZone"/>
+    
+    <div class="slds">
+        <div class="slds-card slds-m-top--x-large"> 
+            <!-- page header -->
+            <div class="slds-card__header slds-border_bottom slds-p-bottom_small">
+                <header class="slds-align--absolute-center">
+                    <span class="slds-text-heading_small">Addressable Online Zones</span>
+                </header>
+            </div>
+            <div class="slds-card__body slds-m-around_medium">              
+                <h3 class="slds-section-title--divider"><b>Addressable Online Zones</b></h3>
+                <div class="slds-grid slds-wrap slds-grid--pull-padded slds-m-horizontal--large">
+                    <div class="slds-p-horizontal--small slds-m-bottom--medium  slds-medium-size--1-of-1 slds-small-size--1-of-1 slds-large-size--1-of-1">
+                        
+                        <div class="slds-form-element">  
+                            <label for="picklist" class="slds-form-element__label">Addressable Online Zone</label>
+                            	<c:ToolTipLC tooltipText="{!v.DigAZoneTooltip}"/>
+                            <br/>
+                            <div class="slds-select_container" >
+                                <select style="width:100%" id="picklist4" class="select2Class" multiple="multiple" disabled="{!v.lockRecord}" >
+                                </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="slds-card__footer slds-align--absolute-center slds-border_top slds-p-top_small slds-m-top--large">
+                    <lightning:button label="Insert Addressable Online Zone" variant="neutral" disabled="{!v.lockRecord}" onclick="{!c.updateZipcode}"/> 
+                </div>
+                
+                <h3 class="slds-section-title--divider"><b>Selected Addressable Online Zones</b></h3>
+                <div class="slds-grid slds-wrap slds-grid--pull-padded slds-m-horizontal--large">
+                    <div class="slds-p-horizontal--small slds-m-bottom--medium  slds-medium-size--1-of-1 slds-small-size--1-of-1 slds-large-size--1-of-1">
+                        <div class="slds-form-element">  
+                            <label for="picklist" class="slds-form-element__label">Addressable Online Zone</label>
+                            	<c:ToolTipLC tooltipText="{!v.DigAZoneTooltip}"/>
+                            <br/>
+                            <div class="slds-form-element__control">
+                                <ui:inputTextArea aura:id="Street" class="slds-input" value="{!v.Zipcode}" disabled="true"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</aura:component>

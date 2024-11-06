@@ -1,0 +1,114 @@
+<aura:component implements="force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" controller="NewAccountRequestController">
+    <lightning:navigation aura:id="navService"/>
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="rtAccessFailed" type="boolean" default="false"/>
+    <aura:attribute name="aeAccessFailed" type="boolean" default="false"/>
+    
+    <aura:attribute name="responseObj" type="object"/>
+    <aura:attribute name="isAEVisible" type="boolean" default="false"/>
+
+    <aura:attribute name="showUserList" type="boolean" default="false"/>
+    <aura:attribute name="showUserAEList" type="boolean" default="true"/> 
+    <aura:attribute name="selectedRT" type="string"/>
+    <aura:attribute name="selectedRTNameForContactRequest" type="string"/>
+    <aura:attribute name="selectedAE" type="string"/>
+    <aura:attribute name="selectedAEForTeamMemRecType" type="string"/>
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    
+    <aura:if isTrue="{!not(v.selectedRT == v.selectedRTNameForContactRequest)}">
+    <div class="slds-page-header">
+        <div class="slds-media">
+            <div class="slds-media__body">
+                <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="New Digital Creative">New Account Request</h1>
+            </div>
+        </div>
+    </div>
+    <!-- <aura:if isTrue="{!v.openContactRequestFlow}"> -->
+    <div class="slds-form slds-form_stacked slds-m-top_small">
+        <div class="slds-form-element">
+            <div class="slds-form-element__control">
+                <aura:if isTrue="{! !empty( v.responseObj.lstRecordTypes ) }">
+                    <lightning:select name="rtSelect" required="true" aura:id="rtSelect" label="Select Record Type" value="{!v.selectedRT}" onchange="{!c.onRecordTypeChange}">
+                        <aura:iteration items="{!v.responseObj.lstRecordTypes}" var="rt">
+                            <option text="{!rt.Name}" value="{!rt.Id}"/>
+                        </aura:iteration>
+                    </lightning:select> 
+                </aura:if>
+                
+                <!--loading spinner start... style=Brand Medium (blue dots)-->
+                 <aura:if isTrue="{!v.Spinner}">
+                    <div aura:id="spinnerId" class="slds-spinner_container slds-is-relative">
+                       <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                         <span class="slds-assistive-text">Loading</span>
+                         <div class="slds-spinner__dot-a"></div>
+                         <div class="slds-spinner__dot-b"></div>
+                       </div>
+                    </div>
+                 </aura:if>
+
+
+                 <!-- Call the flow for contact request -->
+                 <!-- <aura:if isTrue="{!v.openContactRequestFlow}"> -->
+                    <!-- <aura:handler name="init" value="{!this}" action="{!c.init}" />  -->
+                 <!-- </aura:if> -->
+
+
+                  <!-- Loading spinner end--> 
+                
+                <aura:if isTrue="{!v.responseObj.selRTName == 'Team_Member_Request'}">
+                    <lightning:recordEditForm aura:id="recordEditForm"
+                           objectApiName="Account_Request__c" >
+                        <lightning:messages />
+                        <lightning:inputField fieldName="Advertiser_Agency_Rep_Firm__c" aura:id="advId" value="{!v.responseObj.objAR.Advertiser_Agency_Rep_Firm__c}"/>
+                        <!--<lightning:inputField fieldName="Status__c" aura:id="statusId" value="{!v.responseObj.objAR.Status__c}"/>-->
+                       <lightning:inputField fieldName="Account_Executive__c" aura:id="accExeId" value="{!v.selectedAEForTeamMemRecType}" onchange="{!c.checkForAEInAccTeamJS}"/>
+<!--<lightning:inputField fieldName="Date_Completed__c" aura:id="dateComId" value="{!v.responseObj.objAR.Date_Completed__c}"/>-->
+                        <lightning:inputField fieldName="Comments__c" aura:id="commentsId" value="{!v.responseObj.objAR.Comments__c}"/>   
+                    </lightning:recordEditForm>
+                    
+                </aura:if>
+                
+                <aura:if isTrue="{! v.rtAccessFailed}">
+                    <ui:message title="Error" severity="error" closable="false">
+                        You do not have access to Account Request Record types.
+                    </ui:message>
+                </aura:if>
+                
+                <aura:if isTrue="{!v.showUserAEList}">
+                  
+                    <lightning:select name="aeUser" required="true" aura:id="aeUser" label="Select Account Executive" value="{!v.selectedAE}">
+                        <aura:iteration items="{!v.responseObj.lstUsers}" var="ae">
+                            <option text="{!ae.Name}" value="{!ae.Id}"/>
+                        </aura:iteration>
+                    </lightning:select> 
+                  
+                </aura:if>
+                <aura:if isTrue="{! v.aeAccessFailed}">
+                    <ui:message title="Error" severity="error" closable="false">
+                        Parent Account must have an Account Executive in team members.
+                    </ui:message>
+                </aura:if>
+                <aura:if isTrue="{!v.responseObj.selRTName == 'Team_Member_Request'}">
+                	<lightning:button variant="brand" label="Save" class="slds-float_right slds-m-top_small" onclick="{!c.SaveData}"/>
+                </aura:if>
+                <aura:if isTrue="{!v.responseObj.selRTName != 'Team_Member_Request'}">
+                	<lightning:button variant="brand" aura:id="btnNext" disabled="true" label="Next" class="slds-float_right slds-m-top_small" onclick="{!c.createNewAccountRequest}" />
+                </aura:if>
+                <lightning:button variant="neutral" aura:id="btnCancel" label="Cancel" class="slds-float_right slds-m-top_small slds-m-right_small" onclick="{!c.dismissQuickAction}" />
+            </div>
+        </div>
+    </div>
+    </aura:if>
+
+    <!-- <c:contactRequest aura:id="contectRequestComponnet"></c:contactRequest> -->
+    <div style="height: 100%;">
+        <lightning:flow aura:id="contactRequest" />
+    </div>
+    
+
+</aura:component>

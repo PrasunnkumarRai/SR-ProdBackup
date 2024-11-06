@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="Sends Account selected Id">
+	<aura:attribute name="accountType" type="String"/>
+	<aura:attribute name="accountId" type="String" />
+</aura:event>

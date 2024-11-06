@@ -1,0 +1,9 @@
+.THIS .oppclosedate{
+    width: 90% !important;
+}
+.THIS #previousUserId .slds-pill__remove{
+    display: none !important; 
+}
+.THIS #newuserId .slds-pill__remove{
+    display: none !important; 
+}

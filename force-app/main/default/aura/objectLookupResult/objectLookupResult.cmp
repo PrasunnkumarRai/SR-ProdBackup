@@ -1,0 +1,30 @@
+<aura:component >
+
+	<aura:attribute name="oObject" type="sObject" />
+  <aura:attribute name="iconForRecordDisplay" type="String" />
+
+  <!--Register the component level event-->
+    <aura:registerEvent name="oSelectedObjectEvent" type="c:selectedObjectEvent"/>
+<!--    <aura:registerEvent name="lookupResultsEvent" type="c:lookupResultsEvent" /> -->
+    
+    <li role="presentation">
+        <span class="slds-lookup__item-action slds-media slds-media--center" id="lookup-option-350" role="option">
+         <div class="slds-media__body">
+            <div class="slds-lookup__result-text">
+              <span aura:id="iconSpan">
+              <c:SVG class="slds-button__icon slds-icon--small slds-icon" myIcon="{!v.oObject.objectType}"  xlinkHref="{!$Resource.SalesforceLightningDesignSystem221}" />
+            </span>
+                <a onclick="{!c.selectObject}" >
+                  &nbsp;
+                  <aura:unescapedHtml value="{!'[' + v.oObject.objectType + '] ' }" />
+                  <aura:unescapedHtml value="{!v.oObject.Name}" />
+                  <span style="padding-left: 20px; font-size: .875em; color:gray"> 
+                  <aura:unescapedHtml value="{!v.oObject.HTML}" />
+                </span> </a>
+           </div>
+      <!--     </div> -->
+        </div>    
+        </span>
+    </li>
+
+</aura:component>

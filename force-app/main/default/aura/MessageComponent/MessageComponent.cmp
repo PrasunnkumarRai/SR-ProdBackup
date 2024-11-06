@@ -1,0 +1,16 @@
+<aura:component access="global">
+<aura:attribute name="message" type="String" default="Message from MessageComponent.cmp"/>
+<aura:attribute name="type"  type="String" default="info" />
+    <!--
+    <ltng:require styles="{!$Resource.LightningDS + '/assets/styles/lightning-design-system-ltng.css'}"/>
+    <ltng:require styles="{!$Resource.svg4everybody}" />
+slds-box slds-theme–alert-texture slds-theme–
+-->
+    <div class="{!'slds-box slds-theme_alert-texture slds-theme_' + v.type}">
+       <lightning:icon iconName="{!'utility:'+ v.type }" size="medium" alternativeText="{!v.type}" variant="{!v.type}" Class="iconContainer"/>&nbsp;
+        <span class="slds-text-body–regular">
+          <aura:unescapedHtml value="{!v.message}"/>
+        </span>
+    </div>
+    
+</aura:component>

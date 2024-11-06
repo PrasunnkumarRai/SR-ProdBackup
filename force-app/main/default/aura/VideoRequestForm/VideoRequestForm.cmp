@@ -1,0 +1,19 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId">
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="fields" type="String[]" default="['Creative_Notes__c']"/>
+    <lightning:card>
+         <div class = "slds-p-around--medium">
+             <h3 class="slds-section-title--divider" style="font-weight:bold">Video Request Form</h3>
+             <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Digital_Creative__c">
+                 <lightning:outputField fieldName="VRF_Client_Id__c" />
+                 <lightning:outputField fieldName="VRF_Spot_ID__c"/>
+                 <lightning:outputField fieldName="HD_AssetId__c" />
+                 <lightning:outputField fieldName="SD_AssetId__c" />
+                 <lightning:outputField fieldName="Freewheel_Creative_ID__c" />
+                 <lightning:outputField fieldName="AudienceTrak_Creative_ID__c" />
+                 <lightning:outputField fieldName="Creative_Rendition_URL__c" />
+           </lightning:recordViewForm> 
+             <lightning:recordForm aura:id="editForm" recordId="{!v.recordId}" objectApiName="Digital_Creative__c" fields="{!v.fields}" mode = "view"/>
+        </div>
+    </lightning:card>
+</aura:component>

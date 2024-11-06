@@ -1,0 +1,13 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	 <div class="slds-p-around_xxx-small" style="height:25em; overflow-y:auto;"> 
+      
+        <lightning:listView aura:id="listViewTask"
+                            objectApiName="Task"
+                            listName="My_Tasks_Next_7_Days"
+                            rows="5"
+                            showActionBar="false" 
+                            enableInlineEdit="false"
+                            showRowLevelActions="false"
+                           />
+       </div>
+</aura:component>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Myrtle Beach</label>
+    <protected>false</protected>
+    <values>
+        <field>Field_API_Name__c</field>
+        <value xsi:type="xsd:string">Sales_Office__c</value>
+    </values>
+    <values>
+        <field>Production_Id__c</field>
+        <value xsi:type="xsd:string">7e65b231-c484-4d30-9d29-a092bda7e0ad</value>
+    </values>
+    <values>
+        <field>Staging_Id__c</field>
+        <value xsi:type="xsd:string">50126ff9-2522-4cd3-a65b-884854de5bc8</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,16 @@
+<!--
+    Author : MAndS 
+    Date   : 18/08/2017
+    Description : Helper Component for Tooltip 
+    Modification History : 
+-->
+<aura:component >
+    <aura:attribute name="tooltipText" type="string" required="true"/>
+    
+    <div class="slds-form-element__icon slds-align-middle" onmouseover="{!c.display}" onmouseout="{!c.displayOut}">
+        <lightning:icon iconName="utility:info" size="xx-small" alternativeText="Help"/>                
+    </div>    
+    <div class="slds-popover slds-popover--tooltip toggle" role="tooltip" style="z-index: 999999;float: right;position: absolute;transition-delay: 5s;" aura:id="tooltip">
+        <div class="slds-popover__body"><aura:unescapedHtml value="{!v.tooltipText}"/></div>
+    </div>    
+</aura:component>

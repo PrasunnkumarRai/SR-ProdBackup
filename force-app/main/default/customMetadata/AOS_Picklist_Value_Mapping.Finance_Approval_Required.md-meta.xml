@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Finance Approval Required</label>
+    <protected>false</protected>
+    <values>
+        <field>Field_API_Name__c</field>
+        <value xsi:type="xsd:string">Pilot_Order_Status__c</value>
+    </values>
+    <values>
+        <field>Production_Id__c</field>
+        <value xsi:type="xsd:string">eea6b067-514b-4cb2-851c-1463820c5456</value>
+    </values>
+    <values>
+        <field>Staging_Id__c</field>
+        <value xsi:type="xsd:string">3098b469-3665-49f9-abc6-f108da7d4892</value>
+    </values>
+</CustomMetadata>

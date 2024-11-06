@@ -1,0 +1,3 @@
+<design:component label="Box Stuff">
+	<design:attribute name="boxFrame" label="Your Box Stuff" />
+</design:component>

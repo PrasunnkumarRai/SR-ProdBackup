@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>A15RP325</label>
+    <protected>false</protected>
+    <values>
+        <field>Field_API_Name__c</field>
+        <value xsi:type="xsd:string">Discount_Code__c</value>
+    </values>
+    <values>
+        <field>Production_Id__c</field>
+        <value xsi:type="xsd:string">a5e939ef-31ba-4c34-9c23-dc441ce2887c</value>
+    </values>
+    <values>
+        <field>Staging_Id__c</field>
+        <value xsi:type="xsd:string">72f71f6b-c278-40d5-9d84-be72190ef302</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,113 @@
+<!--
+	Author      : M & S
+	Date        : 28 Mar- 2018
+	Description : Lightning component to search a specified SObject for a specific string
+				  Ref : SRSF-1992
+	Modification History :
+-->
+<aura:component controller="CM_CloneMultipleDCCreatives" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<!--declare attributes--> 
+    <aura:attribute name="fromRecord" type="Digital_Campaign__c" default="" description="The API name of the SObject to search" />
+    <aura:attribute name="lstSelectedRecords" type="Digital_Campaign__c[]" default="[]" description="Use,for store SELECTED sObject Records"/>
+    <aura:attribute name="listOfSearchRecords" type="List" description="Use,for store the list of search records which returns from apex class"/>
+    <aura:attribute name="SearchKeyWord" type="string"/>
+    <aura:attribute name="objectAPIName" type="string" default="Digital_Campaign__c"/>
+    <aura:attribute name="IconName" type="string" default="Digital_Campaign__c"/>
+    <aura:attribute name="label" type="string" default="To Digital Campaign"/>
+    <aura:attribute name="tooltipInfo" type="string" />
+    
+    <aura:registerEvent name="setFrom_ToDigitalCampaign" type="c:setFromAndToDCEvent"/>
+    
+    <!--declare events hendlers-->  
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="oSelectedRecordEvent" event="c:selectedsObjectRecordsEvent" action="{!c.handleComponentEvent}"/>
+    <aura:attribute name="Message" type="String" default=""/>
+    
+    <div onmouseleave="{!c.onblur}" aura:id="searchRes" class="slds-form-element slds-lookup slds-is-close">
+        <label class="slds-form-element__label">{!v.label}</label>
+        <lightning:helptext content="{!v.tooltipInfo}" />
+        
+        <!--This part is for display search bar for lookup-->  
+        <div class="slds-form-element__control">
+            <div class="slds-input-has-icon slds-input-has-icon--right">
+                <!-- This markup is for when an record is selected -->
+                <div aura:id="lookup-pill" class="slds-pill-container">
+                    <div aura:id="lookupField" class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" >
+                        
+                        <ui:inputText click="{!c.onfocus}"
+                                      updateOn="keyup"
+                                      keyup="{!c.keyPressController}"
+                                      class="slds-lookup__search-input slds-input inputSize"
+                                      value="{!v.SearchKeyWord}"
+                                      placeholder="search.."/>
+                        
+                        <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                            <lightning:icon iconName="utility:search" size="x-small" alternativeText="icon"/>
+                        </span>
+                    </div> 
+                <!--Selected Records Pills Section-->
+                    <aura:iteration items="{!v.lstSelectedRecords}" var="sr">
+                        <lightning:pill class="slds-m-around_xx-small" label="{!sr.Name}" name="{!sr.Id}" onremove="{! c.clear }">
+                            <aura:set attribute="media">
+                                <lightning:icon iconName="{!v.IconName}" size="x-small" alternativeText="icon"/>
+                            </aura:set>
+                        </lightning:pill>
+                    </aura:iteration>
+                </div>
+            </div>
+        </div>
+        
+        <!--This part is for Display typehead lookup result List-->  
+        <ul style="min-height:40px;margin-top:0px !important" class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid slds-lookup__menu slds" role="listbox">
+            <lightning:spinner class="slds-hide" variant="brand" size="small" aura:id="mySpinner"/>
+            <center> {!v.Message}</center>
+            <aura:iteration items="{!v.listOfSearchRecords}" var="toRecord">
+                <!--Child Component--> 
+                <c:CM_CloneMultipleDCCSearchResults fromDC="{!v.fromRecord}" toDC="{!toRecord}" />
+                
+            </aura:iteration>
+        </ul>
+        
+        <!--To DC Info.-->
+        <div class="slds-form-element">
+            <label class="slds-form-element__label">Digital Campaigns</label>
+            <br />
+            <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                <thead>
+                    <tr class="slds-text-title--caps">
+                        <th scope="col" class="tableFont">
+                            <div class="slds-truncate" title="Campaign Name">Name</div>
+                        </th>
+                        <th scope="col" class="tableFont">
+                            <div class="slds-truncate" title="RecordType Name">RecordType Name</div>
+                        </th>
+                        <th scope="col" class="tableFont">
+                            <div class="slds-truncate" title="Status">Status</div>
+                        </th>
+                        <th scope="col" class="tableFont">
+                            <div class="slds-truncate" title="Account Name">Account Name</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="tableFont">
+                    <aura:iteration items="{!v.lstSelectedRecords}" var="ToDC">
+                    <tr>
+                        <th scope="row">
+                            <div class="slds-truncate" title="{!ToDC.Name}">{!ToDC.Name}</div>
+                        </th>
+                        <th scope="row">
+                            <div class="slds-truncate wrap" title="{!ToDC.RecordType.Name}">{!ToDC.RecordType.Name}</div>
+                        </th>
+                        <th scope="row">
+                            <div class="slds-truncate wrap" title="{!ToDC.Status__c}">{!ToDC.Status__c}</div>
+                        </th>
+                        <th scope="row">
+                            <div class="slds-truncate wrap" title="{!ToDC.Advertiser__r.Name}">{!ToDC.Advertiser__r.Name}</div>
+                        </th>
+                    </tr>
+                    </aura:iteration>
+                </tbody>
+            </table><br/>
+        </div>
+    </div>
+</aura:component>

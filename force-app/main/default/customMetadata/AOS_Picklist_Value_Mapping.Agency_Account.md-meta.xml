@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Agency_Account</label>
+    <protected>false</protected>
+    <values>
+        <field>Field_API_Name__c</field>
+        <value xsi:type="xsd:string">Agency_Type</value>
+    </values>
+    <values>
+        <field>Production_Id__c</field>
+        <value xsi:type="xsd:string">db9b6bcb-811d-429c-8169-adda396cc2f5</value>
+    </values>
+    <values>
+        <field>Staging_Id__c</field>
+        <value xsi:type="xsd:string">8c8db485-9514-4f3d-b3a3-7f4e4f71a94e</value>
+    </values>
+</CustomMetadata>

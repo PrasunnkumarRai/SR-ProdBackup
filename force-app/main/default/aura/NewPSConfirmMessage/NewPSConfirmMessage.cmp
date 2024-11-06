@@ -1,0 +1,46 @@
+<!-- SRSF-4026 -->
+<aura:component implements="force:hasRecordId,flexipage:availableForAllPageTypes" access="global" controller="NewProductionServiceController">
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="showConfirmDialog" type="boolean" default="false"/>    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <div class="slds-card__header slds-border_bottom slds-p-bottom_small">
+        <header class="slds-align--absolute-center">
+            <span class="slds-text-heading_small">
+                {!$Label.c.Submit_Support_Request_Component_Label}<span style="height: 26px;"></span>
+                <br/>
+            </span>
+        </header>
+    </div>
+    <!--Component Start-->
+    <div class="slds-m-around_xx-large">
+         
+        <aura:if isTrue="{!v.showConfirmDialog}">
+            <!--Modal Box Start-->
+            <div role="dialog" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!--Modal Box Header Start-->
+                    <header class="slds-modal__header" style="color:white;background-color:#54698d;">
+                        <h1 class="slds-text-heading--small">Confirmation</h1>
+                    </header>
+                    <!--Modal Box Header End-->
+                     
+                    <!--Modal Box Content Start-->
+                    <div class="slds-modal__content slds-p-around--medium">
+                        <center><b>{!$Label.c.Submit_Support_Request_Confirmation}</b></center>
+                    </div>
+                    <!--Modal Box Content End-->
+                     
+                    <!--Modal Box Button Start-->
+                    <footer class="slds-modal__footer">
+                        <lightning:button name='No' label='No' onclick='{!c.handleConfirmDialogNo}'/>
+                        <lightning:button variant="brand" name='Yes' label='Yes' onclick='{!c.handleConfirmDialogYes}'/>
+                    </footer>
+                    <!--Modal Box Button End-->
+                </div>
+            </div>
+                        
+        </aura:if>
+    </div>
+    <!--Component End-->
+</aura:component>

@@ -1,0 +1,10 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<div class="slds-p-around_xxx-small" style="height:25em; overflow-y:auto;">
+    <lightning:listView aura:id="listViewAccounts"
+    objectApiName="Account_Trends__c"
+    listName="Account_Executive_Account_Trend"
+    rows="10"
+    showActionBar="false" 
+    enableInlineEdit="false"
+    showRowLevelActions="false"/></div>
+</aura:component>

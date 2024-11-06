@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>creator</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Duplicate_Account__c</field>
+        <field>LastModifiedBy</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>Submitting to the Approving Manager of the creator of the Opportunity.</description>
+        <label>Submitted to Sales Management</label>
+        <name>Submitted_to_Sales_Management</name>
+    </approvalStep>
+    <description>When Count of Opportuniity on Account changes to 1, a process creates an Account Request - Account Approval Request record and that will be auto submitted for approval into this approval process.  Once it is approved, a process will update the account status to Approved.</description>
+    <emailTemplate>Account_Request/Account_Request_Account_Approval_Request</emailTemplate>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(
+ RecordType.DeveloperName = &quot;Account_Approval_Request&quot;,
+ NOT(Advertiser_Agency_Rep_Firm__r.RecordType.DeveloperName = &quot;In_House_Agency_Account&quot;),
+OR(
+ ISPICKVAL(Status__c, &quot;New&quot;),
+ ISPICKVAL(Status__c, &quot;Recalled&quot;),
+ ISPICKVAL(Status__c, &quot;Denied&quot;)
+)
+)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Acct_Request_Set_Status_to_Completed</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Set_Completed_Date</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>true</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Acct_Request_Account_Approval_Rejected_Notification</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>Acct_Request_Set_Status_to_Denied</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Acct_Request_Set_Status_to_Manager</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Notify_LSM</name>
+            <type>Alert</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Acct Request | Submit Account Approval</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Approving_Manager__c</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>8</processOrder>
+    <recallActions>
+        <action>
+            <name>Account_Request_Set_Status_to_Recalled</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>false</showApprovalHistory>
+</ApprovalProcess>

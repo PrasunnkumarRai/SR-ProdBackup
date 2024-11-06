@@ -1,0 +1,171 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" controller="OpportunitySupportRequestController" access="global">
+    <aura:attribute name="statusVal" type="String"/>
+    <aura:attribute name="creativeRequiresReviewVal" type="boolean" default="false"/> <!--SRSF-3993--> 
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="recordData" type="Object"/>
+    <aura:attribute name="showModal" type="boolean" default="true"/>
+    <aura:attribute name="SaveAndNew" type="boolean" default="false"/>
+    <aura:attribute name="loaded" type="Boolean" default="false" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+        
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large">
+        
+        <div class="slds-modal__container">
+            
+            <header class="slds-modal__header">
+                <lightning:buttonIcon size="large" iconName="utility:close" variant="bare" onclick="{!c.hideModal}" alternativeText="Close window." class="slds-modal__close slds-button_icon-inverse"/>
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                    <span>
+                        New Audience Request
+                    </span>
+                </h2>
+           </header> 
+
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <lightning:recordEditForm aura:id="editform"
+                                        objectApiName="Support_Request__c"
+                                        recordTypeId="{!v.recordData.recordTypeId}"
+                                        onsuccess="{!c.handleSuccess}"
+                                        onerror="{!c.handleError}">
+                
+                        
+                <h3 class="slds-section-title--divider" style="font-weight:bold">Information</h3>
+                <div class="slds-form--stacked slds-p-around--medium slds-m-bottom--x-small">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Name" label="Name" aura:id="audReqField" required="true"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-hide">
+                            <lightning:inputField fieldName="Working__c" aura:id="audReqField" class="slds-m-left_x-large"/>
+                        </div>                         
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Status__c" value="{!v.statusVal}" aura:id="statusField" required="true" onchange="{!c.handleStatusChange}"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Advertiser__c" value="{!v.recordData.defaultFieldValues.Advertiser__c}" required="true" class="slds-m-left_x-large"/>
+                        </div> 
+                    </div>
+                    <div class="slds-grid">
+                        <!--SRSF-3993-->
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Creative_Requires_Review__c" value="{!v.creativeRequiresReviewVal}" aura:id="audReqField"/>
+                        </div> 
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Agency__c" value="{!v.recordData.defaultFieldValues.Agency__c}" class="slds-m-left_x-large"/>
+                        </div>
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Due_Date__c" aura:id="audReqField" required="true"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Rep_Firm__c" value="{!v.recordData.defaultFieldValues.Rep_Firm__c}" class="slds-m-left_x-large"/>
+                        </div>  
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Flight_Start_Date__c" value="{!v.recordData.defaultFieldValues.Flight_Start_Date__c}" aura:id="audReqField" required="true"/>
+                        </div>                        
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Opportunity__c" value="{!v.recordData.defaultFieldValues.Opportunity__c}" required="true" class="slds-m-left_x-large"/>
+                        </div>
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Flight_End_Date__c" value="{!v.recordData.defaultFieldValues.Flight_End_Date__c}" aura:id="audReqField" required="true"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Account_Executive__c" value="{!v.recordData.defaultFieldValues.Account_Executive__c}" required="true" class="slds-m-left_x-large"/>
+                        </div>                                              
+                    </div>
+                    <div class="slds-grid">                        
+                        <div class="slds-col slds-size_1-of-2">
+                                <lightning:inputField fieldName="DMA__c" value="{!v.recordData.defaultFieldValues.DMA__c}" aura:id="dmaField" required="true"/>  
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">    
+                                <lightning:inputField fieldName="Campaign_Goals_and_Specifics__c" aura:id="audReqField" required="true" class="slds-m-left_x-large"/> 
+                        </div>                        
+                    </div>
+                    <!-- <div class="slds-grid"> 
+                        <div class="slds-col slds-size_1-of-2 slds-hide">   
+                            <lightning:inputField  fieldName="Data_Catalog_Product_Type__c" aura:id="audReqField"/>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-hide">                        
+                        <div class="slds-col slds-size_1-of-2">    
+                            <lightning:inputField fieldName="Addressable_Online_Data_Catalog__c" aura:id="audReqField"/> 
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">   
+                            <lightning:inputField fieldName="Streaming_TV_Data_Catalog__c" aura:id="audReqField" class="slds-m-left_x-large"/>
+                        </div>
+                    </div> -->
+           
+                    <div class="slds-grid slds-hide">                                
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Tier_Designation__c" value="{!v.recordData.defaultFieldValues.Tier_Designation__c}" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="SAM_Designation__c" value="{!v.recordData.defaultFieldValues.SAM_Designation__c}" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Sales_Office__c" value="{!v.recordData.defaultFieldValues.Sales_Office__c}" class="slds-m-left_x-large"/>
+                        </div>
+                    </div>
+                   <div class="slds-grid slds-hide">                               
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Region__c" value="{!v.recordData.defaultFieldValues.Region__c}" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Division__c" value="{!v.recordData.defaultFieldValues.Division__c}" class="slds-m-left_x-large"/>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-hide">                               
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Date_Time_Submitted__c" aura:id="audReqField"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Date_Time_Completed__c" aura:id="audReqField" class="slds-m-left_x-large"/>
+                        </div>
+                    </div>                                             
+                </div>
+                <h3 class="slds-section-title--divider" style="font-weight:bold">Notes</h3>
+                <div class="slds-form--stacked slds-p-around--medium slds-m-bottom--x-small">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">    
+                            <lightning:inputField fieldName="Audience_Creation_Team_Feedback__c" aura:id="audReqField"/> 
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">   
+                            <lightning:inputField fieldName="Audience_Creation_Team_Notes__c" aura:id="audReqField" class="slds-m-left_x-large"/>
+                        </div>                                
+                    </div> 
+                </div> 
+                <h3 class="slds-section-title--divider" style="font-weight:bold">System Information</h3>
+                <div class="slds-form--stacked slds-p-around--medium slds-m-bottom--x-small">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="RecordTypeId" value="{!v.recordData.recordTypeId}" disabled="true"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="OwnerId" value="{!v.recordData.defaultFieldValues.OwnerId}" disabled="true" class="slds-m-left_x-large"/>
+                        </div>
+                    </div>    
+                </div>
+            </lightning:recordEditForm>
+                
+            <lightning:spinner variant="brand" alternativeText="Loading..." class="{!(v.loaded? 'slds-show': 'slds-hide')}" />
+            <lightning:navigation aura:id="navService"/>
+
+           </div>
+
+            <footer>
+                <div class="modal-footer slds-modal__footer attach-to-bottom">
+                    <button class="slds-button slds-button_neutral" onclick="{!c.hideModal}">Cancel</button>                    
+                    <button class="slds-button slds-button_brand" onclick="{!c.onSave}">Save</button>
+                    <button class="slds-button slds-button_brand" onclick="{!c.onSaveNew}">Save and New</button>
+                </div>
+            </footer>            
+        </div>        
+        </section>
+</aura:component>

@@ -1,0 +1,196 @@
+<!--
+	Author      : M & S
+	Date        : 16 Jan- 2020
+	Description : Supported Lightning component of CM_DCLookup to Retrieve Digital Creatives from Digital Campaign to Another Digital Campaign
+				  Finally Clones Digital Creatives from One Digital Campaign to Other Digital Campaigns based on Matrix.
+				  Ref : SRSF-1992
+	Modification History :
+-->
+<aura:component controller="CM_CloneMultipleDCCreatives" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+	<!-- @@@ Attributes @@@ -->
+         <aura:attribute name="MigratedCreative" type="Boolean" default="true" description="Hide the component for MigratedCreative equal true " />
+
+    <aura:attribute name="FromDC" type="Digital_Campaign__c" default="" description="The API name of the SObject to search" />
+    <aura:attribute name="ShowMsg" type="String" default="" description="Show success message" />
+    
+    <aura:attribute name="Errormessage" type="String" default="Record Types doesn't match.Please refer DCC Clone Matrix in Custome Metadata Types" description="Digital Campaign id for getting its child Digital Creatives"/>    
+    <aura:attribute name="DigitalCreativeRecords" type="CM_DCCWrap[]"/>
+    <aura:attribute name="disableClone" type="Boolean"  default="true"/>
+    <aura:attribute name="showDcs" type="Boolean"  default="false"/>
+    <aura:attribute name="isChecked" type="Boolean"  default="false"/>
+    <aura:attribute name="isCheckedIndex" type="String"  default=""/>
+    <aura:attribute name="message" type="string" default="Success! Digital Creative(s) Cloned" description="Success Message"/>
+    <aura:attribute name="brTag" type="String"  default="&lt;br&gt;"/>
+    <aura:attribute name="selectedLookUpRecords" type="sObject[]" default="[]"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="setFrom_ToDigitalCampaign" event="c:setFromAndToDCEvent" action="{!c.getDCCreatives}"/>
+    
+    <aura:dependency resource="markup://force:*" type="EVENT"/>
+    <ltng:require styles="{!$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.css'}"/> 
+      <aura:if isTrue="{!v.MigratedCreative}">
+    <div class="slds-form-element">
+        <div class="slds-align_absolute-center slds-grid slds-wrap slds-large-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1">
+            <div aura:id="showAlertValidation" class="slds-align_absolute-center slds-notify slds-theme--alert-texture slds-theme--error message-style slds-p-left_x-small slds-hide">
+                <B><aura:unescapedHtml value="{!v.Errormessage}" /></B>
+            </div>
+        </div>
+        <label class="slds-form-element__label">From Digital Campaign Name :</label>
+        <b><ui:outputText value="{!v.FromDC.Campaign_Name__c}" /></b><br/>
+        
+    	<table class="slds-table slds-table--bordered slds-table--cell-buffer">
+            <thead>
+                <tr class="slds-text-title--caps">
+                    <th scope="col" class="tableFont">
+                        <div class="slds-truncate" title="Campaign Name">Name</div>
+                    </th>
+                    <th scope="col" class="tableFont">
+                        <div class="slds-truncate" title="RecordType Name">RecordType Name</div>
+                    </th>
+                    <th scope="col" class="tableFont">
+                        <div class="slds-truncate" title="Status">Status</div>
+                    </th>
+                    <th scope="col" class="tableFont">
+                        <div class="slds-truncate" title="Account Name">Account Name</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="tableFont">
+                <tr>
+                    <th scope="row">
+                        <div class="slds-truncate" title="{!v.FromDC.Name}">{!v.FromDC.Name}</div>
+                    </th>
+                    <th scope="row">
+                        <div class="slds-truncate wrap" title="{!v.FromDC.RecordType.Name}">{!v.FromDC.RecordType.Name}</div>
+                    </th>
+                    <th scope="row">
+                        <div class="slds-truncate wrap" title="{!v.FromDC.Status__c}">{!v.FromDC.Status__c}</div>
+                    </th>
+                    <th scope="row">
+                        <div class="slds-truncate wrap" title="{!v.FromDC.Advertiser__r.Name}">{!v.FromDC.Advertiser__r.Name}</div>
+                    </th>
+                </tr>
+            </tbody>
+        </table><br/>
+    </div>
+    
+    <c:CM_DCMultiLookup objectAPIName="Digital_Campaign__c"
+                                   IconName="standard:Account"
+                        		   fromRecord="{!v.FromDC}"
+                                   lstSelectedRecords="{!v.selectedLookUpRecords}"
+                                   label="To Digital Campaign Name"/>
+    
+    <aura:if isTrue="{!v.showDcs}">
+    <!-- @@@ Contacts table with input checkbox @@@ -->
+    <!--<aura:dependency resource="markup://force:*" type="EVENT"/> -->  
+    <div class="slds-p-around--large " aura:id="showContacts"> 
+        <div class="slds-align_absolute-center slds-grid slds-wrap slds-large-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1">
+            <div aura:id="showAlert" class="slds-align_absolute-center slds-notify slds-notify--alert slds-theme--alert-texture slds-theme--success message-style slds-hide">
+                <B>{!v.message}</B>
+            </div>
+        </div><br/>
+        <br/>
+        <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+            <thead>
+                <tr class="slds-text-title--caps">
+                    <th scope="col" class="slds-size_1-of-8">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                <ui:inputCheckbox class="slds-checkbox" aura:id="box3" change="{!c.checkAll}"/>
+                            </div>
+                        </div>
+                    </th>
+                    <!--<th scope="col">
+                        <div class="slds-truncate" title="Name">Name</div>
+                    </th>-->
+                    <th scope="col" class="slds-size_2-of-8 tableFont">
+                        <div class="slds-truncate" title="Creative Name/ISCI">
+                            Creative Name/ISCI
+                        </div>
+                    </th>
+                    <th scope="col" class="slds-size_1-of-8 tableFont">
+                        <div class="xx-small" title="Status">Status</div>
+                    </th>
+                    <th scope="col" class="slds-size_2-of-8 tableFont">
+                        <div class="slds-truncate">
+                            Start Date <c:ToolTipLC tooltipText="{!'Original'+v.brTag+'Clone Creative'+v.brTag+'Start Date'}" />
+                        </div>
+                    </th>
+                    <th scope="col" class="slds-size_2-of-8 tableFont">
+                        <div class="slds-truncate">
+                            End Date <c:ToolTipLC tooltipText="{!'Original'+v.brTag+'Clone Creative'+v.brTag+'End Date'}" />
+                       	</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="tableFont">
+                <aura:iteration items="{!v.DigitalCreativeRecords}" var="con" indexVar="indx">
+                    <tr>
+                        <th scope="row">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__control">
+                                    <ui:inputCheckbox class="slds-checkbox" value="{!con.isCheck}" aura:id="{!indx+'boxPack'}" change="{!c.enableClone}" text="{!indx}"/>
+                                </div>
+                            </div>
+                        </th>
+                        <!--th scope="row">
+                            <div class="slds-truncate" title="{!con.Con.Id}">{!con.dccName}</div>
+                        </th-->
+                        <th scope="row">
+                           <div class="slds-truncate" title="{!con.Con.Creative_Name__c}">
+                               {!con.dccCN}
+                            </div>
+                        </th>
+                        <th scope="row">
+                            <div class="slds-truncate" title="{!con.Con.Status__c}">{!con.dccStatus}</div>
+                        </th>
+                        <aura:if isTrue="{!con.isCheck}">
+                             <th scope="row">
+                                 <ui:inputDate aura:id="orderDate" label=""
+                                   class="slds-input slds-truncate"
+                                   labelClass="slds-form-element__label"
+                                   value="{!con.Con.Creative_Start_Date__c}"
+                                   displayDatePicker="true"/>
+                                 &nbsp;<c:ToolTipLC tooltipText="{!'Original'+v.brTag+'Clone Creative'+v.brTag+'Start Date'+v.brTag+con.strdccStDate}" />
+                             </th>
+                             <th scope="row">
+                                 <ui:inputDate aura:id="orderDate" label=""
+                                   class="slds-input slds-truncate"
+                                   labelClass="slds-form-element__label"
+                                   value="{!con.Con.Creative_End_Date__c}"
+                                   displayDatePicker="true"/>&nbsp;
+                                 <c:ToolTipLC tooltipText="{!'Original'+v.brTag+'Clone Creative'+v.brTag+'End Date'+v.brTag+con.strdccEndDate}" />
+                            </th>
+                            <aura:set attribute="else">
+                                <th scope="row">
+                                    <div class="slds-truncate">
+                                        {!con.strdcStDate}&nbsp;
+                                        <c:ToolTipLC tooltipText="{!'Original'+v.brTag+'Clone Creative'+v.brTag+'Start Date'+v.brTag+con.strdccStDate}" />
+                                    </div>
+                                </th>
+                                <th scope="row">
+                                    <div class="slds-truncate">
+                                        {!con.strdcEndDate}&nbsp;
+                                        <c:ToolTipLC tooltipText="{!'Original'+v.brTag+'Clone Creative'+v.brTag+'End Date'+v.brTag+con.strdccEndDate}" />
+                                    </div>
+                                </th>
+                            </aura:set>
+                        </aura:if>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table><br/>
+        
+    </div>
+    <!-- @@@ Button to clone contacts @@@ -->
+    <button type="button" class="slds-button slds-button--neutral uiButton--default uiButton--brand uiButton" onclick="{!c.CloneHandle}" disabled="{!v.disableClone}">Clone</button>
+    <aura:set attribute="else">
+    	<div aura:id="noDCs" class="slds-hide" >
+                <br/><h1><strong>No Campaigns found that match the allowed cloning criteria.  Please see help text for allowable cloning criteria.</strong></h1>
+        </div>
+    </aura:set>
+          </aura:if><aura:set attribute="else">
+     This Campaign's creative should be managed in Inn Creative
+    </aura:set></aura:if>
+    
+</aura:component>

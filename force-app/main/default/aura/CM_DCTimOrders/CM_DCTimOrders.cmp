@@ -1,0 +1,80 @@
+<!--
+	Author      : M & S
+	Date        : 10 Mar- 2020
+	Description : Digital Campaign: Lightning Component for Inventory Request - Ads Everywhere
+				  Ref : SRSF-2026
+	Modification History :
+-->
+<aura:component controller="DCTimOrdersController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+	<!--Init handler which is call doInit js function on component Load-->  
+    <aura:handler name="init" value="{!this}" action="{!c.scriptsLoaded}"/>
+    
+    <!--Aura Attribute for store Contact Object List as Array-->    
+    <aura:attribute name="timOrders" type="List"/> 
+    <aura:attribute name="timArray" type="List"/> 
+    <aura:attribute name="dateString" type="String"/> 
+    <aura:attribute name="DateInstance" type="Object"/>
+    <aura:attribute name="rowIndex" type="String"/>
+    <aura:attribute name="recordId" type="String" /><!--default="a08m0000004IlfXAAS"/>-->
+    <aura:attribute name="flightDtTooltip" type="String" default="{$Label.DCC_Clone_Matrix_Tooltip}" />
+  
+    <!-- page header -->
+    <div class="slds-card__header slds-border_bottom slds-p-bottom_small">
+        <header class="slds-align--absolute-center">
+            <span class="slds-text-heading_small">
+                TIM Orders <span style="height: 26px;"><c:ToolTipLC tooltipText="{!v.flightDtTooltip}"/></span>
+                <br/>
+            </span>
+        </header>
+    </div>
+    
+ 	<!--Table Part-->
+    <table class="slds-table slds-table_bordered slds-table_cell-buffer"> 
+        <thead>
+            <tr class="slds-text-title_caps">
+                
+                <th scope="col">
+                    <div class="slds-truncate" title="TIM System">Traffic System</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="TIM Order">TIM Id</div>
+                </th>
+                
+            </tr>
+        </thead>   
+        <tbody>
+            <aura:iteration items="{!v.timArray}" var="item" indexVar="index">
+                <!-- Table Row -->   
+                <tr class="slds-text-title_caps">
+					<td>
+						<lightning:select name="rtSelect" aura:id="rtSelect" value="{!item.selTrafficSystem}" >
+							<option text="-None-" value=""/>
+							<aura:iteration items="{!item.lstTrafficSystem}" var="opt">
+								<option text="{!opt}" value="{!opt}"/>
+							</aura:iteration>
+						</lightning:select>
+                    </td>
+                    <td>
+                        <lightning:input type="text" value="{!item.TIMOrder}"/>
+                    </td>
+                    <td>
+                        <a onclick="{!c.removeRow}" id="{!index}">
+                            <lightning:icon variant="error" iconName="utility:delete" class="slds-icon slds-icon_small" size="small" alternativeText="icon"/>
+                            <span class="slds-assistive-text">Delete Icon</span>
+                        </a> 
+                    </td> 
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+    <br/>
+    <div>
+        <a onclick="{!c.addNewRow}">
+            <lightning:icon iconName="utility:add" class="slds-icon slds-icon_small" size="small" alternativeText="add"/>
+            <span class="slds-assistive-text">Add Icon</span>
+        </a>
+    </div>
+    <br/>
+    <!--Save Button which is call Save js function on click --> 
+    <button class="slds-button slds-button_brand" onclick="{!c.Save}">Save</button>
+</aura:component>

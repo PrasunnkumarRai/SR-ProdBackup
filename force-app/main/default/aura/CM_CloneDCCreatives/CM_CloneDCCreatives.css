@@ -1,0 +1,8 @@
+.THIS .wrap {
+    width: 10em;
+    word-wrap: break-word;
+}
+
+.THIS .tableFont {
+    font-size: 10px !important;
+}

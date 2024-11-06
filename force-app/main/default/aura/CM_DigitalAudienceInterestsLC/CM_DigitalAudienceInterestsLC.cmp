@@ -1,0 +1,106 @@
+<!--
+    Author : MAndS 
+    Date   : 11/05/2017
+    Description : Audience Interests Component for Digital Campaign  
+    Modification History : 
+-->
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction" access="global" controller="CM_DigitalAudienceInterestsLCController">
+	<ltng:require styles="/resource/SLDS/assets/styles/salesforce-lightning-design-system.css,
+                           /resource/SLDS/assets/styles/salesforce-lightning-design-system.min.css"
+                  />
+    <ltng:require styles="{!$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <ltng:require styles="{! $Resource.select2 + '/select2-4.0.3/dist/css/select2.min.css'}" 
+      scripts="{!join(',', 
+        $Resource.Jquery224 ,  
+        $Resource.select2 + '/select2-4.0.3/dist/js/select2.js')
+      }" afterScriptsLoaded="{!c.scriptsLoaded}"/>
+    <!--init handler event call "doInit" function on component load and fetch picklist values-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="recordId" type="String" /><!--default="a0Ig00000084fPgEAI" />-->
+    <!--<aura:attribute name="picklistOptsList" type="String[]"/>-->
+    <aura:attribute name="selectedAudience" type="String"/>
+    <aura:attribute name="selectedDigA" type="String"/>
+    <aura:attribute name="strLblAI" type="string" description="Audience Interest Information"/>
+    <aura:attribute name="strLblDigAAI" type="string" description="DigA Audience Interest Information"/>
+    <!--<aura:attribute name="SelOpt" type="String[]" description="Selected Options"/>-->
+    <aura:attribute name="lockRecord" type="Boolean" default="true"/>
+    <aura:attribute name="isDisplayStd" type="Boolean" default="true"/>
+    
+    <div class="slds">
+        <div class="slds-card slds-m-top--x-large"> 
+            <!-- page header -->
+            <div class="slds-card__header slds-border_bottom slds-p-bottom_small">
+                <header class="slds-align--absolute-center">
+                    <span class="slds-text-heading_small">Audience Interests</span>
+                </header>
+            </div>
+            <div class="slds-card__body slds-m-around_medium">              
+                <h3 class="slds-section-title--divider"><b>Available Audience Interests</b></h3>
+                <div class="slds-grid slds-wrap slds-grid--pull-padded slds-m-left--xx-large">
+                    <div class="slds-p-horizontal--small slds-m-bottom--medium  slds-medium-size--1-of-1 slds-small-size--1-of-1 slds-large-size--1-of-1">
+                        <aura:renderIf isTrue="{!v.isDisplayStd}">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element"> 
+                                    <label for="picklist" class="slds-form-element__label slds-p-right--x-small">Standard
+                                        <c:ToolTipLC tooltipText="{!v.strLblAI}"/>
+                                    </label> 
+                                    <br/>
+                                    <div class="slds-select_container slds-picklist" >
+                                        <select style="width:100%" id="picklist" class="select2Class" multiple="multiple" disabled="{!v.lockRecord}">     
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </aura:renderIf>
+                        <div class="slds-form-element">
+                            <div class="slds-form-element slds-m-top_small"> 
+                                <label for="picklist" class="slds-form-element__label slds-p-right--x-small">Addressable Online
+                                	<c:ToolTipLC tooltipText="{!v.strLblDigAAI}"/>
+                                </label> 
+                                <br/>
+                                <div class="slds-select_container slds-picklist" >
+                                    <select style="width:100%" id="DigApicklist" class="select2Class" multiple="multiple" disabled="{!v.lockRecord}">     
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-card__footer slds-align--absolute-center slds-border_top slds-p-top_small slds-m-top--large">
+                	<lightning:button variant="neutral" label="Insert Audience Interests" onclick="{!c.updateData}" disabled="{!v.lockRecord}"/>
+                </div>
+                <h3 class="slds-section-title--divider"><b>Selected Audience Interests</b></h3>
+                <div class="slds-grid slds-wrap slds-grid--pull-padded slds-m-horizontal--large">
+                    <div class="slds-p-horizontal--small slds-m-bottom--medium slds-m-left_large slds-medium-size--1-of-1 slds-small-size--1-of-1 slds-large-size--1-of-1">
+                        <aura:renderIf isTrue="{!v.isDisplayStd}">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element"> 
+                                    <label for="picklist" class="slds-form-element__label">Standard
+                                        <c:ToolTipLC tooltipText="{!v.strLblAI}"/>
+                                    </label> 
+                                    <br/>
+                                    <div class="slds-form-element__control" >
+                                        <ui:inputTextArea aura:id="inputAudience" disabled="true" class="slds-input" value="{!v.selectedAudience}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </aura:renderIf>
+                        <div class="slds-form-element">
+                            <div class="slds-form-element slds-m-top_small"> 
+                                <label for="picklist" class="slds-form-element__label">Addressable Online
+                                	<c:ToolTipLC tooltipText="{!v.strLblDigAAI}"/>
+                                </label> 
+                                <br/>
+                                <div class="slds-form-element__control" >
+                                    <ui:inputTextArea aura:id="inputDigA" disabled="true" class="slds-input" value="{!v.selectedDigA}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+            
+        </div>
+    </div>
+</aura:component>

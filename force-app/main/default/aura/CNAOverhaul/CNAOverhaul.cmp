@@ -1,0 +1,166 @@
+<!--
+	Author      : M&S
+	Description : Redirects to New CNA Record page with auto populated fields as below.
+-->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller="NewCNAController" access="global" >
+	<aura:attribute name="recordId" type="Id"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="showOptions" type="Boolean" default="false"/>
+    <aura:attribute name="showGeneralQuestions" type="Boolean" default="false"/>
+    <aura:attribute name="showSupplementalQuestions" type="Boolean" default="false"/>
+    <aura:attribute name="categoryOptions" type="list"/>
+    <aura:attribute name="generalQuestions" type="Object[]"/>
+    <aura:attribute name="supplementalQuestions" type="Object[]"/>
+    <aura:attribute name="selectedCategory" type="string" default="General"/>
+    <aura:attribute name="isSpinnerVisible" type="Boolean" default="false"/>
+    <aura:attribute name="recordTypeName" type="string"/>
+    
+    <!-- Start: Is Spinner Visible -->
+    <aura:if isTrue="{!v.isSpinnerVisible}">
+        <lightning:spinner class="spins" size="large" variant="brand" alternativeText="Loading" />
+    </aura:if>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" 
+            aria-modal="true" aria-describedby="modal-content-id-1" 
+            class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.dismissQuickAction }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                <aura:if isTrue="{!v.recordTypeName =='CNA'}">
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                	New {!v.recordTypeName} Questionnaire</h2>
+                </aura:if>
+                 <aura:if isTrue="{!v.recordTypeName =='CNA Prep Sheet'}">
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                	New {!v.recordTypeName} </h2>
+                </aura:if>
+                <!--<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                New {!v.recordTypeName} </h2>-->
+                    </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+        <!-- End: Is Spinner Visible -->
+      <!--  <div class="slds-page-header">
+            <div class="slds-media">
+                <div class="slds-media__body">
+                    <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="New CNA Questionnaire"> New {!v.recordTypeName} Questionnaire</h1>
+                </div>
+            </div>
+        </div>-->
+        <div><br/></div>
+        <aura:if isTrue="{!v.showGeneralQuestions}">
+            <div class="slds-media__body">
+                <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Questions">General Questions</h1>
+            </div>
+            <div><br /></div>
+            <aura:iteration items="{!v.generalQuestions}" var="obj" indexVar="index">
+                <b>{!index+1}</b>.&nbsp;<ui:outputText value="{!obj.question}"/>
+                <aura:if isTrue="{!(obj.questionType =='Text')}">
+                    <ui:inputTextarea class="field" value="{!obj.answer}" />
+                </aura:if>
+                <aura:if isTrue="{!(obj.questionType =='Picklist')}">
+                    <div class="slds-form slds-form_stacked slds-m-top_small">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                <lightning:select name="rtSelect" aura:id="rtSelect" label="Select Answer" value="{!obj.strSelPicklistOption}" >
+                                    <option text="--None--" value=""/>
+                                    <aura:iteration items="{!obj.lstAnsPicklistOptions}" var="opt">
+                                        <!--<option text="{!opt}" value="{!opt}"/>-->
+                                        <option text="{!opt.label}" value="{!opt.value}"/>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+                        </div>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!obj.questionType=='Picklist (Multi-Select)'}">
+                    <lightning:dualListbox name="Answers"
+                               label= "Select Answer"
+                               sourceLabel="Available"
+                               selectedLabel="Selected"
+                               fieldLevelHelp="Select Answer"
+                               options="{!obj.lstAnsMultiselPicklistOptions}" 
+                               value="{!obj.lstSelectedAanswers}"/>
+                </aura:if>
+                <div><br /></div>
+            </aura:iteration>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.showOptions}">
+            <div class="slds-form slds-form_stacked slds-m-top_small">
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                        <lightning:select name="rtSelect" aura:id="rtSelect" label="Select Supplemental Category" value="{!v.selectedCategory}" onchange="{!c.displaySupplementalQuestions}">
+                            <option text="--None--" value=""/>
+                            <aura:iteration items="{!v.categoryOptions}" var="opt">
+                                <option text="{!opt}" value="{!opt}"/>
+                            </aura:iteration>
+                        </lightning:select> 
+                        <!--<lightning:button variant="brand" label="Next" class="slds-float_right slds-m-top_small" onclick="{!c.displaySupplementalQuestions}" />
+                        <lightning:button variant="neutral" label="Cancel" class="slds-float_right slds-m-top_small slds-m-right_small" onclick="{!c.dismissQuickAction}" />-->
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.showSupplementalQuestions}">
+            <div class="slds-media__body">
+                <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Questions">Supplemental CNA Questions:  {!v.selectedCategory} Category</h1>
+            </div>
+            <div><br /></div>
+            <aura:iteration items="{!v.supplementalQuestions}" var="obj" indexVar="index">
+                <b>S-{!index+1}</b>.&nbsp;<ui:outputText value="{!obj.question}"/>
+                <aura:if isTrue="{!(obj.questionType=='Text')}">
+                    <ui:inputTextarea class="field" value="{!obj.answer}" />
+                </aura:if>
+                <aura:if isTrue="{!(obj.questionType=='Picklist')}">
+                    <div class="slds-form slds-form_stacked slds-m-top_small">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                <lightning:select name="rtSelect" aura:id="rtSelect" label="Select Answer" value="{!obj.strSelPicklistOption}" >
+                                    <option text="--None--" value=""/>
+                                    <aura:iteration items="{!obj.lstAnsPicklistOptions}" var="opt">
+                                        <option text="{!opt.label}" value="{!opt.value}"/>
+                                        <!--<option text="{!opt}" value="{!opt}"/>-->
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+                        </div>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!obj.questionType=='Picklist (Multi-Select)'}">
+                    <lightning:dualListbox name="Answers"
+                               label= "Select Answer"
+                               sourceLabel="Available"
+                               selectedLabel="Selected"
+                               fieldLevelHelp="Select Answer"
+                               options="{!obj.lstAnsMultiselPicklistOptions}" 
+                               value="{!obj.lstSelectedAanswers}"/>
+                </aura:if>
+                <div><br /></div>
+            </aura:iteration>
+        </aura:if>
+            </div>
+             <footer class="slds-modal__footer">
+                            <lightning:button variant="brand"
+                                              label="Cancel"
+                                              title="Cancel"
+                                              onclick="{! c.dismissQuickAction }"/>
+                            <lightning:button variant="brand"
+                                              label="Save"
+                                              title="Save"
+                                              onclick="{!c.SaveQuestions}"/>
+                        </footer>
+        </div>
+    </section>
+  <!--  <div class="slds-form slds-form_stacked slds-m-top_small">
+        <div class="slds-form-element">
+            <div class="slds-form-element__control slds-align_absolute-center">
+                <lightning:button variant="brand" label="Save" class="slds-float_right slds-m-top_small" onclick="{!c.SaveQuestions}" />
+            </div>
+        </div>
+    </div>-->
+</aura:component>

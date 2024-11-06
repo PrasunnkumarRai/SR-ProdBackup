@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>creator</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>President_Media</submitter>
+        <type>roleSubordinates</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Owner</field>
+        <field>CPM_Negotiat__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>National_DSL</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Digital_Campaign__c.Division__c</field>
+                <operation>contains</operation>
+                <value>National</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>RejectRecord</ifCriteriaNotMet>
+        <label>Makegood - National</label>
+        <name>Makegood_National</name>
+    </approvalStep>
+    <emailTemplate>unfiled$public/DC_Makegood_DC_Approval_Submitted_Notification</emailTemplate>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(
+IsMakegoodDC__c = true, 
+CONTAINS(RecordType.Name, &quot;Inventory Request&quot;),
+ISPICKVAL(Status__c, &apos;Submit Makegood Approval&apos;),
+OR(
+ISPICKVAL(Division__c , &apos;National&apos;),
+ISPICKVAL(Division__c , &apos;National - Central&apos;),
+ISPICKVAL(Division__c , &apos;National - North East&apos;),
+ISPICKVAL(Division__c , &apos;National - South&apos;),
+ISPICKVAL(Division__c , &apos;National - West&apos;),
+ISPICKVAL(Division__c , &apos;National - East&apos;)
+)
+)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>DC_Makegood_DC_Approved_Notification</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>DSL_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Makegood_Approved_IR_Status_Update</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>DC_Makegood_DC_Rejected_Notification</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>DC_Makegood_IR_Reject_DC_Status_Update</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>DSL_Rejected</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <label>Makegood Approval - National</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Approving_Manager__c</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>3</processOrder>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>false</showApprovalHistory>
+</ApprovalProcess>

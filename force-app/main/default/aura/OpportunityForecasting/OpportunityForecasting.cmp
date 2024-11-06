@@ -1,0 +1,805 @@
+<!--
+    Customer/Project:                 Spectrum Reach 
+    Lightning Component Name:          Opportunity Forecasting (renamed in code and GUI to Opportunity Pipeline in 2018)
+    Author/Date:                      Brett Ballantyne and John King 2017
+    Release:             
+    Related US:         
+    Purpose:            This component is for Opportunity Forecasting (Pipeline). It is the Opportunity Kanban
+    					page on steroids.
+    Modification History
+-->
+
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" controller="OpportunityForecastingController">
+    <aura:attribute name="objName" type="String"/>
+    <aura:attribute name="isMenuMouseIn" type="String" default="0" />
+    <aura:attribute name="objFields" type="String[]"/>
+    <aura:attribute name="objTotals" type="Decimal[]"/>
+    <aura:attribute name="kanbanPicklistField" type="String"/>
+    <aura:attribute name="filterEditNum" type="String"/>
+    <aura:attribute name="stageTotals" type="Map"/>
+    <aura:attribute name="pendingTotals" type="Map"/>
+    <aura:attribute name="pickListNamesAndVals" type="Object[]"/>
+    <aura:attribute name="opptyCountByStage" type="Object[]"/>
+    <aura:attribute name="broadCastTotals" type="Object[]"/>
+    <aura:attribute name="takeActionHTML" type="String" />
+    <aura:attribute name="lastRefreshDateTime" type="Long" />
+    <aura:attribute name="refreshAge" type="String" />
+    <aura:attribute name="probabilityMap" type="Map" />
+    <aura:attribute name="listViews" type="Object[]" />
+    <aura:attribute name="selectedListView" type="String" />
+    <aura:attribute name="selectedListViewId" type="String" />
+    <aura:attribute name="selectedListViewOld" type="String" />
+    <aura:attribute name="clonedListView" type="String" />
+    <aura:attribute name="userListViews" type="Map" />
+    <aura:attribute name="opptyFields" type="Object[]" />
+    <aura:attribute name="filterRules" type="Object[]" />
+    <aura:attribute name="filterName" type="String" />
+    <aura:attribute name="newFilterName" type="String" />
+    <aura:attribute name="currentRuleNum" type="String" />
+    <aura:attribute name="filterValue" type="String" />
+    <aura:attribute name="rule1Field" type="String" />
+    <aura:attribute name="rule1Operator" type="String" />
+    <aura:attribute name="rule1Value" type="String" />
+    <aura:attribute name="rule2Field" type="String" />
+    <aura:attribute name="rule2Operator" type="String" />
+    <aura:attribute name="rule2Value" type="String" />
+    <aura:attribute name="rule3Field" type="String" />
+    <aura:attribute name="rule3Operator" type="String" />
+    <aura:attribute name="rule3Value" type="String" />
+    <aura:attribute name="rule1Field_value" type="String" />
+    <aura:attribute name="rule2Field_value" type="String" />
+    <aura:attribute name="rule3Field_value" type="String" />
+    <aura:attribute name="rule1Field_type" type="String" />
+    <aura:attribute name="rule2Field_type" type="String" />
+    <aura:attribute name="rule3Field_type" type="String" />
+    <aura:attribute name="isUserAdmin" type="Boolean"  />
+ 	<aura:attribute name="filterAudience" type="String" default="Me"/>    
+ 	<aura:attribute name="selectedWhichOppties" type="String" default="My Opportunities"/>    
+    <aura:attribute name="inputExample" type="String" />
+    <aura:attribute name="inputExampleValue" type="String" />
+    <aura:attribute name="recAccessMap" type="Map" />
+    <aura:attribute name="budgetAccessList" type="String[]" />
+    <aura:attribute name="filterValuePicklist" type="String" />
+    <aura:attribute name="mySelectedItems" type="String[]" />
+    <aura:attribute name="sortByField" type="String" />
+    <aura:attribute name="sortByFieldHumanReadable" type="String" />
+    <aura:attribute name="sortDesc" type="Boolean" default="true" />
+    <aura:attribute name="stageContainerHeight" type="String" default="" />
+    <aura:attribute name="fromStage" type="String" />
+    <aura:attribute name="toStage" type="String" />
+    <aura:attribute name="droppedOppId" type="String" />
+    <aura:attribute name="lossReasonPicklist" type="String[]"/>
+    <aura:attribute name="dropTarget" type="Object" />
+    <aura:attribute name="accOppName" type="String" />
+
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <!-- kanbanData contains the response from the server with all data relevant to this component.
+     	 See the OpportunityForecastingController Apex Class for more details on what's contained in this object -->
+    <aura:attribute name="kanbanData" type="OpportunityForecastingController.kanbanWrapper"/>
+
+
+
+	<!--  Save Filter Modal Dialog -->
+	<div style="position: absolute; top: 100px">
+      <div role="dialog" tabindex="-1" aria-labelledby="saveFilterHeader" aura:id="Modalbox" class="slds-modal">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h2 id="saveFilterHeader" class="slds-text-heading--medium">Rename Filter</h2>
+            </div>
+            <div class="slds-modal__content slds-p-around--medium">
+                <div>
+                    <ui:inputText aura:id="filterRename" label="Rename List View to:" value="{!v.selectedListView}"/>
+                </div>
+                <span style="font-size: .85em; font-style: italics;">* Any changes to Filter Rules will also be Saved</span>
+            </div>
+            <div class="slds-modal__footer">
+           		<button class="slds-button slds-button_neutral" onclick="{!c.closeModal}">Cancel</button>
+				<button class="slds-button slds-button_brand" onclick="{!c.saveFilterRename}">Save</button>
+            </div>
+        </div>
+    </div>
+	</div>
+	<div class="slds-backdrop " aura:id="Modalbackdrop"></div>
+
+	<!--  Clone Filter Modal Dialog -->
+	<div style="position: absolute; top: 100px">
+      <div role="dialog" tabindex="-1" aria-labelledby="cloneFilterHeader" aura:id="ModalboxClone" class="slds-modal">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h2 id="cloneFilterHeader" class="slds-text-heading--medium">Clone Filter</h2>
+            </div>
+            <div class="slds-modal__content slds-p-around--medium">
+                <div>
+                    <ui:inputText aura:id="filterRename" label="Cloned Filter Name:" value="{!v.clonedListView}"/>
+                </div>
+         			<div style="margin-top: 16px">
+                    <fieldset class="slds-form-element">
+					  <legend class="slds-form-element__legend slds-form-element__label">Who sees this filter?</legend>
+					  <lightning:input type="radio" label="Only I can see this filter" name="whoSees" value="Me" checked="true" onchange="{!c.setVisibility}"/>
+					  <lightning:input type="radio" label="My Manager and I can see this filter" name="whoSees" value="Manager" onchange="{!c.setVisibility}" />
+            			<aura:if isTrue="{!v.isUserAdmin}">
+						  <lightning:input type="radio" label="All users can see this filter" name="whoSees" value="All" onchange="{!c.setVisibility}" />
+						</aura:if>
+					</fieldset>
+				</div>
+
+            </div>
+            <div class="slds-modal__footer">
+           		<button class="slds-button slds-button_neutral" onclick="{!c.closeModalClone}">Cancel</button>
+				<button class="slds-button slds-button_brand" onclick="{!c.saveClonedFilter}">Save</button>
+            </div>
+        </div>
+    </div>
+	</div>
+	<div class="slds-backdrop " aura:id="ModalbackdropClone"></div>
+
+	<!--  New Filter Modal Dialog -->
+	<div style="position: absolute; ">
+      <div style="height: 400px; ">
+      <section  style="height: 400px; top: 100px" role="dialog" tabindex="-1" aria-labelledby="newFilterHeader" aura:id="ModalboxNew" aria-describedby="newFilterContent" class="slds-modal">
+        <div  style="height: 400px;" class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h2 id="newFilterHeader" class="slds-text-heading--medium">New Filter</h2>
+            </div>
+            <div  style="height: 400px;" id="newFilterContent" class="slds-modal__content slds-p-around--medium">
+                <div>
+                    <ui:inputText label="Filter Name:" value="{!v.newFilterName}"/>
+                </div>
+                <div style="margin-top: 16px">
+                    <fieldset class="slds-form-element">
+					  <legend class="slds-form-element__legend slds-form-element__label">Who sees this filter?</legend>
+					  <lightning:input type="radio" label="Only I can see this filter" name="whoSees" value="Me" checked="true" onchange="{!c.setVisibility}"/>
+					  <lightning:input type="radio" label="My Manager and I can see this filter" name="whoSees" value="Manager" onchange="{!c.setVisibility}" />
+            			<aura:if isTrue="{!v.isUserAdmin}">
+						  <lightning:input type="radio" label="All users can see this filter" name="whoSees" value="All" onchange="{!c.setVisibility}" />
+						</aura:if>
+
+
+					</fieldset>
+				</div>
+            </div>
+            <div class="slds-modal__footer">
+           		<button class="slds-button slds-button_neutral" onclick="{!c.closeNewFilter}">Cancel</button>
+				<button class="slds-button slds-button_brand" onclick="{!c.saveNewFilter}">Save</button>
+            </div>
+        </div>
+	  </section>
+	  </div>
+	</div>
+	<div class="slds-backdrop " aura:id="ModalbackdropNew"></div>
+
+	<!--  Sort Modal Dialog -->
+	<div style="position: absolute;">
+      <div role="dialog" tabindex="-1" aria-labelledby="sortFilterHeader" aura:id="ModalboxSort" class="slds-modal">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h2 id="sortFilterHeader" class="slds-text-heading--medium">Sort</h2>
+            </div>
+	        <div class="slds-modal__content slds-p-around--medium">
+				<!--	<label class="inputLabel uiLabel" for="9722:0" data-aura-class="uiLabel"> -->
+				<label class="inputLabel uiLabel" data-aura-class="uiLabel">
+					<span class=""></span>Select Field To Sort On</label>
+				<div class="forceRecordLayout valueInput">
+					<ui:inputSelect aura:id="sortField" class="fieldSelection select uiInput uiInputSelect uiInput--default uiInput--select" change="{!c.handleOpptyFieldChange}">
+			        	<ui:inputSelectOption text=";NONE;" label=" "/>
+						<ui:inputSelectOption text="Account.Name;STRING;Account Name" label="Account Name" />
+						<ui:inputSelectOption text="Name;STRING;Opportunity Name" label="Opportunity Name" />
+						<ui:inputSelectOption text="Total_Forecast_Amount__c;CURRENCY;Total Forecasted Amount" label="Total Forecasted Amount" />
+						<ui:inputSelectOption text="Pending_Gross_Amount__c;CURRENCY;Total Pending" label="Total Pending" />
+						<ui:inputSelectOption text="Closed_Gross_Amount__c;CURRENCY;Total Closed" label="Total Closed"  />
+						<ui:inputSelectOption text="CloseDate;DATE;Presentation Date" label="Presentation Date" />
+						<ui:inputSelectOption text="CreatedDate;DATETIME;Date Opened" label="Date Opened" />
+						<ui:inputSelectOption text="Probability;PERCENT;Probability (%)" label="Probability (%)" />
+						<ui:inputSelectOption text="Owner.Name;STRING;Owner" label="Owner" />
+					</ui:inputSelect> <!--render facet: -->
+				</div>
+	            <div class="slds-modal__footer">
+	           		<button class="slds-button slds-button_neutral" onclick="{!c.closeModalSort}">Cancel</button>
+					<button class="slds-button slds-button_brand" onclick="{!c.applySort}">Apply Sort</button>
+	            </div>
+			</div>
+
+	      </div>
+
+      </div>
+
+	</div>
+
+	<!--  Pick Loss Reason Modal Dialog -->
+	<div style="position: absolute;">
+          <div role="dialog" tabindex="-1" aria-labelledby="LossReasonHeader" aura:id="ModalboxLossReason" class="slds-modal">
+	        <div class="slds-modal__container">
+	            <div class="slds-modal__header lossReasonBGHeader">
+	                <h2 id="LossReasonHeader" class="slds-text-heading--medium lossReasonHeader">Loss Reason</h2>
+	            </div>
+	            <div class="slds-modal__content slds-p-around--medium lossReasonBG">
+					<!--	<label class="inputLabel uiLabel" for="9722:0" data-aura-class="uiLabel"> -->
+					<div>
+						<div class="lossReasonLarge"> 
+							<p class="lossReasonBold  lossReasonDispInline">A Loss Reason </p><p class="lossReasonBold colorMeRed lossReasonDispInline">MUST</p><p class="lossReasonBold lossReasonDispInline"> be entered to move this</p>
+							<p class="lossReasonBold "> opportunity to Closed Lost</p>
+						</div>
+					</div>
+					<br/>
+					<label class="inputLabel uiLabel lossReasonHeader" data-aura-class="uiLabel">
+						<span class=""></span>Select Loss Reason</label>
+					<br/>
+					<div class="forceRecordLayout valueInput">
+						<ui:inputSelect aura:id="lossReason" class="fieldSelection select uiInput uiInputSelect uiInput--default uiInput--select" >
+			            	<ui:inputSelectOption text="--None--" label="--None--"/>
+			            	<aura:iteration items="{!v.lossReasonPicklist}" var="lr"  >
+			            		<ui:inputSelectOption text="{!lr}" label="{!lr}" />
+			            	</aura:iteration>
+
+					</ui:inputSelect> <!--render facet: -->
+					</div>
+			        <div class="slds-modal__footer">
+			       		<button class="slds-button slds-button_neutral" onclick="{!c.closeModalLossReason}">Cancel</button>
+						<button class="slds-button slds-button_brand" onclick="{!c.lossReasonSelected}">Save</button>
+			        </div>
+				</div>
+
+	        </div>
+	    </div>
+	</div>
+
+	<div class="slds-backdrop " aura:id="ModalbackdropLossReason"></div>
+
+
+	<!--  Delete List View Modal Dialog -->
+	<div style="position: absolute;">
+      <div role="dialog" tabindex="-1" aria-labelledby="deleteFilterHeader" aura:id="ModalboxDelete" class="slds-modal">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h2 id="deleteFilterHeader" class="slds-text-heading--medium">Delete List View</h2>
+            </div>
+            <div class="slds-modal__content slds-p-around--medium">
+				<!--	<label class="inputLabel uiLabel" for="9722:0" data-aura-class="uiLabel"> -->
+				<label class="inputLabel uiLabel" data-aura-class="uiLabel">
+					<span class=""></span>Are you sure you want to delete the following List View?</label>
+				<div class="forceRecordLayout valueInput">
+					{!v.selectedListView}
+
+				</div>
+			        <div class="slds-modal__footer">
+			       		<button class="slds-button slds-button_neutral" onclick="{!c.closeModalDelete}">Cancel</button>
+						<button class="slds-button slds-button_brand" onclick="{!c.applyDelete}">Delete</button>
+			        </div>
+			</div>
+        </div>
+
+      </div>
+
+	</div>
+	<div class="slds-backdrop " aura:id="ModalbackdropDelete"></div>
+
+
+
+	<!--   SharingSettings Modal Dialog -->
+	<div style="position: absolute; ">
+      <div style="height: 400px; ">
+      <section  style="height: 320px; top: 100px" role="dialog" tabindex="-1" aria-labelledby="newFilterHeader" aura:id="SharingModalbox" aria-describedby="newFilterContent" class="slds-modal">
+        <div  style="height: 400px;" class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h2 id="newFilterHeader" class="slds-text-heading--medium">Sharing Settings</h2>
+            </div>
+            <div  style="height: 400px;" id="newFilterContent" class="slds-modal__content slds-p-around--medium">
+                <div>
+                    <fieldset class="slds-form-element">
+					  <legend class="slds-form-element__legend slds-form-element__label">Who sees this filter?</legend>
+					  <lightning:input type="radio" label="Only I can see this filter" name="whoSees" value="Me" checked="true" onchange="{!c.setSharingSettings}"/>
+					  <lightning:input type="radio" label="My Manager and I can see this filter" name="whoSees" value="Manager" onchange="{!c.setSharingSettings}" />
+            			<aura:if isTrue="{!v.isUserAdmin}">
+						  <lightning:input type="radio" label="All users can see this filter" name="whoSees" value="All" onchange="{!c.setSharingSettings}" />
+						</aura:if>
+					</fieldset>
+				</div>
+            </div>
+            <div class="slds-modal__footer">
+           		<button class="slds-button slds-button_neutral" onclick="{!c.closeSharingSettings}">Cancel</button>
+				<button class="slds-button slds-button_brand" onclick="{!c.saveSharingSettings}">Save</button>
+            </div>
+        </div>
+    </section>
+    </div>
+	</div>
+	<div class="slds-backdrop " aura:id="SharingModalbackdrop"></div>
+
+	<div aura:id="refreshBackdrop" class="slds-backdrop"></div>
+
+	<div class="fixedHeader" style="{!'width: 98.5%; position: fixed; z-index: 2;'+ $Label.c.OpptyFC_Header_Offset}">   <!-- fixed header START -->
+
+    <div class="slds-page-header oppForecastHeader" style=" padding-top: 12px; border-top-left-radius: 0px;  border-top-right-radius: 0px; ">
+        <div class="slds-media">
+            <div class="slds-media__figure">
+                <span class="slds-icon_container" title="Click to refresh page" onclick="{!c.refresh}">
+                    <lightning:icon iconName="utility:kanban" variant="bare" size="small"/>
+                </span>
+                <span>
+                	<lightning:button class="refreshButtAlign" iconName="utility:refresh" onclick="{!c.refresh}" title="Refresh Opportunity Pipeline" />
+                </span>
+                <span onclick="{!c.settingsMenuFocus}">
+                	<lightning:buttonGroup class="filtButtonGroup" >
+        	        	<lightning:buttonMenu class="newButtAlign settingsMenu" iconName="utility:settings" onselect="{!c.handleFilterSettings}" title="Filter Settings" >
+        	        		<lightning:menuItem label="New" value="new" />
+        	        		<lightning:menuItem aura:id="renameMenuItem" label="Rename" value="rename" class="hideInits" />
+        	        		<lightning:menuItem aura:id="cloneMenuItem" label="Clone" value="clone" class="hideInits" />
+        	        		<lightning:menuItem aura:id="sortMenuItem" label="Sort" value="sort" class="hideInits" />
+        	        		<lightning:menuItem aura:id="sharingMenuItem" label="Sharing" value="sharing" class="hideInits" />
+        	        		<lightning:menuItem aura:id="deleteMenuItem" label="Delete" value="delete" class="hideInits" />
+        	        	</lightning:buttonMenu>
+        	        	<lightning:button aura:id="sortDirection" class="sortButtAlign" iconName="utility:down" name="sortOrder" onclick="{!c.toggleSortOrder}" title="Sort Order" />
+    	            	<lightning:button aura:id="filtButtAlign" class="filtButtAlign" iconName="utility:filterList" name="filterButt" onclick="{!c.showFilterPanel}" title="Show/Hide Filters" />
+	                </lightning:buttonGroup>
+                </span>
+            </div>
+            <div class="slds-media__body">
+                <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Opportunity Forecast">Opportunity Pipeline</h1>
+
+            	<span style="margin-right: 6px">
+            		{!v.selectedListView}
+				</span>
+
+				<div aura:id="topLevelDropdown" class="slds-dropdown-trigger slds-dropdown-trigger--click">
+					<lightning:buttonIcon iconName="utility:down" onclick="{!c.showFilterMenuItems}"  alternativeText="Toggle Filter dropdown menu" />
+					<div aura:id="menuPopupDiv" id="menuPopupDiv" class="slds-dropdown slds-dropdown_left slds-dropdown_length-10" onmouseenter="{!c.menuMouseEnter}" onmouseout="{!c.menuMouseOut}">
+						<ul class="slds-dropdown__list" role="menu">
+				        	<aura:iteration items="{!v.userListViews}" var="listView" indexVar="Id">
+								<li id="{!listView.Id}" class="slds-dropdown__item" style="display: flex; cursor:pointer" role="presentation" onclick="{!c.handleListView}">
+                                    <a aura:id="{!listView.Id}" id="{!listView.Id}" href="javascript:void(0);" role="menuitem" tabindex="-1" value="{!listView.Id}" >
+                                        <span id="{!listView.Id}" class="slds-truncate" >{!listView.value}</span>
+									</a>
+								</li>
+				        	</aura:iteration>
+						</ul>
+					</div>
+				</div>
+			</div>
+            <div class="slds-grid" style="right: 205px; top: 16px; position: relative;">
+            	<div class="slds-col slds-align-bottom">
+            		<p class="slds-text-body--small">
+            			<div class="test-listViewStatusInfo">
+            				<span data-aura-class="uiOutputText">
+            					<aura:if isTrue="{!v.kanbanData.numOppsFound > 200}">
+            						{!v.kanbanData.records.length} records of {!v.kanbanData.numOppsFoundStr} • Sorted by {!v.sortByFieldHumanReadable} • {!v.refreshAge}
+            					<aura:set attribute="else">
+            						{!v.kanbanData.records.length} records • Sorted by {!v.sortByFieldHumanReadable} • {!v.refreshAge}
+            					</aura:set>
+            					</aura:if>
+            				</span>
+            			</div>
+            		</p>
+            	</div>
+            </div> 
+        </div>
+    </div>
+    
+    <div class="slds-grid" style="position: absolute;top: 10px;left: 250px;width:500px;">
+      <div class="slds-col slds-p-horizontal_medium">
+        <lightning:input type="text" name="search" value="{!v.accOppName}" placeholder="Opportunity/Account Name" />
+      </div>
+      <div class="slds-col slds-p-horizontal_medium">
+          <br /><lightning:button label="Search" onclick="{!c.onAccOppSearch }" />
+      </div>
+	</div>    
+      
+    
+    
+	</div>   <!-- fixed header END -->
+
+	<!-- Opportunities -->
+    <div style="{!$Label.c.OpptyFC_SalesPath_Offset}"><!--padding-top: 63px;"-->
+	    <aura:iteration var="pickVal" items="{!v.pickListNamesAndVals}" indexVar="index" >
+	        <div class="stageContainer" style="{!'width:calc(100vw/'+(v.kanbanData.pickVals.length+0.5)+')'}">
+	        	<div class="slds-grid slds-grid_vertical" style="position: fixed; z-index: 1;">
+	                <div>
+                        <div style="text-align:center;color:darkred;font-size: 16px;"><b>
+                            <aura:if isTrue="{!pickVal.stage == 'Identification'}">
+                                Not Presented
+                                <aura:set attribute="else">
+                                    <aura:if isTrue="{!pickVal.stage == 'Closed Lost to Competitor'}">
+                                        Closed Lost
+                                        <aura:set attribute="else">
+                                            {!pickVal.stage}
+                                        </aura:set>
+                                    </aura:if>
+                                </aura:set>
+                            </aura:if>
+                            ({!pickVal.count})</b>
+                        </div>
+	                    <div class="slds-media slds-no-space slds-media_center costContainer" style="{!'width:calc(100vw/'+(v.kanbanData.pickVals.length+1)+')'}">
+	                        <div id="{!pickVal.label}" class="slds-media__body">
+	                            <h1 class="slds-page-header__title slds-align-middle slds-truncate" id="{!pickVal.stage}" style="text-align:center; color:rgb(250,169,26); font-size: 1.2em; background-color: #f8f8f8; border-top-left-radius: 5px;  border-top-right-radius: 5px;" title="{!'Forecasted: $'+pickVal.amount}">
+	                           	<aura:if isTrue="{!pickVal.amount == 0}">
+	                           		$0
+	                        		 <aura:set attribute="else">
+	                        		 	<ui:outputCurrency format="$#,###" value="{!pickVal.amount}"/>
+								     </aura:set>
+
+								</aura:if>
+	                           	</h1>
+	                        </div>	                        
+	                        <div id="{!pickVal.label + '-Pending'}" class="slds-media__body">
+	                           <h1 class="slds-page-header__title slds-align-middle slds-truncate"  id="{!pickVal.stage + '-Pending'}" style="text-align:center; color:#00b600; font-size: 1.2em; background-color: #f8f8f8;border-top-left-radius: 5px;  border-top-right-radius: 5px; margin-right: 1px;" title="{!'Pending: $'+pickVal.pendingAmount}">
+	                           	<aura:if isTrue="{!pickVal.pendingAmount == 0}">
+	                           		$0
+	                        		 <aura:set attribute="else">
+	                        		 	<ui:outputCurrency format="$#,###" value="{!pickVal.pendingAmount}"/>
+								     </aura:set>
+
+								</aura:if>
+	                           	</h1>
+	                        </div>
+
+	                    </div>
+	                </div>
+	            </div>
+		
+				
+
+	            <ul ondrop="{!c.drop}" ondragover="{!c.allowDrop}" class="slds-has-dividers_around-space dropZone"  data-Pick-Val="{!pickVal.stage}" style="{!'min-height:calc(100vh - 251.5px);overflow:visible;-ms-overflow:visible;margin-top: 24px; '+v.stageContainerHeight}" aura:id="scList">
+                    <br />
+	                <aura:iteration var="objRecord" items="{!v.kanbanData.records}">
+	                    <aura:if isTrue="{!pickVal.stage == objRecord.StageName}">
+	                    	
+	                        <li class="slds-item slds-m-around_small slds-list_vertical-space opptyCard" theStage="{!pickVal.stage}" draggable="false" data-item="{!pickVal.stage}" ondragstart="{!c.drag}" id="{!objRecord.Id}" sourceStage="{!pickVal.label}">
+	                            <article class="slds-tile slds-tile_board">
+	                            	<div class="noDrag" draggable="false" id="headerSection">
+	                                <div class="noDrag" style="display:inline-block; float:right">
+
+		                                <lightning:buttonMenu iconName="utility:down" iconSize="x-small" alternativeText="Edit" onselect="{! c.handleEditSelect }">
+										    <lightning:menuItem label="Edit"  value="{!objRecord.Id}" />
+										    <lightning:menuItem label="Opportunity Budget"  value="{!objRecord.Id}" />
+										</lightning:buttonMenu>
+									</div>
+	                                <h3 class="slds-truncate noDrag" draggable="false" title="{!objRecord.Name}">
+	                                    <div  onclick="{!c.doView1}" data-value="{!objRecord.Id}" draggable="false">
+	                                    	<a href="javascript:void(0);" class="noDrag" draggable="false" onmousedown="return false;">
+	                                    	<span class="slds-truncate noDrag"  draggable="false" id="{!objRecord.Id+'item'}"><b>{!objRecord.Name}</b></span>
+	                                    </a>
+
+	                                    </div>
+
+	                                </h3>
+
+									</div>
+
+	                                    <div class="slds-align-middle" style="position: absolute; right: 0">
+		                                	<span style="margin-right: 2px; top: -2px; display: inline-flex;"><c:tooltip tooltipText="{!objRecord.HIDDEN_BC_ToolTip__c}" toolTipIcon="utility:info" callToggler="true"/></span>
+		                                </div>
+		                                <h4 class="slds-truncate noDrag" style="font-size: .85em" title="{!objRecord.Name}">
+                        				<!--
+	                                    <a href="javascript:void(0);" onclick="{!c.doView}">
+	                                        <span class="slds-truncate" id="{!objRecord.AccountId}"><b>{!objRecord.Account.Name}</b></span>
+	                                    </a>-->
+		                                    <div class="noDrag" onclick="{!c.doView1}" data-value="{!objRecord.AccountId}" draggable="false">
+			                               <!--     <a  class="noDrag" href="javascript:void(0);" draggable="false"> -->
+			                                    <a  class="noDrag" href="javascript:return false;" draggable="false">
+			                                        <span draggable="false" class="noDrag slds-truncate" id="{!objRecord.AccountId}">{!objRecord.Account.Name}</span>
+			                                    </a>
+		                                	</div>
+		                                </h4>
+	                                <div class="slds-tile__detail slds-text-body_small">
+
+	                                    <p class="slds-text-body_small"  style="color:rgb(250,169,26);">
+	                                    	<aura:if isTrue="{!objRecord.Total_Forecast_Amount__c == null || objRecord.Total_Forecast_Amount__c == 0}">
+	                                    		$0
+	                                    		 <aura:set attribute="else">
+	                                    		 	<ui:outputCurrency format="$#,###" value="{!objRecord.Total_Forecast_Amount__c}"/>
+											     </aura:set>
+	                                    		
+	                                    	</aura:if>
+											<i><p style="color:#5986b2; display:inline;">&nbsp;&nbsp;(Total Forecasted)</p></i></p>
+
+	                                    <p class="slds-text-body_small" style="color:rgb(106,168,79);">
+	                                    	<aura:if isTrue="{!objRecord.Pending_Gross_Amount__c == null || objRecord.Pending_Gross_Amount__c == 0}">
+	                                    		$0
+	                                    		 <aura:set attribute="else">
+	                                    		 	<ui:outputCurrency format="$#,###" value="{!objRecord.Pending_Gross_Amount__c}"/>
+											     </aura:set>
+	                                    		
+	                                    	</aura:if>
+	                                    	<i><p style="color:#5986b2; display:inline;">&nbsp;&nbsp;(Total Pending)</p></i></p>
+
+	                                    <p class="slds-text-body_small" style="color:black; font-weight: bold">
+	                                    	<aura:if isTrue="{!objRecord.Closed_Gross_Amount__c == null || objRecord.Closed_Gross_Amount__c == 0}">
+	                                    		$0
+	                                    		 <aura:set attribute="else">
+	                                    		 	<ui:outputCurrency format="$#,###" value="{!objRecord.Closed_Gross_Amount__c}"/>
+											     </aura:set>
+	                                    		
+	                                    	</aura:if>
+	                                    	<i><p style="color:#5986b2; display:inline;">&nbsp;&nbsp;(Total Closed)</p></i></p>
+
+	                                    <p style="slds-text-body_small">{!objRecord.CloseDate}<i><p style="color:#5986b2; display:inline;">&nbsp;&nbsp;(Presentation Date)</p></i></p>
+
+	                                    <p class="slds-text-body_small">{!objRecord.CreatedDate}<i><p style="color:#5986b2; display:inline;">&nbsp;&nbsp;(Date Opened)</p></i></p>
+
+	                                    <p id="{!objRecord.Id + '-prob'}" class="slds-text-body_small">{!objRecord.Probability}%<i><p style="color:#5986b2; display:inline;">&nbsp;&nbsp;(Probability %)</p></i></p>
+
+	                                    <div class="slds-align-middle" style="float: right; ">
+	                                    	<aura:if isTrue="{!objRecord.HasOpenActivity}">
+		                                    	<span style="margin-right: 2px; top: -2px; display: inline-flex;"><c:tooltip tooltipText="{!v.takeActionHTML}" toolTipIcon="utility:warning" opptyId="{!objRecord.Id}" showActionLinks="true" callToggler="false"/></span>
+		                                	</aura:if>
+		                                </div>
+
+	                                    <p class="slds-text-body_small">{!objRecord.Owner.Name}<i><p style="color:#5986b2; display:inline;">&nbsp;&nbsp;(Owner)</p></i></p>
+
+	                                </div>
+	                            </article>
+	                        </li>
+	                    </aura:if> 
+	                </aura:iteration>
+
+	            </ul>
+	        </div>
+	    </aura:iteration>
+
+   </div>
+
+   <!-- Filter Panel Elements -->
+	<div aura:id="showOpportunities" tabindex="-1" role="dialog" class="slds-hide uiPanel--default uiPanel positioned west  active" data-aura-class="uiPanel--default uiPanel" data-aura-rendered-by="2550:0" id="2550:0" aria-hidden="false" style="opacity: 1; z-index: 3000; position: fixed; left: calc(100vw - 640px); top: 242px; max-width: 402px;  min-width: 402px; padding: 10px">
+		<div class="container" data-aura-rendered-by="2551:0">
+			<span class="assistiveText" data-aura-rendered-by="2552:0">Start of Dialog</span>
+				<div class="panel-content scrollable" data-aura-rendered-by="2555:0" data-scoped-scroll="true">
+					<div data-aura-rendered-by="2537:0" class="forceFilterPanelCallout" data-aura-class="forceFilterPanelCallout">
+						<div data-aura-rendered-by="2538:0">
+							<div data-aura-rendered-by="2514:0" class="forceFilterPanelScopeEditor" data-aura-class="forceFilterPanelScopeEditor">
+				                    <fieldset class="slds-form-element">
+									  <legend class="slds-form-element__legend slds-form-element__label">Show me</legend>
+									  <lightning:input type="radio" label="My Opportunities" name="whichOppties" value="My Opportunities"  checked="true" onchange="{!c.setWhichOppties}"/>
+									  <lightning:input type="radio" label="All Opportunities" name="whichOppties" value="All Opportunities"  onchange="{!c.setWhichOppties}" />
+
+									</fieldset>
+							</div>
+						</div>
+						<button class="slds-button slds-button--neutral doneButton uiButton" aria-live="off" type="button" data-aura-rendered-by="2542:0" data-aura-class="uiButton" onclick="{!c.showWhichOpptiesWindow}">
+						<span class=" label bBody truncate" dir="ltr" data-aura-rendered-by="2545:0">Done</span>
+					</button>
+				</div>
+			</div>
+			<div class="panel-footer" data-aura-rendered-by="2557:0">
+			</div>
+		</div>
+		<div class="pointer" data-aura-rendered-by="2560:0" id="2560:0" style="position: absolute; left: 390.005px; top: 76.0055px;">
+		</div>
+	</div>
+
+
+	<div aura:id="filterEditor" id="filterEditor" tabindex="-1" role="dialog" class="filterEdit1 filterEdit2 filterEdit3 slds-hide uiPanel--default uiPanel positioned west active filterWindow" aria-hidden="false" style="opacity: 1; z-index: 3000; position: fixed; left: calc(100vw - 640px); top: 260px; max-width: 402px;  min-width: 402px; padding: 10px">
+	    <div class="container" data-aura-rendered-by="10116:0">
+	        <span class="assistiveText" data-aura-rendered-by="10117:0">Start of Dialog</span>
+	        <div class="panel-content scrollable" data-scoped-scroll="true" style="min-height: 350px">
+	            <div class="forceFilterPanelCallout" data-aura-class="forceFilterPanelCallout">
+	                <div>
+	                    <div class="wrapper forceFilterPanelFieldSelector forceFilterPanelFilterEditor" data-aura-class="forceFilterPanelFieldSelector forceFilterPanelFilterEditor">
+	                        <center>
+	                            <h1 style="font-weight: bold">Editing Filter Rule #{!v.filterEditNum}</h1></center>
+	                        <label class="inputLabel uiLabel" for="9722:0" data-aura-class="uiLabel">
+	                            <span class=""></span>Field</label>
+	                        <div class="forceRecordLayout valueInput">
+
+	                            <ui:inputSelect aura:id="filterField" class="fieldSelection select uiInput uiInputSelect uiInput--default uiInput--select" change="{!c.handleOpptyFieldChange}">
+	                                <ui:inputSelectOption text=";NONE;" label=" " />
+	                                <ui:inputSelectOption text="Account.Name;STRING;Account Name" label="Account Name" />
+	                                <!--ui:inputSelectOption text="Account.Site;STRING;Account Site" label="Account Site" /-->
+	                                <!--ui:inputSelectOption text="AE_Id__c;ID;AE Id" label="AE Id" /-->
+	                                <ui:inputSelectOption text="Agency__r.Name;STRING;Agency" label="Agency" />
+	                                <ui:inputSelectOption text="Agency_Account__r.Name;STRING;Agency Account" label="Agency Account" />
+	                                <ui:inputSelectOption text="Amount;CURRENCY;Amount" label="Amount" />
+	                                <ui:inputSelectOption text="Bill_To__c;PICKLIST;Bill To" label="Bill To" />
+	                                <ui:inputSelectOption text="Billing_White_GLove_Opp__c;BOOLEAN;Billing White Glove" label="Billing White Glove" />
+	                                <!--ui:inputSelectOption text="Box_Folder_Exists__c;BOOLEAN;Box Folder Exists" label="Box Folder Exists" /-->
+	                                <!--ui:inputSelectOption text="Budget_Confirmed__c;BOOLEAN;Budget Confirmed" label="Budget Confirmed" /-->
+	                                <ui:inputSelectOption text="IsClosed;BOOLEAN;Closed" label="Closed" />
+	                                <ui:inputSelectOption text="Closed_Gross_Amount__c;CURRENCY;Closed Gross Amount" label="Closed Gross Amount" />
+	                                <ui:inputSelectOption text="Closed_Net_Amount__c;CURRENCY;Closed Net Amount" label="Closed Net Amount" />
+	                                <ui:inputSelectOption text="Cost_Per_Point__c;CURRENCY;Cost Per Point" label="Cost Per Point" />
+	                                <ui:inputSelectOption text="Cost_Per_Thousand__c;CURRENCY;Cost Per Thousand" label="Cost Per Thousand" />
+	                                <!--ui:inputSelectOption text="Created_By_Account_Executive__c;BOOLEAN;Created By Account Executive" label="Created By Account Executive" /-->
+	                                <ui:inputSelectOption text="CreatedBy.Alias;STRING;Created By Alias" label="Created By Alias" />
+	                                <ui:inputSelectOption text="CreatedDate;DATETIME;Created Date" label="Created Date" />
+	                                <ui:inputSelectOption text="Day_Part_Mix__c;STRING;Day Part Mix" label="Day Part Mix" />
+	                                <!--ui:inputSelectOption text="Discovery_Completed__c;BOOLEAN;Discovery Completed" label="Discovery Completed" /-->
+	                                <ui:inputSelectOption text="Earliest_Scheduled_Date__c;DATE;Earliest Scheduled Date" label="Earliest Scheduled Date" />
+	                                <!--ui:inputSelectOption text="ExpectedRevenue;CURRENCY;Expected Revenue" label="Expected Revenue" />
+									<ui:inputSelectOption text="Fiscal;STRING;Fiscal Period" label="Fiscal Period" />
+									<ui:inputSelectOption text="FiscalQuarter;INTEGER;Fiscal Quarter" label="Fiscal Quarter" />
+									<ui:inputSelectOption text="FiscalYear;INTEGER;Fiscal Year" label="Fiscal Year" /-->
+	                                <ui:inputSelectOption text="Flight_End_Date__c;DATE;Flight End Date" label="Flight End Date" />
+	                                <ui:inputSelectOption text="Flight_Start_Date__c;DATE;Flight Start Date" label="Flight Start Date" />
+	                                <!--ui:inputSelectOption text="ForecastCategoryName;PICKLIST;Forecast Category" label="Forecast Category" /-->
+	                                <ui:inputSelectOption text="Gross_Rating_Points__c;DOUBLE;Gross Rating Points" label="Gross Rating Points" />
+	                                <ui:inputSelectOption text="Key_Opportunity__c;BOOLEAN;Key Account Opportunity" label="Key Account Opportunity" />
+	                                <ui:inputSelectOption text="LastActivityDate;DATE;Last Activity" label="Last Activity" />
+	                                <ui:inputSelectOption text="LastModifiedBy.Alias;STRING;Last Modified By Alias" label="Last Modified By Alias" />
+	                                <ui:inputSelectOption text="LastModifiedDate;DATETIME;Last Modified Date" label="Last Modified Date" />
+	                                <ui:inputSelectOption text="Last_Scheduled_Date__c;DATE;Last Scheduled Date" label="Last Scheduled Date" />
+	                                <!--ui:inputSelectOption text="LeadSource;PICKLIST;Lead Source" label="Lead Source" />
+									<ui:inputSelectOption text="Loss_Reason__c;PICKLIST;Loss Reason" label="Loss Reason" /-->
+	                                <ui:inputSelectOption text="NCC_Account_Rep__r.Name;STRING;NCC Account Rep" label="NCC Account Rep" />
+	                                <ui:inputSelectOption text="NCC_Agency__r.Name;STRING;NCC Agency" label="NCC Agency" />
+	                                <ui:inputSelectOption text="NCC_Office__c;STRING;NCC Office" label="NCC Office" />
+	                                <!--ui:inputSelectOption text="NextStep;STRING;Next Step" label="Next Step" />
+									<ui:inputSelectOption text="Number_of_Linear_Proposals__c;INTEGER;Number of Linear Proposals" label="Number of Linear Proposals" />
+									<ui:inputSelectOption text="Number_Of_Manual_Proposal_Records__c;INTEGER;Number Of Manual Proposal Records" label="Number Of Manual Proposal Records" /-->
+	                                <ui:inputSelectOption text="Name;STRING;Opportunity Name" label="Opportunity Name" />
+	                                <ui:inputSelectOption text="Owner.Alias;STRING;Opportunity Owner Alias" label="Opportunity Owner Alias" />
+	                                <ui:inputSelectOption text="RecordType.Name;STRING;Opportunity Record Type" label="Opportunity Record Type" />
+	                                <!--ui:inputSelectOption text="OpportunityExternalId__c;STRING;OpportunityExternalId" label="OpportunityExternalId" /-->
+	                                <ui:inputSelectOption text="Owner_Division__c;PICKLIST;Owner Last Name" label="Owner Division" />
+
+	                                <ui:inputSelectOption text="Owner.FirstName;STRING;Owner First Name" label="Owner First Name" />
+	                                <ui:inputSelectOption text="Owner.Name;STRING;Owner Full Name" label="Owner Full Name" />
+	                                <ui:inputSelectOption text="Owner.LastName;STRING;Owner Last Name" label="Owner Last Name" />
+
+	                                <ui:inputSelectOption text="Owner_Region__c;PICKLIST;Owner Region" label="Owner Region" />
+	                                <ui:inputSelectOption text="Owner_Sales_Office__c;PICKLIST;Owner Sales Office" label="Owner Sales Office" />
+
+	                                <ui:inputSelectOption text="Pending_Gross_Amount__c;CURRENCY;Pending Gross Amount" label="Pending Gross Amount" />
+	                                <ui:inputSelectOption text="Pending_Net_Amount__c;CURRENCY;Pending Net Amount" label="Pending Net Amount" />
+	                                <ui:inputSelectOption text="CloseDate;DATE;Presentation Date" label="Presentation Date" />
+	                                <ui:inputSelectOption text="Probability;PERCENT;Probability (%)" label="Probability (%)" />
+	                                <ui:inputSelectOption text="Projected_Gross_Amount__c;CURRENCY;Projected Gross Amount" label="Projected Gross Amount" />
+	                                <ui:inputSelectOption text="Projected_Net_Amount__c;CURRENCY;Projected Net Amount" label="Projected Net Amount" />
+	                                <ui:inputSelectOption text="Record_Type__c;PICKLIST;Record Type" label="Record Type" />
+	                                <ui:inputSelectOption text="Rep_Firm__r.Name;STRING;Rep Firm" label="Rep Firm" />
+	                                <!--ui:inputSelectOption text="ROI_Analysis_Completed__c;BOOLEAN;ROI Analysis Completed" label="ROI Analysis Completed" /-->
+	                                <ui:inputSelectOption text="Spectrum_Reach_Preferred__c;BOOLEAN;Spectrum Reach Preferred" label="Spectrum Reach Preferred" />
+	                                <!--ui:inputSelectOption text="StageName;PICKLIST;Stage" label="Stage" />
+									<ui:inputSelectOption text="SyncedQuote.Name;STRING;Synced Quote" label="Synced Quote" />
+									<ui:inputSelectOption text="TIM_System__c;PICKLIST;TIM System" label="TIM System" /-->
+	                                <ui:inputSelectOption text="Total_Closed_Amount__c;CURRENCY;Total Closed Amount" label="Total Closed Amount" />
+	                                <ui:inputSelectOption text="Total_Forecast_Amount__c;CURRENCY;Total Forecast Amount" label="Total Forecast Amount" />
+	                                <ui:inputSelectOption text="Total_Gross_Amount__c;CURRENCY;Total Gross Amount" label="Total Gross Amount" />
+	                                <ui:inputSelectOption text="Total_Net_Amount__c;CURRENCY;Total Net Amount" label="Total Net Amount" />
+	                                <ui:inputSelectOption text="Total_Proposed_Amount__c;CURRENCY;Total Proposed Amount" label="Total Proposed Amount" />
+	                                <ui:inputSelectOption text="Type;PICKLIST;Type" label="Type" />
+	                                <!--ui:inputSelectOption text="IsWon;BOOLEAN;Won" label="Won" /-->
+
+	                            </ui:inputSelect>
+	                            <!--render facet: -->
+	                        </div>
+	                    </div>
+	                    <div class="wrapper forceFilterPanelFilterEditor" data-aura-rendered-by="10079:0" data-aura-class="forceFilterPanelFilterEditor">
+
+	                        <span aura:id="filterValuePicklistSpan" class="slds-hide" style="min-height: 300px"><!--ui:inputText aura:id="filterValuePicklist" label="Select 1 or more:" value="{!v.filterValue}" /-->
+							<div class="slds-form-element">
+							    <label class="slds-form-element__label" for="my-multi-select">Select 1 ore more:</label>
+			    				<div class="slds-form-element__control">
+			    					<c:MultiSelect aura:id="my-multi-select" selectChange="{!c.handleSelectChangeEvent}" selectedItems="{!v.mySelectedItems}" />
+								</div>
+							</div>
+			            </span>
+	                        <span aura:id="filterOperatorSpan">
+							<label class="inputLabel uiLabel" for="10088:0" data-aura-rendered-by="10082:0" data-aura-class="uiLabel">
+								<span class="" data-aura-rendered-by="10083:0">Operator</span>
+	                        <!--render facet: 10085:0-->
+	                        <!--render facet: 10086:0-->
+	                        </label>
+	                        <div class="forceRecordLayout operatorPicker valueInput" data-aura-rendered-by="10087:0">
+	                            <ui:inputSelect aura:id="filterOperator" class="filterOperatorSelect select uiInput uiInputSelect uiInput--default uiInput--select">
+	                                <!--render facet: 10094:0-->
+	                                <ui:inputSelectOption label="equals" text="equals" value="=" />
+	                                <ui:inputSelectOption label="not equal to" text="not equal to" value="!=" />
+	                                <ui:inputSelectOption label="less than" text="less than" />
+	                                <ui:inputSelectOption label="greater than" text="greater than" value=">" />
+	                                <ui:inputSelectOption label="less or equal" text="less or equal" />
+	                                <ui:inputSelectOption label="greater or equal" text="greater or equal" />
+	                                <ui:inputSelectOption label="contains" text="contains" />
+	                                <ui:inputSelectOption label="does not contain" text="does not contain" />
+	                                <ui:inputSelectOption label="starts with" text="starts with" />
+	                            </ui:inputSelect>
+	                            <!--render facet: 10097:0-->
+	                        </div>
+	                        </span>
+	                        <div data-aura-rendered-by="10098:0">
+	                            <div class="forceRecordLayout" data-aura-rendered-by="10099:0">
+	                                <span aura:id="filterValueSpan"><ui:inputText aura:id="filterValue" label="Value:" value="{!v.filterValue}"/></span>
+	                            </div>
+	                            <div style="font-size: .85em">{!v.inputExample}<em>{!v.inputExampleValue}</em></div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <button class="slds-button slds-button--neutral doneButton uiButton" aria-live="off" type="button" data-aura-class="uiButton" onclick="{!c.cancelFilterWindow}">
+	                    <!--render facet: 10108:0--><span class=" label bBody truncate" dir="ltr">Cancel</span>
+	                    <!--render facet: 10112:0-->
+	                </button>
+	                <button class="slds-button slds-button--neutral doneButton uiButton" aria-live="off" type="button" data-aura-class="uiButton" onclick="{!c.showFilterWindow}">
+	                    <!--render facet: 10108:0--><span class=" label bBody truncate" dir="ltr">Save</span>
+	                    <!--render facet: 10112:0-->
+	                </button>
+	            </div>
+	        </div>
+	        <div class="panel-footer" data-aura-rendered-by="10122:0">
+	            <!--render facet: 10123:0-->
+	        </div>
+	    </div>
+	    <div class="pointer" data-aura-rendered-by="10125:0" id="10125:0" style="position: absolute; left: 390.349px; top: 148.349px;"></div>
+	</div>
+
+			<!-- Filter Panel -->
+		  <div aura:id="opptyFilterPanel" id="opptyFilterPanel" class="slds-panel slds-grid slds-grid_vertical slds-nowrap slds-panel_filters slds-hide opptyFilterPanel" style="{!'max-width: 420px; overflow: hidden; float: right; position: fixed;  right: 0; background-color: rgb(247, 249, 251) !important; height: calc(100vh - 190px); z-index: 2000;' + $Label.c.OpptyFC_FilterPanel_Offset}">
+		    <div class="slds-form slds-form_stacked slds-grow slds-scrollable_y slds-grid slds-grid_vertical">
+		      <div class="slds-filters">
+		        <div class="slds-filters__header slds-has-divider_bottom-space slds-clearfix">
+	          		<h2 class="slds-text-heading_small slds-float_left" style="margin-top: 8px">Filters</h2>
+		          <!--button class="slds-button slds-button_icon slds-col_bump-left slds-button_icon slds-button_icon-small" title="Close Filter Panel" onclick="{!c.showFilterPanel}"-->
+		          	<div class="slds-float_right">
+		          		<lightning:button aura:id="filtButtClose"  iconName="utility:forward" name="filterButt" onclick="{!c.showFilterPanel}" class="slds-button_icon slds-icon__svg--default" title="Close Filter Panel" />
+		          	</div>
+	            <!--c:SVG class="slds-button__icon" iconClass="utility" myIcon="forward" xlinkHref=""/-->
+		            <!--span class="slds-assistive-text">Close Filter Panel</span>
+		          </button-->
+		        </div>
+		        <div class="slds-filters__body">
+					<button class="slds-button_reset slds-text-link slds-col_bump-left" href="javascript:void(0);" onclick="{!c.clearFilters}">Clear All Filters</button>
+		          	<button aura:id="saveButton" class="slds-button_reset slds-text-link slds-col_bump-left hideInit" style="margin-left: 20px" href="javascript:void(0);" onclick="{!c.saveFilter}">Save</button>		          <ol class="slds-list_vertical slds-list_vertical-space">
+		            <li aura:id="editor0" class="slds-item slds-hint-parent">
+		              <div class="slds-filters__item slds-grid slds-grid_vertical-align-center">
+		                <button href="javascript:void(0);"  onclick="{!c.showWhichOpptiesWindow}" class="slds-button_reset slds-grow slds-has-blur-focus">
+		                  <span class="slds-assistive-text">Edit filter:</span>
+		                  <p class="slds-text-body_small">Show Me</p>
+		                  <p>{!v.selectedWhichOppties}</p>
+		                </button>
+		              </div>
+		            </li>
+		          </ol>
+		          <h3 class="slds-text-body_small slds-m-vertical_x-small">Matching all these filters</h3>
+		          <!-- The current List View selected needs to load into below: -->
+		          <ol class="slds-list_vertical slds-list_vertical-space">
+		            <li aura:id="editor1" class="slds-item slds-hint-parent">
+		              <div class="slds-filters__item slds-grid slds-grid_vertical-align-center">
+		                1<button aura:id="editFilter1" id="editFilter1" onclick="{!c.showFilterWindow}" class="slds-button_reset slds-grow slds-has-blur-focus editFilterButton">
+		                  <span class="slds-assistive-text">Edit filter:</span>
+		                  <p class="slds-text-body_small"><em>{!v.rule1Field}</em></p>
+		                  <p>{!v.rule1Operator}&nbsp;<strong>{!v.rule1Value}</strong></p>
+		                </button>
+		                <lightning:button aura:id="filtRuleClose1"  iconName="utility:clear" name="filterButt1" class="slds-button slds-button_icon slds-button_icon slds-button_icon-small slds-icon__svg--default removeFilter" onclick="{!c.removeFilterRule}" title="Clear Filter"  />
+		              </div>
+		            </li>
+		            <li aura:id="editor2" class="slds-item slds-hint-parent">
+		              <div class="slds-filters__item slds-grid slds-grid_vertical-align-center">
+		                2<button aura:id="editFilter2" id="editFilter2" onclick="{!c.showFilterWindow}" class="slds-button_reset slds-grow slds-has-blur-focus editFilterButton">
+		                  <span class="slds-assistive-text">Edit filter:</span>
+		                  <p class="slds-text-body_small"><em>{!v.rule2Field}</em></p>
+		                  <p>{!v.rule2Operator}&nbsp;<strong>{!v.rule2Value}</strong></p>
+		                </button>
+		                <lightning:button aura:id="filtRuleClose2"  iconName="utility:clear" name="filterButt2" class="slds-button slds-button_icon slds-button_icon slds-button_icon-small slds-icon__svg--default removeFilter" onclick="{!c.removeFilterRule}" title="Clear Filter"  />
+		              </div>
+		            </li>
+		            <li aura:id="editor3" class="slds-item slds-hint-parent">
+		              <div class="slds-filters__item slds-grid slds-grid_vertical-align-center">
+		                3<button aura:id="editFilter3"  id="editFilter3" onclick="{!c.showFilterWindow}" class="slds-button_reset slds-grow slds-has-blur-focus editFilterButton">
+		                  <span class="slds-assistive-text">Edit filter:</span>
+		                  <p class="slds-text-body_small"><em>{!v.rule3Field}</em></p>
+		                  <p>{!v.rule3Operator}&nbsp;<strong>{!v.rule3Value}</strong></p>
+		                </button>
+		                <lightning:button aura:id="filtRuleClose3"  iconName="utility:clear" name="filterButt3" class="slds-button slds-button_icon slds-button_icon slds-button_icon-small slds-icon__svg--default removeFilter" onclick="{!c.removeFilterRule}" title="Clear Filter"  />
+		              </div>
+		            </li>
+		            <!--li class="slds-item slds-hint-parent">
+		              <div class="slds-filters__item slds-grid slds-grid_vertical-align-center">
+		                <button href="javascript:void(0);" class="slds-button_reset slds-grow slds-has-blur-focus">
+		                  <span class="slds-assistive-text">Edit filter:</span>
+		                  <p class="slds-text-body_small">List Price</p>
+		                  <p>greater than "500"</p>
+		                </button>
+		                <button class="slds-button slds-button_icon slds-button_icon slds-button_icon-small" title="Remove greater than &quot;500&quot;"-->
+		               <!--   <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+		                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+		                  </svg> -->
+		                  <!--span class="slds-assistive-text">Remove filter: List Price greater than "500"</span>
+		                </button>
+		              </div>
+		            </li-->
+		          </ol>
+		        </div>
+		        <div class="slds-filters__footer slds-grid slds-shrink-none">
+		          <!--button class="slds-button_reset slds-text-link" href="javascript:void(0);">Add Filter</button-->
+	          
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+</aura:component>

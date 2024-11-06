@@ -1,0 +1,90 @@
+<!--
+	Author      : M & S
+	Date        : 18 Jul- 2018
+	Description : Digital Campaign: Lightning Component for Inventory Request - Ads Everywhere
+				  Ref : SRSF-1154
+	Modification History :
+-->
+<aura:component controller="CM_DCFlightDatesController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+	<!--Init handler which is call doInit js function on component Load-->  
+    <aura:handler name="init" value="{!this}" action="{!c.scriptsLoaded}"/>
+    
+    <!--Aura Attribute for store Contact Object List as Array-->    
+    <aura:attribute name="resultWrap" type="Object"/>
+    <aura:attribute name="datesArray" type="List"/>
+    <aura:attribute name="dateString" type="String"/> 
+    <aura:attribute name="DateInstance" type="Object"/>
+    <aura:attribute name="rowIndex" type="String"/>
+    <aura:attribute name="recordId" type="String" /><!--default="a08550000045WbEAAU"-->
+    <aura:attribute name="showErrorMsg" type="boolean" default="false"/>
+    <aura:attribute name="showErrorMsg1" type="boolean" default="false"/>
+    <aura:attribute name="flightDtTooltip" type="String" default="{$Label.DCC_Clone_Matrix_Tooltip}" />
+  
+    <!-- page header -->
+    <div class="slds-card">
+    	<div class="slds-card__header slds-border_bottom slds-p-bottom_small">
+        <header class="slds-align--absolute-center">
+            <span class="slds-text-heading_small">
+                Flight Dates <span style="height: 26px;"><c:ToolTipLC tooltipText="{!v.flightDtTooltip}"/></span>
+                <br/>
+            </span>
+        </header>
+    	</div>
+        <aura:if isTrue="{!v.showErrorMsg ==true}">
+            <div class="bgred">
+                <b>The Flight End date must end on {!v.resultWrap.objDCampaign.Campaign_End_Date__c}</b>
+            </div>
+        </aura:if>
+    	<aura:if isTrue="{!v.showErrorMsg1 ==true}">
+            <div class="bgred">
+                <b>The Flight Start date should start before/equal to the Flight End date</b>
+            </div>
+        </aura:if>
+        <!--Table Part-->
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer"> 
+            <thead>
+                <tr class="slds-text-title_caps">
+                    
+                    <th scope="col">
+                        <div class="slds-truncate" title="Start Date">Flight Start Date</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="End Date">Flight End Date</div>
+                    </th>
+                    
+                </tr>
+            </thead>   
+            <tbody>
+                <aura:iteration items="{!v.datesArray}" var="item" indexVar="index">
+                    <!-- Table Row -->   
+                    <tr class="slds-text-title_caps">
+                        <td>
+                            <!--<ui:inputDate displayDatePicker="true" value="{!item.startDate}"/>-->
+                            <lightning:input type="date" value="{!item.startDate}" min="{!item.maxst}" max="{!item.maxend}" disabled="{!item.disable}" onchange="{!c.checkForErrorMsg}" />
+                        </td>
+                        <td>
+                            <!--<ui:inputDate displayDatePicker="true" value="{!item.endDate}"/>-->
+                            <lightning:input type="date" value="{!item.endDate}" min="{!item.maxst}" max="{!item.maxend}" disabled="{!item.disable}" onchange="{!c.checkForErrorMsg}" />
+                        </td>
+                        <td>
+                            <a onclick="{!c.removeRow}" id="{!index}">
+                                <lightning:icon variant="error" iconName="utility:delete" class="slds-icon slds-icon_small" size="small" alternativeText="icon"/>
+                                <span class="slds-assistive-text">Delete Icon</span>
+                            </a> 
+                        </td> 
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+        <br/>
+        <div>
+            <a onclick="{!c.addNewRow}">
+                <lightning:icon iconName="utility:add" class="slds-icon slds-icon_small" size="small" alternativeText="add"/>
+                <span class="slds-assistive-text">Add Icon</span>
+            </a>
+        </div>
+        <br/>
+        <!--Save Button which is call Save js function on click --> 
+        <button class="slds-button slds-button_brand" onclick="{!c.Save}">Save</button>
+    </div>
+</aura:component>

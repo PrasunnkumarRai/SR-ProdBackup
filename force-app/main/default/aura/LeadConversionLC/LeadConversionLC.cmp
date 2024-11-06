@@ -1,0 +1,102 @@
+<aura:component controller="LeadConversionLCCC" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="userContext" type="String" />
+    <aura:attribute name="LeadStatus" type="String[]"/>
+    <aura:attribute name="Accounts" type="String[]"/>
+    <aura:attribute name="oppName" type="String" />
+    <aura:attribute name="selAccount" type="String" />
+    <aura:attribute name="selUser" type="String" />
+    <aura:attribute name="searchString" type="String" 
+                    description="The search string to find." />
+    <aura:attribute name="doNotOppty" type="boolean"/>
+    <aura:attribute name="objLead" type="Lead" default="{ 'sobjectType': 'Lead' }"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.selAccount}" action="{!c.getLookedUpAcc}" />
+    <aura:handler name="updateLookupIdEvent" event="c:SR_UpdateLookUpIdLE" action="{!c.handleAccountIdUpdate}" />
+
+    
+    <ltng:require scripts="/resource/SR_slds/js/jquery-2.2.4.js"
+                  afterScriptsLoaded="{!c.doInit}"/>
+    
+    <div class="slds">
+        <!-- page header -->
+        <div class="slds-page-header slds-form-element slds-align--absolute-center">
+            <label class="slds-text-heading--medium slds-form-element__label" for="Convert Lead">Convert Lead</label>
+        </div>
+        <div class="slds-text-align--center" id="errorDiv" style="display:none">
+            <div id="error" class="slds-notify--alert slds-theme--error slds-theme--alert-texture" role="alert">
+                <span id="errorMsg"></span>
+            </div>
+        </div>
+        <div class="slds-text-align--center" id="msgDiv">
+            <span id="sucMsg"></span>
+        </div>
+        <lightning:spinner variant="brand" size="large" aura:id="mySpinner" class="Spinner"/>
+        <div class="slds-m-around--xx-large">
+            <div class="slds-form-element slds-size--1-of-2">
+                <label class="slds-form-element__label" for="select-01">Converted Status</label>
+                <div class="slds-form-element__control">
+                    <div class="slds-select_container">
+                        <ui:inputSelect value="{!v.objLead.Status}" aura:id="status" change="{!c.onSelectChange}" class="slds-select">
+                            <aura:iteration items="{!v.LeadStatus}" var="status">
+                                <ui:inputSelectOption text="{!status}" label="{!status}"/>
+                            </aura:iteration>
+                        </ui:inputSelect>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-form-element slds-size--1-of-2">
+                <label class="slds-form-element__label" for="select-01">Record Owner</label><span class="slds-text-align--left" id="warningDiv" style="display:none">
+                <lightning:icon size="x-small" iconName="utility:warning" title="Warning: Lead being converted with a Record Owner whose Team Role is not 'Account Executive'" alternativeText="Warning: Lead being converted with a Record Owner whose Team Role is not 'Account Executive'" variant="warning"/>
+            </span>
+                <!-- Lookup component -->
+                <c:SR_LookUpLC pluralLabel="Users" sObjectAPIName="User" instanceId="myUser" searchString="{!v.objLead.Owner.Name}"
+                               listIconSVGPath="{!$Resource.SR_slds + '/assets/icons/standard-sprite/svg/symbols.svg#user'}"
+                               listIconClass="slds-icon-standard-user" textValueShip="{!v.objLead.OwnerId}"/>
+            </div>
+            <div class="slds-form-element slds-size--1-of-2">
+                <fieldset class="slds-form--compound">
+                    <legend class="slds-form-element__label">Account Name</legend>
+                    <div class="slds-form-element__group">
+                        <div class="slds-form-element__row">
+                            <div class="slds-form-element slds-size--1-of-2">
+                                <ui:inputSelect aura:id="exsAccId" change="{!c.onAccountChange}" class="slds-select">
+                                    <aura:iteration items="{!v.Accounts}" var="acc">
+                                        <ui:inputSelectOption text="{!acc.value}" label="{!acc.label}"/>
+                                    </aura:iteration>
+                                </ui:inputSelect>
+                            </div>
+                            <div class="slds-form-element slds-size--1-of-2">
+                                <c:SR_LookUpLC pluralLabel="Accounts" sObjectAPIName="Account" instanceId="myAccount"
+                                               listIconSVGPath="{!$Resource.SR_slds + '/assets/icons/standard-sprite/svg/symbols.svg#account'}"
+                                               listIconClass="slds-icon-standard-account" textValueShip="{!v.selAccount}"/>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="slds-form-element slds-size--1-of-2">
+                <label class="slds-form-element__label" for="text-input-01">Opportunity Name</label>
+                <div class="slds-form-element__control">
+                    <ui:inputText value="{!v.oppName}" class="slds-input"/>
+                </div>
+            </div>
+            <div class="slds-form-element slds-size--1-of-2">
+                <div class="slds-form-element__control">
+                    <span class="slds-checkbox">
+                        <input type="checkbox" name="chkbx" id="doNotOppty"/>
+                        <label class="slds-checkbox__label" for="doNotOppty">
+                            <span class="slds-checkbox--faux"></span>
+                            <span class="slds-form-element__label"> Do not create a new opportunity upon conversion.</span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="slds-modal__footer">
+            <button class="slds-button slds-button--neutral" onclick="{!c.cancelConversion}">Cancel</button>
+            <button class="slds-button slds-button--brand" onclick="{!c.convertingLead}">Convert</button>
+        </div>
+    </div>
+</aura:component>

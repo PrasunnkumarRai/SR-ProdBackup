@@ -1,0 +1,16 @@
+<aura:component >
+    <aura:attribute name="oContact" type="Contact" />
+  <!--Register the component level event-->
+    <aura:registerEvent name="oSelectedContactEvent" type="c:selectedContactEvent"/>
+    
+    <li role="presentation">
+        <span class="slds-lookup__item-action slds-media slds-media--center" id="lookup-option-350" role="option">
+         <div class="slds-media__body">
+          <div class="slds-input-has-icon slds-input-has-icon--right">
+            <c:SVG class="slds-input__icon" xlinkHref="{!$Resource.SalesforceLightningDesignSystem221 + '/assets/icons/standard-sprite/svg/symbols.svg#contact'}" />
+            <div class="slds-lookup__result-text"><a onclick="{!c.selectContact}">{!v.oContact.Name}</a><span style="padding-left: 20px; font-size: .7em; color:gray">[ <strong>Email</strong>: {!v.oContact.Email}, <strong>Phone</strong>: {!v.oContact.Phone	}  ]</span></div>
+          </div>
+        </div>    
+        </span>
+    </li>
+</aura:component>

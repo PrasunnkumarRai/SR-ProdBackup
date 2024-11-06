@@ -1,0 +1,78 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" 
+                controller='UpdateOpportunityFromAccountController' >
+    <!--- aura attribute List -->
+    <aura:attribute name="AccountData" type="Account"></aura:attribute>
+    <aura:attribute name="columns" type="List"> </aura:attribute> <!-- attribute for dataTable -->
+    <aura:attribute name="buttonEnabled" type="Boolean"></aura:attribute> <!-- attribute to render disabled button -->
+    <aura:attribute name="jobId" type="Id"></aura:attribute> <!-- attribute to store current job id -->
+    <!-- Aura Handler -->
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }"/>
+    
+    
+    
+    <div class="slds-col slds-size_12-of-12 slds-align_absolute-center">
+        <lightning:button aura:id="UpdateOpportunity" onclick="{!c.runBatch}" label="Update Opportunities"></lightning:button>
+    </div>
+    
+    <div class="slds-col slds-size_12-of-12 slds-align_absolute-center">
+        
+        
+    </div>
+    <div class="slds-col slds-size_12-of-12 slds-m-top_medium ">
+        <div aura:id="batchAlreadyRunning"></div>
+    </div>
+    
+    
+    <!-- 
+    <div class=" slds-grid slds-m-top_medium" >
+        <div class="slds-col slds-size_12-of-12">
+            <lightning:datatable data="{!v.AccountData }" class="slds-m-top_medium"
+                                 columns="{! v.columns }" 
+                                 keyField="id"
+                                 hideCheckboxColumn="true"
+                                 />
+            
+        </div>
+        
+        
+        
+    </div>
+    -->
+    
+    
+    <div aura:id="batchStarted"></div>
+    
+    <div class=" slds-grid slds-m-top_medium" >
+        <div class="slds-col slds-size_12-of-12">
+            <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+                <thead>
+                    <tr class="slds-text-heading--label">
+                        <th scope="col"><div class="slds-truncate" title="Change Type">Change Type</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Name">Name</div></th>                        
+                        <!--th scope="col"><div class="slds-truncate" title="Account Tim Name">Account Tim Name</div></th-->
+                        <th scope="col"><div class="slds-truncate" title="Active">Active</div></th>
+						<th scope="col"><div class="slds-truncate" title="#Opportunities Impacted">#Opportunities Impacted</div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Use the Apex model and controller to fetch server side data -->
+                    <aura:iteration items="{!v.AccountData}" var="account">
+                        <tr>
+                            <td><div class="slds-truncate" title="{!account.UpdateOppFromAccount__c}">{!account.UpdateOppFromAccount__c}</div></td>
+                            <td><div class="slds-truncate" title="{!account.Name}">{!account.Name}</div></td>
+                            <!--td><div class="slds-truncate" title="{!account.Account_Tim_Name__c}">{!account.Account_Tim_Name__c}</div></td-->
+                            <td><div class="slds-truncate" title="{!account.Active__c}">{!account.Active__c}</div></td>
+                            <td><div class="slds-truncate" title="{!account.Type}">{!account.Type}</div></td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+            <div aura:id="noRecordFound"></div>
+        </div>
+        
+        
+        
+    </div>
+    
+    
+</aura:component>

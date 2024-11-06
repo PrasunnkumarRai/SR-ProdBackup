@@ -1,0 +1,40 @@
+.THIS .inlineOnRight {
+    display:inline-block;
+    margin-left:5px;
+}
+
+.THIS.newObjectButtDiv {
+  position:absolute;
+  top:1rem;
+  left:1rem;
+}
+
+.THIS .hide .newObjectButtDiv {
+  display: none;
+}
+
+.THIS .icn svg{
+  fill : blue;
+}
+
+.THIS.icn {
+  fill : red;
+}
+
+.THIS .cardFix {
+  position : relative !important;
+  padding : 0 !important;
+  background : transparent !important;
+  border : none !important;
+  border-radius : .25rem !important;
+  background-clip : padding-box !important;
+  box-shadow : none !important;
+}
+
+.THIS .slds-icon-standard-contact {
+  background-color:  #eb7092 ;
+}
+
+.THIS.textClass{
+color: green;
+}

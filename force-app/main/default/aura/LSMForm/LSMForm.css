@@ -1,0 +1,6 @@
+.THIS .other {
+    color: grey;
+} /* Gray */
+.THIS.orangeOnBlack svg{
+    fill:orange !important;
+}

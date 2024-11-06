@@ -1,0 +1,141 @@
+<!--
+    Author : MAndS 
+    Date   : 11/05/2017
+    Description : Geofence Location Component for Digital Campaign  
+    Modification History : 
+-->
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction" access="global" controller="CM_DigitalAddAddressesLCController">
+    <ltng:require styles="/resource/SR_slds/assets/styles/salesforce-lightning-design-system.css,
+                           /resource/SR_slds/assets/styles/salesforce-lightning-design-system.min.css"
+                  afterScriptsLoaded="{!c.doLoad}"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="lockRecord" type="Boolean" default="true"/>
+    <!--<aura:attribute name="RecId" type="string" default="a150n0000008r0UAAQ" description="RecordId"/>-->
+    <aura:attribute name="addList" type="string[]" description="address list"/>
+    <aura:attribute name="Street" type="string" default="" description="Street Address"/>
+    <aura:attribute name="City" type="string" default="" description="City Address"/>
+    <aura:attribute name="State" type="string" default="" description="State Address"/>
+    <aura:attribute name="Zip" type="string" default="" description="Zip Address"/>
+    <aura:attribute name="Type" type="string" default="" description="Campaign Type"/>
+    <aura:attribute name="Radius" type="string" default="" description="Radius (in meters)"/>
+    <aura:attribute name="isNone" type="boolean" default="" description="None Value"/>
+    
+    <div class="slds">
+        <div class="slds-card slds-m-top--x-large"> 
+            <!-- page header -->
+            <div class="slds-card__header slds-border_bottom slds-p-bottom_small">
+                <header class="slds-align--absolute-center">
+                    <span class="slds-text-heading_small">Geofence Location</span>
+                </header>
+            </div>
+            <div class="slds-card__body slds-m-around_medium">              
+                <h3 class="slds-section-title--divider"><b>New Address</b></h3>
+                <div class="slds-grid slds-wrap slds-grid--pull-padded slds-m-horizontal--large">
+                    <div class="slds-p-horizontal--small slds-m-bottom--medium  slds-medium-size--1-of-1 slds-small-size--1-of-1 slds-large-size--1-of-2">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label slds-p-right--x-small" for="Newsletter Order Status">
+                                Street <c:ToolTipLC tooltipText="{!$Label.c.CM_Street}"/>  
+                            </label>
+                            <div class="slds-form-element__control">
+                                <ui:inputText aura:id="Street" disabled="{!v.lockRecord}" class="slds-input" value="{!v.Street}" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-p-horizontal--small slds-m-bottom--medium slds-medium-size--1-of-1 slds-small-size--1-of-1 slds-large-size--1-of-2">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label slds-p-right--x-small" for="Newsletter Order Status">City                           
+                                <c:ToolTipLC tooltipText="{!$Label.c.CM_City}"/>                                                
+                            </label>
+                            <div class="slds-form-element__control">
+                                <ui:inputText aura:id="Street" disabled="{!v.lockRecord}" class="slds-input" value="{!v.City}" />                                                            
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-p-horizontal--small slds-m-bottom--medium  slds-medium-size--1-of-1 slds-small-size--1-of-1 slds-large-size--1-of-2">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label slds-p-right--x-small" for="Newsletter Order Status">State
+                            	<c:ToolTipLC tooltipText="{!$Label.c.CM_State}"/>    
+                            </label>
+                            <div class="slds-form-element__control">
+                                <ui:inputText aura:id="Street" disabled="{!v.lockRecord}" class="slds-input" value="{!v.State}" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-p-horizontal--small slds-m-bottom--medium  slds-medium-size--1-of-1 slds-small-size--1-of-1 slds-large-size--1-of-2">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label slds-p-right--x-small" for="Newsletter Order Status">Zip
+                            	<c:ToolTipLC tooltipText="{!$Label.c.CM_Zip}"/>    
+                            </label>
+                            <div class="slds-form-element__control">
+                                <ui:inputText aura:id="Street" disabled="{!v.lockRecord}" class="slds-input" value="{!v.Zip}" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-p-horizontal--small slds-m-bottom--medium  slds-medium-size--1-of-1 slds-small-size--1-of-1 slds-large-size--1-of-2">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label slds-p-right--x-small" for="Newsletter Order Status">Campaign Type
+                            	<c:ToolTipLC tooltipText="{!$Label.c.CM_Campaign_Type}"/>    
+                            </label>
+                            <div class="slds-form-element__control">
+                                <div class="selectList">
+                                    <ui:inputSelect aura:id="type" disabled="{!v.lockRecord}" class="slds-select" value="{!v.Type}">
+                                        <ui:inputSelectOption text="Conquest" label="Conquest" />
+                                        <ui:inputSelectOption text="Proximity" label="Proximity" />
+                                    </ui:inputSelect>                                     
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-p-horizontal--small slds-m-bottom--medium  slds-medium-size--1-of-1 slds-small-size--1-of-1 slds-large-size--1-of-2">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label slds-p-right--x-small" for="Newsletter Order Status">Radius (in meters)
+                            	<c:ToolTipLC tooltipText="{!$Label.c.CM_Radius}"/>    
+                            </label>
+                            <div class="slds-form-element__control">
+                                <ui:inputText aura:id="Street" disabled="{!v.lockRecord}" class="slds-input" value="{!v.Radius}" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="slds-card__footer slds-align--absolute-center slds-border_top slds-p-top_small slds-m-top--large">
+                    <lightning:button variant="neutral" label="Insert Address" onclick="{! c.updateAddress }"  disabled="{!v.lockRecord}"/>
+                </div>
+                <h3 class="slds-section-title--divider"><b>Existing Addresses</b></h3>
+                <div class="slds-grid slds-wrap slds-grid--pull-padded slds-m-horizontal--large slds-p-horizontal--small">
+                    <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                      <thead>
+                        <tr class="slds-text-title_caps">
+                          <th scope="col">
+                            <div class="slds-truncate" title="Action">Action</div>
+                          </th>
+                          <th scope="col">
+                            <div class="slds-truncate" title="Address">Address</div>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <aura:iteration items="{!v.addList}" var="addr" indexVar="subIndex" >
+                            <tr>
+                              <th scope="row" data-label="Action">
+                                <div class="slds-truncate" title="Delete">
+                                  <a onclick="{!c.deleteAddress}" id="{!subIndex}" data-index="{!subIndex}">Delete</a>
+                                </div>
+                              </th>
+                              <td data-label="Address">
+                                <div class="slds-truncate" >{!addr}</div>
+                              </td>
+                            </tr>
+                          </aura:iteration>
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>   
+</aura:component>

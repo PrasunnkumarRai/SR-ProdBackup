@@ -1,0 +1,23 @@
+.THIS .slds-float_right {
+   padding-right: 6%;
+}
+.THIS .sno {
+   width : 7%;
+}
+.THIS .btnstyle{
+    padding-bottom: 12px;
+    padding-left: 4px;
+
+}
+.THIS .smallBtn{
+    font-size: 25px;
+    border:0px;
+    background-color: #fdfdfd !important;
+}
+.THIS .btnSize{
+    width: 41px;
+    
+}
+/*.THIS .smallBtn:hover .slds-button_neutral{
+    background-color: #f4f6f9 !important;
+}*/

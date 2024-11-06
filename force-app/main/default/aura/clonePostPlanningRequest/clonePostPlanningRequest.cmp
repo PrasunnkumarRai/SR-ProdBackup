@@ -1,0 +1,256 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" controller="clonePostPlanningRequestController">
+    <aura:attribute name="statusVal" type="String" default="Draft"/>
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="recordData" type="Object"/>
+    <aura:attribute name="showModal" type="boolean" default="true"/>
+    <aura:attribute name="loaded" type="Boolean" default="false" />
+    <aura:handler name="init" value="{!this}" action="{!c.showModel}"/>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <lightning:buttonIcon size="large" iconName="utility:close" variant="bare" onclick="{! c.hideModel }" alternativeText="Close window." class="slds-modal__close slds-button_icon-inverse"/>
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                    <span>
+                        New Post Planning Request
+                    </span>
+                </h2>
+            </header> 
+               <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <lightning:recordEditForm aura:id="editform"
+                                                  objectApiName="Support_Request__c"
+                                                  recordTypeId="{!v.recordData.recordTypeId}"
+                                                  onsuccess="{!c.handleSuccess}"
+                            					  onerror="{!c.handleError}">
+                            <lightning:messages />
+                            <h3 class="slds-section-title--divider" style="font-weight:bold">Information</h3>
+                            <div class="slds-form--stacked slds-p-around--medium slds-m-bottom--x-small">
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        	<lightning:inputField fieldName="Name" label="Name" value="{!v.recordData.defaultFieldValues.Name}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        	<lightning:inputField fieldName="Planning_Request__c" value="{!v.recordData.defaultFieldValues.Planning_Request__c}" class="slds-m-left_x-large"/>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        	<lightning:inputField fieldName="Due_Date__c" aura:id="requiredField" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        	<lightning:inputField fieldName="Assigned_To__c" value="{!v.recordData.defaultFieldValues.Assigned_To__c}" class="slds-m-left_x-large"/>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        	<lightning:inputField fieldName="Request_Description_Planning__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        	<lightning:inputField fieldName="Status__c" value="{!v.statusVal}" class="slds-m-left_x-large"/>
+                                    </div>
+                                </div>
+     							<div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField aura:id="requiredField" fieldName="Needed__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        	<lightning:inputField fieldName="Business_Type__c" class="slds-m-left_x-large"/>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Ratings_Service__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Campaign_Specialist_Needed__c" class="slds-m-left_x-large" />
+                                    </div>
+                                </div>
+    							<div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Billing_Type__c" value="{!v.recordData.defaultFieldValues.Billing_Type__c}"/> <!-- SRSF-3785: Added value attribute-->
+                                    </div> 
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="OwnerId" value="{!v.recordData.defaultFieldValues.OwnerId}" diabled="true" class="slds-m-left_x-large"/>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Budget_Monthly__c" value="{!v.recordData.defaultFieldValues.Budget_Monthly__c}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Advertiser__c" value="{!v.recordData.defaultFieldValues.Advertiser__c}" class="slds-m-left_x-large"/>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Budget_Over_Campaign__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Agency__c" value="{!v.recordData.defaultFieldValues.Agency__c}" class="slds-m-left_x-large"/>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Budget_Monthly_Over_Campaign__c" value="{!v.recordData.defaultFieldValues.Budget_Monthly_Over_Campaign__c}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                    </div>    
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Linear_Budget_Monthly__c" value="{!v.recordData.defaultFieldValues.Linear_Budget_Monthly__c}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Rep_Firm__c" value="{!v.recordData.defaultFieldValues.Rep_Firm__c}" class="slds-m-left_x-large"/>
+                                    </div>
+                                    
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Linear_Budget_Over_Campaign__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Opportunity__c" value="{!v.recordData.defaultFieldValues.Opportunity__c}" class="slds-m-left_x-large"/>
+                                    </div>
+                                    
+                                </div> 
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Advanced_Budget_Monthly__c" value="{!v.recordData.defaultFieldValues.Advanced_Budget_Monthly__c}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Account_Executive__c" value="{!v.recordData.defaultFieldValues.Account_Executive__c}" class="slds-m-left_x-large"/>
+                                    </div>                                    
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Advanced_Budget_Over_Campaign__c" value="{!v.recordData.defaultFieldValues.Advanced_Budget_Over_Campaign__c}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Flight_Start_Date__c" value="{!v.recordData.defaultFieldValues.Flight_Start_Date__c}" class="slds-m-left_x-large"/>
+                                    </div>                                    
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Budget_Type__c" value="{!v.recordData.defaultFieldValues.Budget_Type__c}"/> <!-- SRSF-3785: Added value attribute-->
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Flight_End_Date__c" value="{!v.recordData.defaultFieldValues.Flight_End_Date__c}" class="slds-m-left_x-large"/>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="CPM__c" value="{!v.recordData.defaultFieldValues.CPM__c}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="DMA__c" value="{!v.recordData.defaultFieldValues.DMA__c}" class="slds-m-left_x-large"/> <!-- SRSF-3785: Added value attribute-->
+                                    </div>
+                                </div>
+                                
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Remove_Opportunity_Budget__c" value="{!v.recordData.defaultFieldValues.Remove_Opportunity_Budget__c}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="CNA_Link__c" value="{!v.recordData.defaultFieldValues.CNA_Link__c}" class="slds-m-left_x-large"/>
+                                    </div>
+                                </div>
+
+                                <div class="slds-grid slds-hide"> 
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Region__c" value="{!v.recordData.defaultFieldValues.Region__c}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Division__c" value="{!v.recordData.defaultFieldValues.Division__c}" class="slds-m-left_x-large"/>
+                                    </div> 
+                                </div>
+                                <div class="slds-grid slds-hide"> 
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Sales_Office__c" value="{!v.recordData.defaultFieldValues.Sales_Office__c}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Tier_Designation__c" class="slds-m-left_x-large" value="{!v.recordData.defaultFieldValues.Tier_Designation__c}"/>  <!-- SRSF-3785: Added value attribute-->
+                                    </div> 
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="SAM_Designation__c" class="slds-m-left_x-large" value="{!v.recordData.defaultFieldValues.SAM_Designation__c}"/>  <!-- SRSF-3785: Added value attribute-->
+                                    </div> 
+                                </div>
+                                <div class="slds-grid slds-hide">                                    
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Date_Time_Submitted__c" value="{!v.recordData.defaultFieldValues.Date_Time_Submitted__c}" class="slds-m-left_x-large"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Date_Time_Completed__c" value="{!v.recordData.defaultFieldValues.Date_Time_Completed__c}" class="slds-m-left_x-large"/>
+                                    </div>
+                                </div>
+                            </div>
+                        <h3 class="slds-section-title--divider" style="font-weight:bold">Campaign Details</h3>
+                            <div class="slds-form--stacked slds-p-around--medium slds-m-bottom--x-small">
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField aura:id="requiredField" fieldName="Campaign_Needs__c" required="true" value="{!v.recordData.defaultFieldValues.Campaign_Needs__c}"/> 
+                                        <lightning:inputField aura:id="requiredField" fieldName="Campaign_Goals__c" required="true" value="{!v.recordData.defaultFieldValues.Campaign_Goals__c}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Target_Linear_Audience__c" value="{!v.recordData.defaultFieldValues.Target_Linear_Audience__c}" class="slds-m-left_x-large"/>
+                                        <lightning:inputField fieldName="Target_Advanced_Audience__c" value="{!v.recordData.defaultFieldValues.Target_Advanced_Audience__c}" class="slds-m-left_x-large"/>
+                                    </div>
+                                </div>
+                               	<div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Products__c" value="{!v.recordData.defaultFieldValues.Products__c}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Zones__c" value="{!v.recordData.defaultFieldValues.Zones__c}" class="slds-m-left_x-large"/>
+                                        <lightning:inputField fieldName="Presentation_Format__c" class="slds-m-left_x-large"/>
+                                    </div>
+                                </div>                            
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Programs__c" value="{!v.recordData.defaultFieldValues.Programs__c}" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Current_Media_What_Works_For_them__c" value="{!v.recordData.defaultFieldValues.Current_Media_What_Works_For_them__c}" class="slds-m-left_x-large"/>
+                                    </div>
+                                </div>                            
+                            </div>
+                            <h3 class="slds-section-title--divider" style="font-weight:bold">Posting Details</h3>
+							<div class="slds-form--stacked slds-p-around--medium slds-m-bottom--x-small">
+                            <div class="slds-grid">                         
+                                 <div class="slds-col slds-size_2-of-2">
+                                    <lightning:inputField fieldName="Posting__c" value="{!v.recordData.defaultFieldValues.Posting__c}"/> <!-- SRSF-3785: Added value attribute-->
+                                    <lightning:inputField fieldName="Posting_Requirements__c" value="{!v.recordData.defaultFieldValues.Posting_Requirements__c}"/><!-- SRSF-3785: Added value attribute-->
+                                    <lightning:inputField fieldName="Nielsen_Demographics__c" value="{!v.recordData.defaultFieldValues.Nielsen_Demographics__c}"/><!-- SRSF-3785: Added value attribute-->
+                                    <lightning:inputField fieldName="Source__c" value="{!v.recordData.defaultFieldValues.Source__c}"/> <!-- SRSF-3785: Added value attribute-->
+                                    <lightning:inputField fieldName="Month_s__c" value="{!v.recordData.defaultFieldValues.Month_s__c}"/> <!-- SRSF-3785: Added value attribute-->
+                                    <lightning:inputField fieldName="Goal_GRP__c" value="{!v.recordData.defaultFieldValues.Goal_GRP__c}"/> <!-- SRSF-3785: Added value attribute-->
+                                    <lightning:inputField fieldName="Goal_Impressions__c" value="{!v.recordData.defaultFieldValues.Goal_Impressions__c}"/> <!-- SRSF-3785: Added value attribute-->
+                                    <lightning:inputField fieldName="Freeform__c" />
+                                 </div>
+                            </div>
+                            </div>
+							<h3 class="slds-section-title--divider" style="font-weight:bold">Notes</h3>
+							<div class="slds-form--stacked slds-p-around--medium slds-m-bottom--x-small">
+                            <div class="slds-grid">
+                                    <lightning:inputField fieldName="Planner_Comments__c" />                                
+                            </div>
+                            </div>	
+                            <h3 class="slds-section-title--divider" style="font-weight:bold">System Information</h3>
+                            <div class="slds-form--stacked slds-p-around--medium slds-m-bottom--x-small">
+                            <div class="slds-grid">
+                                    <lightning:inputField fieldName="RecordTypeId" value="{!v.recordData.recordTypeId}" disabled="true"/>
+                                </div>
+                            </div>
+                    </lightning:recordEditForm>
+                    <lightning:spinner variant="brand" alternativeText="Loading..." class="{!(v.loaded? 'slds-show': 'slds-hide')}" />
+                    <lightning:navigation aura:id="navService"/>
+            </div>
+    				<footer>
+                        <div class="modal-footer slds-modal__footer attach-to-bottom">
+                            <button class="slds-button slds-button_neutral" onclick="{!c.hideModel}">Cancel</button>
+                            <button class="slds-button slds-button_brand" onclick="{!c.submitApproval}">Save</button>
+                            <button class="slds-button slds-button_brand" onclick="{!c.onRecordSubmit}">Save and Submit</button>
+                        </div>
+                    </footer>
+               </div>
+        </section>              
+</aura:component>

@@ -1,0 +1,303 @@
+<aura:component extends="c:objectLookup" implements="force:lightningQuickAction,force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,lightning:actionOverride">
+    <!--declare attributes--> 
+   <aura:attribute name="selectedRecord" type="Account" default="{}" description="Use,for store SELECTED sObject Record"/>
+   <aura:attribute name="listOfSearchRecords" type="Account[]" description="Use,for store the list of search records which returns from apex class"/>
+   <aura:set attribute="objectType" value="Account" />
+   <aura:set attribute="objectDetailText" value="Account Details" />
+   <aura:set attribute="numRecords" value="10" />
+   <aura:set attribute="showNewButton" value="false" />
+   <aura:set attribute="iconForDetailDisplay" value="/assets/icons/standard-sprite/svg/symbols.svg#account" />
+   <aura:set attribute="additionalMarkup" value="true"/>
+   <aura:set attribute="isCreateOppty" value="true" />
+   <aura:set attribute="IsObjectSearchable" value="false" />
+   <aura:set attribute="nestedQuerySOQL" value=", (Select TeamMemberRole, User.Name From Account.AccountTeamMembers where (TeamMemberRole='Account Executive' OR TeamMemberRole = 'LSM' OR TeamMemberRole = 'Sales Manager'))" />
+   <aura:set attribute="createObjectType" value="Account" />
+   <aura:attribute name="today" type="Date" default=""/>
+   <aura:attribute access="public" name="opptyId" type="String" />
+   <aura:attribute access="public" name="selectedAgency" type="String" default="Enter Agency Account Name"  />
+   <aura:attribute access="public" name="selectedRepFirm" type="String" default="Enter Rep Firm Name" />
+   <aura:attribute access="public" name="selectedAgencyId" type="String"  />
+   <aura:attribute access="public" name="selectedRepFirmId" type="String" /> 
+   
+   <aura:handler name="change" value="{!v.opptyId}" action="{!c.navigateToOppty}"/>
+   <aura:registerEvent name="selectObjEvt" type="c:selectedObjectEvent"/>
+      
+   <aura:handler name="accountSelectedEvent" event="c.accountSelected" action="{!c.handleAccountSelection}" />
+   <aura:handler name="change" value="{!v.curUserProfile}" action="{!c.showHideRepFirm}" />
+    <aura:attribute name="DMAChanges" type="Boolean" default="false" />    
+    <aura:attribute name="selectedDMAs" type="String" default=""/> <!-- SRSF-3571 -->    
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>  <!-- SRSF-1672 -->
+    <aura:attribute access="public" name="displayModal" type="Boolean" default="false" /><!--SRSF-3571-->
+    <aura:attribute access="public" name="showOpps" type="List" /><!--SRSF-3571-->
+   
+   <aura:set attribute="insertMarkup">
+      <!--Custom Styles for Modal Header and Footer--> 
+       
+      <div aura:id="spinnerDiv" class="slds-hide">
+         <lightning:spinner variant="brand" size="medium" />
+      </div>
+   <!--   <aura:if isTrue="{!v.selectedRecord.RecordType.DeveloperName != 'Agency_Account'}">--><!-- SRSF-2674  -->
+          <div aura:id="opptyInfoDiv" class="acctInput">
+           <ui:inputText aura:id="opptyName" label="Opportunity Name" required="true" placeholder="Enter Opportunity Name" /> 
+             <ui:inputDate aura:id="opptyCloseDate" class="field" value="{!v.today}" label="Presentation Date" required="true" displayDatePicker="true" />
+          <!--SRSF - 4222 Sales Probability is an auto populated field
+            <ui:inputSelect aura:id="SalesProbabilityId" label="Sales Probability" value="{!v.Salesprobability}">
+             <aura:iteration items="{!v.opptySalesProbList}" var="Sales" indexVar="index">
+                <ui:inputSelectOption text="{!Sales}" label="{!Sales}"/>
+             </aura:iteration>
+          </ui:inputSelect> 
+        -->
+             <ui:inputSelect aura:id="opptyStagePicklist" label="Stage" required="true">
+                <aura:iteration items="{!v.opptyStages}" var="stage" indexVar="index">
+                   <aura:if isTrue="{!index == 0}">
+                      <ui:inputSelectOption text="{!stage.ApiName}" label="{!stage.ApiName}"/>
+                   <aura:set attribute="else">
+                      <ui:inputSelectOption text="{!stage.ApiName}" label="{!stage.ApiName}"/>
+                   </aura:set>
+                </aura:if>
+                </aura:iteration>
+             </ui:inputSelect>
+             <ui:inputSelect aura:id="aePicklist" label="Account Executives / Sales Managers" required="true" change="{!c.handleChangeAE}" updateOn="change"> 
+                <aura:iteration items="{!v.AccountTeamAEs}" var="atm" >
+                   <ui:inputSelectOption text="{!atm.Id}"  label="{!atm.Name}"/>
+                </aura:iteration>
+             </ui:inputSelect>
+            
+            <!-- SRSF-1672  -->        
+            <!-- Below Block commented : SRSF-2306 -->
+            <!-- <ui:inputSelect aura:id="aeDMA" label="DMA" value="{!v.DMASelected}" updateOn="change">
+                <aura:iteration items="{!v.BudgetDMAs}" var="dma" >
+                   <ui:inputSelectOption text="{!dma}" label="{!dma}"/>
+                </aura:iteration>
+            </ui:inputSelect> --> 
+            
+           <!-- Below Block added : SRSF-2306 -->
+            <!-- Moved to below aura:if condition
+            <lightning:select aura:id="aeDMA" label="DMA" value="{!v.DMASelected}">         
+                <aura:iteration items="{!v.dmaMap}" var="dma">
+                  <aura:iteration items="{!dma.value}" var="dmaVal">           
+                    <option text="{!dmaVal}" value="{!dmaVal}" selected="{!dmaVal==v.DMASelected}"/>
+                  </aura:iteration>  
+                </aura:iteration>
+            </lightning:select>  -->
+            <!-- SRSF-1672 --> 
+
+            <!-- START : SRSF-3571 --> 
+            <aura:if isTrue="{!v.UserProfileName == 'Master - National Account Coordinator' || v.UserProfileName == 'Master - National Sales Manager' || v.UserProfileName == 'Master - Enterprise Sales Manager' || v.UserProfileName == 'Master - National Account Planner' || v.UserProfileName == 'Master - National Sales Director'}">
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="multiselect">Select DMA(s):<ui:outputText class="result" aura:id="multiResult" value=""/></label>
+                    <div class="slds-form-element__control">
+                        <select class="slds-select" id="multiselect" multiple="true" onchange="{!c.fetchDMAValues}">
+                        <aura:iteration items="{!v.dmaMap}" var="dma">
+                          <aura:iteration items="{!dma.value}" var="dmaVal">           
+                            <option text="{!dmaVal}" value="{!dmaVal}" selected="{!dmaVal==v.DMASelected}"/>
+                          </aura:iteration>  
+                        </aura:iteration>
+                        </select>
+                    </div>                
+                </div>
+                <aura:set attribute="else">
+                    <lightning:select aura:id="aeDMA" label="DMA" value="{!v.DMASelected}">        
+                        <aura:iteration items="{!v.dmaMap}" var="dma">
+                          <aura:iteration items="{!dma.value}" var="dmaVal">           
+                            <option text="{!dmaVal}" value="{!dmaVal}" selected="{!dmaVal==v.DMASelected}"/>
+                          </aura:iteration>  
+                        </aura:iteration>
+                    </lightning:select>
+                </aura:set>    
+            </aura:if>                 
+            <!-- END : SRSF-3571 -->                          
+		                 
+            <!-- SRSF-2280 -->
+              <!--Commenting FOR SRSF-4945 CAMA
+                 <ui:inputCheckbox aura:id="faceToface" label="Face to Face"/>
+            <ui:inputCheckbox aura:id="virtual" label="Virtual"/>  Commenting FOR SRSF-4945 CAMA-->
+              <aura:if isTrue="{!v.showCreateActivity}">
+                  <ui:inputCheckbox aura:id="createActivity" label="Create Activity"/>
+              </aura:if>            
+                          
+              <c:strike_lookup label="Agency Account"
+                 object="Account"
+                 accountType="Agency"
+                 multipleRecTypes="true"
+                 value="{!v.selectedAgencyId}"
+                 searchField="Name"
+                 filter="RecordType.Name IN ('Agency Account', 'In House Agency Account')"
+                 placeholder="{!v.selectedAgency}"
+                 accountId="{!v.selectedAgencyId}"
+                 iconName="standard:account"
+                 subtitleField="Agency_Account_Lookup_Fields_To_Display__c"
+                 order="Name"
+                 limit="7"
+                 loadingMessage="Loading..."
+                 errorMessage="Invalid input" />
+    
+            <!-- <div aura:id = "repFirmDiv" class = "slds-hide ">-->
+            <div>        
+                <c:strike_lookup label="Rep Firm"
+                    object="Account"
+                    accountType="RepFirm"
+                    multipleRecTypes="true"
+                    value="{!v.selectedRepFirmId}"
+                    searchField="Name"
+                    filter="RecordType.Name = 'Rep Firm'"
+                    placeholder="{!v.selectedRepFirm}"
+                    accountId="{!v.selectedRepFirmId}"
+                    iconName="standard:account"
+                    subtitleField=""
+                    order="Name"
+                    limit="7"
+                    loadingMessage="Loading..."
+                    errorMessage="Invalid input" />
+             </div>
+      		<!-- SRSR-1672 --> 
+
+            <!-- START : SRSF-4392/SRSF-4660 -->
+            <aura:if isTrue="{!v.UserProfileName == 'Master - Enterprise Sales Manager' || v.UserProfileName == 'System Administrator'}">
+             <c:strike_lookup label="Hold Co"
+                 object="Account"
+                 accountType="Hold Co"
+                 multipleRecTypes="true"
+                 value="{!v.selectedHoldingAccId}"
+                 searchField="Name"
+                 filter="RecordType.Name = 'Hold Co'"
+                 placeholder="{!v.selectedHoldingAcc}"
+                 accountId="{!v.selectedHoldingAccId}"
+                 iconName="standard:account"
+                 subtitleField=""
+                 order="Name"
+                 limit="7"
+                 loadingMessage="Loading..."
+                 errorMessage="Invalid input" />
+             </aura:if>
+            <!-- END : SRSF-4392 -->
+
+          <!-- Start SRSF-3212: 
+            1) Moved Flight startDt and Enddt out of if condition to show for all profiles 
+   		      2)Added broadcast weeks 
+          -->
+              <ui:inputDate aura:id="FlghtStrtDtId" value="{!v.FlightStartDate}" label="Flight Start Date" displayDatePicker="true" />              
+              <ui:inputText aura:id="noOfBrdCstWeeks" value="{!v.NoOfWeeks}" label="Flight Broadcast Weeks" placeholder="Enter No.Of Broadcast Weeks" change="{!c.calculateEndDate}" /> 
+              <ui:inputDate aura:id="FlghtEndDtId" value="{!v.FlightEndDate}" label="Flight End Date" displayDatePicker="true" change="{!c.calculateNoOfBroadcastWeeks}" />            
+
+            <!-- START : SRSF-4604 -->
+            <aura:if isTrue="{!v.UserProfileName == 'Master - Enterprise Sales Manager' || v.UserProfileName == 'Master - Enterprise Sales Support' || v.UserProfileName == 'Master - Enterprise Digital' || v.UserProfileName == 'System Administrator'}">
+                <lightning:select aura:id="BusinessClassId" label="Business Classification" value="{!v.businessClassification}">
+                    <option text="--None--" value=""/>        
+                    <aura:iteration items="{!v.businessClassList}" var="businessClass">
+                        <option text="{!businessClass.label}" value="{!businessClass.value}"/>
+                    </aura:iteration>
+                </lightning:select>
+            </aura:if>
+            <!-- END : SRSF-4604 -->
+
+            <!-- START : SRSF-4927 -->            
+            <!-- <lightning:select aura:id="DiscountCode" label="Discount Code" value="{!v.discountCode}">
+                <option text="-None-" value=""/>        
+                <aura:iteration items="{!v.discountCodeList}" var="discCode">
+                    <option text="{!discCode.label}" value="{!discCode.value}"/>
+                </aura:iteration>
+            </lightning:select> -->           
+            <!-- END : SRSF-4927 -->
+
+            <!-- START : SRSF-4392/SRSF-4660 -->
+
+            <aura:if isTrue="{!v.UserProfileName == 'Master - Enterprise Sales Manager' || v.UserProfileName == 'System Administrator'}">                
+
+                <lightning:dualListbox name="Demand Side Platform" aura:id="demandSidePicklist"
+                               label= "Demand Side Platform"
+                               sourceLabel="Available"
+                               selectedLabel="Selected"
+                               fieldLevelHelp="Select Demand Side Platform"
+                               options="{!v.dsPlatformList}" 
+                               value="{!v.demandSidePlatform}"
+                               onchange="{!c.handleDemandPlatformChange}" size="4"/> 
+
+                <lightning:dualListbox name="Supply Side Platform" aura:id="supplySidePicklist"
+                               label= "Supply Side Platform"
+                               sourceLabel="Available"
+                               selectedLabel="Selected"
+                               fieldLevelHelp="Select Supply Side Platform"
+                               options="{!v.ssPlatformList}" 
+                               value="{!v.supplySidePlatform}"
+                               onchange="{!c.handleSupplyPlatformChange}" size="4"/> 
+                                
+                <ui:inputText aura:id="seatId" value="{!v.seatId}" label="Seat ID"/>
+            </aura:if>
+
+            <!-- END : SRSF-4392 -->  
+
+          <!-- END : SRSF-3212 -->
+    	<!--<aura:if isTrue="{!v.UserProfileName == 'Master - Account Executive' || v.UserProfileName == 'Master - National Sales Manager'}">-->
+      <!--<aura:if isTrue="{!v.showFlightDates}">-->
+          <aura:if isTrue="{!$Label.c.HideorShowFirstLookFields=='true'}">
+                  <!--SRSF-4770 start-->
+                    <!-- <ui:inputSelect aura:id="FirstLookId" label="First Look" value="{!v.FirstLookVal}" > 
+                     <aura:iteration items="{!v.getFirstLookList}" var="fstlk">
+                         <ui:inputSelectOption text="{!fstlk}" label="{!fstlk}"/>
+                      </aura:iteration>
+                   </ui:inputSelect> -->
+               <lightning:combobox aura:id="FirstLookId"
+                        name="firstLook"
+                        label="First Look"
+                        value="{!v.FirstLookVal}"
+                        options="{!v.getFirstLookList}"
+                        placeholder=""
+                        >
+                        </lightning:combobox>
+                <!--SRSF-4770 end-->
+                 <!-- <ui:inputText label="First Look Contract Value" class="field" value="{!v.FirstLookContValue}" />--> 
+               <!--   <ui:inputCurrency aura:id="fstlkContVal" label="First Look Contract Value" class="field" value="{!v.FirstLookContValue}" updateOn="keyup"/>  -->
+            <!--  </aura:if> --> 
+           <lightning:textarea name="DescriptionId" value="{!v.Description}" 
+            label="Description" maxlength="32000" />
+          <lightning:textarea name="NtwrkToAvoidID" value="{!v.networksToAvoid}" 
+            label="Network to Avoid" maxlength="32768" />
+    	</aura:if>
+      <!-- SRSR-1672 -->
+      <!-- SRSF-3571 : Modal/Popup Box starts here-->
+         <aura:if isTrue="{!v.displayModal}">
+         <!-- <aura:if isTrue="true"> -->            
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- Modal/Popup Box Header Starts here-->
+                    <header class="slds-modal__header">                    
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Created Opportunities</h2>
+                    </header>
+                    <!--Modal/Popup Box Body Starts here-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                         <aura:iteration items="{!v.showOpps}" var="opp" indexVar="key">
+                          <a href="{!'/one/one.app?#/sObject/'+ opp.key + '/view'}" target="_blank">{! opp.value}</a><br/>                          
+                        </aura:iteration>
+                    </div>
+                    <!--Modal/Popup Box Footer Starts here-->
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral"
+                                          label="Close"
+                                          title="Close"
+                                          onclick="{! c.closeModel }"/>
+                    </footer>  
+                </div>
+            </section>
+             <div class="slds-backdrop slds-backdrop_open"></div> 
+          </aura:if>   
+          <!-- SRSF-3571 : Modal/Popup Box ends here-->            
+              <p>
+         <!--   <lightning:button aura:id="cancelSaveOppty" variant="neutral" label="Cancel" onclick="{!c.cancelCreateOpportunity}" /> -->
+          <lightning:button aura:id="saveOpptyButt" variant="brand" label="Save" onclick="{!c.createOpportunity}" />
+             </p> 
+          </div>           
+          <!-- <div class="slds-page-header">
+                <h1>New Opportunity</h1>
+           </div>
+          
+           <div class="slds-docked-form-footer">
+               <button type="button" class="slds-button slds-button_neutral" onclick="window.location.reload();">Cancel</button>
+               <lightning:button aura:id="saveOpptyButt" variant="brand" label="Save" onclick="{!c.createOpportunity}" />
+           </div> -->
+       
+   <!--    </aura:if>-->
+   </aura:set>
+   <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>   
+
+</aura:component>

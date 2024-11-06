@@ -1,0 +1,250 @@
+.THIS {
+    
+} 
+
+.THIS .filterEdit1 {
+    top: 150px;
+}
+
+.THIS .filterEdit2 {
+    top: 250px;
+}
+
+.THIS .filterEdit3 {
+    top: 350px;
+}
+
+.THIS .opptyFilterPanel {
+    
+}
+
+.THIS .slds-item {
+    border: 1px solid #d8dde6;
+    border-radius: 0.25rem;
+    background-clip: padding-box;
+    padding: 0.45rem;
+    margin: 0.25rem;
+    min-width: 172px;
+    max-width: 275px;
+}
+.THIS .stageContainer{
+ /*   width:320px; */
+    float:left;
+    border-right: 1px solid #d8dde6;
+    border-radius: 5px;
+    resize:both;
+    margin: 0.1rem;
+    background-color: #f8f8f8;
+/*    border-radius: .25rem;*/
+}
+.THIS .slds-page-header__title {
+    padding: 0rem 0.5rem;
+    /*background: #f7f9fb;*/
+}
+
+
+.THIS .dropZone{
+    min-height:25rem;
+}
+
+.THIS .filtButtAlign {
+    position: absolute;
+    right: 10px;
+/*   background-color: white;*/
+}
+
+.THIS .sortButtAlign {
+    position: absolute;
+    right: 60px;
+/*   background-color: white;*/
+}
+
+.THIS .filtButtonGroup {
+   margin-top: -16px;
+   display: block;
+
+}
+
+.THIS .refreshButtAlign {
+    position: absolute;
+    right: 166px;
+    width: 50px;
+    top: 20px;
+ 
+/*   background-color: white;*/
+}
+.THIS .settingsMenu div {
+    right: 0;
+}
+
+.THIS .settingsMenu svg {
+    fill: rgb(0, 112, 210);
+}
+
+
+.THIS .newButtAlign {
+    position: absolute;
+    right: 110px;
+    width: 50px;
+ /*   background-color: white;*/
+}
+
+.THIS .filtButtAlignPressed {
+    position: absolute;
+    right: 10px;
+    background-color: rgb(0, 112, 210);
+    color: white;
+}
+
+.THIS .stageContainer:first-child {
+    border-left: 1px solid #d8dde6;
+}
+
+.THIS .slds-icon-utility-warning svg{
+    fill: #ffb75d;
+}
+
+.THIS .slds-tile__detail > p > i > p {
+    font-size : .85em;
+}
+
+.THIS .costContainer,
+.THIS .stageContainer
+{
+    min-width: 189px;
+    max-width: 292px;
+}
+/*
+.THIS .stageContainer ul.slds-has-dividers_around-space {
+    overflow: visible;
+
+}*/
+
+.THIS li.headerTitle{
+    min-width: 191px;
+    max-width: 295px;
+}
+
+.THIS .slds-icon-utility-kanban svg {
+    fill: rgb(0, 112, 210);
+}
+
+.THIS .editButton {
+    overflow:visible;
+}
+
+.THIS .slds-dropdown {
+/*    left: -116px;*/
+}
+
+.THIS .noDrag {
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+
+    user-select: none;
+    user-drag: none; 
+
+    -moz-user-drag: none;
+
+    -webkit-user-drag: none;
+
+    -ms-user-drag: none;
+}
+
+.THIS .removeFilter {
+    right: -10px;
+}
+
+.THIS .filterWindow {
+    right: 450px;
+}
+
+.THIS .slds-tile__detail > p {
+    color: rgb(11, 25, 46);
+}
+
+.THIS .refreshIcon_hide {
+    display: none;
+}
+
+.THIS .oppForecastHeader {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.THIS .editFilterButton {
+    min-width: 70px;
+    min-height: 40px;
+}
+
+.THIS .editFilterButton p {
+    font-size: .85em;
+    color: #888;
+    margin-left: 8px;
+}
+
+.THIS .hideInit {
+    /*display: none;*/
+}
+
+.THIS .hideInitSave {
+    display: none;
+}
+
+.THIS .edited {
+    background-color: rgb(250,255,189);
+}
+
+.THIS .opptyCard {
+    background-color: white;
+}
+
+.THIS .fixedHeader {
+    position: fixed;
+}
+
+.THIS .lossReasonBGHeader {
+    background-color: darkgrey;
+    font-weight: bold;
+}
+
+.THIS .lossReasonHeader {
+    font-weight: bold;
+}
+
+.THIS .lossReasonBold {
+    font-weight: bold;
+}
+
+.THIS .lossReasonDispInline {
+    display: inline;
+}
+
+.THIS .lossReasonLarge {
+    font-size:large;
+    text-align: center;
+}
+
+.THIS .colorMeRed {
+    color: red;
+}
+
+.THIS .padLeft {
+    padding-left: 35 !important;
+}
+.THIS .padRight {
+    padding-right: 35!important;
+}
+
+.THIS .lossReasonBG {
+    background-color: rgb(243, 242, 242);
+}
+
+.THIS .slds-tabs_path {
+    width: 94%;
+}
+
+.THIS .slds-tabs--path {
+    width: 94%;
+}

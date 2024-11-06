@@ -1,0 +1,95 @@
+.THIS body {
+
+}
+
+.THIS .dropdown {
+    width: 80%;
+}
+
+.THIS input[type='text']{
+    width: 250px;
+}
+
+/*adjusting help text position*/
+.THIS.customIcon div{
+    vertical-align: top !important;
+}
+
+.THIS #body {
+    padding:10px;
+    padding-bottom:60px;   /* Height of the footer */
+ }
+
+ .THIS #footer {
+     margin-top: 50px;
+    float: right;
+ }
+
+ .THIS.spinnerDiv{
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+
+.THIS .spins::after {
+    position: absolute;
+    content: 'Please wait while the VRF is being created';
+    width: 100%;
+    text-align: center;
+    top: calc(50% + 3em);
+    font-weight: bold;
+}
+
+.THIS .red-background{
+    background-color: #bf0201;
+    color: white;
+    padding: 12px;
+}
+
+.THIS .warning-background{
+    background-color: #feefb3;
+    color: #9f6000;
+    padding: 12px;
+    font-size: 20px;
+}
+
+.THIS .button-close {
+    margin-top: 25%;
+}
+
+.THIS .hide {
+    display: none;
+}
+
+.THIS .message {
+    text-align: center;
+
+}
+
+.THIS .complete {
+    padding: 60px;    
+    color: blue;
+    font-size: 30px;
+    margin-bottom: 5px;
+  }
+
+
+.THIS .helptext div {
+    vertical-align: top !important;
+}
+ 
+.THIS.helptext div {
+    vertical-align: top !important;
+}
+
+.THIS .select-auto-width > .slds-form-element__control > .slds-select_container{
+    display: inline-block;
+}
+
+.THIS .helpMessage{
+    margin-right: 0.5rem;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}

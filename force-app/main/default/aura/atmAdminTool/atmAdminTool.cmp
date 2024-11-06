@@ -1,0 +1,118 @@
+<aura:component controller="atmAdminController" implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,force:hasRecordId" access="global" >	
+    <ltng:require scripts="{!$Resource.jqueryMinJS}"/>
+    
+    <ltng:require styles="{!$Resource.LightningDS + '/assets/styles/lightning-design-system-ltng.css'}"/>
+    <ltng:require styles="{!$Resource.svg4everybody}" />
+ 
+    <aura:attribute name="selectedRecord" type="sObject" default="{}" description="Use,for store SELECTED sObject Record"/>
+    <aura:attribute name="listOfSearchRecords" type="List" description="Use,for store the list of search records which returns from apex class"/>
+    <aura:attribute name="SearchKeyWord" type="string"/>
+    <aura:attribute name="objectAPIName" type="string" default="User"/>
+    <aura:attribute name="IconName" type="string" default=""/>
+    <aura:attribute name="label" type="string" default=""/>
+    <aura:attribute name="currentPage" type="Integer" default="0"/>
+    <aura:attribute name="totalPages" type="Integer" default="0"/>
+    <aura:attribute name="pageSize" type="Integer" default="10"/> 
+    <aura:attribute name="pageNumber" type="Integer" default="0"/> 
+	<aura:attribute name="totalRecords" type="Integer" default="0"/> 
+    <aura:attribute name="selectedRecords" type="Integer" default="0"/> 
+    <aura:attribute name="hasPrevious" type="Boolean" />
+    <aura:attribute name="hasNext" type="Boolean" />
+    <aura:attribute name="Message" type="String" default="" /> 
+    <aura:attribute name="accountId" type="String" default=""/>
+    <aura:attribute name="accountTeamMembers" type="sObject[]" />
+    <aura:attribute name="objectType" type="String" />
+    <aura:attribute name="shwDeleteBtn" type="Boolean" default="false"/>
+	<aura:attribute name="isChecked" type="Boolean" default="false"/> 
+	<aura:attribute access="public" name="indx" type="Integer" default="0"/> 
+    
+    <aura:attribute access="public" name="selectedAccount" type="Account"/>
+    
+    <aura:attribute name="atmSMCount" type="Integer" default="0" description="AccountTeamMembers Count with AE’s and Sales Manager’s from the Account Team records which returns from apex class"/>
+    <aura:attribute access="public" name="lstDMA" type="String[]" default="['None']" description="Holds All DMA picklist values from Opportunity"/>
+    <aura:attribute access="public" name="selDMA" type="String" default="--None--"/>
+    <aura:attribute access="public" name="isOpenAccDMA" type="boolean" default="false" description="To render DMA picklist"/>
+    <aura:attribute access="public" name="isUpdateOpenAccDMA" type="boolean" default="false" description="To Update Account.Open_Account__c field"/>
+    
+    <aura:set attribute="objectType" value="Account" />
+    <!--<aura:set attribute="selectedAccount" value="Account" />-->
+    
+    <!--declare events handlers-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:handler event="force:refreshView" action="{!c.doInit}" />
+    <!--declare attributes-->
+        
+        <label class="slds-form-element__label" for="lookup-348">{!v.label}</label>
+    
+    	<!--Added for SRSF-1741 -->    
+        <div class="slds-form-element__control  slds-modal_large" style="slds-col slds-size_1-of-3">
+            <ui:inputSelect aura:id="openAccountDMA" label="Open Account DMA" value="{!v.selDMA}" required="true" disabled="{!!v.isOpenAccDMA}" class="slds-select">
+                <aura:iteration items="{!v.lstDMA}" var="dma" >
+                    <ui:inputSelectOption text="{!dma}" label="{!dma}"/>
+                </aura:iteration>
+            </ui:inputSelect>
+        </div>
+    	<br />
+        <!--This part is for display search bar for lookup-->  
+        <div class="slds-form-element__control  slds-modal_large" style="slds-col slds-size_1-of-3">
+             
+        <!-- Use a data table from the Lightning Design System: https://www.lightningdesignsystem.com/components/data-tables/ -->
+        <table aura:id="mySelect" class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer">
+                <thead>
+                <tr class="slds-text-title--caps">
+                    <th scope="row" style="width: 4%;" class="slds-text-align--right"><ui:inputCheckbox aura:id="cBoxAll" class="cBoxAll" change="{!c.selectAllCheckBox}"/></th>
+                    <th scope="col" class="slds-size_1-of-3">
+                        <div class="slds-truncate" title="Name">Name</div>
+                    </th>
+                    <th scope="col" class="slds-size_1-of-3">
+                        <div class="slds-truncate" title="Role">Role</div>
+                    </th>
+                    <th scope="col" class="slds-size_1-of-3">
+                        <div class="slds-truncate" title="Account Access">Account Access</div>
+                    </th>
+                    <th scope="col" class="slds-size_1-of-3">
+                        <div class="slds-truncate" title="Has Sales Budget?">Has Budget?</div>
+                    </th>
+                    </tr>
+            </thead> 
+            <tbody class="tableFont">
+             <aura:iteration items="{!v.listOfSearchRecords}" var="atm" indexVar="indx">
+               <aura:if isTrue="{!atm.isVisible}">
+                 <tr>
+          <td ><ui:inputCheckbox aura:id="cboxRow" text="{!atm.atmInformation}" class="cbox"  value="{!atm.isChecked}" change="{!c.changeRowSelectedCheckBox}" requiredIndicatorClass="{!indx}"/></td>           
+          <td role="gridcell">
+            <div class="slds-truncate" title="{!atm.Name}">{!atm.Name}</div>
+          </td>
+            
+          <td role="gridcell">
+            <div class="slds-truncate" title="{!atm.TeamMemberRole}">{!atm.TeamMemberRole}</div>
+          </td>
+          <td role="gridcell">
+            <div class="slds-truncate" title="{!atm.AccountAccessLevel}">{!atm.AccountAccessLevel}
+            </div>
+          </td>
+          <td role="gridcell">
+            <div class="slds-truncate" title="{!atm.HasSalesBudget}">{!atm.HasSalesBudget}
+            </div>
+          </td>
+          </tr>
+ 				</aura:if>
+             </aura:iteration>
+          </tbody>     
+        </table> 
+         </div>
+    <br/>
+        <div class="btnstyle">
+        <!--Next & previous buttons for pagination-->
+            
+        <button class="slds-button slds-button_neutral buttonCC " onclick="{!c.previous}" disabled="{!!v.hasPrevious}" > Previous</button>
+        <button class="slds-button slds-button_neutral buttonCC " onclick="{!c.next}" disabled="{!!v.hasNext}" >Next</button>
+       	<br/><br/>Selected {!v.selectedRecords} of {!v.totalRecords}
+       	
+        <aura:renderIf isTrue="{!v.shwDeleteBtn}">  
+           <br/><br/>
+       		<lightning:button variant="brand" label="Remove" onclick="{!c.doDeleteSelectedAtm }" />   
+      	</aura:renderIf>
+    </div><br/>
+    <center>{!v.Message}</center>
+</aura:component>

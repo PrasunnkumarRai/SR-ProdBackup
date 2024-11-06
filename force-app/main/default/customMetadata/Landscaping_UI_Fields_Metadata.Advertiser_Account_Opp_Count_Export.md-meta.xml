@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Advertiser Account Opp Count Export</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Label__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Accordion_Level__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Display_Level__c</field>
+        <value xsi:type="xsd:double">6.0</value>
+    </values>
+    <values>
+        <field>Field_API_Name__c</field>
+        <value xsi:type="xsd:string">Count_of_Opportunities__c</value>
+    </values>
+    <values>
+        <field>Field_Label__c</field>
+        <value xsi:type="xsd:string">Number of Opportunities</value>
+    </values>
+    <values>
+        <field>Field_Role__c</field>
+        <value xsi:type="xsd:string">Export</value>
+    </values>
+    <values>
+        <field>Object_API_Name__c</field>
+        <value xsi:type="xsd:string">Account</value>
+    </values>
+    <values>
+        <field>Record_Type_API_Name__c</field>
+        <value xsi:type="xsd:string">Advertiser_Account</value>
+    </values>
+</CustomMetadata>

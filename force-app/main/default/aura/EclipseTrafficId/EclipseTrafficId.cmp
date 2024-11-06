@@ -1,0 +1,64 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" controller="EclipseTrafficId_Controller">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="trafficList" type="Object[]" />
+    <aura:attribute name="numRecords" type="Integer" />
+
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-contact" title="contact">
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+						<a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Eclipse Traffic IDs">
+						<span class="slds-text-heading_small">Eclipse Traffic IDs ({!v.numRecords})</span>
+						</a>
+					</h2>
+                </div>
+
+            </header>
+        </div>
+        <div class="slds-card__body">
+            <table class="slds-table slds-table_fixed-layout slds-table_bordered slds-no-row-hover slds-table_cell-buffer">
+                <thead>
+                    <tr class="slds-text-title_caps">
+                        <th scope="col">
+                            <div class="slds-truncate" title="Name">Export System Name</div>
+                        </th>
+                        <!--<th scope="col">
+                            <div class="slds-truncate" title="Company">Tim System</div>
+                        </th>-->
+                        <th scope="col">
+                            <div class="slds-truncate" title="Title">Traffic Id</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                	<aura:iteration items="{!v.trafficList}" var="tid"  >
+                    <tr class="slds-hint-parent">
+                    	<td>
+                            <div class="slds-truncate" title="Expert System Name">{!tid.ExportSystem_Name__c}</div>
+                        </td>
+                        <!--<td>
+                            <div class="slds-truncate" title="Tim System">{!tid.TIM_System__c}</div>
+                        </td>-->
+                        <td>
+                            <div class="slds-truncate" title="Traffic Id">{!tid.Traffic_Id__c}</div>
+                        </td>
+                    </tr>
+                </aura:iteration>
+                </tbody>
+            </table>
+        </div>
+        <!--
+        <footer class="slds-card__footer">
+            <a class="slds-card__footer-action" href="javascript:void(0);">View All
+				<span class="slds-assistive-text">Contacts</span>
+			</a>
+        </footer> -->
+    </article>
+</aura:component>

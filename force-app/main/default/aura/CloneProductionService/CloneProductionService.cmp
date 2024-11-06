@@ -1,0 +1,40 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" controller="CloneProductionServiceController">
+    <aura:attribute name="recordId" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="showRTSelection" type="Boolean" default="false"/>
+    <aura:attribute name="selectedRT" type="String"/>
+    <aura:attribute name="lstRecordTypes" type="list"/>
+    
+    <aura:if isTrue="{!!v.showRTSelection}">
+        <div data-reactroot="" class="demo-only" style="height: 6rem;">
+            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.showRTSelection}">
+        <div class="slds-page-header">
+            <div class="slds-media">
+                <div class="slds-media__body">
+                    <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="New Digital Campaign">Clone Production Service</h1>
+                </div>
+            </div>
+        </div>
+        <div class="slds-form slds-form_stacked slds-m-top_small">
+            <div class="slds-form-element">
+                <div class="slds-form-element__control">
+                    <lightning:select name="rtSelect" required="true" aura:id="rtSelect" label="Select Record Type" value="{!v.selectedRT}">
+                        <aura:iteration items="{!v.lstRecordTypes}" var="rt">
+                            <option text="{!rt.Name}" value="{!rt.Id}"/>
+                        </aura:iteration>
+                    </lightning:select> 
+                    <lightning:button variant="brand" label="Next" class="slds-float_right slds-m-top_small" onclick="{!c.cloneProductionService}" />
+                    <lightning:button variant="neutral" label="Cancel" class="slds-float_right slds-m-top_small slds-m-right_small" onclick="{!c.dismissQuickAction}" />
+                </div>
+            </div>
+        </div>
+	</aura:if>
+</aura:component>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Record56</label>
+    <protected>false</protected>
+    <values>
+        <field>Description__c</field>
+        <value xsi:type="xsd:string">Additional actions cannot be taken on this registration until the previous request has been completed. Please wait and then try again. You can use the Get Registration Status API request to check when the registration is active.</value>
+    </values>
+    <values>
+        <field>ErrorMessage__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>HTTPStatusCode__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>IsDataError__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>errorCode__c</field>
+        <value xsi:type="xsd:string">21015</value>
+    </values>
+    <values>
+        <field>product__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

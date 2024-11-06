@@ -1,0 +1,436 @@
+<aura:component controller="customLookUpController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+
+        <ltng:require scripts="{!$Resource.jqueryMinJS}"/>
+
+
+    <ltng:require styles="{!$Resource.LightningDS + '/assets/styles/lightning-design-system-ltng.css'}"/>
+    <ltng:require styles="{!$Resource.svg4everybody}" />
+                  
+    <!--declare attributes--> 
+    <aura:attribute name="selectedRecord" type="sObject" default="{}" description="Use,for store SELECTED sObject Record"/>
+    <aura:attribute name="listOfSearchRecords" type="List" description="Use,for store the list of search records which returns from apex class"/>
+    <aura:attribute name="SearchKeyWord" type="string"/>
+    <aura:attribute name="objectAPIName" type="string" default="User"/>
+    <aura:attribute name="IconName" type="string" default=""/>
+    <aura:attribute name="label" type="string" default=""/>
+    <aura:attribute name="Message" type="String" default=""/>   
+    
+    <aura:attribute name="selectedRecordChild" type="sObject" default="{}" description="Use,for store SELECTED sObject Record" />
+    <aura:attribute name="listOfSearchRecordsChild" type="List" description="Use,for store the list of search records which returns from apex class"/>
+    <aura:attribute name="SearchKeyWordChild" type="string" access="global"/>
+    <aura:attribute name="objectAPINameChild" type="string" default="User"/>
+    <aura:attribute name="IconNameChild" type="string" default=""/>
+    <aura:attribute name="labelChild" type="string" default=""/>
+    <aura:attribute name="MessageChild" type="String" default=""/>  
+    
+    <aura:attribute name="childComp" type="Boolean" default="false"/>
+    <aura:attribute name="shwDtlsFlag" type="Boolean" default="false"/>
+    <aura:attribute name="shwBtnFlag" type="Boolean" default="false"/>
+    <aura:attribute name="shwTransfrFlag" type="Boolean" default="false"/>
+    <aura:attribute name="shwResetBtn" type="Boolean" default="false"/>
+
+    <aura:attribute name="UserId" type="Id" default="null"/>
+    <aura:attribute name="newUserId" type="Id" default="null"/>
+    <aura:attribute name="accountTeamMembers" type="sObject[]" />
+    <aura:attribute name="oppList" type="sObject[]" />
+    <aura:attribute name="disableLookup" type="Boolean" default="false" />    
+    <aura:attribute name="oppclosedate" type="Date"/>
+    <aura:attribute name="error" type="Boolean" default="false"/>
+    <aura:attribute name="erorMessage" type="String" default="" />
+    <aura:attribute name="spinnerDisplay" type="String" default="none" />
+    <aura:attribute name="transferStatus" type="String" default="none" />
+    <aura:attribute name="transferBtn" type="Boolean" default="false" />
+    <aura:attribute name="transferSuccessFlag" type="Boolean" default="false" />
+    <aura:attribute name="AETranferRecord" type="sObject" />
+    <aura:attribute name="AdminStatusSummary" type="sObject" />
+    <aura:attribute name="SelectedAccountIds" type="String[]" />
+	<aura:attribute name="progress" type="Integer" default="0"/>
+
+    <!--declare events hendlers-->      
+    <aura:handler name="oSelectedRecordEvent" event="c:selectedsObjectRecordEvent" action="{!c.handleComponentEvent}"/>
+    <aura:handler name="oSelectedRecordEventChild" event="c:selectedsObjectRecordEventChild" action="{!c.handleComponentEventChild}"/>
+    
+    <div id="spinner" style="{!'display:'+v.spinnerDisplay}">
+        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;">
+            &nbsp;
+        </div>
+        <aura:if isTrue="{!v.AdminStatusSummary!=null}">
+            <div style="position: fixed; left: -176px; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%" >
+                <div style="display: inline-block; padding: 2px;width:302px;">
+                    <lightning:progressBar value="{!v.progress}" size="large"/>
+                </div>
+            </div>
+        </aura:if>
+        <aura:if isTrue="{!v.AdminStatusSummary==null}">
+            <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%" >
+                <div style="display: inline-block; padding: 2px;width:70px;">
+                    <img src="{!$Resource.Loader_Image}" style="float: left; margin: 8px;" />
+                </div>
+            </div>
+        </aura:if>
+    </div> 
+
+<!--     <aura:handler name="render" value="{!this}" action="{!c.onRender}"/>
+    <aura:attribute name="progress" type="Integer" default="0"/>
+    <lightning:progressBar value="{!v.progress}"/> -->
+
+    <!-- https://www.lightningdesignsystem.com/components/lookups/ --> 
+   <ul class="slds-grid slds-page-header__detail-row" style="margin-bottom: 0.5%;">
+    
+    <li class="slds-page-header__detail-block" style="margin-left:3%;">
+     <div onmouseleave="{!c.onblur}" aura:id="searchRes" class="slds-form-element slds-lookup slds-is-close" data-select="single">
+        <label class="slds-form-element__label" for="lookup-348">{!v.label}</label>
+        <!--This part is for display search bar for lookup-->  
+        <div class="slds-form-element__control">
+            
+            <div class="slds-input-has-icon slds-input-has-icon--right">
+              <lightning:icon class="slds-input__icon slds-show" iconName="utility:search" size="x-small" alternativeText="search"/> 
+                <div aura:id="lookup-pill" class="slds-pill-container slds-hide" data-userid ="{!v.selectedRecord.Id}">
+                    <div id="previousUserId">
+                         <lightning:pill  label="{!v.selectedRecord.Name}" name="{!v.selectedRecord.Name}" onremove="{! c.clear }">
+                              <aura:set attribute="media" >
+                                 <lightning:icon iconName="{!v.IconName}" size="x-small" alternativeText="{!v.IconName}" />
+                              </aura:set>
+                          </lightning:pill>
+                    </div>
+                </div>
+                <div aura:id="lookupField" class="slds-show">
+<!--                     <span class="slds-icon_container  slds-combobox__input-entity-icon" title="record">
+                        <lightning:icon class="slds-icon slds-icon slds-icon_small slds-icon-text-default" iconName="{!v.IconName}" size="x-small" alternativeText="icon"/>
+                        <span class="slds-assistive-text"></span>
+                    </span> -->
+                    <ui:inputText click="{!c.onfocus}" updateOn="keyup" keyup="{!c.keyPressController}" class="slds-lookup__search-input slds-input leftPaddingClass inputCls" value="{!v.SearchKeyWord}" placeholder="Search..." />
+                </div>   
+            </div>
+        </div>        
+        <table aura:id="mySelect" style="margin-top:0px !important" class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer">                 
+          <ul style="min-height:120px;margin-top:0px !important" class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid slds-lookup__menu slds" role="listbox">
+           <lightning:spinner class="slds-hide" variant="brand" size="small" aura:id="mySpinner"/>
+            <center> {!v.Message}</center>
+             <aura:iteration items="{!v.listOfSearchRecords}" var="singleRec">
+              <c:customLookupDynamicResult oRecord="{!singleRec}" IconName="{!v.IconName}"/>
+             </aura:iteration>
+          </ul>     
+        </table>         
+     </div>   
+    </li>
+  <aura:renderIf isTrue="{!v.childComp}">
+    <li class="slds-page-header__detail-block">
+     <div onmouseleave="{!c.onblurChild}" aura:id="searchResChild" class="slds-form-element slds-lookup slds-is-close" data-select="single">
+        <label class="slds-form-element__label" for="lookup-3489">{!v.labelChild}</label>
+        
+        <div class="slds-form-element__control">
+            
+            <div class="slds-input-has-icon slds-input-has-icon--right">
+              <lightning:icon class="slds-input__icon slds-show" iconName="utility:search" size="x-small" alternativeText="search"/> 
+        
+                <div aura:id="lookup-pillChild" class="slds-pill-container slds-hide" data-userid ="{!v.selectedRecordChild.Id}">
+                    <div id="newuserId">
+                     <lightning:pill class="pillSize" label="{!v.selectedRecordChild.Name}" name="{!v.selectedRecordChild.Name}" onremove="{! c.clearChild }">
+                          <aura:set attribute="media">
+                             <lightning:icon iconName="{!v.IconNameChild}" size="x-small" alternativeText="{!v.IconNameChild}"/>
+                          </aura:set>
+                      </lightning:pill>
+                    </div>
+                </div>
+                <div aura:id="lookupFieldChild" class="slds-show">
+<!--                     <span class="slds-icon_container  slds-combobox__input-entity-icon" title="record">
+                        <lightning:icon class="slds-icon slds-icon slds-icon_small slds-icon-text-default" iconName="{!v.IconNameChild}" size="x-small" alternativeText="icon"/>
+                        <span class="slds-assistive-text"></span>
+                    </span> -->
+                    <ui:inputText click="{!c.onfocusChild}" updateOn="keyup" keyup="{!c.keyPressControllerChild}" class="slds-lookup__search-input slds-input leftPaddingClass inputCls" value="{!v.SearchKeyWordChild}" placeholder="Search..." />
+                </div>   
+            </div>
+        </div>        
+        <table aura:id="mySelectChild" style="margin-top:0px !important" class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer">                 
+          <ul style="min-height:120px;margin-top:0px !important" class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid slds-lookup__menu slds" role="listbox">
+           <lightning:spinner class="slds-hide" variant="brand" size="small" aura:id="mySpinnerChild"/>
+            <center> {!v.MessageChild}</center>
+             <aura:iteration items="{!v.listOfSearchRecordsChild}" var="singleRec">
+              <c:customLookupDynamicResultChild oRecord="{!singleRec}" IconName="{!v.IconNameChild}"/>
+             </aura:iteration>
+          </ul>     
+        </table>         
+     </div>   
+    </li>
+  
+  <aura:renderIf isTrue="{!v.shwDtlsFlag}">
+    <li>
+       <ui:inputDate aura:id="expdate" label="Proposal End Date" class="slds-input oppclosedate" displayDatePicker="true"  required="true" value="{!v.oppclosedate}" format="MM/dd/yyyy"/> 
+    </li>
+  </aura:renderIf>
+  
+      
+
+    <li>
+      
+      <br/>
+      
+      <aura:renderIf isTrue="{!v.shwBtnFlag}">  
+        <lightning:button variant="brand" label="Show Details" onclick="{! c.showAccountDetails }" />
+      </aura:renderIf>
+
+      <aura:renderIf isTrue="{!v.shwDtlsFlag}">
+        <lightning:button variant="brand" label="Fetch Opportunities" onclick="{! c.fetchOpp }"  class="fetchOppCls"/>
+      </aura:renderIf>
+
+      <aura:renderIf isTrue="{!v.transferBtn}">
+        <lightning:button variant="brand" label="Transfer" onclick="{! c.transfer }"/>
+      </aura:renderIf>
+
+      <aura:renderIf isTrue="{!v.shwResetBtn}">  
+        <lightning:button variant="brand" label="Reset" onclick="{! c.resetSelection }" />
+      </aura:renderIf>
+
+    </li>   
+  </aura:renderIf>
+
+  </ul> 
+  
+  <aura:renderIf isTrue="{!v.error}">
+  <ul>
+    <li>
+      <ui:message title="Error" severity="error" closable="true" >
+        {!v.erorMessage}
+      </ui:message>
+    </li>
+   </ul>
+  </aura:renderIf>
+
+  <aura:renderIf isTrue="{!v.transferSuccessFlag}">
+  <ul>
+    <li>
+        <aura:if isTrue="{!!v.AdminStatusSummary.Batch_Completed__c}">
+            <ui:message title="Confirmation" severity="confirm" closable="true">
+               {!$Label.c.AE_Transfer_Progress_message}
+            </ui:message>
+            <br/>
+        </aura:if>
+          <table class="slds-table slds-table--bordered slds-table--cell-buffer slds-table--fixed-layout slds-table--col-bordered" cellspacing="1" cellpadding="1" width="100%">
+            <thead>
+              <tr class="slds-text-heading--label">
+                <th style="font-weight: bold;">Object Name </th>
+                <th style="font-weight: bold;">Total Count</th>
+                <th style="font-weight: bold;">No of Success</th>
+                <th style="font-weight: bold;">No of Error</th>
+              </tr>
+            </thead> 
+            <tbody>
+              <tr class="slds-text-heading--label">
+                <td>Proposal</td>
+                <td>{!v.AdminStatusSummary.Total_Proposal_Count__c}</td>
+                <td style="color:green;">{!v.AdminStatusSummary.Count_of_Proposal_Success__c}</td>
+                <td style="color:red;">{!v.AdminStatusSummary.Count_of_Proposal_Error__c}</td>
+              </tr>
+              <tr class="slds-text-heading--label">
+                <td>Opportunity</td>
+                <td>{!v.AdminStatusSummary.Total_Opportunity_Count__c}</td>
+                <td style="color:green;">{!v.AdminStatusSummary.Count_of_Opportunity_Success__c}</td>
+                <td style="color:red;">{!v.AdminStatusSummary.Count_of_Opportunity_Error__c}</td>
+              </tr>
+              <tr class="slds-text-heading--label">
+                <td>Account Team</td>
+                <td>{!v.AdminStatusSummary.Total_Account_Team_Count__c}</td>
+                <td style="color:green;">{!v.AdminStatusSummary.Count_of_Account_Team_Success__c}</td>
+                <td style="color:red;">{!v.AdminStatusSummary.Count_of_Account_Team_Error__c}</td>
+              </tr>
+              <tr class="slds-text-heading--label">
+                <td>Account Connection</td>
+                <td>{!v.AdminStatusSummary.Total_Account_Connection_Count__c}</td>
+                <td style="color:green;">{!v.AdminStatusSummary.Count_of_Account_Connection_Success__c  }</td>
+                <td style="color:red;">{!v.AdminStatusSummary.Count_of_Account_Connection_Error__c}</td>
+              </tr>
+              <tr class="slds-text-heading--label">
+                <td>Activity Task</td>
+                <td>{!v.AdminStatusSummary.Total_Activity_Count__c}</td>
+                <td style="color:green;">{!v.AdminStatusSummary.Count_of_Activity_Success__c  }</td>
+                <td style="color:red;">{!v.AdminStatusSummary.Count_of_Activity_Error__c}</td>
+              </tr>
+
+            </tbody>
+          </table><br/>
+	<aura:if isTrue="{!v.AdminStatusSummary.Batch_Completed__c}">
+      <ui:message severity="info" closable="true" >
+          Click 
+         <ui:outputURL value="{!'/'+v.AdminStatusSummary.Id}" label="here"  target="__blank"/>
+          for Admin Status Summary
+      </ui:message>
+     </aura:if>
+	
+      </li>
+   </ul>
+  </aura:renderIf>
+
+  <br/> 
+<aura:renderIf isTrue="{!v.shwDtlsFlag}">
+  <table class="slds-table slds-table--bordered slds-table--cell-buffer slds-table--fixed-layout slds-table--compact slds-table--col-bordered">
+    <thead>
+      <tr class="slds-text-heading--label">
+<th scope="row" style="width: 50px;text-align-last:left: " class="slds-text-align--right"><ui:inputCheckbox aura:id="cbox" class="cBox" change="{!c.selectAllChckBx}"/></th>
+<!--         <th class="slds-text-align_right" scope="col" style="width: 3.25rem;">
+          <div class="slds-th__action slds-th__action_form">
+            <span class="slds-checkbox">
+              <input type="checkbox" name="options" id="checkbox-45" tabindex="-1" value="on" />
+              <label class="slds-checkbox__label" for="checkbox-45" onclick="{! c.selectAllChckBx }">
+                <span class="slds-checkbox_faux"></span>
+                <span class="slds-form-element__label slds-assistive-text">Select All</span>
+              </label>
+            </span>
+          </div>
+        </th> -->
+        
+        <th scope="col"><div class="slds-truncate" title="Account Name">Account Name</div></th>
+        
+        <th scope="col"><div class="slds-truncate" title="Record Type">Record Type</div></th>
+        
+        <th scope="col"><div class="slds-truncate" title="Billing Street">Billing Street</div></th>
+        
+        <th scope="col"><div class="slds-truncate" title="Billing City">Billing City</div></th>
+        
+        <th scope="col"><div class="slds-truncate" title="Billing State">Billing State</div></th>
+      
+      </tr>
+    </thead>
+    <tbody>
+      <aura:iteration items="{!v.accountTeamMembers}" var="atm">
+        <tr>
+<td ><ui:inputCheckbox aura:id="cboxRow" text="{!atm.Id}" class="cBox" change="{!c.changeSelectAll}"/></td>
+<!--           <td class="slds-text-align_right" role="gridcell">
+            <span class="slds-checkbox">
+              <ui:inputCheckbox aura:id="DependentCheckbox" />
+               <input type="checkbox" name="options" class="DependentCheckbox" tabindex="-1" value="on" /> 
+              <label class="slds-checkbox__label" for="checkbox-01">
+                <span class="slds-checkbox_faux"></span>
+                <span class="slds-form-element__label slds-assistive-text">Select item 1</span>
+              </label>
+            </span>
+          </td> -->
+            
+          <td role="gridcell">
+            <div class="slds-truncate" title="{!atm.Name}">{!atm.Name}
+            </div>
+          </td>
+
+          <td role="gridcell">
+            <div class="slds-truncate" title="{!atm.RecordType.Name}">{!atm.RecordType.Name}
+            </div>
+          </td>
+            
+          <td role="gridcell">
+            <div class="slds-truncate" title="{!atm.BillingStreet}">{!atm.BillingStreet}
+            </div>
+          </td>
+          
+          <td role="gridcell">
+            <div class="slds-truncate" title="{!atm.BillingCity}">{!atm.BillingCity}
+            </div>
+          </td>
+          
+          <td role="gridcell">
+            <div class="slds-truncate" title="{!atm.BillingState}">{!atm.BillingState}
+            </div>
+          </td>
+            
+        </tr>
+
+      </aura:iteration>
+    </tbody>
+  </table>
+</aura:renderIf> 
+
+<aura:renderIf isTrue="{!v.shwTransfrFlag}">
+  <table class="slds-table slds-table--bordered slds-table--cell-buffer slds-table--fixed-layout slds-table--compact slds-table--col-bordered oppTable">
+    <thead>
+      <tr class="slds-text-heading--label">
+      
+      <th scope="row" style="width: 4%;" class="slds-text-align--right"><ui:inputCheckbox aura:id="cboxOpp" class="cBoxOpp" change="{!c.selectAllOppChckBx}"/></th>
+
+
+        <th scope="col"><div class="slds-truncate" title="Opportunity Name"> Opportunity Name</div></th>
+        
+        <th scope="col"><div class="slds-truncate" title="Account Name">Account Name</div></th>
+
+        <th scope="col" ><div class="slds-truncate" title="Tim Id">Proposal Name</div></th>
+        
+        <th scope="col"><div class="slds-truncate" title="prop End Date">Proposal End Date</div></th>
+
+        <th scope="col" style="{!'display:'+v.transferStatus}"><div class="slds-truncate" title="Transfer Status">Proposal Transfer Status</div></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <aura:iteration items="{!v.oppList}" var="opp" indexVar="outerkey">
+        <aura:iteration items="{!opp.proposalList}" var="propWrap" indexVar="innerkey">
+        <tr> 
+
+          <aura:renderIf isTrue="{!0==innerkey}">
+          <td rowspan="{!opp.proposalList.length}" ><ui:inputCheckbox aura:id="cboxRowOpp" text="{!opp.oppName}" class="cBoxOpp" change="{!c.changeSelectAllOpp}" value="{!opp.chckBx}"/></td>
+          </aura:renderIf>
+
+
+
+          <aura:renderIf isTrue="{!0==innerkey}">
+          <td role="gridcell" rowspan="{!opp.proposalList.length}">
+            <div class="slds-truncate" title="{!opp.oppName}">
+              <ui:outputURL value="{!'/'+opp.oppId}" label="{!opp.oppName}"  target="__blank"/>
+            </div>
+          </td>
+          </aura:renderIf>
+
+          <aura:renderIf isTrue="{!0==innerkey}">
+          <td role="gridcell" style="border-right:1px solid Lightgrey;" rowspan="{!opp.proposalList.length}" >
+            <div class="slds-truncate" title="{!opp.accName}">
+              <ui:outputURL value="{!'/'+opp.accId}" label="{!opp.accName}"  target="__blank"/>
+            </div>
+          </td>
+          </aura:renderIf>
+          
+            <td role="gridcell" >
+              <div class="slds-truncate" title="{!propWrap.prop.Name}" style="text-align: center;">
+                <ui:outputURL value="{!'/'+propWrap.prop.Id}" label="{!propWrap.prop.Name}"  target="__blank"/>
+              </div>
+            </td>
+
+             <td role="gridcell">
+              <div class="slds-truncate" title="{!propWrap.prop.End_Date__c}">
+                {!propWrap.prop.End_Date__c}
+              </div>
+            </td> 
+
+            <td role="gridcell" style="{!'display:'+v.transferStatus}">
+              <div class="slds-truncate" title="{!propWrap.status}" style="{!'color:'+propWrap.stsClr}">
+                  {!propWrap.status}
+              </div>
+            </td>
+
+        </tr>
+        </aura:iteration>
+
+        <aura:if isTrue="{!opp.proposalList.length==0}">
+
+            <td ><ui:inputCheckbox aura:id="cboxRowOpp" text="{!opp.oppName}" class="cBoxOpp" change="{!c.changeSelectAllOpp}" value="{!opp.chckBx}"/></td>
+
+
+
+            <td role="gridcell">
+              <div class="slds-truncate" title="{!opp.oppName}">
+                <ui:outputURL value="{!'/'+opp.oppId}" label="{!opp.oppName}"  target="__blank"/>
+              </div>
+            </td>
+
+
+            <td role="gridcell" style="border-right:1px solid Lightgrey;" >
+              <div class="slds-truncate" title="{!opp.accName}">
+                <ui:outputURL value="{!'/'+opp.accId}" label="{!opp.accName}"  target="__blank"/>
+              </div>
+            </td>
+            <td/>
+            <td/>
+        </aura:if>
+
+      </aura:iteration>
+    </tbody>
+  </table>
+</aura:renderIf>
+
+</aura:component>

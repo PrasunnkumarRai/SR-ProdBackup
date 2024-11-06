@@ -1,0 +1,11 @@
+.THIS #msgDiv {
+    display:none;
+    background-color:#468847;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white
+}
+
+.THIS .Spinner{
+    display:none;
+}

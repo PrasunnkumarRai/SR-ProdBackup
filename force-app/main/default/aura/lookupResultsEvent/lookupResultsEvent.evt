@@ -1,0 +1,12 @@
+<aura:event type="APPLICATION" description="Passes lookup results to lookup component" >
+    <aura:attribute name="objectName" type="String"/>
+    <aura:attribute name="resultList" type="Object[]"/>
+</aura:event>
+
+<!--
+<aura:event type="APPLICATION" description="Passes lookup results to lookup result component" >
+    <aura:attribute name="resultList" type="sObject[]"/>
+    <aura:attribute name="customSettingData" type="String"/>
+    <aura:attribute name="fieldList" type="String" />
+</aura:event>
+-->

@@ -1,0 +1,38 @@
+<aura:component >
+    <aura:attribute name="tooltipText" type="string" required="true"/>
+    <aura:attribute name="toolTipIcon" type="String" required="true"/>
+    <aura:attribute name="opptyId" type="Id" />
+    <aura:attribute name="showActionLinks" type="Boolean" default="false" />
+    <aura:attribute name="callToggler" type="Boolean" default="false"/>
+    <aura:attribute name="callTogglerMap" type="Map" />
+
+   
+    <aura:method name="callDisplayOut" action="{!c.displayOut}" description="method to hide popover"/>
+    <aura:method name="getCallTogglerValue" action="{!c.getCallTogglerValue}" description="gets current val of callToggler"/>
+
+
+ <!--   <div class="slds-popover slds-popover- -tooltip toggle slds-is-fixed" data-container="body" role="tooltip" style="position:absolute;left:auto; overflow:visible; bottom:60px; transition-delay: 5s;" aura:id="tooltip"> -->
+    <aura:if isTrue="{!v.showActionLinks}">
+        <div class="slds-form-element__icon slds-align-middle" onmouseenter="{!c.display}" >
+            <lightning:icon iconName="{!v.toolTipIcon}" size="xx-small"  />                
+        </div>    
+       <div class="slds-popover slds-align-middle slds-float_right toggle hoverMe  slds-is-fixed slds-nubbin_left" data-container="body" role="dialog" aura:id="tooltip" aria-describedby="dialog-body-id-1" onmouseenter="{!c.popoverDisplay}" onmouseleave="{!c.popoverDisplayOut}" style="bottom: -52px; right:-325px;  position: absolute; overflow:visible;">
+            <div id="dialog-body-id-1" class="slds-popover__body"><aura:unescapedHtml value="{!v.tooltipText}"/></div> 
+                <div style="margin-left: 12px">
+                    <lightning:button variant="base" label="New Task" onclick="{!c.createTask}" />
+                    <br/>
+                    <lightning:button variant="base" label="New Event" onclick="{!c.createEvent}" />
+                </div>
+            </div>
+        <aura:set attribute="else">
+            <div class="slds-form-element__icon slds-align-middle" onmouseenter="{!c.display}" onmouseleave="{!c.displayOut}">
+                <lightning:icon iconName="{!v.toolTipIcon}" size="xx-small"  />                
+            </div>    
+                <div class="slds-popover slds-popover--tooltip toggle slds-is-fixed" role="tooltip" data-container="body"  style=" top: 20px; left:0px; min-width: 400px; position: absolute; overflow:visible; transition-delay: 5s; box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.33); background-color: rgb(244,246,249); padding: 12px;" aura:id="tooltip">
+                    <div class="slds-popover__body" style="color: #5986b2;"><!--span style="margin-right:5px"><lightning:icon iconName="standard:opportunity" size="medium"/></span--><aura:unescapedHtml value="{!v.tooltipText}"/></div> 
+                </div>
+        </aura:set>
+    </aura:if>
+    
+
+</aura:component>

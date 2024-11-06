@@ -1,0 +1,86 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" controller="NewAdvancedProposalController" access="global"> 
+
+	<aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="recordData" type="Object"/>  
+    <aura:attribute name="propStartDt" type="Date"/>  
+    <aura:attribute name="propEndDt" type="Date"/> 
+    <aura:attribute access="public" name="orderTypeSelected" type="String"/> 
+    <aura:attribute access="public" name="productType" type="String[]"/>
+    <aura:attribute access="public" name="productTypeList" type="String[]" /> 
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large">
+        
+        <div class="slds-modal__container">
+            
+            <header class="slds-modal__header">
+                <lightning:buttonIcon size="large" iconName="utility:close" variant="bare" onclick="{!c.hideModal}" alternativeText="Close window." class="slds-modal__close slds-button_icon-inverse"/>
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                    <span>
+                        New Advanced Proposal
+                    </span>
+                </h2>
+           </header>
+
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            	
+            <lightning:recordEditForm aura:id="editform" objectApiName="Proposal__c">
+
+                <h3 class="slds-section-title--divider" style="font-weight:bold">Information</h3>
+
+                <div class="slds-form--stacked slds-p-around--medium slds-m-bottom--x-small">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                        	<label for="advReqField">Advanced Proposal Name</label>
+                            <lightning:inputField fieldName="Name" aura:id="advpropName" value="{!v.recordData.defaultFieldValues.Name}" variant="label-hidden" required="true"/> <!-- aura:id="advReqField" -->
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Order_Type__c" aura:id="orderType" required="true" onchange="{!c.handleOrderTypeChange}"/>
+                        </div>                         
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-1">
+                            <aura:if isTrue="{!v.orderTypeSelected =='Online'}">
+                            <lightning:dualListbox name="Product Type" aura:id="prodTypeMultiPicklist" required="true"
+                                   label= "Product Type"
+                                   sourceLabel="Available"
+                                   selectedLabel="Selected"
+                                   fieldLevelHelp="Select Product Type"
+                                   options="{!v.productTypeList}" 
+                                   value="{!v.productType}"
+                                   onchange="{!c.handleProductTypeMultiChange}" size="4"/>
+                            <aura:set attribute="else">
+                                <lightning:select aura:id="prodTypePicklist" label="Product Type" value="{!v.productType}" onchange="{!c.handleProductTypeChange}" required="true">
+                                    <option text="--None--" value=""/>        
+                                    <aura:iteration items="{!v.productTypeList}" var="prodType">
+                                        <option text="{!prodType.label}" value="{!prodType.value}"/>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </aura:set>       
+                            </aura:if>       
+                        </div>                         
+                    </div>               
+                    <div class="slds-grid">
+                         <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Start_Date__c" aura:id="startDt" value="{!v.recordData.defaultFieldValues.Start_Date__c}"/>
+                        </div>
+                         <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="End_Date__c" aura:id="endDt" value="{!v.recordData.defaultFieldValues.End_Date__c}"/>
+                        </div>
+                    </div>
+                </div>    
+            </lightning:recordEditForm>
+
+            <lightning:navigation aura:id="navService"/> 
+
+            </div>
+        
+	        <footer>
+	            <div class="modal-footer slds-modal__footer attach-to-bottom">
+	                <button class="slds-button slds-button_neutral" onclick="{!c.hideModal}">Cancel</button>                    
+	                <button class="slds-button slds-button_brand" onclick="{!c.onSave}">Save</button>
+	            </div>
+	        </footer>
+        </div>  
+    </section>       
+</aura:component>

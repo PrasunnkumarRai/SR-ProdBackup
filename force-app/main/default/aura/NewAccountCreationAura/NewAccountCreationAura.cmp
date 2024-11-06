@@ -1,0 +1,30 @@
+<aura:component controller="AccountRequestAPIController" implements="force:lightningQuickAction,force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,lightning:actionOverride,lightning:isUrlAddressable" access="global">
+    <aura:attribute name="LeadId__c" type="String" default="world" />
+    <aura:attribute name="IsOwnerActive__c" type="String" default="world" />
+    <aura:attribute name="recordTypeId__c" type="String" />
+    <aura:attribute name="recordTypeName__c" type="String" />
+    <aura:attribute name="recordTypeLabel__c" type="String" />
+    <aura:attribute name="renderNewAccountCreation" type="Boolean" default="false" />
+    <aura:attribute name="renderOldAccountCreation" type="Boolean" default="false" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:handler name="change" value="{!v.pageReference}" action="{!c.onPageReferenceChanged}" />
+
+    <aura:if isTrue="{!$Browser.formFactor=='DESKTOP'}">
+        <aura:renderIf isTrue="{!v.renderNewAccountCreation}">
+            <c:newAccountCreation_clone LeadId__c="{!v.LeadId__c}" IsOwnerActive__c="{!v.IsOwnerActive__c}" RecordTypeNameAura__c="{!v.recordTypeName__c}" />
+            <!-- <c:parentCompAccountMobile RecordTypeNameAura__c="{!v.recordTypeName__c}" LeadId__c="{!v.LeadId__c}" IsOwnerActive__c="{!v.IsOwnerActive__c}"></c:parentCompAccountMobile> -->
+        </aura:renderIf>
+    </aura:if>
+
+    <aura:if isTrue="{!$Browser.isAndroid}">
+        <c:parentCompAccountMobile RecordTypeNameAura__c="{!v.recordTypeName__c}" LeadId__c="{!v.LeadId__c}" IsOwnerActive__c="{!v.IsOwnerActive__c}"></c:parentCompAccountMobile>
+    </aura:if>
+
+    <aura:if isTrue="{!$Browser.isIPad}">
+        <c:parentCompAccountMobile RecordTypeNameAura__c="{!v.recordTypeName__c}" LeadId__c="{!v.LeadId__c}" IsOwnerActive__c="{!v.IsOwnerActive__c}"></c:parentCompAccountMobile>
+    </aura:if>
+
+    <aura:if isTrue="{!$Browser.isIPhone}">
+        <c:parentCompAccountMobile RecordTypeNameAura__c="{!v.recordTypeName__c}" LeadId__c="{!v.LeadId__c}" IsOwnerActive__c="{!v.IsOwnerActive__c}"></c:parentCompAccountMobile>
+    </aura:if>
+</aura:component>

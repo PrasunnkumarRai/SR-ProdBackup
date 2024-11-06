@@ -1,0 +1,82 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" controller="CloneOpportunityController">	
+
+    <aura:attribute name="opportunityRec" type="Opportunity"/>
+    <aura:attribute name="recordError" type="String" default="" description="Holds error messages while saving the record"></aura:attribute>    
+    <aura:attribute name="advMap" type="Map" default="{}"/>
+
+    <lightning:spinner class="slds-hide" variant="brand" alternativeText="Processing.." size="small" aura:id="mySpinner"/>
+   
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <!-- Display Error or Warning notifications -->
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+
+    <lightning:recordEditForm aura:id="recordEditForm" objectApiName="Opportunity" 
+          onsubmit="{!c.handleSubmit}"> 
+                  
+        <lightning:messages />   
+
+        <div class="slds-page-header">
+            <div class="slds-media">
+                <div class="slds-media__body">
+                    <h1 class="slds-page-header__title slds-truncate slds-align_absolute-center" title="Clone Opportunity Budget">Clone Opportunity Budget</h1>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_1-of-2">
+                <lightning:inputField fieldName="Name" value="{!v.opportunityRec.Name}"/>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning:inputField fieldName="StageName" value="{!v.opportunityRec.StageName}"/>
+            </div>
+        </div> 
+
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_1-of-2">
+                <lightning:inputField fieldName="Sales_Probability__c" value="{!v.opportunityRec.Sales_Probability__c}"/>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning:inputField fieldName="DMA__c" value="{!v.opportunityRec.DMA__c}"/>
+            </div>
+        </div>   
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_1-of-2">
+                <lightning:inputField fieldName="AccountId" value="{!v.opportunityRec.AccountId}" onchange="{!c.validateAgencyRepFirm}" required="true"/>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning:inputField fieldName="Flight_Start_Date__c" value="{!v.opportunityRec.Flight_Start_Date__c}" disabled="true"/>
+            </div>            
+        </div>   
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_1-of-2">
+                <lightning:inputField fieldName="Agency_Account__c" value="{!v.opportunityRec.Agency_Account__c}"/>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning:inputField fieldName="Flight_End_Date__c" value="{!v.opportunityRec.Flight_End_Date__c}" disabled="true"/> 
+            </div>
+        </div>   
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_1-of-2">
+                <lightning:inputField fieldName="Rep_Firm__c" value="{!v.opportunityRec.Rep_Firm__c}"/>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning:inputField fieldName="Total_Forecast_Amount__c" value="{!v.opportunityRec.Total_Forecast_Amount__c}" disabled="true"/>
+            </div> 
+        </div>   
+           
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_1-of-2">
+                <lightning:inputField fieldName="CloseDate" value="{!v.opportunityRec.CloseDate}"/> 
+            </div>
+        	<div class="slds-col slds-size_1-of-2">
+            </div>		                       
+        </div> 
+        <div class="slds-clearfix">
+          <div class="slds-align_absolute-center">
+              <lightning:button label="Clone" class="slds-m-top_medium" variant="brand" type="submit"/>
+          </div>
+        </div> 
+    </lightning:recordEditForm>
+</aura:component>

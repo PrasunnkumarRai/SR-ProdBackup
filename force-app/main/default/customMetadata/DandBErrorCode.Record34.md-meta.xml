@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Record34</label>
+    <protected>false</protected>
+    <values>
+        <field>Description__c</field>
+        <value xsi:type="xsd:string">The D-U-N-S Number in the request is not valid. D-U-N-S Number must be 9 characters long and contain only digits 0-9.</value>
+    </values>
+    <values>
+        <field>ErrorMessage__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>HTTPStatusCode__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>IsDataError__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>errorCode__c</field>
+        <value xsi:type="xsd:string">10003</value>
+    </values>
+    <values>
+        <field>product__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,127 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable" access="global" controller="MassApprovalForInterimAEsController">
+
+	<aura:attribute name="interimAEAccountsList" type="Interim_AE_Account__c[]" default="[]" access="PRIVATE" description="Holds current Interim AE Accounts" />
+	<aura:attribute name="interimAEMap" type="Map" default="{}"/>	
+
+	<lightning:spinner class="slds-hide" variant="brand" alternativeText="Processing.." size="small" aura:id="mySpinner"/>
+	
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+	<!-- Display Error or Warning notifications -->
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+
+    <div class="slds-scrollable">	
+	    <lightning:card >
+	        <lightning:layout horizontalAlign="spread" multipleRows="false">
+	            <lightning:layoutItem flexibility="auto" size="6" smallDeviceSize="12" largeDeviceSize="4"> 
+			        	            	
+	        	</lightning:layoutItem>
+	        	<lightning:layoutItem flexibility="auto" size="6" smallDeviceSize="12" largeDeviceSize="4">
+	        		<b class="headercls">	            		
+	            		{!$Label.c.Pending_InterimAE_Approvals}
+	            	</b>	        		
+	        	</lightning:layoutItem>
+	        	<lightning:layoutItem flexibility="auto" size="6" smallDeviceSize="12" largeDeviceSize="3">	
+	        		<div class="slds-clearfix">
+			          <div class="slds-float_right">			          	  
+			          	<aura:if isTrue="{!not(empty(v.interimAEAccountsList))}">
+			              <lightning:button label="Approve" class="slds-m-top_medium" variant="brand" aura:id="approve" onclick="{!c.ApproveReject}"/>
+			              &nbsp;
+			              <lightning:button label="Reject" class="slds-m-top_medium" variant="brand" aura:id="reject" onclick="{!c.ApproveReject}"/>
+			              &nbsp;&nbsp;
+			            </aura:if>  
+			          </div> 
+			        </div> 
+	        	</lightning:layoutItem>
+	        </lightning:layout>
+	       <br/>
+	        <table class="slds-table slds-table_bordered slds-table_col-bordered slds-table_cell-buffer slds-no-row-hover slds-max-medium-table_stacked-horizontal">
+	            <thead>
+	                <tr>
+	                	<aura:if isTrue="{!not(empty(v.interimAEAccountsList))}">
+		                	<th class="subheadercls"> 
+		                		<ui:inputCheckbox aura:id="selectAll" change="{!c.SelectAllCheck}"/>  
+		                	</th>
+	                	</aura:if>
+	                	<th class="header-cell col subheadercls">
+	                        <div class="slds-truncate" title="Account Name">
+	                        	Interim ID
+	                        </div>
+	                    </th>
+	                    <th class="header-cell col subheadercls">
+	                        <div class="slds-truncate" title="Account Name">
+	                        	Account
+	                        </div>
+	                    </th>
+	                    <th class="header-cell col subheadercls">
+	                        <div class="slds-truncate" title="Initiated By">
+	                        	Initiated By
+	                        </div>
+	                    </th>
+	                    <th class="header-cell col subheadercls">
+	                        <div class="slds-truncate" title="Primary AE">
+	                        	Primary AE
+	                        </div>
+	                    </th>
+	                    <th class="header-cell col subheadercls">
+	                        <div class="slds-truncate" title="Interim AE">
+	                        	Interim AE
+	                        </div>
+	                    </th>  
+	                    <th class="header-cell col subheadercls">
+	                        <div class="slds-truncate" title="Start Date">
+	                        	Start Date
+	                        </div>
+	                    </th>
+	                    <th class="header-cell col subheadercls">
+	                        <div class="slds-truncate" title="End Date">
+	                        	End Date
+	                        </div>
+	                    </th>	
+	                    <th class="header-cell col subheadercls">
+	                        <div class="slds-truncate" title="Comments">
+	                        	Comments
+	                        </div>
+	                    </th>                                      
+	                </tr>
+	            </thead>
+	            <tbody>
+	            	<aura:iteration items="{!v.interimAEAccountsList}" var="interimAERec">	            		 	
+		                <tr class="slds-hint-parent">	
+		                    <td>
+								<ui:inputCheckbox aura:id="checkInterimAE" value="" text="{!interimAERec.Id}" change="{!c.validateSelectAllCheck}"/>
+							</td>
+							<td data-label="InterimAE Record">		                        
+		                        <lightning:formattedUrl value="{!'/' + interimAERec.Id}" tooltip="" label="{!interimAERec.Name}" target="_blank" />
+		                    </td>	                    
+		                    <td scope="row" data-label="AccountName">
+		                        <!-- <div class="slds-truncate" title="{!interimAERec.Account__c}" style="white-space: normal;">{!interimAERec.Account__r.Name}</div> -->
+		                        <lightning:formattedUrl value="{!'/' + interimAERec.Account__c}" tooltip="" label="{!interimAERec.Account__r.Name}" target="_blank" />
+		                    </td>
+		                    <td data-label="InitiatedBy">
+		                        <div class="slds-truncate" title="" style="white-space: normal;">{!interimAERec.InitiatedBy__r.Name}</div>
+		                    </td>
+		                    <td data-label="Primary AE">
+		                        <div class="slds-truncate" title="" style="white-space: normal;">{!interimAERec.Primary_AE__r.Name}</div>
+		                    </td>
+		                    <td data-label="Interim AE">
+		                        <div class="slds-truncate" title="" style="white-space: normal;">{!interimAERec.Interim_AE__r.Name}</div>
+		                    </td>
+		                    <td data-label="Start Date">
+		                        <div class="slds-truncate" title="" style="white-space: normal;">{!interimAERec.StartDate__c}</div>
+		                    </td>
+		                    <td data-label="End Date">
+		                        <div class="slds-truncate" title="" style="white-space: normal;">{!interimAERec.EndDate__c}</div>
+		                    </td>   
+		                    <td data-label="Approver Comments">
+		                        <!-- <ui:inputTextArea aura:id="comments" value="" rows="1"></ui:inputTextArea> -->
+		                        <ui:inputText aura:id="comments" value="" maxlength="5000"></ui:inputText> <!--  mouseover="{!c.showText}" -->
+		                    </td>                  
+		                </tr>
+	                </aura:iteration>
+	            </tbody>
+	        </table>
+	    </lightning:card>
+	</div>
+
+</aura:component>

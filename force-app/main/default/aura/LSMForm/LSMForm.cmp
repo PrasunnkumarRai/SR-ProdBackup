@@ -1,0 +1,132 @@
+<!--
+	Author      : M&S
+	Description : Redirects to New CNA Record page with auto populated fields as below.
+-->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller="LSMFormController" access="global" >
+	<aura:attribute name="recordId" type="Id"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="showGeneralQuestions" type="Boolean" default="false"/>
+    <aura:attribute name="generalQuestions" type="list[]"/>
+    <aura:attribute name="aeId" type="string" />
+    <aura:attribute name="isReadonly" type="Boolean" default="false"/>
+    <aura:attribute name="isReview" type="Boolean" default="false"/>
+    
+    <div class="slds-card" style="padding-left: 15px;">
+        
+        <div class="slds-page-header">
+            <div class="slds-media">
+                <div class="slds-media__body">
+                    <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="LSM/AE 1 on 1">LSM/AE 1 on 1</h1>
+                </div>
+            </div>
+        </div>
+        
+        <p class="slds-box slds-text-heading_small slds-align_absolute-center" style="color:orange">
+			<lightning:icon class="orangeOnBlack" iconName="utility:warning" size="large"/>If you navigate away or refresh the page, answers will be cleared out.
+		</p>
+        
+        <div><br/></div>
+        <div class="slds-scrollable" >
+            <aura:if isTrue="{!v.showGeneralQuestions}">
+                <div class="slds-media__body">
+                    <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Questions">Questions</h1>
+                </div>
+                <div><br /></div>
+                <aura:iteration items="{!v.generalQuestions}" var="obj" indexVar="index">
+                    <b>{!index+1}.&nbsp;</b><span class="other">{!obj.question}</span><br />
+                    <aura:if isTrue="{!(obj.questionType=='User Picklist')}">
+                        <div class="slds-form slds-form_stacked slds-m-top_small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__control">
+                                    <aura:if isTrue="{!!obj.isAnsPicklistOptions}">
+                                        <b><span class="other">
+                                            The running user has no users with their name in the HR Manager field.<br />
+                                            'Contact Support for addition of AEs'.
+                                        </span></b><br />
+                                    </aura:if>
+                                    <aura:if isTrue="{!obj.isAnsPicklistOptions}">
+                                        <lightning:select name="rtSelectUid" aura:id="rtSelectUid" label="Select Answer" value="{!v.aeId}">
+                                            <aura:iteration items="{!obj.lstAnsPicklistOptions}" var="opt">
+                                                <option text="{!opt.label}" value="{!opt.value}"/>
+                                            </aura:iteration>
+                                        </lightning:select>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </aura:if>
+                    <aura:if isTrue="{!(obj.questionType=='Text')}">
+                        <aura:if isTrue="{!!v.isReview}">
+                        	<ui:inputTextarea class="field" value="{!obj.answer}" />
+                        </aura:if>
+                        <aura:if isTrue="{!v.isReview}">
+                            Ans. <ui:outputText value="{!obj.answer}" />
+                        </aura:if>
+                    </aura:if>
+                    
+                    <aura:if isTrue="{!(obj.questionType=='Picklist')}">
+                        <div class="slds-form slds-form_stacked slds-m-top_small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__control">
+                                    <aura:if isTrue="{!!v.isReview}">
+                                        <lightning:select name="rtSelect" aura:id="rtSelect" label="Select Answer" value="{!obj.strSelPicklistOption}" disabled="{!v.isReadonly}">
+                                            <option text="--None--" value=""/>
+                                            <aura:iteration items="{!obj.lstAnsPicklistOptions}" var="opt">
+                                                <option text="{!opt.label}" value="{!opt.value}"/>
+                                            </aura:iteration>
+                                        </lightning:select>
+                                    </aura:if>
+                                    <aura:if isTrue="{!v.isReview}">
+                                        Ans. <ui:outputText value="{!obj.strSelPicklistOption}" />
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </aura:if>
+					
+                    <aura:if isTrue="{!obj.questionType=='Picklist (Multi-Select)'}">
+                        <aura:if isTrue="{!!v.isReview}">
+                            <lightning:dualListbox name="Answers"
+                                       label= "Select Answer"
+                                       sourceLabel="Available"
+                                       selectedLabel="Selected"
+                                       fieldLevelHelp="Select Answer"
+                                       options="{!obj.lstAnsMultiselPicklistOptions}" 
+                                       value="{!obj.lstSelectedAanswers}"
+                                       disabled="{!v.isReadonly}"/>
+                        </aura:if>
+						<aura:if isTrue="{!v.isReview}">
+                            Ans. <br />
+                            <aura:iteration items="{!obj.lstSelectedAanswers}" var="selAns" indexVar="index">
+                                <ui:outputText value="{!selAns}" /><br />
+                            </aura:iteration>
+                        </aura:if>
+                    </aura:if>
+                    
+                    <div><br /></div>
+                </aura:iteration>
+            </aura:if>
+        </div>
+        
+        
+        <div class="slds-form slds-form_stacked slds-m-top_small" >
+            <div class="slds-form-element">
+                <div class="slds-form-element__control slds-align_absolute-center">
+                    <!--<div id="btndiv">-->
+                        <lightning:button variant="brand" label="Review" class="slds-float_right slds-m-top_small" onclick="{!c.reviewQuestions}" />
+                        <aura:if isTrue="{!v.isReadonly}">
+                            <lightning:button variant="brand" label="Print" class="slds-float_right slds-m-top_small" onclick="{!c.printQuestions}" />
+                        </aura:if>
+                        <aura:if isTrue="{!v.isReadonly}">
+                            <lightning:button variant="brand" label="Edit" class="slds-float_right slds-m-top_small" onclick="{!c.editQuestions}" />
+                        </aura:if>
+                    <!--</div>-->
+                    &nbsp;<lightning:button variant="brand" label="Email" class="slds-float_right slds-m-top_small" onclick="{!c.emailQuestions}" />
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</aura:component>

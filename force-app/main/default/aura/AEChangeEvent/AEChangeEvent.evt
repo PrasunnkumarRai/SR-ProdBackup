@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="we are holding AE ID in this event to pass values to parent component">
+    <aura:attribute name="AEId" type="String"/>
+</aura:event>

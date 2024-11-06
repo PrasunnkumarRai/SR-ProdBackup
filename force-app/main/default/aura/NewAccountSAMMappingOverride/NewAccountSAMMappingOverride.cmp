@@ -1,0 +1,77 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" controller="NewAccountSAMMappingController">
+    <aura:attribute name="recordData" type="Object"/>
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="samDesignationValue" type="String"/>
+    <aura:attribute name="userValue" type="String"/>
+    <aura:dependency resource="markup://force:showToast" type="EVENT,COMPONENT" />
+    <aura:attribute name="loaded" type="Boolean" default="false" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+     <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <lightning:buttonIcon size="large" iconName="utility:close" variant="bare" onclick="{! c.hideModel }" alternativeText="Close window." class="slds-modal__close slds-button_icon-inverse"/>
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                    <span>
+                        New Account SAM Mapping
+                    </span>
+                </h2>
+            </header> 
+               <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <lightning:recordEditForm aura:id="editform"
+                                                  objectApiName="Account_SAM_Mapping__c"
+                                                  onsuccess="{!c.handleSuccess}"
+                            					  onerror="{!c.handleError}">
+                            <lightning:messages />
+                            <h3 class="slds-section-title--divider" style="font-weight:bold">Information</h3>
+                            <div class="slds-form--stacked slds-p-around_x-large slds-m-bottom--x-small">
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        	<lightning:inputField fieldName="User__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        	<lightning:inputField fieldName="OwnerId" value="{!v.recordData.defaultFieldValues.OwnerId}" class="slds-m-left_large"/>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        	<lightning:inputField fieldName="Region__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        	<lightning:inputField aura:id="requiredField" fieldName="Account__c" value="{!v.recordData.defaultFieldValues.Account__c}" required="true"  class="slds-m-left_large"/>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        	<lightning:inputField fieldName="Division__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        	<lightning:inputField fieldName="Tier_Designation__c" class="slds-m-left_large"/>
+                                    </div>
+                                </div>
+     							<div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Is_Transferred__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        	<lightning:inputField fieldName="Sales_Office__c" class="slds-m-left_large"/>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:inputField fieldName="Old_SAM_Designation__c"/>
+                                    </div>
+                                </div>
+                            </div>
+                    </lightning:recordEditForm>
+                    <lightning:spinner variant="brand" alternativeText="Loading..." class="{!(v.loaded? 'slds-show': 'slds-hide')}" />
+                    <lightning:navigation aura:id="navService"/>
+            	</div>
+    				<footer>
+                        <div class="modal-footer slds-modal__footer attach-to-bottom">
+                            <button class="slds-button slds-button_neutral" onclick="{!c.hideModel}">Cancel</button>
+                            <button class="slds-button slds-button_brand" onclick="{!c.onRecordSave}">Save</button>
+                        </div>
+                    </footer>
+               </div>
+        </section>              
+</aura:component>

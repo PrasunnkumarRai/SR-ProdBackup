@@ -1,0 +1,13 @@
+.THIS .headercls {   
+  font-size: medium;
+  text-align: center;
+  color:#54698d;
+  font-weight:bold;
+}
+
+.THIS .subheadercls {
+  background-color:#54698d ;  
+  font-size: small;
+  color:white;  
+  text-align: center;
+}

@@ -1,0 +1,31 @@
+.THIS div.contactInput {
+    padding-left: 24px;
+}
+
+.THIS div.contactInput > div,
+.THIS div.contactInput > p {
+    padding-bottom: 6px;
+}
+
+.THIS div label {
+    display: block;
+    padding-top: 6px;
+}
+
+.THIS p {
+    padding-top: 12px;
+}
+
+.THIS span.assistiveText {
+    display: none;
+}
+
+.THIS span.required {
+    color: red;
+}
+
+/*
+.cAccountLookup .slds-pill__remove {
+    border: .1px solid #faa;
+}
+*/

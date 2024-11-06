@@ -1,0 +1,155 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride" access="global" controller="VRFController">
+
+  
+    <!-- Record ID -->
+    <aura:attribute name="recordId" type="Id" />
+    <!-- Initializa Object -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" /> 
+    <!-- Attribute to Hide/Show Spinner -->
+    <aura:attribute name="isSpinnerVisible" type="Boolean" default="false"/>
+    <!-- Attribute to Hide/Show VRF Componennt -->
+    <aura:attribute name="isVisible" type="Boolean" />
+    <!--Traffic ID Array Object -->
+    <aura:attribute name="vrfClass" type="VRFClass" />
+    <!-- Check if the component is in Quick Action --> 
+    <aura:attribute name="isQuickAction" type="Boolean" default='false' />
+    <!-- Submitted Message -->
+    <aura:attribute name="submitMsg" type="string" default='VRF is Already Submitted' />
+    <!-- Disable button -->
+    <aura:attribute name="disableButton" type="Boolean" default="true" />
+    <!-- Hide Class -->
+    <aura:attribute name="hide" type="string" default="hide" />
+
+    <aura:attribute name="vastTag" type="Boolean" default='false'/>
+
+
+    <!-- Start Aura Set -->
+    <aura:set attribute="body">
+
+        <!-- Start Lighting Card: Shows the header content of the component -->
+        <lightning:card iconName="standard:account" title="Video Request Form" >
+
+                <!-- Start Validation Error -->
+                <aura:if isTrue="{!v.vrfClass.hasValidationError}">
+                    <div class="red-background">
+                        <lightning:icon iconName="utility:error" alternativeText="Connected" variant="inverse" size="small"/>
+                        <aura:text value="{!v.vrfClass.ValidationMessage}"></aura:text>
+                    </div>
+                </aura:if>
+                    <!-- End Validation Error -->
+
+                <!-- Start: Is Spinner Visible -->
+                <aura:if isTrue="{!v.isSpinnerVisible}">
+                        <lightning:spinner class="spins" size="large" variant="brand" alternativeText="Loading" />
+                </aura:if>
+                <!-- End: Is Spinner Visible -->
+
+                <!--  Start: Is Submission Valid -->
+                <aura:renderIf isTrue="{!v.vrfClass.isSubmitValid}">
+   
+                        <!-- Start Body : VRF Form -->
+                        <div id="body">       
+                        
+                                <!-- Help Label -->
+                                <label class="slds-form-element__label helpMessage">Hover on the help icon about the VRF Client ID</label>
+                                <!--lightning help text for input field-->
+                                <lightning:helptext content="{!v.vrfClass.VrfClientIdHelpMsg}" class="helptext"/> 
+
+                                <!-- Start Dropdown div -->
+                                <div class="dropdown">    
+
+                                    <!-- Start Select Client ID -->
+                                    <lightning:select name="clientId" label="Select VRF Client ID:" aura:id="clientId"   onchange ="{!c.checkIfNotNumber}" class="select-auto-width" >
+                                        <aura:iteration items="{!v.vrfClass.TrafficElements}" var="option">
+                                            <option text="{!option.label}" value="{!option.value}" />
+                                        </aura:iteration>
+                                    </lightning:select>                         
+                                <!-- End Select Client ID -->
+
+                                </div>
+                                <!-- End Dropdown div -->
+
+                                <!-- Start Spot ID input -->
+                                <div>
+                                    <lightning:input aura:id="spotId" label="Spot ID" value="{!v.vrfClass.SpotId}" onchange ="{!c.checkIfNotNumber}" disabled="{!v.vastTag}" maxlength="9"/>
+                                    <lightning:formattedRichText style="color: red"  aura:id="validationMsg" value="Spot Id must be 8 or 9 characters without any special characters" class="{!v.hide}"></lightning:formattedRichText>
+                                </div>
+                                <!-- End Spot ID input -->
+                        
+
+                                <!-- Start: Render Quick Action Button -->
+                                <aura:renderIf isTrue="{!v.isQuickAction}">
+
+                                        <!-- Start: Footer div -->
+                                        <div id="footer" class="modal-footer">
+                                                <lightning:button variant="brand" label="Close" onclick="{!c.closeModal}" />                              
+                                                <lightning:button aura:id="btnSubmit" variant="brand" label="Submit VRF" disabled="{!v.disableButton}" onclick="{!c.createVRF}"/>                                    
+                                        </div>
+                                        <!-- End: Quick Action Button -->
+
+                                </aura:renderIf>
+                                <!-- End: Render Quick Action Button -->
+    
+                        </div>
+                        <!-- Start Body : VRF Form -->
+   
+                      
+                </aura:renderIf> 
+                <!-- End: Is Submission Valid -->
+
+                <!--  Start: Is Invalid Status -->
+                <aura:renderIf isTrue="{!v.vrfClass.invalidStatus}">
+                        <!-- Start Set : VRF Form -->
+                            <div class="warning-background">
+                                <lightning:icon iconName="action:priority" alternativeText="Warning" variant="inverse" size="small"/>                                     
+                                <p>"{!v.vrfClass.vrfToastErrorMessage}"</p>
+                            </div>           
+                        <!-- End Set : VRF Form -->       
+                </aura:renderIf>
+                 <!--  End: Is Invalid Status -->
+
+                <!-- Start Successful Message -->
+                <aura:renderIf isTrue="{!v.vrfClass.isVRFMessageVisble}">
+
+                        <div aura:id="messageDiv" class="message hide">
+                                <p class="complete">
+                                    <lightning:formattedText aura:id="createdMsg" value="{!v.submitMsg}"  />
+                                </p>  
+                                <lightning:button variant="brand" label="Close" onclick="{!c.closeModal }"/>                                 
+                        </div>   
+                
+          
+
+
+
+                
+                                            
+                </aura:renderIf>
+                <!-- End Successful Message -->
+
+                <!-- Start: Show Error Message if Status is on review -->
+                <aura:renderIf isTrue="{!v.vrfClass.isOrderPrefix99}">
+                    
+                    <!-- Start Error Message Prefix 99 -->
+                    <div class="red-background">
+                        <lightning:icon iconName="utility:error" alternativeText="Connected" variant="inverse" size="small"/>
+                            Sales Office, Division, and Region mapping is invalid. Please contact your sales admin.
+                    </div>
+                    <!-- End Error Message Prefix 99 -->
+
+                        <!-- Start: Footer div -->
+                        <div id="footer" class="modal-footer">
+                            <lightning:button variant="brand" label="Close" class="button-close" onclick="{!c.closeModal }"/>
+                        </div>
+                        <!-- End: Footer div -->
+
+                </aura:renderIf>   
+                <!-- End: Show Error Message if Status is on review -->
+                                
+        </lightning:card>
+        <!-- End Ligthing Card -->      
+
+    </aura:set>
+    <!-- End Aura Set -->
+
+</aura:component>

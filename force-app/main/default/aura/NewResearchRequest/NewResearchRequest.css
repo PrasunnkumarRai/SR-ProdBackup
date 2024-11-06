@@ -1,0 +1,4 @@
+/* SRSF-4275 : added reqdescription CSS   */
+.THIS .reqdescription textarea {
+    height:220px;
+}

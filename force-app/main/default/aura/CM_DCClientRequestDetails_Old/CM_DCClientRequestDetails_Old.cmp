@@ -1,0 +1,190 @@
+<!--
+	Author      : M & S
+	Date        : 18 Jul- 2018
+	Description : Digital Campaign: Lightning Component for Inventory Request - Ads Everywhere
+				  Ref : SRSF-1154
+	Modification History :
+-->
+<aura:component controller="CM_DCClientRequestPlanController_Old" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+	<!--Init handler which is call doInit js function on component Load-->  
+    <aura:handler name="init" value="{!this}" action="{!c.scriptsLoaded}"/>
+    
+    <!--Aura Attribute for store Contact Object List as Array-->    
+    <aura:attribute name="resultWrap" type="Object"/>
+    <aura:attribute name="datesArray" type="List"/>
+    <aura:attribute name="dateString" type="String" description="list of records"/> 
+    <aura:attribute name="rowIndex" type="String"/>
+    <aura:attribute name="recordId" type="String" /><!--default="a0855000005noPjAAI" -->
+    <aura:attribute name="ErrorMsg" type="String" />
+    <aura:attribute name="showErrorMsg" type="boolean" default="false"/>
+    <aura:attribute name="showErrorMsg1" type="boolean" default="false"/>
+    <aura:attribute name="showErrorMsg2" type="boolean" default="false"/>
+    <aura:attribute name="isOTTPrimary" type="boolean" default="false"/>
+    <aura:attribute name="planDetailFormTooltip" type="String" default="{$Label.CM_ClientRequestPlanDetails}" />
+  	<lightning:messageChannel type="RequestFormToNetworkLWCMsgChannel__c" aura:id="dcMessageChannel" scope="APPLICATION"/>
+
+    
+    <!-- page header -->
+    <div class="slds-card">
+    	<div class="slds-card__header slds-border_bottom slds-p-bottom_small">
+        <header class="slds-align--absolute-center">
+            <span class="slds-text-heading_small">
+                Client Request Form Plan Details <span style="height: 26px;"><c:ToolTipLC tooltipText="{!v.planDetailFormTooltip}"/></span>
+                <br/>
+            </span>
+        </header>
+    	</div>
+        <aura:if isTrue="{!v.showErrorMsg ==true}">
+            <div class="bgred">
+                <b>INVENTORY SOURCE must be unique.</b>
+            </div>
+        </aura:if>
+        <aura:if isTrue="{!v.showErrorMsg1 ==true}">
+            <div class="bgred">
+                <b>{!v.ErrorMsg}</b>
+            </div>
+        </aura:if>
+        <aura:if isTrue="{!v.showErrorMsg2 ==true}">
+            <div class="bgred">
+                <b>{!v.ErrorMsg}</b>
+            </div>
+        </aura:if>
+    	<lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Digital_Campaign__c" onload="{!c.handleOnLoad}">
+            <!-- Hidden fields for auto-refresh from detail page data is changed -->
+            <div style="display:none">
+                <lightning:inputField fieldName="Campaign_Start_Date__c" disabled="true"/>
+                <lightning:inputField fieldName="Campaign_End_Date__c" disabled="true"/>
+            </div>
+        <!--Table Part-->
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer"> 
+            <thead>
+                <tr class="slds-text-title_caps">
+                    
+                    <th scope="col">
+                        <div class="slds-truncate" title="Start Date">Start Date</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="End Date">End Date</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Inventory Source">Inventory Source</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="SFDC DC Type">SFDC DC Type</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Audience ">Audience</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Geo Traget Type">Geo Target Type</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Notes">Notes</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Impressions">Impressions</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="CPM (Gross)">CPM (Gross)</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Cost (Gross)">Cost (Gross)</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Is Primary">Is Primary</div>
+                    </th>
+                </tr>
+            </thead>   
+            <tbody>
+                <aura:iteration items="{!v.datesArray}" var="item" indexVar="index">
+                    <!-- Table Row -->   
+                    <tr class="slds-text-title_caps">
+                        <td>
+                            <lightning:input type="date" value="{!item.startDate}" disabled="true" title="{!item.startDate}"/>
+                        </td>
+                        <td>
+                            <lightning:input type="date" value="{!item.endDate}" disabled="true" title="{!item.endDate}"/>
+                        </td>
+                        <td>
+                            <lightning:select class="{!index}" aura:id="rtSelect0" value="{!item.selIS}" onchange="{!c.onChangeInentorySource}" >
+                                <option text="-None-" value=""/>
+                                <aura:iteration items="{!item.lstIS}" var="opt">
+                                    <option text="{!opt}" value="{!opt}"/>
+                                </aura:iteration>
+                            </lightning:select>
+                        </td>
+                        <td>
+                            <lightning:select name="rtSelect1" aura:id="rtSelect1" value="{!item.selType}" disabled="true">
+                                <option text="-None-" value=""/>
+                                <aura:iteration items="{!item.lstDCType}" var="opt">
+                                    <option text="{!opt}" value="{!opt}"/>
+                                </aura:iteration>
+                            </lightning:select>
+                        </td>
+                        <td>
+                            <lightning:select name="rtSelect2" aura:id="rtSelect2" value="{!item.selAud}" >
+                                <option text="-None-" value=""/>
+                                <aura:iteration items="{!item.lstAudience}" var="opt">
+                                    <option text="{!opt}" value="{!opt}"/>
+                                </aura:iteration>
+                            </lightning:select>
+                        </td>
+                        <td>
+                            <lightning:select name="rtSelect4" aura:id="rtSelect3" value="{!item.selGeoType}" >
+                                <option text="-None-" value=""/>
+                                <aura:iteration items="{!item.lstGeoTargetType}" var="opt">
+                                    <option text="{!opt}" value="{!opt}"/>
+                                </aura:iteration>
+                            </lightning:select>
+                        </td>
+                        <td>
+                            <lightning:textarea value="{!item.Notes}"/>
+                        </td>
+                        <td style="padding-bottom: 0px;">
+                            <ui:inputNumber value="{!item.Impressions}" class="slds-input" maxlength="8" keyup="{!c.onlyNum}"  updateOn="keyup" requiredIndicatorClass="{!index}"/>
+                        </td>
+                        <td style="padding-bottom: 0px;">
+                            <ui:inputNumber format=".00" value="{!item.CPM}" class="slds-input" maxlength="5"/>
+                        </td>
+                        <td style="padding-bottom: 0px;">
+                            <ui:inputNumber format=".00" value="{!item.Cost}" class="slds-input" maxlength="10"/>
+                        </td>
+                        <td style="padding-bottom: 0px;">
+                            <!--<aura:if isTrue="{!item.selIS =='Freewheel - FF OTT'}">
+                            	<lightning:input type="checkbox" name="check1" checked="{!v.resultWrap.objDCampaign.Is_Freewheel_FF_OTT_Primary__c}"/>
+                            </aura:if>-->
+                            <lightning:input type="checkbox" name="check1" checked="{!item.isPrimary}" class="{!index}" onchange="{!c.checkForPrimary}"/>
+                        </td>
+                        <td>
+                            <a onclick="{!c.removeRow}" id="{!index}">
+                                <lightning:icon variant="error" iconName="utility:delete" class="slds-icon slds-icon_small" size="small" alternativeText="icon"/>
+                                <span class="slds-assistive-text">Delete Icon</span>
+                            </a> 
+                        </td> 
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+        <br/>
+        <div>
+            <aura:if isTrue="{!v.resultWrap.isOTTExtensionPayloadInfo == true}">
+                <div class="demo-only" style="padding:0.5rem;background:#16325c">
+                    <div class="slds-text-color_inverse">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>'OTT Extension' is added for Payload.</b></div>
+                </div><br />
+            </aura:if>
+        </div>
+        <aura:if isTrue="{!and(v.showErrorMsg==false, v.resultWrap.isLockRecord ==false)}">
+            <!--<aura:if isTrue="{!v.recordId=='a0855000006rxyZAAQ'}">-->
+            <div>
+                <a onclick="{!c.addNewRow}" id="addBtn">
+                    <lightning:icon iconName="utility:add" class="slds-icon slds-icon_small" size="small" alternativeText="add"/>
+                    <span class="slds-assistive-text">Add Icon</span>
+                </a>
+            </div>
+            <br/>
+            <!--Save Button which is call Save js function on click --> 
+            <button class="slds-button slds-button_brand" onclick="{!c.Save}">Save</button>
+        </aura:if>
+        </lightning:recordEditForm>
+    </div>
+</aura:component>

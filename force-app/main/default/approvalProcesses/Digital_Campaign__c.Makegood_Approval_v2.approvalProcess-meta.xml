@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>creator</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>President_Media</submitter>
+        <type>roleSubordinates</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Owner</field>
+        <field>CPM_Negotiat__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Adlink_AA_Approvers_Makegood</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Digital_Campaign__c.Region__c</field>
+                <operation>equals</operation>
+                <value>Adlink / SRS</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Makegood - Adlink</label>
+        <name>Makegood_Adlink</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Blue_Ridge_AA_Approvers_Makegood</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Digital_Campaign__c.Region__c</field>
+                <operation>equals</operation>
+                <value>Blue Ridge</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Makegood - Blue Ridge</label>
+        <name>Makegood_Blue_Ridge</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Central_AA_Approvers_Makegood</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Digital_Campaign__c.Region__c</field>
+                <operation>equals</operation>
+                <value>Central</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Makegood - Central</label>
+        <name>Makegood_Central</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Great_Lakes_AA_Approvers_Makegood</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Digital_Campaign__c.Region__c</field>
+                <operation>equals</operation>
+                <value>Great Lakes</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Makegood - Great Lakes</label>
+        <name>Makegood_Great_Lakes</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Northern_AA_Approvers_Makegood</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Digital_Campaign__c.Region__c</field>
+                <operation>equals</operation>
+                <value>Northern</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Makegood - Northern</label>
+        <name>Makegood_Northern</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>SouthEast_AA_Approvers_Makegood</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Digital_Campaign__c.Region__c</field>
+                <operation>equals</operation>
+                <value>Southeast</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Makegood - SouthEast</label>
+        <name>Makegood_SouthEast</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>West_AA_Approvers_Makegood</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Digital_Campaign__c.Region__c</field>
+                <operation>equals</operation>
+                <value>West</value>
+            </criteriaItems>
+        </entryCriteria>
+        <label>Makegood - West</label>
+        <name>Makegood_West</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>Change from Division to Region</description>
+    <emailTemplate>unfiled$public/DC_Makegood_DC_Approval_Submitted_Notification</emailTemplate>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(
+IsMakegoodDC__c = true, 
+CONTAINS(RecordType.Name, &quot;Inventory Request&quot;),
+ISPICKVAL(Status__c, &apos;Submit Makegood Approval&apos;),
+NOT(ISPICKVAL(Division__c , &apos;National&apos;)),
+NOT(ISPICKVAL(Division__c , &apos;National - Central&apos;)),
+NOT(ISPICKVAL(Division__c , &apos;National - North East&apos;)),
+NOT(ISPICKVAL(Division__c , &apos;National - South&apos;)),
+NOT(ISPICKVAL(Division__c , &apos;National - West&apos;)),
+NOT(ISPICKVAL(Division__c , &apos;National - East&apos;))
+)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>DC_Makegood_DC_Approved_Notification</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>DSL_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Makegood_Approved_IR_Status_Update</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>DC_Makegood_DC_Rejected_Notification</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>DC_Makegood_IR_Reject_DC_Status_Update</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>DSL_Rejected</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <label>Makegood Approval v2</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Approving_Manager__c</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>1</processOrder>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>false</showApprovalHistory>
+</ApprovalProcess>

@@ -1,0 +1,191 @@
+<!-- 
+* @Author				: M & S
+* @Description          : Displaying the ItemsToApprove records 
+* @Date Of Creation		: 8/28/2017 
+* @Modified by          : 
+* @Modified Date	    : 
+* @Modifiction History  :
+* @Related Meta Data    : ItemsToApprove(Apex class),LightningLookUp (Lightning Component)
+-->
+<aura:component controller="ItemsToApprove" implements="flexipage:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <lightning:overlayLibrary aura:id="overlayLib"/> <!-- SRSF-4025 -->
+    <ltng:require scripts="{!$Resource.Jquery224}"/>
+    <aura:attribute name="isOpen" type="boolean" default="false"/> 
+    <aura:attribute name="Status" type="String" />
+    <aura:attribute name="id" type="String" />
+    <aura:attribute name="approvalList" type="object"/> 
+    <aura:attribute name="comments" type="string" />
+    <aura:attribute name="pageSize" type="Integer" />
+    <aura:attribute name="pageNumber" type="Integer" />     
+    <aura:attribute name="hasPrevious" type="Boolean" />
+    <aura:attribute name="hasNext" type="Boolean" />
+    <aura:attribute name="total" type="Integer" />    
+    <aura:attribute name="userId" type="Id" />
+    <aura:attribute name="targetObjsortAsc" type="Boolean" default="false"/>
+    <aura:attribute name="RecTypesortAsc" type="Boolean" default="false"/>    
+    <aura:attribute name="objNameAsc" type="Boolean" default="false"/> 
+    <aura:attribute name="acctExecSortAsc" type="Boolean" default="false"/> <!-- SRSF-3392 -->
+    <aura:attribute name="statusSortAsc" type="Boolean" default="false"/> <!-- SRSF-3392 -->
+    <aura:attribute name="actorNamesortAsc" type="Boolean" default="false"/>    
+    <aura:attribute name="crtdDatesortAsc" type="Boolean" default="false"/> 
+
+    <aura:attribute name="isHomePage" type="Boolean" default="true" />     
+    
+    <aura:attribute name="approvalListRecords" type="List"/> <!-- SRSF-3392 -->
+    <aura:attribute name="hoverRow" type="Integer" default="-1" /> <!-- SRSF-4025-->
+    <aura:attribute name="reId" type="Id" /><!-- SRSF-4025-->
+    <aura:attribute name="mouseHoverData" type="object" /> <!-- SRSF-4025-->
+    <aura:attribute name="togglehover" type="boolean" default="false"/><!-- SRSF-4025-->
+
+    <aura:handler name="updateLookupIdEvent" event="c:UpdateLookupEvt" action="{!c.getObjectValue}"/> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<aura:attribute name="actionBtnName" type="String" />    
+    <aura:attribute name="objName" type="String" />    
+    <div id="layoutsDiv" class="{!v.isHomePage == true ? 'slds-card' : ''}" >       
+        <div class="slds-page-header" role="banner">
+  			<div class="slds-media">
+                <div class="slds-media__figure">
+                  <lightning:icon iconName="standard:approval" size="medium" alternativeText="Indicates approval"/>                   
+                </div>
+                <div class="slds-media__body">
+                    <p  class="slds-text-body--small slds-page-header__info" title="Approval Requests">APPROVAL REQUESTS</p>
+                    <p class="slds-page-header__title slds-truncate slds-align-middle" >Items To Approve</p>
+                </div>
+          	</div>
+    	</div>
+        <!--Table to Display the Approval request records-->
+        <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+            <!--table headers-->
+            <thead>
+                <tr class="slds-text-heading--label"> 
+					<th scope="col" id="targetObject" onclick ="{!c.getSort}" class="slds-truncate slds-size--1-of-6" title="Request ID"> 
+                         Request ID                       
+                        <lightning:icon aura:id="trgtObj" iconName="utility:arrowup" size="xx-small" alternativeText="sort arrow up" class="slds-hide" /> 
+                    </th>
+                    <th scope="col" id= "RecType" onclick ="{!c.getSort}" class="slds-truncate slds-size--1-of-6" title="RecordType">RecordType
+                        <lightning:icon aura:id="RectypeArow" iconName="utility:arrowup" size="xx-small" alternativeText="sort arrow down" class="slds-hide"/>
+                    </th>
+                    <th scope="col" id="targetObjectAcc" onclick ="{!c.getSort}" class="slds-truncate slds-size--1-of-6" title="Account"> 
+                         Account                       
+                        <lightning:icon aura:id="targetObjectAcc" iconName="utility:arrowup" size="xx-small" alternativeText="sort arrow up" class="slds-hide" />
+                    </th>
+
+                    <!-- START : SRSF-3392 -->
+                    <th scope="col" id="targetObjectAccExec" onclick ="{!c.getSort}" class="slds-truncate slds-size--1-of-6" title="AccountExec"> 
+                        AE                      
+                        <lightning:icon aura:id="AcctExecutive" iconName="utility:arrowup" size="xx-small" alternativeText="sort arrow up" class="slds-hide" />
+                    </th> 
+                    <th scope="col" id="targetObjectStatus" onclick ="{!c.getSort}" class="slds-truncate slds-size--1-of-6" title="Status"> 
+                        Status                      
+                        <lightning:icon aura:id="status" iconName="utility:arrowup" size="xx-small" alternativeText="sort arrow up" class="slds-hide" />
+                    </th>
+                    <!-- END : SRSF-3392 -->
+
+                    <th scope="col" id="actorName" onclick ="{!c.getSort}" class="slds-truncate slds-size--1-of-6" title="Most Recent Approver">Recent Approver
+                        <lightning:icon aura:id="actor" iconName="utility:arrowup" size="xx-small" alternativeText="sort arrow down" class="slds-hide"/>
+                    </th>
+                    <th scope="col" id="crtdDate" onclick ="{!c.getSort}" class="slds-truncate slds-size--1-of-6" title="Date Submitted"> Date Submitted
+                        <lightning:icon aura:id="date" iconName="utility:arrowup" size="xx-small" alternativeText="sort arrow down" class="slds-hide"/>
+                    </th>                
+                    
+                    <th scope="col"  class="slds-truncate slds-size--2-of-8" title="Action">Action</th>
+                </tr>
+            </thead>
+            <!--table body-->
+            <tbody>  <!-- 4025 ADDED INDEXVAR, auraif and handleShowPopover -->             
+                <aura:iteration items="{!v.approvalListRecords}" var="step" indexVar="index"> 
+                    <aura:if isTrue="{!step.isVisible}"> 
+                        <!-- 4025 <tr > -->
+                        <tr data-selected-Index="{!index}">
+                            <td>
+                            <aura:if isTrue="{!step.sObjectLabel == 'Account Request'}">
+                                <div class="slds-truncate"><a href ="{!'/'+step.targetObjectId}"  onmouseover="{!c.handleMouseHover}" onmouseout="{!c.handleMouseOut}" data-index="{!index}" data-value="{!step.targetObjectId}" tabindex="-1">{!step.targetObjectName}</a>
+                                    <aura:if isTrue="{!v.hoverRow==index}">
+                                        <aura:if isTrue="{!v.togglehover==true}">
+                                        <div class="slds-popover "
+                                             role="tooltip" id="help" style="position: absolute;">
+                                        <b>&nbsp;&nbsp;Amount:&nbsp;{!v.mouseHoverData.strNetAmt}<br/>
+                                        &nbsp;&nbsp;Department:&nbsp;{!v.mouseHoverData.strDept}<br/>
+                                        &nbsp;&nbsp;Reason:&nbsp;{!v.mouseHoverData.strReason}<br/></b>
+                                        </div>
+                                        </aura:if>
+                                    </aura:if>
+                                </div>
+                            </aura:if>
+                            <aura:if isTrue="{!step.sObjectLabel != 'Account Request'}">
+                                <div class="slds-truncate" title="{!step.targetObjectName}"><a href ="{!'/'+step.targetObjectId}">{!step.targetObjectName}</a></div>
+                            </aura:if>
+                            </td>
+                            <td><div class="slds-truncate" title="{!step.RecordTypeName}" > {!step.RecordTypeName}</div></td>
+                            <td><div class="slds-truncate" title="{!step.strAccountName}"><a href ="{!'/'+step.strAccountId}">{!step.strAccountName}</a></div></td>
+
+                            <!-- START : SRSF-3392 -->
+                            <td><div class="slds-truncate" title="{!step.strAcctExecutive}"><a href ="{!'/'+step.strAcctExecutiveId}">{!step.strAcctExecutive}</a></div></td>
+                            <td><div class="slds-truncate" title="{!step.strStatus}">{!step.strStatus}</div></td> 
+                            <!-- END : SRSF-3392 -->      
+
+                            <td><div class="slds-truncate" title="{!step.assignedTo}"><a href ="{!'/'+step.assignedId}">{!step.actorName}</a></div></td>                      
+                            <td><div class="slds-truncate" title="{!step.createdDate}" > {!step.createdDate}</div></td> 
+                             
+                            <td>
+                                <div class="slds-size--2-of-2">
+                                    <lightning:button aura:id="btnApprove" iconName="action:approval" class="slds-button slds-size--1-of-4 small btnSize" name="{!step.targetObjectId+'-'+step.sObjectLabel}" onclick="{!c.openModel}" title="Approve" />
+                                    <lightning:button aura:id="btnReject"  iconName="action:reject" class="slds-button slds-size--1-of-4 small btnSize" name="{!step.targetObjectId+'-'+step.sObjectLabel}" onclick="{!c.openModel}" title="Reject"/>
+                                    <lightning:button aura:id="btnReassign" iconName="action:refresh" class="slds-button slds-size--1-of-4 small btnSize" name="{!step.targetObjectId+'-'+step.sObjectLabel}" onclick="{!c.openModel}" title="Reassign" />
+                                </div>
+                            </td>
+                        </tr>
+                    </aura:if>                    
+                </aura:iteration>                
+            </tbody>
+        </table><br/>
+        <div class="btnstyle">
+        <!--Next & previous buttons for pagination-->            
+        <button class="slds-button slds-button_neutral buttonCC " onclick="{!c.previous}" disabled="{!!v.hasPrevious}" > Previous</button>
+        <button class="slds-button slds-button_neutral buttonCC " onclick="{!c.next}" disabled="{!!v.hasNext}" >Next</button>        
+        <a href="javascript:void(0);" aura:id="ViewBtn" class="slds-text-link slds-float_right " onclick="{!c.navigateToMyComponent}" >ViewAll</a>
+       	</div>
+
+        <!--Modal Popup to accept the comments-->
+        <div class="slds-m-around--xx-large slds-hide" aura:id="actionPopUp">
+            <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+                <div class="slds-modal__container">                  
+                    <div class="slds-modal__header">
+                        <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close" onclick="{!c.closeModel}">
+                            X
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="header99" class="slds-text-heading--medium">{!v.actionBtnName}{!v.objName}</h2>
+                    </div>                            
+                    <div class="slds-modal__content slds-p-around--medium">                       
+                        <div class="slds-form-element" >
+                            <!--LightningLookUp component for User lookup in popup-->
+                            <div class="slds-container slds-hide" aura:id="UserLookup" >
+                               <c:LightningLookUp label="User" pluralLabel="users" sObjectAPIName="User" instanceId="MyAccount" listIconClass="slds-icon-standard-account" aura:Id="userid" />                                           
+                            </div>
+                        </div>                        
+                        <label class="slds-form-element__label" >Comments</label>                            
+                        <ui:inputtextarea aura:id="commentsId" class="slds-textarea" value="{!v.comments}" rows="6"/>                           
+                    </div>          
+                    <div class="slds-modal__footer">
+                        <!--Popup footer-->
+                        <div class="slds-list_horizontal slds-float--right" >
+                            <ui:button label="Cancel" press="{!c.closeModel}"/>                             
+                            <div aura:id="ApproveBtn" class="slds-hide">
+                                <ui:button label="Approve" press="{!c.getStatus}"/>
+                            </div>
+                            <div aura:id="RejectBtn" class="slds-hide">
+                                <ui:button label="Reject" press="{!c.getStatus}"/>
+                            </div>
+                            <div aura:id="ReAssign" class="slds-hide">
+                                <ui:button label="Reassign" press="{!c.getStatus}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>         
+          <div class="slds-backdrop slds-backdrop--open">        
+          </div>
+       </div>
+     </div>   
+</aura:component>

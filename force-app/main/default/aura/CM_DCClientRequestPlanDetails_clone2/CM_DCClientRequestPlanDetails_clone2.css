@@ -1,0 +1,11 @@
+.THIS  .yieldCheckbox{
+  display: inline-block;
+  float: left;
+  margin-right: 7px;
+}
+.THIS.exampleHolder{
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Owner</field>
+        <field>Account_Rep__c</field>
+        <field>Site</field>
+        <field>AccountSource</field>
+        <field>NCC_Account__c</field>
+        <field>NCC_Account_Rep__c</field>
+        <field>NCC_Office__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>Approve_the_Account</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>The Account Owner&apos;s Manager is responsible for taking action on this account record that has been Submitted for Approval.</description>
+        <label>Manager Approval</label>
+        <name>Manager_Approval</name>
+        <rejectionActions>
+            <action>
+                <name>Reject_the_Account</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>Reset_Submitted_for_Approval</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <description>As soon as an Opportunity is created for an account, we intend to submit the account to the account owner&apos;s manager for further approval.</description>
+    <emailTemplate>unfiled$public/Account_Approval_Request</emailTemplate>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <criteriaItems>
+            <field>Account.Count_of_Opportunities__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalRecordLock>true</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Rejection_email_sent_to_the_Account_Owner</name>
+            <type>Alert</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <label>Submit a New Account for Approval</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Approving_Manager__c</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>1</processOrder>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

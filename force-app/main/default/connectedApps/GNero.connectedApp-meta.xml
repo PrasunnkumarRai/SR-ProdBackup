@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>gnero.support@mandsconsulting.com</contactEmail>
+    <label>GNero</label>
+    <oauthConfig>
+        <callbackUrl>https://gnero.mandsc.com/Logon.aspx
+https://gnero.mandsc.com/SSOIntegration.aspx</callbackUrl>
+        <consumerKey>3MVG9szVa2RxsqBaLV3RJWOJsXP42mX5eRoEsz4KxHpZff_CVR3IqBqM6fnQsEwbOeJ6SmbQGW24Iy6e.8Dwb</consumerKey>
+        <idTokenConfig>
+            <idTokenIncludeAttributes>true</idTokenIncludeAttributes>
+            <idTokenIncludeCustomPerms>false</idTokenIncludeCustomPerms>
+            <idTokenIncludeStandardClaims>true</idTokenIncludeStandardClaims>
+            <idTokenValidity>2</idTokenValidity>
+        </idTokenConfig>
+        <isAdminApproved>true</isAdminApproved>
+        <isClientCredentialEnabled>false</isClientCredentialEnabled>
+        <isCodeCredentialEnabled>false</isCodeCredentialEnabled>
+        <isCodeCredentialPostOnly>false</isCodeCredentialPostOnly>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isNamedUserJwtEnabled>false</isNamedUserJwtEnabled>
+        <isPkceRequired>false</isPkceRequired>
+        <isRefreshTokenRotationEnabled>false</isRefreshTokenRotationEnabled>
+        <isSecretRequiredForRefreshToken>false</isSecretRequiredForRefreshToken>
+        <isSecretRequiredForTokenExchange>false</isSecretRequiredForTokenExchange>
+        <isTokenExchangeEnabled>false</isTokenExchangeEnabled>
+        <scopes>Basic</scopes>
+        <scopes>Full</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>ENFORCE</ipRelaxation>
+        <isTokenExchangeFlowEnabled>false</isTokenExchangeFlowEnabled>
+        <refreshTokenPolicy>zero</refreshTokenPolicy>
+    </oauthPolicy>
+    <profileName>Marketing Cloud Integration User</profileName>
+    <profileName>OLD Marketing Cloud Integration User</profileName>
+    <profileName>Guest License User</profileName>
+    <profileName>Read Only1</profileName>
+    <profileName>Solution Manager</profileName>
+    <profileName>Standard User</profileName>
+    <profileName>System Administrator</profileName>
+    <profileName>Contract Manager</profileName>
+    <profileName>Marketing User</profileName>
+    <profileName>Chatter Moderator User</profileName>
+    <profileName>Chatter Free User</profileName>
+    <profileName>Chatter External User</profileName>
+    <profileName>Analytics Cloud Security User</profileName>
+    <profileName>Analytics Cloud Integration User</profileName>
+    <profileName>Master - Account Coordinator</profileName>
+    <profileName>Master - Account Executive</profileName>
+    <profileName>Master - Account Planner</profileName>
+    <profileName>Master - Digital Operations</profileName>
+    <profileName>Master - Digital Sales</profileName>
+    <profileName>Master - Director of Sales</profileName>
+    <profileName>Master - Field Marketing</profileName>
+    <profileName>Master - Interconnect Account Coordinator</profileName>
+    <profileName>Master - Interconnect Account Executive</profileName>
+    <profileName>Master - Interconnect Account Planner</profileName>
+    <profileName>Master - Interconnect Sales Manager</profileName>
+    <profileName>Master - Local Sales Manager</profileName>
+    <profileName>Master - National Sales Manager</profileName>
+    <profileName>Master - Pricing and Planning</profileName>
+    <profileName>Master - Production</profileName>
+    <profileName>Master - Regional Finance</profileName>
+    <profileName>Master - Research</profileName>
+    <profileName>Master - Sales Admin</profileName>
+    <profileName>Master - Sales Leadership</profileName>
+    <profileName>Master - Sales Vertical</profileName>
+    <profileName>Master - Spectrum Preferred</profileName>
+    <profileName>Master - Support</profileName>
+    <profileName>Master - Training</profileName>
+    <profileName>Integration User</profileName>
+    <profileName>Master - Digital Planner</profileName>
+    <profileName>Master - Digital Coordinator</profileName>
+    <profileName>Affiliate Users</profileName>
+    <profileName>Pardot</profileName>
+    <profileName>Master - Helpdesk</profileName>
+    <profileName>Master - National Sales Director</profileName>
+    <profileName>Master - FBO</profileName>
+    <profileName>Master - National Account Planner</profileName>
+    <profileName>Master - National Account Coordinator</profileName>
+    <profileName>Data User</profileName>
+    <profileName>Master - Sales Support Manager</profileName>
+    <profileName>Master - Enterprise Sales Manager</profileName>
+    <profileName>Master - Business Development</profileName>
+    <profileName>Master - Yield and Inventory</profileName>
+    <profileName>Minimum Access - Salesforce</profileName>
+    <profileName>Master - Digital Traffic</profileName>
+    <profileName>Integration User Knowledge</profileName>
+    <profileName>Master - Enterprise Digital2</profileName>
+    <profileName>Master - Enterprise Digital</profileName>
+    <profileName>Master - Enterprise Digital_Old</profileName>
+    <profileName>Master - Optimization Manager 2</profileName>
+    <profileName>Read Only</profileName>
+    <profileName>Master - Optimization Manager</profileName>
+    <profileName>Master - Digital Traffic Testing</profileName>
+    <profileName>NetSkope API-Protection</profileName>
+    <profileName>Master - Enterprise Sales Support</profileName>
+</ConnectedApp>

@@ -1,0 +1,31 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="options" type="List" default="[
+    {'label': 'CNA Questionnaire', 'value': 'CNA'},
+    {'label': 'CNA Prep Sheet', 'value': 'CNA Prep Sheet'}
+    ]"/>
+    <aura:attribute name="value" type="String" default="CNA"/>
+
+    <aura:attribute name="recordId" type="Id"/>
+    <div class="slds-page-header">
+        <div class="slds-media">
+            <div class="slds-media__body">
+                <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Select the CNA Question Type">Select CNA Form Type</h1>
+            </div>
+        </div>
+    </div>
+    <div><br/></div>
+    <div>
+    <lightning:radioGroup name="radioGroup"
+                          options="{!v.options}"
+                          value="{!v.value}"
+                          type="radio"
+                          class="radioCls"/>
+    </div>
+    <div class="slds-form slds-form_stacked slds-m-top_small">
+        <div class="slds-form-element">
+            <div class="slds-form-element__control slds-float_left slds-p-top_small">
+                <lightning:button variant="brand" label="Submit" onclick="{!c.submitDetails}" />
+            </div>
+        </div>
+    </div>
+</aura:component>

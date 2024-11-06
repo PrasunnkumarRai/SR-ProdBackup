@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="Update Lookup Id" >
+    <aura:attribute name="eventFromDC" type="Digital_Campaign__c" required="true" description="from DigitalCampaign" />
+    <aura:attribute name="eventToDC" type="Digital_Campaign__c" required="true" description="to DigitalCampaign" />
+</aura:event>

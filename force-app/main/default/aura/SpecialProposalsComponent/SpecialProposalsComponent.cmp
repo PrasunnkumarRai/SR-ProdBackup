@@ -1,0 +1,188 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller="SpecialProposalController">
+    
+    <aura:attribute name="OppId" type="String" access="global" />
+    <aura:attribute name="var_RT" type="string" access="global" />
+    <aura:attribute name="value_scx" type="Boolean" default="false"/>
+    <aura:attribute name="value_pilot" type="Boolean" default="false"/>
+    <aura:attribute name="errorMessage" type="String" default="{!$Label.c.ERROR_TEXT}"/>
+    <aura:attribute name="showMessage" type="Boolean" default="false"/>
+    <aura:attribute name="showSystemInfo" type="Boolean" default="false"/>
+    <aura:attribute name="recordTypeList" type="Object[]" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+        
+    
+    <aura:handler name="change" value="{!v.OppId}" action="{!c.handleValueChange}" />
+    <!-- <aura:attribute name="IsSpinner" type="Boolean"/>
+      <aura:if isTrue="{!v.IsSpinner}">
+       <lightning:spinner variant="brand"  size="large" />
+      </aura:if> -->
+    
+    
+    
+    <!--  <div class="demo-only" >
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+
+                    <!- <header class="slds-modal__header"> ->
+                        <lightning:card >
+                        <aura:set attribute="title">
+                                            Please Select
+                                        </aura:set>
+                        <h2 id="modal-heading-01" style="padding-left: 105px;" class="slds-text-heading_medium slds-hyphenate">{!$Label.c.TEXT_TO_SELECT}
+                        </h2>
+                    <- </header> ->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        
+                            <a  data-anchor="editContDiv" aura:id="confirm_btn"    style="width: 23%;border-radius: 15px; font-size: 1.9em;margin-right: 194px;" class="wpcf7-form-control wpcf7-submit btn"  href="{! '/apex/ProposalTIMCreate?Id='+ v.OppId}">
+                            {!$Label.c.SCX_PROPOSAL}
+                            </a> 
+                        
+                            <a  aura:id="cancel_btn"  class="wpcf7-form-control wpcf7-submit btn" style="width: 23%;border-radius: 15px;font-size: 1.9em;"  href="{! '/apex/ProposalTIMCreate?Id='+ v.OppId}" >
+                            {!$Label.c.TIM_PROPOSAL}
+                            </a> 
+                             <- onclick="{!c.createTIMInventoryProposal}"                            ->
+
+                        
+                    </div>
+                    </lightning:card>
+                    <- <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral">Cancel</button>
+                        <button class="slds-button slds-button_brand">Save</button>
+                    </footer> ->
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div> -->
+    <!-- Start of radio recordtype values -->
+    <aura:renderIf isTrue="{!(!v.showSystemInfo) &amp;&amp; v.OppId != 'undefined'}"> 
+        <lightning:card >
+            <aura:set attribute="title">
+            </aura:set>
+            
+            <div id="modalWindow">
+                
+                <div class="slds-modal slds-fade-in-open"  style="background-color: lightgrey;" aria-hidden="false" role="dialog" id="modal">
+                    <div class="slds-modal__container">
+                        <div class="slds-modal__header">
+                            <button class="slds-button slds-button--icon-inverse slds-modal__close"  onclick="{!c.closeModal}">
+                                <lightning:icon iconName="utility:close"/>
+                                
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 class="slds-text-heading--medium slds-text-title_bold" style="white-space: nowrap; font-size: 26px; background-color: #e6eefa; color: rgb(8, 8, 56); border: 2px solid rgb(16, 16, 83); padding: 8px; border-radius: 6px;">{!$Label.c.TEXT_SELECTION}</h2>
+                        </div>
+                        <div class="slds-modal__content slds-p-around--medium">
+                            <div>
+                                <!-- <fieldset class="slds-form-element"> -->
+                                    <div class="slds-form-element__control">
+                                        <!-- <input type="radio" aura:id='scxProp' name="options" title="TIM Proposal"  class="radiobtn" value="SCX Proposal" onclick="{!c.fetchInputRadioValue}" />{!$Label.c.SCX_PROPOSAL}<br/> -->
+                                        <!--  <lightning:input type="radio" aura:id="SCX_Select" name="options" value="{!$Label.c.SCX_PROPOSAL}"/>
+                                  <lightning:input type="radio" aura:id="Tim_Select" name="options" value="{!$Label.c.TIM_PROPOSAL}"/>
+                                  <br/> -->
+                                        <table>
+                                            <aura:iteration items="{!v.recordTypeList}" var="recType">
+                                                <tr>
+                                                    <td style="white-space: nowrap; width: 15%; font-weight: bold;">
+                                                        <ui:inputRadio text="{!recType.recName}" aura:id="{!recType.ckey}" name="options" change="{!c.onRecordTypeSelect}" /> &nbsp;{!recType.recName}  &nbsp; &nbsp;&nbsp; &nbsp;
+                                                    </td> <!-- class="radioLabel1"  -->
+                                                  
+                                                    <td>
+                                                        <ui:outputText aura:id="descr" value="{!recType.descr}"/> <!-- class="descClass" -->
+                                                    </td>
+                                                </tr>
+                                            </aura:iteration>
+                                            
+                                        </table>
+                                        
+                                        <!--  <input type="radio" name="options" title="SCX Proposal" class="radiobtn"  value="TIM Proposal" onclick="{!c.fetchInputRadioValue}"/>{!$Label.c.TIM_PROPOSAL} -->
+                                        
+                                        <!-- <apex:variable var="count" value="{!1}" />   
+                                
+                                <apex:repeat value="{!messageList[dateLogic]}" var="msg">
+                                <apex:repeat value="{!messageList[dateLogic][msg]}" var="m">
+                                      <input type="radio" name="options" id="{!count}" class="radiobtn" value="{!msg}"/>
+                                      <span class="slds-form-element__label">{!m}</span>
+                                <br />
+                                 <apex:variable value="{!count+1}" var="count"/>  <-increment->
+                                 </apex:repeat>
+                                </apex:repeat> -->
+                                    </div>
+                                <!-- </fieldset> -->
+                            </div>
+                        </div>
+                        <div class="slds-modal__footer">
+                            <aura:renderIf isTrue="{!v.showMessage}">
+                                <div class="errorText">{!v.errorMessage}</div>
+                            </aura:renderIf>
+                            <button class="slds-button slds-button--neutral" onclick="{!c.closeModal}">Cancel</button>
+                            <button class="slds-button slds-button--neutral slds-button--brand" onclick="{!c.afterRecordTypeSelect}">Ok</button>
+                            <!-- <ui:button aura:id="button" class="slds-button slds-button-neutral slds-button-brand" buttonTitle="Ok" press="{!c.fetchInputRadioValue}" >Ok</ui:button> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-backdrop slds-backdrop--open" id="backdrop"></div>
+                
+                <!-- Modal Popup END -->
+            </div>
+        </lightning:card>
+    </aura:renderIf>
+    <!-- End of radio recordtype values -->
+    
+    <!-- Start of modal window to display differcnt radio values for button -->
+    <aura:renderIf isTrue="{!v.showSystemInfo}">
+        <div id="modalWindow">
+            
+            <div class="slds-modal slds-fade-in-open" style="background-color: lightgrey;" aria-hidden="false" role="dialog" id="modal">
+                <div class="slds-modal__container">
+                    <div class="slds-modal__header">
+                        <button class="slds-button slds-button--icon-inverse slds-modal__close"  onclick="{!c.closeModal}">
+                            <lightning:icon iconName="utility:close"/>
+                            
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+ <h2 class="slds-text-heading--medium" style="white-space: nowrap; font-size: 18px; font-weight: bold;">{!$Label.c.System_Selection}</h2>                    </div>
+                    <div class="slds-modal__content slds-p-around--medium">
+                        <div>
+                            <fieldset class="slds-form-element">
+                           <div class="slds-form-element__control" style="font-size: 16px;">                                    <!-- <input type="radio" aura:id='scxProp' name="options" title="TIM Proposal"  class="radiobtn" value="SCX Proposal" onclick="{!c.fetchInputRadioValue}" />{!$Label.c.SCX_PROPOSAL}<br/> -->
+                                    <!--  <lightning:input type="radio" aura:id="SCX_Select" name="options" value="{!$Label.c.SCX_PROPOSAL}"/>
+                                  <lightning:input type="radio" aura:id="Tim_Select" name="options" value="{!$Label.c.TIM_PROPOSAL}"/>
+                                  <br/> -->
+                                    <ui:inputRadio aura:id="SCX_Select" name="options" class="radioLabel2" change="{!c.onValueChange}" />{!$Label.c.SCX_PROPOSAL}
+                                    <ui:inputRadio aura:id="Pilot_Select" name="options" class="radioLabel2" change="{!c.onValueChange}" />{!$Label.c.PILOT_PROPOSAL}
+                                    
+                                    <!--  <input type="radio" name="options" title="SCX Proposal" class="radiobtn"  value="TIM Proposal" onclick="{!c.fetchInputRadioValue}"/>{!$Label.c.TIM_PROPOSAL} -->
+                                    
+                                    <!-- <apex:variable var="count" value="{!1}" />   
+                                
+                                <apex:repeat value="{!messageList[dateLogic]}" var="msg">
+                                <apex:repeat value="{!messageList[dateLogic][msg]}" var="m">
+                                      <input type="radio" name="options" id="{!count}" class="radiobtn" value="{!msg}"/>
+                                      <span class="slds-form-element__label">{!m}</span>
+                                <br />
+                                 <apex:variable value="{!count+1}" var="count"/>  <-increment->
+                                 </apex:repeat>
+                                </apex:repeat> -->
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <aura:renderIf isTrue="{!v.showMessage}">
+                            <div class="errorText">{!v.errorMessage}</div>
+                        </aura:renderIf>
+                        <button class="slds-button slds-button--neutral" onclick="{!c.closeModal}">Cancel</button>
+                        <button class="slds-button slds-button--neutral slds-button--brand" onclick="{!c.fetchInputRadioValue}">Ok</button>
+                        <!-- <ui:button aura:id="button" class="slds-button slds-button-neutral slds-button-brand" buttonTitle="Ok" press="{!c.fetchInputRadioValue}" >Ok</ui:button> -->
+                    </div>
+                </div>
+            </div>
+            <div class="slds-backdrop slds-backdrop--open" id="backdrop"></div>
+            
+            <!-- Modal Popup END -->
+        </div>
+    </aura:renderIf>
+    
+    
+    
+</aura:component>

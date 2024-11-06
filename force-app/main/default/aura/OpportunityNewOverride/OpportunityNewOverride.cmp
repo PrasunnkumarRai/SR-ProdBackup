@@ -1,0 +1,9 @@
+<!--
+	Author : M&S
+	Description : Overriding the "New" button of Opportunity
+				  Error Message - "The Opportunity must be created from an Account."
+-->
+<aura:component implements="lightning:actionOverride,force:hasRecordId" access="global" >
+    <aura:attribute name="recordId" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+</aura:component>

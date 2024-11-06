@@ -1,0 +1,16 @@
+<!--
+	Author      : M&S
+	Description : Redirects to New CNA Record page with auto populated fields as below.
+-->
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" controller="OpportunityRequestsActionController">
+	<aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="selectedRequest" type="string" default="cna"/>
+    <aura:handler name="init" value="{!this}" action="{!c.createNewRequest}"/>
+    <div data-reactroot="" class="demo-only" style="height: 6rem;">
+        <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+            <span class="slds-assistive-text">Loading</span>
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+        </div>
+    </div>
+</aura:component>

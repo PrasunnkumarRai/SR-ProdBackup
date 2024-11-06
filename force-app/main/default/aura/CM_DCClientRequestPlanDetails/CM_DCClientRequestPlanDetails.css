@@ -1,0 +1,8 @@
+.THIS .bgred{
+    padding: 0.5rem;
+    background: rgb(180, 0, 6);
+    color: white;
+}
+.THIS .toastMessage.forceActionsText{
+     white-space : pre-line !important;
+}

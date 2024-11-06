@@ -1,0 +1,46 @@
+<!--
+	Author      : Madhusudhan
+	Date        : 6th Nov- 2018
+	Description : Adding URLs dynamically
+	Modification History :
+-->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="DynamicHelpLinkController" >
+	<!--Init handler which is call doInit js function on component Load-->  
+    <aura:handler name="init" value="{!this}" action="{!c.scriptsLoaded}"/>
+    <aura:attribute name="urlArray" type="sObject[]"/>
+    <aura:attribute name="visibleTo" type="String" default="AE" />
+    <aura:attribute name="urlTooltip" type="String" default="AE" />
+    
+    <!-- page header -->
+    <div class="slds-card">
+    <div class="slds-card__header slds-border_bottom slds-p-bottom_small">
+        <header class="slds-align--absolute-center">
+            <span class="slds-text-heading_small">
+                <b>Helpful Links</b>
+                <br/>
+            </span>
+        </header>
+    </div>
+    </div>
+    <!--Table Part-->
+    <table class="slds-table slds-table_bordered slds-table_cell-buffer"> 
+        <thead>
+            <tr class="slds-text-title_caps">                
+                <th scope="col" width="80%">
+                    <div class="slds-truncate" title="Start Date">Website Name</div>
+                </th>
+            </tr>
+        </thead>   
+        <tbody>
+            <aura:iteration items="{!v.urlArray}" var="obj" indexVar="index">
+                <!-- Table Row -->   
+                <tr class="slds-text-title_caps">
+					<td><div class="{!obj.URL_Value__c!=''?'slds-show':'slds-hide'}">
+                        <a class="textUnderline outputLookupLink slds-truncate forceOutputLookup" href="{!obj.URL_Value__c}" target="_blank">{!obj.Name}</a>
+                        </div>
+                    </td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+</aura:component>

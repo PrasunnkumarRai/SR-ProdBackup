@@ -1,0 +1,196 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" controller="ProposalCopyTitleController">
+	<aura:attribute name="recordId" type="String"/>
+	<aura:attribute name="copyTitles" type="List" />	
+	
+	<aura:attribute name="proposalList" type="Proposal__c[]" default="[]" access="PRIVATE" description="Holds current Proposal" />
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	
+	<!-- Display Error or Warning notifications -->
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+
+	<div class="slds-page-header">
+        <div class="slds-media">
+            <div class="slds-media__body">
+                <h1 class="slds-page-header__title slds-truncate slds-align_absolute-center" title="Clone Opportunity">View Copy</h1>
+            </div>
+        </div>
+    </div>
+            
+    <div class="proposalList slds-scrollable">	
+	    <lightning:card >
+	        <lightning:layout horizontalAlign="spread" multipleRows="true">
+	            <lightning:layoutItem flexibility="grow" size="6" smallDeviceSize="12" largeDeviceSize="4">
+                    <b>
+	            		Proposal Details
+	            	</b>	            	
+	        	</lightning:layoutItem>
+	        	<lightning:layoutItem flexibility="grow" size="6" smallDeviceSize="12" largeDeviceSize="5">
+	        		&nbsp;
+	        	</lightning:layoutItem>
+	        	<lightning:layoutItem flexibility="grow" size="6" smallDeviceSize="12" largeDeviceSize="3">	
+	        	</lightning:layoutItem>
+	        </lightning:layout>
+	       <br/>
+	        <table class="slds-table slds-table_bordered slds-table_col-bordered slds-table_cell-buffer slds-no-row-hover slds-max-medium-table_stacked-horizontal">
+	            <thead>
+	                <tr>
+	                    <th class="header-cell col">
+	                        <div class="slds-truncate" title="Name">
+	                        	Proposal Name
+	                        </div>
+	                    </th>
+	                    <th class="header-cell col">
+	                        <div class="slds-truncate" title="Advertiser">
+	                        	Advertiser
+	                        </div>
+	                    </th>
+	                    <aura:if isTrue="{!v.proposalList[0].Pilot_Proposal_ID__c}">
+		                    <th class="header-cell col">
+		                        <div class="slds-truncate" title="Pilot Proposal ID">
+		                        	Pilot Proposal ID
+		                        </div>
+		                    </th>
+		                    <th class="header-cell col">
+		                        <div class="slds-truncate" title="Pilot Order Status">
+		                        	Pilot Order Status
+		                        </div>
+		                    </th>
+			                <aura:set attribute="else">
+			                	<th class="header-cell col">
+			                        <div class="slds-truncate" title="TIM ID">
+			                        	TIM ID
+			                        </div>
+			                    </th>
+			                    <th class="header-cell col">
+			                        <div class="slds-truncate" title="TIM Status">
+			                        	TIM Status
+			                        </div>
+			                    </th>
+			                </aura:set> 
+			            </aura:if> 
+	                    
+	                    <th class="header-cell col">
+	                        <div class="slds-truncate" title="Start Date">
+	                        	Start Date
+	                        </div>
+	                    </th>
+	                    <th class="header-cell col">
+	                        <div class="slds-truncate" title="End Date">
+	                        	End Date
+	                        </div>
+	                    </th>
+	                    <th class="header-cell col">
+	                        <div class="slds-truncate" title="Traffic Order Number">
+	                        	Traffic Order Number
+	                        </div>
+	                    </th>	                   
+	                </tr>
+	            </thead>
+	            <tbody>
+	            	<aura:iteration items="{!v.proposalList}" var="proposalRec">
+		                <tr class="slds-hint-parent">
+		                    
+		                    <td scope="row" data-label="Name">
+		                        <div class="slds-truncate" title="{!proposalRec.Name}" style="white-space: normal;">{!proposalRec.Name}</div>
+		                    </td>
+		                    <td data-label="Advertiser">
+		                        <div class="slds-truncate" title="{!proposalRec.Advertiser__c}" style="white-space: normal;">{!proposalRec.Advertiser__r.Name}</div>
+		                    </td>
+		                    
+		                    <aura:if isTrue="{!proposalRec.Pilot_Proposal_ID__c}">
+			                    <td data-label="Pilot Proposal ID">
+			                        <div class="slds-truncate" title="{!proposalRec.Pilot_Proposal_ID__c}" style="white-space: normal;">{!proposalRec.Pilot_Proposal_ID__c}</div>
+			                    </td>
+			                    <td data-label="Pilot Order Status">
+			                        <div class="slds-truncate" title="{!proposalRec.Pilot_Order_Status__c}" style="white-space: normal;">{!proposalRec.Pilot_Order_Status__c}</div>
+			                    </td>
+			                    <aura:set attribute="else">
+						        	<td data-label="TIM ID">
+				                        <div class="slds-truncate" title="{!proposalRec.TIM_Id__c}" style="white-space: normal;">{!proposalRec.TIM_Id__c}</div>
+				                    </td>
+				                    <td data-label="TIM Status">
+				                        <div class="slds-truncate" title="{!proposalRec.TIM_Status__c}" style="white-space: normal;">{!proposalRec.TIM_Status__c}</div>
+				                    </td>
+						    	</aura:set> 
+			                </aura:if>
+
+		                    <td data-label="Start Date">
+		                        <div class="slds-truncate" title="{!proposalRec.Start_Date__c}" style="white-space: normal;">{!proposalRec.Start_Date__c}</div>
+		                    </td>
+		                    <td data-label="End Date">
+		                        <div class="slds-truncate" title="{!proposalRec.End_Date__c}" style="white-space: normal;">{!proposalRec.End_Date__c}</div>
+		                    </td>	
+		                    <td data-label="Traffic Order Number">
+		                        <div class="slds-truncate" title="{!proposalRec.Traffic_Order_Number__c}" style="white-space: normal;">{!proposalRec.Traffic_Order_Number__c}</div>
+		                    </td>                                 
+		                </tr>
+	                </aura:iteration>
+	            </tbody>
+	        </table>
+	    </lightning:card>
+	</div>
+
+	<div class="copyTitleList slds-scrollable_x">			
+	    <lightning:card >
+	        <lightning:layout horizontalAlign="spread" multipleRows="true">
+	            <lightning:layoutItem flexibility="grow" size="6" smallDeviceSize="12" largeDeviceSize="4">
+                    <b>
+	            		Copy Details
+	            	</b>	            	
+	        	</lightning:layoutItem>
+	        	<lightning:layoutItem flexibility="grow" size="6" smallDeviceSize="12" largeDeviceSize="5">
+	        		&nbsp;
+	        	</lightning:layoutItem>
+	        	<lightning:layoutItem flexibility="grow" size="6" smallDeviceSize="12" largeDeviceSize="3">	
+	        	</lightning:layoutItem>
+	        </lightning:layout> 	       
+	        <br/>
+	        <table class="slds-table slds-table_bordered slds-table_col-bordered slds-table_cell-buffer slds-no-row-hover slds-max-medium-table_stacked-horizontal">
+	            <thead>
+	                <tr>	                	
+	                    <th class="header-cell col">
+	                        <div class="slds-truncate" title="Type">
+	                        	Type
+	                        </div>
+	                    </th>
+	                    <th class="header-cell col">
+	                        <div class="slds-truncate" title="Length">
+	                        	Length
+	                        </div>
+	                    </th>	
+	                    <th class="header-cell col">
+	                        <div class="slds-truncate" title="Sport_Name">
+	                        	Spot Name
+	                        </div>
+	                    </th>
+	                    <th class="header-cell col">
+	                        <div class="slds-truncate" title="AD_ID">
+	                        	AD ID
+	                        </div>
+	                    </th>	                                        
+	                </tr>	              
+	            </thead>
+	            <tbody id="td1">
+	            	<aura:iteration items="{!v.copyTitles}"  var="item" indexVar="key">	
+		                <tr class="{! item.key0 == 'Bookend Top' ? ' bookend ' : 
+					              item.key0 == 'Bookend Bottom' ? ' bookend ' : ''}">	
+		                    <td data-label="Type">
+		                        <div class="slds-truncate">{!item.key0}</div>
+		                    </td>	
+		                     <td data-label="Length">
+		                        <div class="slds-truncate">{!item.value.ULLENGTH}</div>
+		                    </td> 	                    
+		                    <td data-label="Spot_Name" class="slds-cell-wrap">
+		                        <div class="slds-truncate">{!item.value.SZTITLE}</div>
+		                    </td>
+		                    <td data-label="AD ID">
+		                        <div class="slds-truncate">{!item.value.SZADID}</div>
+		                    </td>			                                               
+		                </tr>			                
+	                </aura:iteration>
+	            </tbody> 
+	        </table>
+	    </lightning:card>
+	</div>   
+</aura:component>

@@ -1,0 +1,13 @@
+<aura:component controller="SyncProposalController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+	<aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="message" type="String"/>
+    <aura:attribute name="messageType" type="String" />
+
+    <c:MessageComponent type="{!v.messageType}" message="{!v.message}" />
+<!--
+  <div>
+   <ui:outputText value="{!v.message}"/>
+  </div>
+    -->
+</aura:component>

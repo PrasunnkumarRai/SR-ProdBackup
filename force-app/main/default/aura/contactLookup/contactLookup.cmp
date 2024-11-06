@@ -1,0 +1,13 @@
+<aura:component extends="c:objectLookup" implements="force:appHostable,flexipage:availableForAllPageTypes" >
+   <aura:attribute name="selectedRecord" type="Contact" default="{}" description="Used to store the SELECTED sObject Record"/>
+   <aura:attribute name="listOfSearchRecords" type="Contact[]" description="Used to store the list of search records which are returned from the apex controller"/>
+   <aura:set attribute="objectType" value="Contact" />
+   <aura:set attribute="objectDetailText" value="Contact Details" />
+   <aura:set attribute="numRecords" value="50" />
+   <aura:set attribute="createButtLabel" value="New Contact" />
+   <aura:set attribute="showNewButton" value="true" />
+   <aura:set attribute="showObjDetails" value="true" />
+   <aura:set attribute="defaultRecordType" value="0124B0000004Y0a" />
+   <aura:set attribute="createObjectType" value="Contact" />
+   <aura:handler name="init" action="{!c.doInit}" value="{!this}"/> 
+</aura:component>

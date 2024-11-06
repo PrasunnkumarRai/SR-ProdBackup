@@ -1,0 +1,110 @@
+<!--
+	Author      : M & S
+	Date        : 18 Jul- 2018
+	Description : Digital Campaign: Lightning Component for Inventory Request - Ads Everywhere
+				  Ref : SRSF-1154
+	Modification History :
+-->
+<aura:component controller="CM_DCInterests" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+	<!--Init handler which is call doInit js function on component Load-->  
+    <aura:handler name="init" value="{!this}" action="{!c.scriptsLoaded}"/>
+    
+    <!--Aura Attribute for store Contact Object List as Array-->    
+    <aura:attribute name="resultWrap" type="Object"/>
+    <aura:attribute name="interestArray" type="List"/>
+    <aura:attribute name="categoryArray" type="List"/>
+    <aura:attribute name="subCategoryArray" type="List"/>
+    <aura:attribute name="rowIndex" type="String"/>
+    <aura:attribute name="recordId" type="String" /><!--default="a0855000007pyEhAAI"-->
+    <aura:attribute name="interestTooltip" type="String" default="{$Label.CM_DCInterests}" />
+    <aura:attribute name="showErrorMsg" type="boolean" default="false"/>
+    <aura:attribute name="ErrorMsg" type="string" />
+  
+    <!-- page header -->
+    <div class="slds-card">
+    	<div class="slds-card__header slds-border_bottom slds-p-bottom_small">
+        <header class="slds-align--absolute-center">
+            <span class="slds-text-heading_small">
+                Interests <span style="height: 26px;"><c:ToolTipLC tooltipText="{!v.interestTooltip}"/></span>
+                <br/>
+            </span>
+        </header>
+    	</div>
+        
+        <aura:if isTrue="{!v.showErrorMsg ==true}">
+            <div class="padding-left-right" >
+                <b><p class="bgred">{!v.ErrorMsg}</p></b>
+            </div>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.resultWrap.isWraning ==true}">
+            <div class="padding-left-right" >
+                <b><p class="bgwarning">Document your Custom Interests in the Campaign Notes. If three or more Interests are Custom DSL approval will need to be documented in the Syncplicity folder.</p></b>
+            </div>
+        </aura:if>
+        
+        <!--Table Part-->
+        <table class="slds-table slds-table_cell-buffer"> 
+            <thead>
+                <tr class="slds-text-title_caps">
+                    <th scope="col">
+                        <div class="slds-truncate" title="Start Date">Interest Category</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="End Date">Interest Sub-Category</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="End Date">Interest</div>
+                    </th>
+                </tr>
+            </thead>   
+            <tbody>
+                <aura:iteration items="{!v.interestArray}" var="item" indexVar="index">
+                    <!-- Table Row -->   
+                    <tr class="slds-text-title_caps">
+                        <td>
+                            <lightning:select name="select1" required="true" value="{!item.category}" onchange="{!c.fetchSubCategoriesJS}" class="{!index}">
+                                <option value="">Select..</option>
+                                <aura:iteration items="{!item.lstCategory}" var="categoryname">
+                                    <option value="{!categoryname}">{!categoryname}</option>
+                                </aura:iteration>
+    						</lightning:select>
+                        </td>
+                        <td>
+                            <lightning:select name="select2" required="true" value="{!item.subCategory}" onchange="{!c.fetchInterestsJS}" class="{!index}">
+                                <option value="">Select..</option>
+                                <aura:iteration items="{!item.lstSC}" var="subcategoryname">
+                                    <option value="{!subcategoryname}">{!subcategoryname}</option>
+                                </aura:iteration>
+    						</lightning:select>
+                        </td>
+                        <td>
+                            <lightning:select name="select2" required="true" value="{!item.interest}" class="{!index}">
+                                <option value="">Select..</option>
+                                <aura:iteration items="{!item.lstInt}" var="interests">
+                                    <option value="{!interests}">{!interests}</option>
+                                </aura:iteration>
+    						</lightning:select>
+                        </td>
+                        <td>
+                            <a onclick="{!c.removeRow}" id="{!index}">
+                                <lightning:icon variant="error" iconName="utility:delete" class="slds-icon slds-icon_small" size="small" alternativeText="icon"/>
+                                <span class="slds-assistive-text">Delete Icon</span>
+                            </a> 
+                        </td> 
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+        <br/>
+        <div>
+            <a onclick="{!c.addNewRow}">
+                <lightning:icon iconName="utility:add" class="slds-icon slds-icon_small" size="small" alternativeText="add"/>
+                <span class="slds-assistive-text">Add Icon</span>
+            </a>
+        </div>
+        <br/>
+        <!--Save Button which is call Save js function on click --> 
+        <button class="slds-button slds-button_brand" onclick="{!c.saveJS}">Save</button>
+    </div>
+</aura:component>

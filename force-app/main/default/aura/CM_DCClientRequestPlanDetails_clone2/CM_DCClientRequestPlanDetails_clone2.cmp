@@ -1,0 +1,297 @@
+<!--
+	Author      : M & S
+	Date        : 18 Jul- 2018
+	Description : Digital Campaign: Lightning Component for Inventory Request - Ads Everywhere
+				  Ref : SRSF-1154
+	Modification History :
+-->
+<aura:component controller="CM_DCClientRequestPlanController"
+    implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction"
+    access="global">
+    <!--<aura:attribute name="exclusions1" type="String"/>
+    <aura:attribute name="Exclusions" type="String"/>-->
+    <!--Init handler which is call doInit js function on component Load-->
+    <aura:handler name="init" value="{!this}" action="{!c.scriptsLoaded}" />
+    <aura:handler event="force:refreshView" action="{! c.scriptsLoaded}" />
+
+    <!--Aura Attribute for store Contact Object List as Array-->
+    <aura:handler name="sampleComponentEvent" event="c:COMPONENT" action="{!c.handleComponentEvent}" />
+
+    <aura:attribute name="isAllSelected" type="boolean" />
+    <aura:attribute name="resultWrap" type="Object" />
+    <aura:attribute name="datesArray" type="List" />
+    <aura:attribute name="dateString" type="String" description="list of records" />
+    <aura:attribute name="rowIndex" type="String" />
+    <aura:attribute name="recordId" type="String" /><!--default="a0855000008H9L2AAK"-->
+    <aura:attribute name="ErrorMsg" type="String" />
+    <aura:attribute name="exValArr" type="List" />
+    <aura:attribute name="DesiredBudgetWarningMsg" type="String" />
+    <aura:attribute name="showDBWarningMsg" type="boolean" default="false" />
+    <aura:attribute name="showErrorMsg" type="boolean" default="false" />
+    <aura:attribute name="showErrorMsg1" type="boolean" default="false" />
+    <aura:attribute name="showErrorMsg2" type="boolean" default="false" />
+    <aura:attribute name="showErrorMsg3" type="boolean" default="false" />
+    <aura:attribute name="isOTTPrimary" type="boolean" default="false" />
+    <aura:attribute name="isDMLError" type="boolean" default="false" />
+    <aura:attribute name="isCPMCostLock" type="boolean" default="false" />
+    <aura:attribute name="yieldEx" type="Boolean" default="false" />
+    <aura:attribute name="yieldExclude" type="boolean" default="false" />
+    <aura:attribute name="spinner" type="boolean" default="FALSE" />
+    <aura:attribute name="lstExlPicklist" type="string[]" />
+    <aura:attribute name="ExclusionList" type="List" default="[]" />
+    <aura:attribute name="selectedExclusionList" type="List" default="[]" />
+
+
+    <aura:attribute name="InvSrcList" type="sObject[]" />
+    <aura:attribute name="planDetailFormTooltip" type="String" default="{$Label.CM_ClientRequestPlanDetails}" />
+    <aura:attribute name="totalcostWarningMsg" type="String" />
+    <lightning:messageChannel type="RequestFormToNetworkLWCMsgChannel__c" aura:id="dcMessageChannel"
+        scope="APPLICATION" />
+    <ltng:require styles="{!$Resource.multilineToastCSS}" />
+
+
+    <aura:attribute name="yisfVisible" type="boolean" default="true" />
+
+    <!-- SRSF-4158 -->
+    <aura:attribute name="showInactiveCatalogWarning" type="boolean" default="false" />
+    <aura:attribute name="inactiveCatalogWarningMsg" type="String"
+        default="Simpli.fi inventory cannot be issued out on this campaign as the data catalog selections are not activated for that inventory source." />
+    <!-- SRSF-4158 End -->
+
+    <aura:attribute name="isLoaded" type="Boolean" />
+    <aura:if isTrue="{!v.yisfVisible ==true}">
+        <!-- page header -->
+        <div class="slds-card">
+            <div class="slds-card__header slds-border_bottom slds-p-bottom_small">
+                <header class="slds-align--absolute-center">
+                    <span class="slds-text-heading_small">
+                        Yield Inventory Source Form <span style="height: 26px;">
+                            <c:ToolTipLC tooltipText="{!v.planDetailFormTooltip}" />
+                        </span>
+                        <br />
+                    </span>
+                </header>
+            </div>
+            <aura:if isTrue="{!v.showErrorMsg ==true}">
+                <div class="bgred">
+                    <b>INVENTORY SOURCE must be unique.</b>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.showErrorMsg1 ==true}">
+                <div class="bgred">
+                    <b>{!v.ErrorMsg}</b>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.showErrorMsg2 ==true}">
+                <div class="bgred">
+                    <b>{!v.ErrorMsg}</b>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.showErrorMsg3 ==true}">
+                <div class="slds-theme_error">
+                    <p>TTD-CTV row on YISF should have the value.</p>
+                </div>
+            </aura:if>
+
+            <!-- SRSF-4158 start-->
+            <!-- <aura:if isTrue="{!v.showInactiveCatalogWarning ==true}">
+                <div class="padding-left-right" >
+                    <b><p style="background-color:red;">{!v.inactiveCatalogWarningMsg}</p></b>
+                </div>
+            </aura:if> -->
+            <!-- SRSF-4158 end -->
+
+            <aura:if isTrue="{!v.showDBWarningMsg ==true}">
+                <div class="padding-left-right">
+                    <b>
+                        <p style="{!v.totalcostWarningMsg}">{!v.DesiredBudgetWarningMsg}</p>
+                    </b>
+                </div>
+            </aura:if>
+
+            <!-- Hidden fields for auto-refresh from detail page data is changed --> <!--
+            <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Digital_Campaign__c"  >
+                
+                <div style="display:none">
+                    <lightning:inputField fieldName="Campaign_Start_Date__c" disabled="true"/>
+                    <lightning:inputField fieldName="Campaign_End_Date__c" disabled="true"/>
+                </div>
+            </lightning:recordEditForm>
+			-->
+            <!--Table Part-->
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr class="slds-text-title_caps">
+
+                        <th scope="col">
+                            <div class="slds-truncate" title="Start Date">Start Date</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="End Date">End Date</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Inventory Source">Inventory Source</div>
+                        </th>
+
+                        <!--<th scope="col">
+                            <div class="slds-truncate" title="SFDC DC Type">SFDC DC Type</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Audience ">Audience</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Geo Traget Type">Geo Target Type</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Notes">Notes  </div>
+                        </th>-->
+                        <th scope="col">
+                            <div class="slds-truncate" title="Impressions">Impressions</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="CPM (Gross)">CPM(Gross)</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Cost (Gross)">Cost(Gross)</div>
+                        </th>
+                        <!--<th scope="col">
+                            <div class="slds-truncate" title="Is Primary">Industry</div>
+                        </th>-->
+                        <th scope="col">
+                            <div class="slds-truncate" title="Exclusions">Exclusions</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Is Primary">Line Item Id</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.datesArray}" var="item" indexVar="index">
+                        <!-- Table Row -->
+                        <tr class="slds-text-title_caps">
+                            <td>
+                                <aura:if isTrue="{!and(v.resultWrap.isEditDate==true, item.isEditStDate ==true)}">
+                                    <lightning:input type="date" value="{!item.objIS.Campaign_Start_Date__c}"
+                                        title="{!item.objIS.Campaign_Start_Date__c}" />
+                                    <aura:set attribute="else">
+                                        <lightning:input type="date" value="{!item.objIS.Campaign_Start_Date__c}"
+                                            title="{!item.objIS.Campaign_Start_Date__c}" disabled="true" />
+                                    </aura:set>
+                                </aura:if>
+                            </td>
+                            <td>
+                                <lightning:input type="date" value="{!item.objIS.Campaign_End_Date__c}"
+                                    title="{!item.objIS.Campaign_End_Date__c}" disabled="{!!v.resultWrap.isEditDate}" />
+                            </td>
+                            <td>
+                                <lightning:select class="{!index}" aura:id="rtSelect0" value="{!item.selIS}"
+                                    onchange="{!c.onChangeInentorySource}" disabled="true">
+                                    <option text="-None-" value="" />
+                                    <aura:iteration items="{!item.lstIS}" var="opt">
+                                        <option text="{!opt}" value="{!opt}" />
+                                    </aura:iteration>
+                                </lightning:select>
+                            </td>
+
+                            <!--<td>
+                                <lightning:select name="rtSelect1" aura:id="rtSelect1" value="{!item.selType}" disabled="true">
+                                    <option text="-None-" value=""/>
+                                    <aura:iteration items="{!item.lstDCType}" var="opt">
+                                        <option text="{!opt}" value="{!opt}"/>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </td>
+                            <td>
+                                <lightning:select name="rtSelect2" aura:id="rtSelect2" value="{!item.selAud}" >
+                                    <option text="-None-" value=""/>
+                                    <aura:iteration items="{!item.lstAudience}" var="opt">
+                                        <option text="{!opt}" value="{!opt}"/>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </td>
+                            <td>
+                                <lightning:select name="rtSelect4" aura:id="rtSelect3" value="{!item.selGeoType}" >
+                                    <option text="-None-" value=""/>
+                                    <aura:iteration items="{!item.lstGeoTargetType}" var="opt">
+                                        <option text="{!opt}" value="{!opt}"/>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </td>
+                            <td>
+                                <lightning:textarea value="{!item.Notes}"/>
+                            </td>-->
+                            <td style="padding-bottom: 0px;">
+                                <ui:inputNumber value="{!item.Impressions}" class="slds-input" maxlength="8"
+                                    disabled="{!item.isImpressionsDisable}" keyup="{!c.calculateToalImpressions}"
+                                    updateOn="keyup" />
+                            </td>
+                            <td style="padding-bottom: 0px;">
+                                <ui:inputNumber format=".00" value="{!item.CPM}" class="slds-input" maxlength="5"
+                                    disabled="{!item.isCPM_GrossLocked}" keyup="{!c.calculateImpressions}"
+                                    updateOn="keyup" requiredIndicatorClass="{!index}" />
+                            </td>
+                            <td style="padding-bottom: 0px;">
+                                <ui:inputNumber format=".00" value="{!item.Cost}" class="slds-input" maxlength="10"
+                                    disabled="{!item.isCPM_GrossLocked}" keyup="{!c.calculateImpressions}"
+                                    updateOn="keyup" requiredIndicatorClass="{!index}" />
+                            </td>
+                            <!--<td style="padding-bottom: 0px;">
+                                <ui:outputtext value="{!item.Industry}" class="{!index}" />
+                            </td>-->
+                            <td>
+                                <!--  <lightning:select class="{!index}" aura:id="rtSelect1" value="{!item.Exclusions}" multiple="multiple">
+                                    <aura:iteration items="{!v.lstExlPicklist}" var="opt">
+                                        <option text="{!opt}" value="{!opt}"/>
+                                    </aura:iteration>
+                                </lightning:select>-->
+                                <c:demoMultipicklistCmp requiredIndicatorClass="{!index}"
+                                    selectedOptions="{!item.objIS.Exclusions__c}"
+                                    disabled="{!item.isExclusionDisable}" />
+                                <!--<lightning:dualListbox aura:id="rtSelect1" label=" " 
+                                sourceLabel=" " 
+                                selectedLabel=" " 
+                                options="{!v.ExclusionList}" 
+                                value="{!item.Exclusions}" />-->
+                            </td>
+                            <td style="white-space: unset;max-width: 200px;word-break: break-word;">{!item.LineItemId}
+                            </td>
+                            <!--<td><ui:outputtext value="{!item.LineItemId}" class="{!index}" /></td>-->
+                        </tr>
+                    </aura:iteration>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><b>Total</b></td>
+                        <!--<td></td>-->
+                        <td style="padding-bottom: 0px;">&nbsp;&nbsp;<b>
+                                <ui:outputNumber value="{!v.resultWrap.totImpressions}" />
+                            </b></td>
+                        <td style="padding-bottom: 0px;">&nbsp;&nbsp;<b>
+                                <ui:outputNumber value="{!v.resultWrap.totCPM}" />
+                            </b></td>
+                        <td style="{!v.totalcostWarningMsg}">&nbsp;&nbsp;<b>$
+                                <ui:outputNumber value="{!v.resultWrap.totCOST}" />
+                            </b></td>
+                        <td style="padding-bottom: 0px;"></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tr>
+                    <td>
+                        <ui:inputCheckbox aura:id="Yield_Exclude" label=" Yield Exclude Override" class="yieldCheckbox"
+                            change="{!c.onCheck}" value="{!v.resultWrap.yieldExclude}" />
+                        <!-- <input type="checkbox" id="Yield_Exclude" onchange="{!c.onCheck}" value="{!v.resultWrap.yieldExclude}"/> -->
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <aura:if isTrue="{!and(v.showErrorMsg==false, v.resultWrap.isLockRecord ==false)}">
+                <!--Save Button which is call Save js function on click -->
+                <button class="slds-button slds-button_brand" onclick="{!c.doSave}">Save</button>
+            </aura:if>
+            <aura:if isTrue="{!v.spinner}">
+                <lightning:spinner class="slds-is-fixed" alternativeText="Loading" size="large" />
+            </aura:if>
+        </div>
+    </aura:if>
+</aura:component>

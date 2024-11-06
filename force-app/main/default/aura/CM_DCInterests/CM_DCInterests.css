@@ -1,0 +1,14 @@
+.THIS .bgred{
+    padding: 0.5rem;
+    background: rgb(180, 0, 6);
+    color: white;
+}
+.THIS .bgwarning{
+    padding: 0.5rem;
+    background: #ff9800;
+    color: white;
+}
+.THIS .padding-left-right{
+    padding-left:5px;
+    padding-right:5px;
+}

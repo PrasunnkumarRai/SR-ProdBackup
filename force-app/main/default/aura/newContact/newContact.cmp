@@ -1,0 +1,192 @@
+<aura:component extends="c:objectLookup" implements="force:lightningQuickAction,force:appHostable,flexipage:availableForRecordHome,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,lightning:actionOverride">
+    <!--declare attributes-->
+    <aura:attribute name="selectedRecord" type="Account" default="{}" description="Use,for store SELECTED sObject Record" />
+    <aura:attribute name="listOfSearchRecords" type="Account[]" description="Use,for store the list of search records which returns from apex class" />
+    <aura:set attribute="objectType" value="Account" />
+    <aura:set attribute="objectDetailText" value="Account Details" />
+    <aura:set attribute="numRecords" value="10" />
+    <aura:set attribute="showNewButton" value="false" />
+    <aura:set attribute="iconForDetailDisplay" value="/assets/icons/standard-sprite/svg/symbols.svg#account" />
+    <aura:set attribute="additionalMarkup" value="true" />
+    <aura:set attribute="isCreateOppty" value="true" />
+    <aura:set attribute="isCreateContact" value="true" />
+    <aura:set attribute="nestedQuerySOQL" value=", (Select TeamMemberRole, User.Name From Account.AccountTeamMembers where (TeamMemberRole='Account Executive' OR TeamMemberRole = 'LSM' OR TeamMemberRole = 'Sales Manager'))" />
+    <aura:set attribute="createObjectType" value="Account" />
+    <aura:set attribute="IsObjectSearchable" value="false" />
+    <aura:attribute name="today" type="Date" default="" />
+    <aura:attribute access="public" name="objectId" type="String" />
+
+    <!-- Added by M&S on 12th Nov-19-->
+    <aura:attribute name="firstName" type="String" default=""/>
+    <aura:attribute name="lastName" type="String" default=""/>
+    <aura:attribute name="title" type="String" default=""/>
+    <aura:attribute name="email" type="String" default=""/>
+    <aura:attribute name="adConTypePicklist" type="String" />
+    <aura:attribute name="Phone" type="String" default=""/>
+    <aura:attribute name="Mobile" type="String" default=""/>
+    <aura:attribute name="street" type="String" default=""/>
+    <aura:attribute name="city" type="String" default=""/>
+    <aura:attribute name="state" type="String" default=""/>
+    <aura:attribute name="zip" type="String" default=""/>
+    <aura:attribute name="country" type="String" default=""/>
+    <aura:attribute name="aePicklist" type="String" />
+    
+    <aura:handler name="strike_evt_modalPrimaryButtonClicked" event="c:strike_evt" action="{!c.reallyCreateContact}" />
+
+    <!--   <aura:handler name="change" value='{!isUserAE}' action='{!c.hideFieldsForAE}' /> -->
+
+
+    <!--
+   <aura:handler name="change" value="{!v.opptyId}" action="{!c.navigateToOppty}"/>
+   <aura:registerEvent name="selectObjEvt" type="c:selectedObjectEvent"/>
+   -->
+
+    <aura:set attribute="insertMarkup">
+        <div aura:id="spinnerDiv" class="slds-hide">
+            <lightning:spinner variant="brand" size="medium" />
+        </div>
+
+        <!--
+      <div aura:id="recordTypeDiv" class="contactInput">
+            <h3 class="slds-section__title slds-theme- -shade primaryPaletteBorder test-id__section-header-container" >
+                <span class="test-id__section-header-title section-header-title slds-p-horizontal- -small slds-truncate" >
+                Record Type</span></h3>
+         	<ui:inputSelect aura:id="contactRecTypePicklist" label="Contact Record Type" required="false">
+	            <aura:iteration items="{!v.contactRecordTypes}" var="rt"  >
+	            	<ui:inputSelectOption text="{!rt.Id}" label="{!rt.value}"/> 
+	            </aura:iteration>
+	        </ui:inputSelect>
+
+	  </div> 
+-->
+        <div aura:id="contactInfoDiv" class="contactInput">
+
+            <h3 class="slds-section__title slds-theme--shade primaryPaletteBorder test-id__section-header-container">
+                <span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate">
+                Contact Information</span></h3>
+            <!--
+      <ui:inputSelect aura:id="salutation" label="Salutation" required="false">
+        <ui:inputSelectOption label="- -None- -" text="" />
+        <ui:inputSelectOption label="Mr." text="Mr." />
+        <ui:inputSelectOption label="Ms." text="Ms." />
+        <ui:inputSelectOption label="Mrs." text = ">Mrs." />
+        <ui:inputSelectOption label="Dr." text="Dr." />
+        <ui:inputSelectOption label="Prof." text="Prof." />
+      </ui:inputSelect>
+  -->
+
+            <lightning:input aura:id="firstName" label="First Name" required="false" placeholder="" value="{!v.firstName}"/>
+            <!--   <ui:inputText aura:id="middleName" label="Middle Name" required="false" placeholder="" /> -->
+            <lightning:input aura:id="lastName" label="Last Name" required="true" placeholder="" messageWhenValueMissing="Last name is required" value="{!v.lastName}"/>
+            <!--       <ui:inputText aura:id="suffix" label="Suffix" required="false" placeholder="" /> --> 
+       <ui:inputText aura:id="title" label="Title" required="false" placeholder="" value="{!v.title}"/> 
+            <lightning:input aura:id="email" type="email" label="Email" name="email" required="true" messageWhenValueMissing="Email is required" value="{!v.email}"/>
+ 
+
+             <!--<ui:inputSelect aura:id="adConTypePicklist" label="{!v.selectedRecord.RecordType.Name=='Agency Account'? 'Agency Contact Type':'Advertiser Contact Type'}" required="true" value="{!v.adConTypePicklist}">
+                <aura:iteration items="{!v.AdContactType}" var="conType" indexVar="index">
+                	<aura:if isTrue="{!index == '0'}" >
+                    	<ui:inputSelectOption text="{!conType.value}" label="{!conType.value}" value="true" />
+                    <aura:set attribute="else" >
+                    	<ui:inputSelectOption text="{!conType.value}" label="{!conType.value}" value="false" />
+                    </aura:set>
+                	</aura:if>
+                </aura:iteration>
+            </ui:inputSelect>-->
+            <lightning:select aura:id="adConTypePicklist" label="{!v.selectedRecord.RecordType.Name=='Agency Account'? 'Agency Contact Type':'Advertiser Contact Type'}" required="true" value="{!v.adConTypePicklist}">
+                <aura:iteration items="{!v.AdContactType}" var="conType" indexVar="index">
+                	<option value="{!conType.value}">{!conType.value}</option>
+                </aura:iteration>
+            </lightning:select>
+
+            
+		<lightning:input aura:id="Phone" type="tel" label="Phone" name="tel" value="{!v.Phone}" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+		<lightning:input aura:id="Moblie" type="tel" label="Moblie" name="cellNum" value="{!v.Mobile}" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+            
+            
+            <!--
+         <ui:inputSelect aura:id="contactRolePicklist" label="Contact Role" required="false">
+            <aura:iteration items="{!v.contactRoles}" var="role" indexVar="index">
+                  <ui:inputSelectOption text="{!role}" label="{!role}"/> 
+            </aura:iteration>
+         </ui:inputSelect>
+         <ui:inputCheckbox aura:id="VIPCB" label="Affiliate Partner (VIP)" />-->
+         <br/>
+         <h3 class="slds-section__title slds-theme- -shade primaryPaletteBorder test-id__section-header-container" >
+                <span class="test-id__section-header-title section-header-title slds-p-horizontal- -small slds-truncate" >
+                Address Information</span></h3>
+       <ui:inputText aura:id="street" label="Mailing Street" required="false" placeholder="" value="{!v.street}"/> 
+       <ui:inputText aura:id="city" label="Mailing City" required="false" placeholder="" value="{!v.city}"/> 
+       <ui:inputText aura:id="state" label="Mailing State/Province" required="false" placeholder="" value="{!v.state}"/> 
+       <ui:inputText aura:id="zip" label="Mailing Zip/Postal Code" required="false" placeholder="" value="{!v.zip}"/> 
+       <ui:inputText aura:id="country" label="Mailing Country" required="false" placeholder="" value="{!v.country}"/> 
+
+        </div>
+		<!--<ui:inputSelect aura:id="aePicklist" label="Account Executives / Sales Managers" required="true" value="{!v.aePicklist}">
+            <aura:iteration items="{!v.AccountTeamAEs}" var="atm" indexVar="index">
+                <aura:if isTrue="{!index == '0'}" >
+                    <ui:inputSelectOption text="{!atm.Id}" label="{!atm.Name}" value="true" />
+                    <aura:set attribute="else" >
+                        <ui:inputSelectOption text="{!atm.Id}" label="{!atm.Name}" value="false" />
+                    </aura:set>
+                </aura:if>
+            </aura:iteration>
+        </ui:inputSelect>-->
+        <lightning:select aura:id="aePicklist" label="Account Executives / Sales Managers" required="true" value="{!v.aePicklist}">
+            <aura:iteration items="{!v.AccountTeamAEs}" var="atm" indexVar="index">
+                <option value="{!atm.Id}">{!atm.Name}</option>
+            </aura:iteration>
+        </lightning:select>
+
+   <div aura:id="dupContactDivNC">
+      <c:strike_modal aura:id="dupContactPopupNC"
+      title="Duplicates Found!"
+      subtitle="The record you're about to create looks like a duplicate. Click on one of the contacts to open an existing record, or click 'SAVE' at the bottom to create new contact."
+      primaryButtonLabel="Save"
+      secondaryButtonLabel="Cancel"
+      showHeader="true"
+      showFooter="true"
+      showClose="true"
+      showModal="false">
+
+      <br/>
+      <aura:iteration items="{!v.duplicateRecordsFound}" var="records"  >
+	      <c:strike_tile variant="icon"
+	      	title="{!records.Name}"
+	      	subtitle="Contact"
+	      	iconName="standard:contact"
+	      	link="{!v.LEXObjectURL + records.Id + '/view'}"
+	      	/>
+	  	Account Name:  {!records.Account.Name} <br/>
+	  	Phone:         <ui:outputPhone value="{!records.Phone}" /> <br/>
+	<!--  	Email:         <ui:outputEmail value="{!records.Email}" /> <br/> -->
+	  	Email:         {!records.Email}<br/>
+	  	Contact Owner: {!records.Owner.Name} <br/><br/>
+	  	
+	  </aura:iteration>
+
+  <!--    <p>Dup Records:
+      	
+      		<lightning:layout horizontalAlign="space">
+      			<aura:iteration items="{!v.duplicateRecordsFound}" var="records"  >
+      			<lightning:layoutItem flexibility="auto" padding="around-small">
+      				<lightning:icon iconName="standard:account" size="medium"/>
+      					{!records.Name}
+      				</lightning:layoutItem>
+      		
+      	</aura:iteration>
+      </lightning:layout>
+      </p> -->
+      </c:strike_modal>
+    </div>
+
+
+        <p>
+            <!--     <lightning:button aura:id="cancelSaveOppty" variant="neutral" label="Cancel" onclick="{!c.cancelCreateOpportunity}" /> -->
+            <lightning:button aura:id="saveContactButt" variant="brand" label="Save" onclick="{!c.createContact}" />
+        </p>
+
+
+    </aura:set>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+</aura:component>

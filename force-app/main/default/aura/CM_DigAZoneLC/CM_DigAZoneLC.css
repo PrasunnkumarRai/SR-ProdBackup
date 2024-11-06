@@ -1,0 +1,13 @@
+.THIS .slds-select_container::before{
+    z-index:1;
+}
+.THIS .select2Class[disabled]{
+    background-color: rgb(224, 229, 238);
+    border-color: rgb(168, 183, 199);
+    cursor: not-allowed;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}

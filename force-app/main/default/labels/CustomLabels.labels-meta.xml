@@ -1,0 +1,4146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>ACMCreateAccountButtonNoSFDnB</fullName>
+        <categories>Account Creation Mobile</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ACMCreateAccountButtonNoSFDnB</shortDescription>
+        <value>No Results: Create New Account</value>
+    </labels>
+    <labels>
+        <fullName>AE_Not_Found</fullName>
+        <categories>ThirdPartyGetAEs</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AE Not Found</shortDescription>
+        <value>Account Executives not found for user :</value>
+    </labels>
+    <labels>
+        <fullName>AE_Transfer_Progress_message</fullName>
+        <categories>AE Transfer Admin Tool</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AE Transfer Progress message</shortDescription>
+        <value>Your request is in progress. You will be notified by email when it completes</value>
+    </labels>
+    <labels>
+        <fullName>API_Type_Can_t_be_Blank</fullName>
+        <categories>SpectrumReachCreate</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>API Type Can&apos;t be Blank</shortDescription>
+        <value>API Type Can&apos;t be Blank.</value>
+    </labels>
+    <labels>
+        <fullName>API_Type_Error_Message</fullName>
+        <categories>SpectrumReachCreate</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>API Type Error Message</shortDescription>
+        <value>API Type is not present</value>
+    </labels>
+    <labels>
+        <fullName>ATM_AEPresentAccSalesOffice</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ATM_AEPresentAccSalesOffice</shortDescription>
+        <value>There is already an &quot;Account Executive&quot; on this Account with the &quot;{0}&quot; Sales Office.</value>
+    </labels>
+    <labels>
+        <fullName>ATS_Approval_Process_ID</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ATS Approval Process ID</shortDescription>
+        <value>04a41000000D65j</value>
+    </labels>
+    <labels>
+        <fullName>AXT_NB_UC_Transfer</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AXT NB/UC Transfer No Accounts will move</shortDescription>
+        <value>No accounts will be moved, only NB/UC will be moved after NB/UC selection.</value>
+    </labels>
+    <labels>
+        <fullName>AXT_Retry_Error_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AXT Retry Error Message</shortDescription>
+        <value>{0}s can not be retried as the transfer status is not complete.</value>
+    </labels>
+    <labels>
+        <fullName>AccFirstContractDtBatchSize</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AccFirstContractDtBatchSize</shortDescription>
+        <value>200</value>
+    </labels>
+    <labels>
+        <fullName>AccSAMMapDelete</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AccSAMMapDelete</shortDescription>
+        <value>System Administrator,Master - Director of Sales,Master - Local Sales Manager,Master - Interconnect Account Executive,Master - Account Executive</value>
+    </labels>
+    <labels>
+        <fullName>Acc_Con_Trigger_Agency_Error</fullName>
+        <categories>Agency TIM ID is 0</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Acc Con Trigger Agency Error</shortDescription>
+        <value>Incorrect Account Connection: Agency TIM ID is not correct</value>
+    </labels>
+    <labels>
+        <fullName>Acc_Con_Trigger_RepFirm_Error</fullName>
+        <categories>Rep Firm TIM ID is 0 or blank</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Acc Con Trigger Agency Error</shortDescription>
+        <value>Incorrect Account Connection: RepFirm TIM ID is missing or is incorrect.</value>
+    </labels>
+    <labels>
+        <fullName>Acc_Connection_Trigger_Adv_Error</fullName>
+        <categories>Advertiser TIM ID is 0 or blank</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Acc Connection Trigger Adv Error</shortDescription>
+        <value>Incorrect Account Connection: Advertiser TIM ID is missing or is incorrect.</value>
+    </labels>
+    <labels>
+        <fullName>Acc_Connection_Trigger_Agency_Error</fullName>
+        <categories>Agency TIM ID is 0 or blank</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Acc Connection Trigger Agency Error</shortDescription>
+        <value>Incorrect Account Connection: Agency TIM ID is missing or is incorrect.</value>
+    </labels>
+    <labels>
+        <fullName>AccountList_Mandatory_Error_Message</fullName>
+        <categories>SpectrumReachCreate</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AccountList Mandatory Error Message</shortDescription>
+        <value>AccountList is mandatory to insert accounts</value>
+    </labels>
+    <labels>
+        <fullName>AccountLocalSalesManagerRole</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AccountLocalSalesManagerRole</shortDescription>
+        <value>LSM</value>
+    </labels>
+    <labels>
+        <fullName>AccountMergeBatchSize</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AccountMergeBatchSize</shortDescription>
+        <value>1</value>
+    </labels>
+    <labels>
+        <fullName>AccountName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AccountName</shortDescription>
+        <value>Account Name</value>
+    </labels>
+    <labels>
+        <fullName>AccountNameMaxLength</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AccountNameMaxLength</shortDescription>
+        <value>50</value>
+    </labels>
+    <labels>
+        <fullName>AccountRecordType_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AccountRecordType                                                     Type</shortDescription>
+        <value>Account Record Type</value>
+    </labels>
+    <labels>
+        <fullName>AccountTeamMeberAccessLevel</fullName>
+        <categories>Account Team Member Access level</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AccountTeamMeberAccessLevel</shortDescription>
+        <value>Edit</value>
+    </labels>
+    <labels>
+        <fullName>AccountTeamRole</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AccountTeamRole</shortDescription>
+        <value>AE</value>
+    </labels>
+    <labels>
+        <fullName>AccountTransferDeleteStatus</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AccountTransferDeleteStatus</shortDescription>
+        <value>New,Recalled,Rejected,Denied,Approved</value>
+    </labels>
+    <labels>
+        <fullName>Account_Billing_Sync_Enablement</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Billing Sync Enablement</shortDescription>
+        <value>False</value>
+    </labels>
+    <labels>
+        <fullName>Account_Create_Owner_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Create Owner Id</shortDescription>
+        <value>005410000036K6d</value>
+    </labels>
+    <labels>
+        <fullName>Account_Executive</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AccountExecutive</shortDescription>
+        <value>Account Executive</value>
+    </labels>
+    <labels>
+        <fullName>Account_Executives_selection_Limit</fullName>
+        <categories>InterimAE</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Executives selection Limit</shortDescription>
+        <value>You can select upto 5 Users for Movement</value>
+    </labels>
+    <labels>
+        <fullName>Account_Id_Mandatory_Error_Message</fullName>
+        <categories>Third party Query</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Id Mandatory Error Message</shortDescription>
+        <value>To fetch &quot;{0}&quot;, it is mandatory to pass Account Id</value>
+    </labels>
+    <labels>
+        <fullName>Account_Inactive_Days</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Inactive Days</shortDescription>
+        <value>395</value>
+    </labels>
+    <labels>
+        <fullName>Account_Merge_Success_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Merge Success Message</shortDescription>
+        <value>You will receive an email shortly after Account Merge.</value>
+    </labels>
+    <labels>
+        <fullName>Account_Merge_Success_Title</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Merge Success Title</shortDescription>
+        <value>Account Merge</value>
+    </labels>
+    <labels>
+        <fullName>Account_Missing_On_Opp</fullName>
+        <categories>ThirdPartySCXUpload</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Missing On Opp</shortDescription>
+        <value>Account is missing for an Opportunity.</value>
+    </labels>
+    <labels>
+        <fullName>Account_Simulation_Sample_Record</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Simulation Sample Record</shortDescription>
+        <value>a1Z41000003Lg1aEAC</value>
+    </labels>
+    <labels>
+        <fullName>Account_Transfer_Error_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Transfer Error Message</shortDescription>
+        <value>The selected account is part of Account Transfer hence cannot be merged yet.</value>
+    </labels>
+    <labels>
+        <fullName>Account_Transfer_Error_Title</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Transfer Error Title</shortDescription>
+        <value>The selected account is part of the Account Transfer</value>
+    </labels>
+    <labels>
+        <fullName>Account_Update</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Update</shortDescription>
+        <value>Update</value>
+    </labels>
+    <labels>
+        <fullName>Accounts</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Accounts</shortDescription>
+        <value>Accounts</value>
+    </labels>
+    <labels>
+        <fullName>Accounts_Section_Header</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Accounts Section Header</shortDescription>
+        <value>Accounts</value>
+    </labels>
+    <labels>
+        <fullName>Activate_Deactivate_Advanced_Proposal_RecordTypes</fullName>
+        <categories>ProposalActiveInactiveController</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Activate_Deactivate Advanced Proposal RecordTypes</shortDescription>
+        <value>Advanced_Proposal,Advanced_Political,Advanced_Trade</value>
+    </labels>
+    <labels>
+        <fullName>Activate_Deactivate_Advanced_Proposal_Title_Note</fullName>
+        <categories>ProposalActiveInactiveController</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Activate Deactivate Advanced Proposal Title Note</shortDescription>
+        <value>Advanced Proposal will be shown if the AOS Deal Status is either of Draft Plan, AdOps Rejected, Draft Campaign, Submit to AdOps, Abandoned Campaign.</value>
+    </labels>
+    <labels>
+        <fullName>Activate_Deactivate_Deal_Deactivate_Allowed_Status</fullName>
+        <categories>ProposalActiveInactiveController</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Activate Deactivate Deal Deactivate Allowed Status</shortDescription>
+        <value>Draft Plan,AdOps Rejected,Draft Campaign,Submit to AdOps,Abandoned Campaign</value>
+    </labels>
+    <labels>
+        <fullName>Activate_Deactivate_Deal_Request_Error_Message</fullName>
+        <categories>ProposalActiveInactiveController</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Activate Deactivate Deal Request Error Message</shortDescription>
+        <value>Error while sending a request to AOS Deal. Please contact System Admin.</value>
+    </labels>
+    <labels>
+        <fullName>Activate_Deactivate_Deal_Status_Deactivate</fullName>
+        <categories>ProposalActiveInactiveController</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Activate Deactivate Deal Status Deactivate</shortDescription>
+        <value>Lost</value>
+    </labels>
+    <labels>
+        <fullName>Activate_Deactivate_Pilot_Proposal_Title_Note</fullName>
+        <categories>ProposalActiveInactiveController</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Activate Deactivate Pilot Proposal Title Note</shortDescription>
+        <value>Pilot Proposal will be shown if it has no Active Advanced Proposals.</value>
+    </labels>
+    <labels>
+        <fullName>ActualWaveDashboardId</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ActualWaveDashboardId</shortDescription>
+        <value>0FK41000000BiaZGAS</value>
+    </labels>
+    <labels>
+        <fullName>Adv_Prop_Dates_must_be_in_future_Dates</fullName>
+        <categories>Advanced Proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Adv Prop Dates must be in future Dates</shortDescription>
+        <value>Start Date/End Date should be Future dates</value>
+    </labels>
+    <labels>
+        <fullName>Adv_Prop_Dates_must_be_within_Prop_Dates_Range</fullName>
+        <categories>Advanced Proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Adv Prop Dates must be within Prop Dates Range</shortDescription>
+        <value>Start Date/End Date should be within the Proposal Flight Dates Range</value>
+    </labels>
+    <labels>
+        <fullName>Advanced_Prop_Cannot_be_created_for_Closed_Lost_Opportunities</fullName>
+        <categories>Advanced Proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Advanced Prop Cannot be created for Closed Lost Opportunities</shortDescription>
+        <value>Advanced Proposal Cannot be created for Closed Lost Opportunities</value>
+    </labels>
+    <labels>
+        <fullName>Advanced_Prop_can_t_be_created_for_Non_Digital_Proposal_Zones</fullName>
+        <categories>Advanced Proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Advanced Prop can&apos;t be created for Non-Digital Proposal Zones</shortDescription>
+        <value>Advanced Proposal can&apos;t be created for Non-Digital Proposal Zones.</value>
+    </labels>
+    <labels>
+        <fullName>Advanced_Proposal_can_t_be_created_for_Inactive_Proposals</fullName>
+        <categories>Advanced Proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Advanced Proposal can&apos;t be created for Inactive Proposals</shortDescription>
+        <value>Advanced Proposal can&apos;t be created for Inactive Proposals.</value>
+    </labels>
+    <labels>
+        <fullName>Agency_Change_LSM</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Agency Change LSM</shortDescription>
+        <value>Master - National Sales Manager,Master - National Sales Director,Master - Local Sales Manager,Master - Interconnect Sales Manager,Master - Enterprise Sales Manager,Master - Director of Sales</value>
+    </labels>
+    <labels>
+        <fullName>Agency_Change_Sales_Team</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Agency Change Sales Team</shortDescription>
+        <value>Master - Sales Support Manager,Master - National Account Planner,Master - National Account Coordinator,Master - Interconnect Account Planner,Master - Interconnect Account Executive,Master - Account Coordinator,Master - Interconnect Account Coordinator,Master - Enterprise Digital2,Master - Enterprise Digital,Master - Digital Sales,Master - Digital Planner,Master - Digital Coordinator,Master - Account Planner,Master - Account Executive</value>
+    </labels>
+    <labels>
+        <fullName>Agency_RecordType_Error</fullName>
+        <categories>Create Opportunity API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Agency RecordType Error</shortDescription>
+        <value>Incorrect recordtype for Agency. Please contact System Administrator</value>
+    </labels>
+    <labels>
+        <fullName>AgentDiscount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AgentDiscount</shortDescription>
+        <value>15</value>
+    </labels>
+    <labels>
+        <fullName>Allowed_Special_Characters</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Allowed Special Characters</shortDescription>
+        <value>(,),@,-,[,],_,&amp;,&apos;,.,/</value>
+    </labels>
+    <labels>
+        <fullName>Approve_Budget_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approve Budget Button</shortDescription>
+        <value>Approve 2019 Budget</value>
+    </labels>
+    <labels>
+        <fullName>Approve_Forecast_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approve Forecast Button</shortDescription>
+        <value>Approve 2021 Forecast</value>
+    </labels>
+    <labels>
+        <fullName>Architect</fullName>
+        <categories>Source</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Architect</shortDescription>
+        <value>Architect</value>
+    </labels>
+    <labels>
+        <fullName>Audience_App</fullName>
+        <categories>Source</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Audience App</shortDescription>
+        <value>Audience App</value>
+    </labels>
+    <labels>
+        <fullName>Audience_Track</fullName>
+        <categories>Source</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Audience Track</shortDescription>
+        <value>Audience Track</value>
+    </labels>
+    <labels>
+        <fullName>BO_GrossAmount</fullName>
+        <categories>Big Object</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BO_GrossAmount</shortDescription>
+        <value>Gross Amount = {0}</value>
+    </labels>
+    <labels>
+        <fullName>BO_GrossRevenueInfo</fullName>
+        <categories>Big Object</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BO_GrossRevenueInfo</shortDescription>
+        <value>Total Gross = {0},Closed Gross = {1}-Pending Gross = {2},Projected Gross = {3}</value>
+    </labels>
+    <labels>
+        <fullName>BO_NetAmount</fullName>
+        <categories>Big Object</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BO_NetAmount</shortDescription>
+        <value>Net Amount =  {0}</value>
+    </labels>
+    <labels>
+        <fullName>BO_NetRevenueInfo</fullName>
+        <categories>Big Object</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BO_NetRevenueInfo</shortDescription>
+        <value>Total Net = {0},Closed Net = {1}-Pending Net = {2},Projected Net = {3}</value>
+    </labels>
+    <labels>
+        <fullName>BackToOpportunity</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BackToOpportunity</shortDescription>
+        <value>Back To Opportunity</value>
+    </labels>
+    <labels>
+        <fullName>Back_to_Opportunity_Message</fullName>
+        <categories>showseeker</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Back to Opportunity Message</shortDescription>
+        <value>To view the Opportunity record, please click on the Back to Opportunity button</value>
+    </labels>
+    <labels>
+        <fullName>Back_to_Proposal_Message</fullName>
+        <categories>showseeker</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Back to Proposal Message</shortDescription>
+        <value>To view the Proposal record, please click on the Back to Proposal button</value>
+    </labels>
+    <labels>
+        <fullName>BaseURLForTask</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BaseURLForTask</shortDescription>
+        <value>https://spectrumreach.lightning.force.com/</value>
+    </labels>
+    <labels>
+        <fullName>BatchMergeSize</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BatchMergeSize</shortDescription>
+        <value>20</value>
+    </labels>
+    <labels>
+        <fullName>BillingProfileName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BillingProfileName</shortDescription>
+        <value>Master - FBO</value>
+    </labels>
+    <labels>
+        <fullName>Billing_Approval</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Billing_Approval</shortDescription>
+        <value>10-Billing Approval</value>
+    </labels>
+    <labels>
+        <fullName>BoomiAPIError</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiAPIError</shortDescription>
+        <value>Error: Boomi Services are experiencing a disruption. Please contact your system administrator.</value>
+    </labels>
+    <labels>
+        <fullName>BoomiBulkProposalId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiBulkProposalId</shortDescription>
+        <value>10ecf8ce-8303-4e00-827f-08f7a1f37116</value>
+    </labels>
+    <labels>
+        <fullName>BoomiCacheAtomId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiCacheAtomId</shortDescription>
+        <value>5897381a-8c8c-4def-9508-bca93f8cb405</value>
+    </labels>
+    <labels>
+        <fullName>BoomiCacheProcessId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiCacheProcessId</shortDescription>
+        <value>dd808f0d-80ae-4d43-ba6f-0b8011e8846f</value>
+    </labels>
+    <labels>
+        <fullName>BoomiCacheProcessName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiCacheProcessName</shortDescription>
+        <value>SFUserAccessSync-ScheduleProcess</value>
+    </labels>
+    <labels>
+        <fullName>BoomiDashboardRefreshFrequency</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiDashboardRefreshFrequency</shortDescription>
+        <value>15</value>
+    </labels>
+    <labels>
+        <fullName>BoomiEndPointAOSCreativeLine</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiEndPointAOSCreativeLine</shortDescription>
+        <value>https://prod4-boomi.spectrumreach.com/ws/rest/Spectrum/AOS/v1/getAOSCreativeLines</value>
+    </labels>
+    <labels>
+        <fullName>BoomiErrorMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiErrorMessage</shortDescription>
+        <value>TIM is experiencing some issues at the moment, please try again after some time.</value>
+    </labels>
+    <labels>
+        <fullName>BoomiServerFail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiServerFail</shortDescription>
+        <value>Boomi Server failed</value>
+    </labels>
+    <labels>
+        <fullName>BoomiTIMAdvertiserSyncError</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiTIMAdvertiserSyncError</shortDescription>
+        <value>TIM is unable to save this Advertiser.</value>
+    </labels>
+    <labels>
+        <fullName>BoomiTIMAgencySyncError</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiTIMAgencySyncError</shortDescription>
+        <value>TIM is unable to save this Agency.</value>
+    </labels>
+    <labels>
+        <fullName>BoomiUser</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiUser</shortDescription>
+        <value>sr.boomi@osius.com.prod</value>
+    </labels>
+    <labels>
+        <fullName>BoomiUserDnBProcess</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiUserDnBProcess</shortDescription>
+        <value>Basic ZG5iQGNoYXJ0ZXJzYWxlc2ZvcmNlLVZCMlhGQzowN2ZjZGMzYi1mMTQzLTQ2NjQtYjdlMC0xZmYyNDk1NTE4ZDY=</value>
+    </labels>
+    <labels>
+        <fullName>BoomiUserDnBSandbox</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiUserDnBSandbox</shortDescription>
+        <value>Basic IFNGTWFuZFNVc2VyQGNoYXJ0ZXJzYWxlc2ZvcmNlLVZCMlhGQzowMzYyMTI5Yi04NzhiLTQxY2UtYjg4Yy1jNmJjOGE2YTBlNmU=</value>
+    </labels>
+    <labels>
+        <fullName>BoomiUserId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiUserId</shortDescription>
+        <value>005410000036K6d</value>
+    </labels>
+    <labels>
+        <fullName>BoomiUserNameCreativeAOSLine</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiUserNameCreativeAOSLine</shortDescription>
+        <value>AOS@chartersalesforce-VB2XFC</value>
+    </labels>
+    <labels>
+        <fullName>BoomiUserPasswordAOSLine</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiUserPasswordAOSLine</shortDescription>
+        <value>79f4b0ec-1309-4f25-a7f2-9b3be1f0ef80</value>
+    </labels>
+    <labels>
+        <fullName>BoomiUserSBAggrProcessUser</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiUserSBAggrProcessUser</shortDescription>
+        <value>Basic YnVkZ2V0QWdncmVnYXRlVXNlckBjaGFydGVyc2FsZXNmb3JjZS1WQjJYRkM6MGY2MTk4MjYtMzZjOC00NjUwLWI4ZWYtYjE2NWI3YzU4NWQ3</value>
+    </labels>
+    <labels>
+        <fullName>BoomiUserSBAggrURL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoomiUserSBAggrURL</shortDescription>
+        <value>http://AWS-SF-SYSDEV-DEV-1096350720.us-east-1.elb.amazonaws.com:9090/ws/rest/UserSBAgg/invoke_SBAgg/</value>
+    </labels>
+    <labels>
+        <fullName>Boomi_Custom_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Boomi Custom Error</shortDescription>
+        <value>There was some exception coming in from Tim. Please contact the System Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>BoxAddEditCollabURI</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoxAddEditCollabURI</shortDescription>
+        <value>https://srboomi.mandsc.com/ws/simple/executeCleanupCollab</value>
+    </labels>
+    <labels>
+        <fullName>BoxCollabProfileWhitelist</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoxCollabProfileWhitelist</shortDescription>
+        <value>Master - FBO, Master - Digital Operations, Master - Digital Sales,Master - Field Marketing, Master - Pricing and Planning, Master - Production, Master - Regional Finance, Master - Research, Master - Spectrum Preferred, Master - Training</value>
+    </labels>
+    <labels>
+        <fullName>BoxDedupeEnvironment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoxDedupeEnvironment</shortDescription>
+        <value>PROD</value>
+    </labels>
+    <labels>
+        <fullName>BoxDedupeToken</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoxDedupeToken</shortDescription>
+        <value>28cba5d1-90d0-468d-9148-f983bf42e124</value>
+    </labels>
+    <labels>
+        <fullName>BoxDedupeURI</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoxDedupeURI</shortDescription>
+        <value>https://srboomi.mandsc.com/ws/simple/executeDedupBoxFolder</value>
+    </labels>
+    <labels>
+        <fullName>BoxDedupeUsername</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BoxDedupeUsername</shortDescription>
+        <value>srboomi@chartercommunications-CDCON6</value>
+    </labels>
+    <labels>
+        <fullName>Box_Allow_Auto_Folder_Creation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Box Allow Auto Folder Creation</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>Box_Auto_Refresh_In_Milliseconds</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Box Auto Refresh In Milliseconds</shortDescription>
+        <value>1000</value>
+    </labels>
+    <labels>
+        <fullName>Box_Collab_Fix</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Box_Collab_Fix</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>Box_Future_Call_Timeout_In_Seconds</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Box Future Call Timeout In Seconds</shortDescription>
+        <value>300</value>
+    </labels>
+    <labels>
+        <fullName>Box_Loading_Override</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Box Loading Override is Active</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>Box_Run_Update</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Box_Run_Update</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>BudgetAutoSaveIntervalMinutes</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetAutoSaveIntervalMinutes</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>BudgetCurrentYear</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetCurrentYear</shortDescription>
+        <value>2024</value>
+    </labels>
+    <labels>
+        <fullName>BudgetDuplicateCheck</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetDuplicateCheck</shortDescription>
+        <value>false</value>
+    </labels>
+    <labels>
+        <fullName>BudgetErrorRecipient</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetErrorRecipient</shortDescription>
+        <value>james.dean@mandsconsulting.com</value>
+    </labels>
+    <labels>
+        <fullName>BudgetForecastCurrentYear</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetForecastCurrentYear</shortDescription>
+        <value>2022</value>
+    </labels>
+    <labels>
+        <fullName>BudgetForecastPreviousYear</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetForecastPreviousYear</shortDescription>
+        <value>2021</value>
+    </labels>
+    <labels>
+        <fullName>BudgetForecastSubmissionDate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetForecastSubmissionDate</shortDescription>
+        <value>/lightning/setup/ExternalStrings/page?address=%2F1014100000OFL94</value>
+    </labels>
+    <labels>
+        <fullName>BudgetMashupReport</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetMashupReport</shortDescription>
+        <value>NA</value>
+    </labels>
+    <labels>
+        <fullName>BudgetMaxAdvertiserCount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetMaxAdvertiserCount</shortDescription>
+        <value>501</value>
+    </labels>
+    <labels>
+        <fullName>BudgetNationalProductIdentifier</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetNationalProductIdentifier</shortDescription>
+        <value>National</value>
+    </labels>
+    <labels>
+        <fullName>BudgetNewBusinessAcountId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetNewBusinessAcountId</shortDescription>
+        <value>0014100001mBXHOAA4</value>
+    </labels>
+    <labels>
+        <fullName>BudgetQ3FCSTYear</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetQ3FCSTYear</shortDescription>
+        <value>/lightning/setup/ExternalStrings/page?address=%2F1014100000OFRQJ</value>
+    </labels>
+    <labels>
+        <fullName>BudgetRevenueCurrentYear</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetRevenueCurrentYear</shortDescription>
+        <value>/lightning/setup/ExternalStrings/page?address=%2F101m0000000gEes</value>
+    </labels>
+    <labels>
+        <fullName>BudgetRevenuePreviousYear</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetRevenuePreviousYear</shortDescription>
+        <value>/lightning/setup/ExternalStrings/page?address=%2F101m0000000gEex</value>
+    </labels>
+    <labels>
+        <fullName>BudgetSyscodeMapping</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetSyscodeMapping</shortDescription>
+        <value>/lightning/setup/CustomSettings/page?address=%2Fsetup%2Fui%2FlistCustomSettingsData.apexp%3Fid%3Da1S&amp;0.source=alohaHeader</value>
+    </labels>
+    <labels>
+        <fullName>BudgetUserClassifications</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetUserClassifications</shortDescription>
+        <value>/lightning/setup/CustomMetadata/page?address=%2Fm0A%3Fsetupid%3DCustomMetadata</value>
+    </labels>
+    <labels>
+        <fullName>BudgetYear</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BudgetYear</shortDescription>
+        <value>/lightning/setup/ExternalStrings/page?address=%2F101m0000000g9gy</value>
+    </labels>
+    <labels>
+        <fullName>Budget_Aggregate_DMA_Switch</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Budget Aggregate DMA Switch</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>Budget_Aggregate_Year</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Budget Aggregate Year</shortDescription>
+        <value>2021</value>
+    </labels>
+    <labels>
+        <fullName>Budget_CopyRevenuetoForecast</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Budget-CopyRevenuetoForecast</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>Budget_Notification</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Budget Notification</shortDescription>
+        <value>You can only save and update your 2019 budget at this time, submission will be enabled on</value>
+    </labels>
+    <labels>
+        <fullName>BugetPageMessageLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BugetPageMessageLabel</shortDescription>
+        <value>This is the old budgeting tool, Redirecting to new budget page</value>
+    </labels>
+    <labels>
+        <fullName>CM_Campaign_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_Campaign Type</shortDescription>
+        <value>For Conquest Campaign Type, please input a radius of 150 meters; for Proximity Campaign Type, please input a radius of 400-800 meters</value>
+    </labels>
+    <labels>
+        <fullName>CM_City</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_City</shortDescription>
+        <value>Enter Tooltip Information in &apos;CM_City&apos; Custom Label</value>
+    </labels>
+    <labels>
+        <fullName>CM_ClientRequestPlanDetails</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DC Lightning Component for Form</shortDescription>
+        <value>Client Request Form Plan Details</value>
+    </labels>
+    <labels>
+        <fullName>CM_ClientRequestPlanDetailsProfiles</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Profiles to see &apos;OTT Extension&apos; payload information</shortDescription>
+        <value>Master - Digital Planner,Master - Yield and Inventory,Master - Enterprise Digital,System Administrator,Master - Optimization Manager</value>
+    </labels>
+    <labels>
+        <fullName>CM_ClientRequestPlanDetails_Status</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_ClientRequestPlanDetails-Status</shortDescription>
+        <value>Draft Plan,Plan Submitted,03 Submitted to Digital Ops,3.1 DC Submission Error,11.1 Revision Review for Ad Ops,12 Revision Submitted for Inventory Analysis,12.1 Campaign Review for Ad Ops,13 Revision Submitted to Digital Ops,13.1 DC Revision Submission Error</value>
+    </labels>
+    <labels>
+        <fullName>CM_Clone_Creative_Tooltip</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_Clone Creative Tooltip</shortDescription>
+        <value>You may only clone Creatives from Campaigns that meet the following criteria: 
+1. Related to the same Advertiser.</value>
+    </labels>
+    <labels>
+        <fullName>CM_DCCRFForm_DCCStatusError</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_CRFForm_DCCStatusError</shortDescription>
+        <value>2.1 Submitted to Digital Traffic,2.2 Submitted to Master Control,02 Digital Ops In Progress,58.1 Revision Ad Server Change Required,32 Sales Date Revision In Progress,48 Date Revision Submitted to Digital Ops,58 Ad Server Change Required</value>
+    </labels>
+    <labels>
+        <fullName>CM_DCCRFForm_ProfileError</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_DCCRFForm_ProfileError</shortDescription>
+        <value>Master - Yield and Inventory,Master - Enterprise Digital,Master - Enterprise Digital2,System Administrator,Master - Optimization Manger</value>
+    </labels>
+    <labels>
+        <fullName>CM_DCGeo_Reach</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_DCGeo Reach</shortDescription>
+        <value>Geo Reach (In/Out of Footprint)</value>
+    </labels>
+    <labels>
+        <fullName>CM_DCInterests</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_DCInterests</shortDescription>
+        <value>A minimum of three interest selections are needed.</value>
+    </labels>
+    <labels>
+        <fullName>CM_DCInterestsCount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_DCInterestsCount</shortDescription>
+        <value>3</value>
+    </labels>
+    <labels>
+        <fullName>CM_DCSelectPlatformTooltip</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Platforms tooltip information on Network LWC on DC</shortDescription>
+        <value>Select Platform(s)</value>
+    </labels>
+    <labels>
+        <fullName>CM_DCTIMInformation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_DCTIMInformation</shortDescription>
+        <value>Traffic System and TimOrder information</value>
+    </labels>
+    <labels>
+        <fullName>CM_DigitalAddressLineSeparator</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_DigitalAddressLineSeparator</shortDescription>
+        <value>&lt;br/&gt;</value>
+    </labels>
+    <labels>
+        <fullName>CM_DigitalAddressSeparator</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_DigitalAddressSeparator</shortDescription>
+        <value>|</value>
+    </labels>
+    <labels>
+        <fullName>CM_Flight_Dates</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_Flight Dates</shortDescription>
+        <value>Please use this section to indicate the consecutive days you would like to serve impressions. If your flights have specific impression goals, please submit a new DC for each flight and budget (do not use this section).</value>
+    </labels>
+    <labels>
+        <fullName>CM_Radius</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_Radius</shortDescription>
+        <value>Enter Tooltip Information in &apos;CM_Radius&apos; Custom Label</value>
+    </labels>
+    <labels>
+        <fullName>CM_State</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_State</shortDescription>
+        <value>Enter Tooltip Information in &apos;CM_State&apos; Custom Label</value>
+    </labels>
+    <labels>
+        <fullName>CM_Street</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_Street</shortDescription>
+        <value>Enter Tooltip Information in &apos;CM_Street&apos; Custom Label</value>
+    </labels>
+    <labels>
+        <fullName>CM_Zip</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CM_Zip</shortDescription>
+        <value>Enter Tooltip Information in &apos;CM_Zip&apos; Custom Label</value>
+    </labels>
+    <labels>
+        <fullName>CRFComponent_EditDateAccessProfiles</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRFComponent_EditDateAccessProfiles</shortDescription>
+        <value>Master - Digital Planner,Master - Yield and Inventory,Master - Digital Operations,Master - Enterprise Digital,System Administrator,Master - Optimization Manager</value>
+    </labels>
+    <labels>
+        <fullName>CURR_PROP_NOT_SELECTED</fullName>
+        <categories>Proposal utility</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CURR_PROP_NOT_SELECTED</shortDescription>
+        <value>The current proposal is not selected.</value>
+    </labels>
+    <labels>
+        <fullName>CacheAutoRefresh</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CacheAutoRefresh</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>CacheFailSafe</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CacheFailSafe</shortDescription>
+        <value>false</value>
+    </labels>
+    <labels>
+        <fullName>Cache_Error_Message</fullName>
+        <categories>Cache</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cache Error Message</shortDescription>
+        <value>Please Refresh Cache</value>
+    </labels>
+    <labels>
+        <fullName>Cache_Load_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cache Load Error</shortDescription>
+        <value>Failed to get User details{0}. Please contact your System Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Cache_Refresh_Error</fullName>
+        <categories>ThirdPartySCXUpload</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cache Refresh Error</shortDescription>
+        <value>Cache is refreshing, please send the request again.</value>
+    </labels>
+    <labels>
+        <fullName>Call_fuse</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Call fuse</shortDescription>
+        <value>True</value>
+    </labels>
+    <labels>
+        <fullName>Cannot_Convert_Account_Record_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cannot Convert Account Record Type</shortDescription>
+        <value>Cannot convert the record type as it is having {0} associated with it</value>
+    </labels>
+    <labels>
+        <fullName>Closed_Won_Label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Closed_Won_Label</shortDescription>
+        <value>12-Closed Won</value>
+    </labels>
+    <labels>
+        <fullName>Commodity_Code_Wrong_Association</fullName>
+        <categories>Campaign Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Commodity Code Wrong Association</shortDescription>
+        <value>Primary and Secondary codes are not associated properly</value>
+    </labels>
+    <labels>
+        <fullName>Confirm_New_Account_Creation_in_TIM</fullName>
+        <categories>ConfirmSaveAcctsInTim</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Confirm New Account Creation in TIM</shortDescription>
+        <value>This will create a new TIM Account. If you want to continue, click Yes. If not, click Cancel and contact</value>
+    </labels>
+    <labels>
+        <fullName>Confirmation_dialogue_for_Clone_Opp_Budget</fullName>
+        <categories>Clone Opportunity Budget</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Confirmation dialogue for Clone Opp Budget</shortDescription>
+        <value>Are you sure you want to proceed with the selected Agency/RepFirm?</value>
+    </labels>
+    <labels>
+        <fullName>Contact_Support_Email</fullName>
+        <categories>ConfirmSaveAcctsInTim</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact Support Email</shortDescription>
+        <value>ReachMe@charter.com</value>
+    </labels>
+    <labels>
+        <fullName>Convert_Lead_Error_Message</fullName>
+        <categories>Campaign Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Convert Lead Error Message</shortDescription>
+        <value>Please Provide Lead Owner in userID</value>
+    </labels>
+    <labels>
+        <fullName>Copy_Titles_not_exist_for_Opportunity_Budget_Proposals</fullName>
+        <categories>View Copy Titles</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Copy Titles not exist for Opportunity Budget Proposals</shortDescription>
+        <value>Copy Titles not exist for Opportunity Budget Proposals</value>
+    </labels>
+    <labels>
+        <fullName>CreateContact</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CreateContactErrorMsg</shortDescription>
+        <value>You must create a contact with valid email address on this Advertiser before creating a Proposal.</value>
+    </labels>
+    <labels>
+        <fullName>Custom_Error_SCX_Upload</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Custom Error SCX Upload</shortDescription>
+        <value>An error has occurred, Please contact your System Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Customer_Success_Profiles</fullName>
+        <categories>Customer Success Profiles to access Forecast Matrix</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Customer Success Profiles</shortDescription>
+        <value>Master - Account Coordinator,Master - Account Planner,Master - Interconnect Account Coordinator,Master - Interconnect Account Planner,Master - Sales Support Manager</value>
+    </labels>
+    <labels>
+        <fullName>DCCFieldsToExport</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DCCFieldsToExport</shortDescription>
+        <value>Name,Advertiser_Name__c,Creative_Name__c,Creative_End_Date__c, Creative_Start_Date__c,Custom_UTM__c,Status__c,Owner.Name</value>
+    </labels>
+    <labels>
+        <fullName>DCC_Pending_Status_For_Min</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DCC Pending Status For Min</shortDescription>
+        <value>02 Digital Ops In Progress,02 Submitted to Digital Ops,2.2 VRF Submission Error,48 Date Revision Submitted to Digital Ops,58 Ad Server Change Required,58.1 Revision Ad Server Change Required</value>
+    </labels>
+    <labels>
+        <fullName>DCC_Statuses_For_Date_Submitted</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DCC Statuses For Date Submitted</shortDescription>
+        <value>02 Submitted to Digital Ops,48 Date Revision Submitted to Digital Ops</value>
+    </labels>
+    <labels>
+        <fullName>DCRecord_can_be_edited_in_Draft_Campaign_Status</fullName>
+        <categories>ThirdPartyDigitalInvReqServices</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DCRecord can be edited in Draft Campaign Status</shortDescription>
+        <value>Record Editable only in Draft Campaign Status.</value>
+    </labels>
+    <labels>
+        <fullName>DCRecord_can_be_edited_in_Draft_Plan_Status</fullName>
+        <categories>ThirdPartyDigitalInvReqServices</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DCRecord can be edited in Draft Plan Status</shortDescription>
+        <value>Record Editable only in Draft Plan Status.</value>
+    </labels>
+    <labels>
+        <fullName>DCS_Proposals_Limit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DCS Proposals Limit</shortDescription>
+        <value>100</value>
+    </labels>
+    <labels>
+        <fullName>DC_ExcludeRT</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DC ExcludeRT</shortDescription>
+        <value>New Ads Everywhere,Inventory Request - New Ads Everywhere,Inventory Request - Revision - New Ads Everywhere,Makegood - Inventory Request - New Ads Everywhere,Makegood - Search,Search,Social Smart Ads,Makegood - Social Smart Ads</value>
+    </labels>
+    <labels>
+        <fullName>DC_MultipleCloningProfiles</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DC_MultipleCloningProfiles</shortDescription>
+        <value>Master - Enterprise Digital,Master - Sales Support Manager,System Administrator,Master - Digital Planner,Master - Account Coordinator,Master - Account Planner,Master - Interconnect Account Planner,Master - National Account Planner,Master - National Account Coordinator,Master - Interconnect Account Coordinator,Master - Optimization Manager</value>
+    </labels>
+    <labels>
+        <fullName>DC_RTForNonAddressablePreRoll</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DC_RTForNonAddressablePreRoll</shortDescription>
+        <value>Spectrum_Networks_Display,Leads,Spectrum_Networks_Video,Visits,Social_Smart_Ads</value>
+    </labels>
+    <labels>
+        <fullName>DC_RateClassificationCloneRecordType</fullName>
+        <categories>DC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DC_RateClassificationCloneRecordType</shortDescription>
+        <value>Addressable Display,Display,Display Custom,Inventory Request - Addressable Display,Inventory Request - Display Custom,Pre-roll,Pre-roll Custom,Inventory Request - Pre-roll Custom,Inventory Request - Addressable Video,Addressable Video</value>
+    </labels>
+    <labels>
+        <fullName>DC_RtForNetwokrscmp</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DC_RtForNetwokrscmp</shortDescription>
+        <value>Addressable_TV,Ads_Everywhere,New_Ads_Everywhere,Automotive_Performance_Package,Directories,Display_Custom,Inventory_Request_Ads_Everywhere,Inventory_Request_New_Ads_Everywhere,Inventory_Request_Display_Custom,Inventory_Request_Pre_roll_Custom,Inventory_Request_Revision_Ads_Everywhere,Inventory_Request_Revision_New_Ads_Everywhere,Inventory_Request_Revision_Display_Custom,Inventory_Request_Revision_Pre_roll_Custom,Leads,Pre_roll_Custom,Social_Smart_Ads,Spectrum_Networks_Display,Spectrum_Networks_Video,Social_Smart_Ads,Visits,Makegood_Inventory_Request_New_Ads_Everywhere,Makegood_Inventory_Request_Pre_roll_Custom,Makegood_Inventory_Request_Display_Custom,Programmatic_Guaranteed,Programmatic_Non_Guaranteed,Inventory_Request_Programmatic_Guaranteed,Inventory_Request_Programmatic_Non_Guaranteed,Inventory_Request_Title_in_Guide,Title_in_Guide,Inventory_Request_Revision_Title_in_Guide</value>
+    </labels>
+    <labels>
+        <fullName>DC_SSP_Record_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DC SSP Record Type</shortDescription>
+        <value>Programmatic_Guaranteed,Programmatic_Non_Guaranteed,Inventory_Request_Programmatic_Guaranteed,Inventory_Request_Programmatic_Non_Guaranteed</value>
+    </labels>
+    <labels>
+        <fullName>DC_Status_c</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DC_Status__c</shortDescription>
+        <value>09 Live,19 Revision Live</value>
+    </labels>
+    <labels>
+        <fullName>DC_Statuses_For_Date_Submitted</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DC Statuses For Date Submitted</shortDescription>
+        <value>Plan Submitted,03 Submitted to Digital Ops,13 Revision Submitted to Digital Ops,33 Cancellation Submitted to Digital Ops,11.1 Revision Review for Ad Ops,12 Revision Submitted for Inventory Analysis</value>
+    </labels>
+    <labels>
+        <fullName>DC_cannot_be_created_for_an_Inactive_Proposal</fullName>
+        <categories>Digital Campaign</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DC cannot be created for an Inactive Proposal</shortDescription>
+        <value>Digital Campaign cannot be created for Inactive Proposal. Please select active Proposal</value>
+    </labels>
+    <labels>
+        <fullName>DC_cannot_be_created_for_an_Opp_Budget</fullName>
+        <categories>Digital Campaign</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DC cannot be created for an Opp Budget</shortDescription>
+        <value>Digital Campaign cannot be created on an Opportunity Budget</value>
+    </labels>
+    <labels>
+        <fullName>DMA_Not_Found_ZipCode_Mapping</fullName>
+        <categories>ThirdPartyDigitalInvReqServices</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DMA Not Found ZipCode Mapping</shortDescription>
+        <value>Invalid DMA value :</value>
+    </labels>
+    <labels>
+        <fullName>Data_Cannot_Retrieve_Error</fullName>
+        <categories>Third party Query</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Data Cannot Retrieve Error</shortDescription>
+        <value>Data cannot be retrieved for &quot;{0}&quot;. Please contact system administrator</value>
+    </labels>
+    <labels>
+        <fullName>DayPartingToolVisibility</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DayPartingToolVisibility</shortDescription>
+        <value>Title in Guide,Inventory Request - Title in Guide,Inventory Request - Revision - Title in Guide</value>
+    </labels>
+    <labels>
+        <fullName>Deactivated_Proposal_Cannot_be_Edited</fullName>
+        <categories>ProposalEdit</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Deactivated Proposal Cannot be Edited</shortDescription>
+        <value>Please Activate the Proposal in order to Edit</value>
+    </labels>
+    <labels>
+        <fullName>DefaultUserId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DefaultUserMail</shortDescription>
+        <value>sf.sr.ashok@mandsconsulting.com</value>
+    </labels>
+    <labels>
+        <fullName>Default_Agency_Discount_Code</fullName>
+        <categories>Discount Codes</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Default Agency Discount Code</shortDescription>
+        <value>AG15</value>
+    </labels>
+    <labels>
+        <fullName>Default_Ampersand_RepFirm_DiscCode</fullName>
+        <categories>Discount Codes</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Default Ampersand RepFirm DiscCode</shortDescription>
+        <value>A15RP13</value>
+    </labels>
+    <labels>
+        <fullName>Default_NCC_RepFirm_DiscCode</fullName>
+        <categories>Discount Codes</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Default NCC RepFirm DiscCode</shortDescription>
+        <value>AG100</value>
+    </labels>
+    <labels>
+        <fullName>Default_NYI_NCC_RepFirm_DiscCode</fullName>
+        <categories>Discount Codes</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Default NYI NCC RepFirm DiscCode</shortDescription>
+        <value>AG15R25</value>
+    </labels>
+    <labels>
+        <fullName>Default_Zero_Percent_Agency_Discount_Code</fullName>
+        <categories>Discount Codes</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Default Zero Percent Agency Discount Code</shortDescription>
+        <value>AG0</value>
+    </labels>
+    <labels>
+        <fullName>Delete_Confirmation_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete Confirmation Message</shortDescription>
+        <value>Are you sure you want to Delete? Click OK to continue</value>
+    </labels>
+    <labels>
+        <fullName>Delete_Opp_Budget_Checkbox_Label</fullName>
+        <categories>Create Tim Proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete Opp Budget Checkbox Label</shortDescription>
+        <value>Remove Opportunity Budget</value>
+    </labels>
+    <labels>
+        <fullName>Delete_Opportunity_Budget</fullName>
+        <categories>showseeker</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete Opportunity Budget</shortDescription>
+        <value>Delete Opp Budget</value>
+    </labels>
+    <labels>
+        <fullName>Delete_Record_success_message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete Record success message</shortDescription>
+        <value>Record deleted successfully.</value>
+    </labels>
+    <labels>
+        <fullName>DigitalCampaign_List_Mandatory</fullName>
+        <categories>ThirdPartyDigitalInvReqServices</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DigitalCampaign List Mandatory</shortDescription>
+        <value>DigitalCampaign is mandatory to create Digital Inventory Request</value>
+    </labels>
+    <labels>
+        <fullName>Digital_Campaign_Id_Mandatory</fullName>
+        <categories>ThirdPartyDigitalInvReqServices</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Digital Campaign Id Mandatory</shortDescription>
+        <value>Digital Campaign Id is Mandatory</value>
+    </labels>
+    <labels>
+        <fullName>Digital_Campaign_cannot_be_Reparented_with_different_Proposal</fullName>
+        <categories>ThirdPartyDigitalInvReqServices</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Digital Campaign cannot be Reparented with different Proposal</shortDescription>
+        <value>Digital Campaign cannot be reparented to other Proposal.</value>
+    </labels>
+    <labels>
+        <fullName>Digital_Hub</fullName>
+        <categories>Source</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Digital Hub</shortDescription>
+        <value>Digital Hub</value>
+    </labels>
+    <labels>
+        <fullName>DltPrpslZoneBatchUserId</fullName>
+        <categories>DeleteProposalZoneMonthlyValues batch class</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DltPrpslZoneBatchUserId</shortDescription>
+        <value>0053B000000yvGR</value>
+    </labels>
+    <labels>
+        <fullName>DnBAuth</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DnBAuth</shortDescription>
+        <value>0o27L18D76dV1Ln0L5E7wE62Wh39</value>
+    </labels>
+    <labels>
+        <fullName>DnBBoomiBaseURL</fullName>
+        <categories>Boomi</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DnBBoomiBaseURL</shortDescription>
+        <value>https://prod1-boomi.spectrumreach.com/ws/rest/DnB/</value>
+    </labels>
+    <labels>
+        <fullName>DnBBoomiSandboxBaseURL</fullName>
+        <categories>Boomi</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DnBBoomiSandboxBaseURL</shortDescription>
+        <value>https://uat1-boomi.spectrumreach.com/ws/rest/DnB/</value>
+    </labels>
+    <labels>
+        <fullName>DnbSpecialCharacterError</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DnbSpecialCharacterError</shortDescription>
+        <value>You can only use the following Special Character:</value>
+    </labels>
+    <labels>
+        <fullName>Draft</fullName>
+        <categories>User Warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Draft</shortDescription>
+        <value>Status Must be New to Submit for Approval</value>
+    </labels>
+    <labels>
+        <fullName>Dummy_Revenue_Account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dummy Revenue Account</shortDescription>
+        <value>0014100001OXDu4AAH</value>
+    </labels>
+    <labels>
+        <fullName>Dummy_SCX_advertiser</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dummy SCX advertiser</shortDescription>
+        <value>SCX import holding Advertiser</value>
+    </labels>
+    <labels>
+        <fullName>Dummy_SCX_agency</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dummy SCX agency</shortDescription>
+        <value>SCX import holding Agency</value>
+    </labels>
+    <labels>
+        <fullName>Duplicate_Rule_Job_ID</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate Rule Job ID</shortDescription>
+        <value>0PB4N000000blJsWAI</value>
+    </labels>
+    <labels>
+        <fullName>Duplicate_TSA_Warning</fullName>
+        <categories>InterimAE</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate TSA Warning</shortDescription>
+        <value>One or more TSA records are waiting for approval or already approved. Please click on Duplicate TSA(s) to check the details.</value>
+    </labels>
+    <labels>
+        <fullName>ERRO_SHOW_USERCONN_UNSELECT</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ERRO_SHOW_USERCONN_UNSELECT</shortDescription>
+        <value>Userconnections for {0} unselected record(s) is/ are not configured correctly.</value>
+    </labels>
+    <labels>
+        <fullName>Edit_Opportunity_Budget</fullName>
+        <categories>showseeker</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Edit Opportunity Budget</shortDescription>
+        <value>Edit Opp Budget</value>
+    </labels>
+    <labels>
+        <fullName>Email_Account_Merge_Error_Status</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Account Merge Error Status</shortDescription>
+        <value>The Account has not been merged successfully. &lt;br/&gt;Please review the details HERE:</value>
+    </labels>
+    <labels>
+        <fullName>Email_Account_Merge_Success_Status</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Account Merge Success Status</shortDescription>
+        <value>The account has been merged Successfully. &lt;br/ &gt; Please review the details HERE:</value>
+    </labels>
+    <labels>
+        <fullName>EnableAccountConnectionCreate</fullName>
+        <categories>Third Party SCX Upload</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EnableAccountConnectionCreate</shortDescription>
+        <value>false</value>
+    </labels>
+    <labels>
+        <fullName>ErrorMsg</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ErrorMsg</shortDescription>
+        <value>Sorry, You have logged in with another user. To access this page, you have to log in with System Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>ErrorWhileAuthenticatewithTim</fullName>
+        <categories>Authenticate Error Messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ErrorWhileAuthenticatewithTim</shortDescription>
+        <value>Error: An error occurred while authenticating with TIM.</value>
+    </labels>
+    <labels>
+        <fullName>ErrorWhileSynchronizewithTim</fullName>
+        <categories>Synchronize Error Messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ErrorWhileSynchronizewithTim</shortDescription>
+        <value>An error occurred while syncing with TIM because</value>
+    </labels>
+    <labels>
+        <fullName>Exception_Message_For_Code_Coverage_and_Testing</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Exception Message For Code Coverage and Testing</shortDescription>
+        <value>This is a constructed exception for testing and code coverage.</value>
+    </labels>
+    <labels>
+        <fullName>ExcludeDealStatuses</fullName>
+        <categories>AOS</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ExcludeDealStatuses</shortDescription>
+        <value>Lost,Abandoned Campaign</value>
+    </labels>
+    <labels>
+        <fullName>ExcludeRangeFor18_25</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ExcludeRangeFor18-25</shortDescription>
+        <value>Discovery STB VOD BUYBACK,Discovery 3PP BUYBACK,Dish/Sling,Fourfronts OTT,FourFronts PRG,PlutoTV,Viacom STVA Live BUYBACK,Viacom STB VOD Buyback</value>
+    </labels>
+    <labels>
+        <fullName>Exclude_profile_From_sending_Task_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Exclude profile From sending Task Email</shortDescription>
+        <value>Marketing Cloud Integration User</value>
+    </labels>
+    <labels>
+        <fullName>External_file_share_email_subject</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>External file share email subject</shortDescription>
+        <value>has shared files with you.</value>
+    </labels>
+    <labels>
+        <fullName>FM_Bo_Pe_Pro_Discrepency</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FM_Bo_Pe_Pro_Discrepency</shortDescription>
+        <value>Yes</value>
+    </labels>
+    <labels>
+        <fullName>FM_Budget_DMA</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FM  Budget DMA</shortDescription>
+        <value>Budget DMA:</value>
+    </labels>
+    <labels>
+        <fullName>FM_Business_Type</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FM Business Type</shortDescription>
+        <value>Business Type:</value>
+    </labels>
+    <labels>
+        <fullName>FM_Fiscal_Year</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FM Fiscal Year</shortDescription>
+        <value>Fiscal Year :</value>
+    </labels>
+    <labels>
+        <fullName>FM_Multiple_SalesProbability</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FM_Multiple_SalesProbability</shortDescription>
+        <value>&apos;10&apos;,&apos;100&apos;,&apos;0&apos;,&apos;90&apos;,&apos;60&apos;</value>
+    </labels>
+    <labels>
+        <fullName>FM_Pending_Discrepency</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FM_Pending_Discrepency</shortDescription>
+        <value>Yes</value>
+    </labels>
+    <labels>
+        <fullName>FM_Sales_Probability</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FM Sales Probability</shortDescription>
+        <value>Sales Probability:</value>
+    </labels>
+    <labels>
+        <fullName>FM_TotalSection_RoundOff</fullName>
+        <categories>Forecast Matrix</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FM_TotalSection_RoundOff</shortDescription>
+        <value>Yes</value>
+    </labels>
+    <labels>
+        <fullName>FM_User</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FM User</shortDescription>
+        <value>User:</value>
+    </labels>
+    <labels>
+        <fullName>FieldsForSocialExport</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DCFieldsForSocialExport</shortDescription>
+        <value>Advertiser__r.Name,Campaign_Name__c,Digital_Campaign_ID__c,Social_Estimate_ID__c, Campaign_Start_Date__c, Campaign_End_Date__c, CoOp__c, Campaign_Notes__c,Objectives__c,Special_Ad_Category__c,Copy_Changes_Allowed__c</value>
+    </labels>
+    <labels>
+        <fullName>File_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>File Type for enhanced file UI</shortDescription>
+        <value>&apos;.avi&apos;,&apos;.doc&apos;, &apos;.dot&apos;,&apos;.docx&apos;,&apos;.exe&apos;, &apos;.msg&apos;, &apos;.wrf&apos;,&apos;.html&apos;, &apos;.acgi&apos;, &apos;.htm&apos;, &apos;.htx&apos;, &apos;.shtm&apos;, &apos;.shtml&apos;,&apos;.htt&apos;,&apos;.json&apos;,&apos;.mht&apos;, &apos;.mhtm&apos;, &apos;.mhtml&apos;,&apos;.mov&apos;,&apos;.mp3&apos;,&apos;.mp4&apos;,&apos;.mpeg&apos;, &apos;.mpg&apos;,&apos;.pdf&apos;,&apos;.ppt&apos;, &apos;.pot&apos;, &apos;.pps&apos;,&apos;.pptx&apos;,&apos;.svg&apos;, &apos;.svgz&apos;,&apos;.swf&apos;,&apos;.txml&apos;,&apos;.unknown&apos;,&apos;.wav&apos;,&apos;.wma&apos;,&apos;.wmv&apos;,&apos;.xhtml&apos;,&apos;.xls&apos;, &quot;&apos;.xlt&apos;,&apos;.xlsx&apos;,&apos;.xml&apos;,&apos;.png&apos;, &apos;.jpg&apos;, &apos;.jpeg&apos;,&apos;.txt&apos;, &apos;.odt&apos;, &apos;.csv&apos;,&apos;.webm&apos;,&apos;.scx&apos;,&apos;.eml&apos;,&apos;.gif&apos;, &apos;.zip&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Filter_View_Admin_Profiles</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Filter View Admin Profiles</shortDescription>
+        <value>System Administrator</value>
+    </labels>
+    <labels>
+        <fullName>Forecast_Automation_Year</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Forecast Automation Year</shortDescription>
+        <value>2020</value>
+    </labels>
+    <labels>
+        <fullName>Forecast_Month</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Forecast Month</shortDescription>
+        <value>7</value>
+    </labels>
+    <labels>
+        <fullName>ForecastingDate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for Advance Budget Tool</shortDescription>
+        <value>2022-12-17</value>
+    </labels>
+    <labels>
+        <fullName>ForecastingToolProfilesForAdmin</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ForecastingToolProfilesForAdmin</shortDescription>
+        <value>Master - Interconnect Account Executive,Master - Account Executive</value>
+    </labels>
+    <labels>
+        <fullName>Forecasting_Tool_Last_Ndays</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Forecasting Tool Last Ndays</shortDescription>
+        <value>730</value>
+    </labels>
+    <labels>
+        <fullName>Handle_State</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Handle State</shortDescription>
+        <value>United States, United States of America, USA, US, America</value>
+    </labels>
+    <labels>
+        <fullName>HideorShowFirstLookFields</fullName>
+        <categories>Opportunity Creation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>HideorShowFirstLookFields</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>IE_Browser_ErrorPage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IE_Browser_ErrorPage</shortDescription>
+        <value>/apex/IEBrowserError</value>
+    </labels>
+    <labels>
+        <fullName>Id_mandatory_to_update_lead</fullName>
+        <categories>Campaign Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Id mandatory to update lead</shortDescription>
+        <value>Id is mandatory to update lead</value>
+    </labels>
+    <labels>
+        <fullName>InActivePilotProposalBatchErrorMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>InActivePilotProposalBatchErrorMessage</shortDescription>
+        <value>{0} Order(s) {1} Pilot Proposal ID(s) could not be removed from Pilot. Order has already been trafficked and cannot be deleted. Please submit the cancellation in Pilot or contact your Traffic Support team if you need assistance</value>
+    </labels>
+    <labels>
+        <fullName>InActiveProposalBatchErrorMessage</fullName>
+        <categories>InactiveProposalsBatch</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>InActiveProposalBatchErrorMessage</shortDescription>
+        <value>{0} Order(s) {1} TIM Estimate ID(s) could not be removed from TIM. Order has already been trafficked and cannot be deleted. Please submit the cancellation in TIM or contact your Traffic Support team if you need assistance</value>
+    </labels>
+    <labels>
+        <fullName>InActiveProposalBatchSubject</fullName>
+        <categories>InactiveProposalsBatch</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>InActiveProposalBatchSubject</shortDescription>
+        <value>Inactivating Proposal Status</value>
+    </labels>
+    <labels>
+        <fullName>InactiveProposalsBatch_Size</fullName>
+        <categories>InactiveProposalsBatch</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>InactiveProposalsBatch Size</shortDescription>
+        <value>5</value>
+    </labels>
+    <labels>
+        <fullName>Inactive_Advanced_Proposal</fullName>
+        <categories>Advanced Proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Inactive Advanced Proposal</shortDescription>
+        <value>Advanced Proposal is Inactive</value>
+    </labels>
+    <labels>
+        <fullName>Inactive_Opportunity_User_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Inactive Opportunity User Message</shortDescription>
+        <value>Activate the Opportunity Owners before you proceed</value>
+    </labels>
+    <labels>
+        <fullName>Inactive_Opportunity_User_Title</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Inactive Opportunity User Title</shortDescription>
+        <value>Opportunity User is Inactive</value>
+    </labels>
+    <labels>
+        <fullName>Incorrect_RecordType</fullName>
+        <categories>showseeker</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Incorrect RecordType</shortDescription>
+        <value>Incorrect RecordType</value>
+    </labels>
+    <labels>
+        <fullName>IntegrationUserName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IntegrationUserName</shortDescription>
+        <value>sr.ashok.aggarwal@mandsconsulting.com</value>
+    </labels>
+    <labels>
+        <fullName>IntegrationUserNamePass</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IntegrationUserNamePass</shortDescription>
+        <value>Welcome**90!</value>
+    </labels>
+    <labels>
+        <fullName>IntegrationUserProfileId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IntegrationUserProfileId</shortDescription>
+        <value>00e41000000wXTXAA2</value>
+    </labels>
+    <labels>
+        <fullName>InterimAE_Notification_Body</fullName>
+        <categories>Interim AE</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>InterimAE_Notification_Body</shortDescription>
+        <value>You have been assigned to the following Accounts as an Interim AE. There is no need to Reply to this email.</value>
+    </labels>
+    <labels>
+        <fullName>InterimAE_Notification_Title</fullName>
+        <categories>Interim AE</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>InterimAE_Notification_Title</shortDescription>
+        <value>Interim AE Accounts Notification - Do Not Reply</value>
+    </labels>
+    <labels>
+        <fullName>InterimAE_Service_Approval_Process</fullName>
+        <categories>InterimAE</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>InterimAE Service Approval Process</shortDescription>
+        <value>Interim_AE_Service_Approval_V3</value>
+    </labels>
+    <labels>
+        <fullName>InvalidBrowser</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>InvalidBrowser</shortDescription>
+        <value>You&apos;re using incorrect Browser. Please switch to Google chrome !</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Advanced_Proposal_Id</fullName>
+        <categories>Advanced Proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Advanced Proposal Id</shortDescription>
+        <value>Invalid Advanced Proposal Id</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Digital_Campaign_ID</fullName>
+        <categories>ThirdPartyDigitalInvReqServices</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Digital Campaign ID</shortDescription>
+        <value>Invalid Digital Campaign ID</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Eclipse_System</fullName>
+        <categories>View Copy Titles</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Eclipse System</shortDescription>
+        <value>Invalid Eclipse System</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Lead_Commodity_Codes</fullName>
+        <categories>Campaign Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Lead Commodity Codes</shortDescription>
+        <value>Bad value for Secondary commodity</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Lead_Primary_Commodity</fullName>
+        <categories>Campaign Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Lead Primary Commodity</shortDescription>
+        <value>Bad value for Primary Commodity</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Pilot_Prop_Id_Pilot_Order_Id</fullName>
+        <categories>Advanced Proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Pilot Prop Id/Pilot Order Id</shortDescription>
+        <value>Invalid Pilot Proposal/Pilot Order Id</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Product_for_Digital_Campaign</fullName>
+        <categories>ThirdPartyDigitalInvReqServices</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Product for Digital Campaign</shortDescription>
+        <value>Invalid Product for Digital Campaign.</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Proposal</fullName>
+        <categories>ThirdPartyDigitalInvReqServices</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Proposal</shortDescription>
+        <value>Invalid Proposal.</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_SessionID</fullName>
+        <categories>showseeker</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid SessionID</shortDescription>
+        <value>Session ID is Invalid.</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Source</fullName>
+        <categories>ThirdPartyGetAEs</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Source</shortDescription>
+        <value>No access for this end point for :</value>
+    </labels>
+    <labels>
+        <fullName>Inventory_RT</fullName>
+        <categories>Proposal recordType</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Inventory_RT</shortDescription>
+        <value>Inventory</value>
+    </labels>
+    <labels>
+        <fullName>IsActiveDigitalCampaignTrigger</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IsActiveDigitalCampaignTrigger</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>IsActiveDigitalCreativeTrigger</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IsActiveDigitalCreativeTrigger</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>IsActiveDuplicateRecordItemTrigger</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IsActiveDuplicateRecordItemTrigger</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>KDD_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KDD Error</shortDescription>
+        <value>Please check to be sure your Amount to Be Billed is no more than Production Rate Card, less any Kernel Offers, FSA and KDD</value>
+    </labels>
+    <labels>
+        <fullName>LEX_Base_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LEX Base URL</shortDescription>
+        <value>/one/one.app#/</value>
+    </labels>
+    <labels>
+        <fullName>LEX_sObject_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LEX sObject URL</shortDescription>
+        <value>/one/one.app#/sObject/</value>
+    </labels>
+    <labels>
+        <fullName>LMSAccessibilityProfiles</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LMSAccessibilityProfiles</shortDescription>
+        <value>Integration User,System Administrator,Master - Local Sales Manager,Master - Director of Sales,Master - Interconnect Sales Manager,Master - National Sales Director,Master - National Sales Manager,Master - Spectrum Preferred,Master - Sales Leadership,Master - Account Executive,Master - Interconnect Account Executive</value>
+    </labels>
+    <labels>
+        <fullName>LSM_Profile_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LSM Profile Name</shortDescription>
+        <value>Master - Local Sales Manager</value>
+    </labels>
+    <labels>
+        <fullName>LastRefreshedTime</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LastRefreshedTime</shortDescription>
+        <value>Last refreshed on</value>
+    </labels>
+    <labels>
+        <fullName>LeadList_Mandatory_Error_Message</fullName>
+        <categories>SpectrumReachCreate</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LeadList Mandatory Error Message</shortDescription>
+        <value>leadList is  mandatory to Insert Leads</value>
+    </labels>
+    <labels>
+        <fullName>LeadSearchOwner</fullName>
+        <categories>Lead Search Tool</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LeadSearchOwner</shortDescription>
+        <value>Marketing Cloud Prospect,Pardot Connector</value>
+    </labels>
+    <labels>
+        <fullName>Lead_Activity_Value</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lead Activity Value</shortDescription>
+        <value>3</value>
+    </labels>
+    <labels>
+        <fullName>Lead_Update_Error_Message</fullName>
+        <categories>Campaign Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lead Update Error Message</shortDescription>
+        <value>Converted Lead cannot be Updated</value>
+    </labels>
+    <labels>
+        <fullName>Lead_Update_Success_Message</fullName>
+        <categories>Campaign Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lead Update Success Message</shortDescription>
+        <value>Successfully Updated Lead</value>
+    </labels>
+    <labels>
+        <fullName>Lead_converted_and_campaign_created</fullName>
+        <categories>Campaign Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lead converted and campaign created</shortDescription>
+        <value>Lead successfully converted and created campaign member for contact</value>
+    </labels>
+    <labels>
+        <fullName>Lead_converted_success_message</fullName>
+        <categories>Campaign Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lead converted success message</shortDescription>
+        <value>Lead successfully converted</value>
+    </labels>
+    <labels>
+        <fullName>LinearProductTypeUpdated</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LinearProductTypeUpdated</shortDescription>
+        <value>No</value>
+    </labels>
+    <labels>
+        <fullName>Linear_RT</fullName>
+        <categories>Proposal recordType</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Linear_RT</shortDescription>
+        <value>Linear</value>
+    </labels>
+    <labels>
+        <fullName>ListManagementBudgetError</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ListManagementBudgetError</shortDescription>
+        <value>You are not allowed to remove a Team Member, who has Budget data for this account. Please use Account Transfer Tool for making that change.</value>
+    </labels>
+    <labels>
+        <fullName>ListManagementControllerBlockSize</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ListManagementControllerBlockSize</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>ListManagementControllerIndex</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ListManagementControllerIndex</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>MBMT_CSV_Headers</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MBMT CSV Headers</shortDescription>
+        <value>Division,Title,Manager,Manager HRWorkforceId,Managers PSID,PSID,Name,HR WorkforceId,Rev Type,January,February,March,April,May,June,July,August,September,October,November,December,Full Year</value>
+    </labels>
+    <labels>
+        <fullName>MailAssistContact</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MailAssistContact</shortDescription>
+        <value>0031K00002bjlphQAA</value>
+    </labels>
+    <labels>
+        <fullName>Manager_Approval</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Manager_Approval</shortDescription>
+        <value>09-Manager Approval</value>
+    </labels>
+    <labels>
+        <fullName>Mandatory_Lead_Commodity_Codes</fullName>
+        <categories>Campaign Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mandatory Lead Commodity Codes</shortDescription>
+        <value>Secondary commodity is Mandatory</value>
+    </labels>
+    <labels>
+        <fullName>Mandatory_Lead_Primary_Commodity</fullName>
+        <categories>Campaign Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mandatory_Lead_Primary_Commodity</shortDescription>
+        <value>Primary Commodity is Mandatory</value>
+    </labels>
+    <labels>
+        <fullName>MapRevenueWithExportId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MapRevenueWithExportId</shortDescription>
+        <value>false</value>
+    </labels>
+    <labels>
+        <fullName>MassApprovalForCPMMakeGoodPublicGroup</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MassApprovalForCPMMakeGoodPublicGroup</shortDescription>
+        <value>Adlink_DOS_AA_Approvers,Blue_Ridge_DOS_AA_Approvers,Blue_Ridge_LSM_AA_Approvers,Central_DOS_AA_Approvers,Central_LSM_AA_Approvers,Great_Lakes_DOS_AA_Approvers,Great_Lakes_LSM_AA_Approvers,Northern_DOS_AA_Approvers,Northern_LSM_AA_Approvers,SouthEast_LSM_AA_Approvers,SouthEast_DOS_AA_Approvers,West_DOS_AA_Approvers,West_LSM_AA_Approvers,Central_AA_Approvers_CPM,Adlink_AA_Approvers,Blue_Ridge_AA_Approvers_CPM,Great_Lakes_AA_Approvers_CPM,Northern_AA_Approvers_CPM,SouthEast_AA_Approvers_CPM,West_AA_Approvers_CPM,Adlink_AA_Approvers_Makegood,Blue_Ridge_AA_Approvers_Makegood,Central_AA_Approvers_Makegood,Great_Lakes_AA_Approvers_Makegood,Northern_AA_Approvers_Makegood,SouthEast_AA_Approvers_Makegood,West_AA_Approvers_Makegood</value>
+    </labels>
+    <labels>
+        <fullName>MassApprovalForMakeGoodandCPM</fullName>
+        <categories>DC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MassApprovalForMakeGoodandCPM</shortDescription>
+        <value>West DSL,EAST DSL,Central DSL</value>
+    </labels>
+    <labels>
+        <fullName>MassApproveReject_PublicGroups</fullName>
+        <categories>DC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MassApproveReject PublicGroups</shortDescription>
+        <value>Digital Expedite - Central,Digital Expedite - East,Digital Expedite - West</value>
+    </labels>
+    <labels>
+        <fullName>Merge_Product_Line</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Merge Product Line</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>Merge_with_same_RT_Error</fullName>
+        <categories>AccountMergecontroller</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Merge with same RT Error</shortDescription>
+        <value>Account should be of same record type.</value>
+    </labels>
+    <labels>
+        <fullName>MyTargetsListView</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MyTargetsListView</shortDescription>
+        <value>00B1K0000098DDYUA2</value>
+    </labels>
+    <labels>
+        <fullName>NOT_SELECT_UPDATE_PROP</fullName>
+        <categories>Proposal utility</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NOT_SELECT_UPDATE_PROP</shortDescription>
+        <value>No Proposal(s) are selected</value>
+    </labels>
+    <labels>
+        <fullName>NO_PROP_SELECTED</fullName>
+        <categories>Proposal utility</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NO_PROP_SELECTED</shortDescription>
+        <value>No Proposal(s) are selected.</value>
+    </labels>
+    <labels>
+        <fullName>NameOfUser</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NameOfUser</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>National_Profile_IDs</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>National Profile IDs</shortDescription>
+        <value>00e41000001m5jU,00e41000001m5jV,00e41000001m5jW,00e41000001m5jX,00e41000001m5jZ</value>
+    </labels>
+    <labels>
+        <fullName>National_Profiles</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>National Profiles</shortDescription>
+        <value>Master - National Sales Director,Master - National Account Planner,Master - National Account Coordinator,Master - National Sales Manager,Master - Enterprise Digital,Master - Enterprise Sales Manager,Master - Enterprise Sales Support</value>
+    </labels>
+    <labels>
+        <fullName>NetworksLWC_SelectNetworks</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NetworksLWC_SelectNetworks</shortDescription>
+        <value>Networks listed are a sample of those a client will see on their reports. Additional networks and publishers may be included if they meet audience target goals. Inventory sources subject to change based on availability.</value>
+    </labels>
+    <labels>
+        <fullName>News_Target_Section_Header</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>News Target Section Header</shortDescription>
+        <value>News Target</value>
+    </labels>
+    <labels>
+        <fullName>NextButton</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NextButton</shortDescription>
+        <value>Next</value>
+    </labels>
+    <labels>
+        <fullName>NoBroadcastDataExists</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NoBroadcastDataExists</shortDescription>
+        <value>No broadcast data exists for this Opportunity.</value>
+    </labels>
+    <labels>
+        <fullName>NoProcessUpdated</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NoProcessUpdated</shortDescription>
+        <value>No process updates since last Dashboard refresh</value>
+    </labels>
+    <labels>
+        <fullName>No_Accounts_on_Opportunity</fullName>
+        <categories>showseeker</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Accounts on Opportunity</shortDescription>
+        <value>No Accounts on Opportunity.</value>
+    </labels>
+    <labels>
+        <fullName>No_Campaign_Record_Found_Message</fullName>
+        <categories>Campaign Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Campaign Record Found Message</shortDescription>
+        <value>No Campaign Records Found.</value>
+    </labels>
+    <labels>
+        <fullName>No_Digital_Campaign_Error</fullName>
+        <categories>ThirdPartyDigitalInvReqServices</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Digital Campaign Error</shortDescription>
+        <value>Invalid Digital Campaign Id</value>
+    </labels>
+    <labels>
+        <fullName>No_I_will_contact_Support</fullName>
+        <categories>ConfirmSaveAcctsInTim</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No I will contact Support</shortDescription>
+        <value>No, I will contact Support</value>
+    </labels>
+    <labels>
+        <fullName>No_LeadId_and_ContactId_Error_Message</fullName>
+        <categories>Campaign Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No LeadId and ContactId Error Message</shortDescription>
+        <value>Please provide all the mandatory fields.</value>
+    </labels>
+    <labels>
+        <fullName>No_Opportunity_Budget_Proposal_found</fullName>
+        <categories>showseeker</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Opportunity Budget Proposal found</shortDescription>
+        <value>No Opportunity Budget Proposal found for Opportunity</value>
+    </labels>
+    <labels>
+        <fullName>No_Opportunity_Error</fullName>
+        <categories>ThirdPartySCXUpload</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Opportunity Error</shortDescription>
+        <value>Opportunity is not present in the system.</value>
+    </labels>
+    <labels>
+        <fullName>No_Permission_to_Create_an_Opportunity</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Permission to Create an Opportunity</shortDescription>
+        <value>This Sales user is not on the account team as either &apos;Account Executive&apos; or &apos;Sales Manager&apos; role for this account, and therefore cannot create the opportunity as requested.</value>
+    </labels>
+    <labels>
+        <fullName>No_Primary_UserConnection</fullName>
+        <categories>ThirdPartySCXUpload</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Primary UserConnection</shortDescription>
+        <value>No primary user connection.</value>
+    </labels>
+    <labels>
+        <fullName>No_Proposal_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Proposal Error</shortDescription>
+        <value>There are no proposal records found for this opportunity</value>
+    </labels>
+    <labels>
+        <fullName>No_Record_Found_Error_Message</fullName>
+        <categories>SpectrumReachCreate</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Record Found Error Message</shortDescription>
+        <value>No Records Found</value>
+    </labels>
+    <labels>
+        <fullName>No_Record_Found_Message</fullName>
+        <categories>Proposal Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Record Found Message</shortDescription>
+        <value>No Proposal Records Found.</value>
+    </labels>
+    <labels>
+        <fullName>No_User_Connection_Error</fullName>
+        <categories>Proposal Edit</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No User Connection Error</shortDescription>
+        <value>No User Connection Exist</value>
+    </labels>
+    <labels>
+        <fullName>No_User_Connection_for_Tim_System</fullName>
+        <categories>Create Tim Proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No User Connection for Tim System</shortDescription>
+        <value>User {0} does not have a user connection for {1} Tim System. Please contact your system administrator.</value>
+    </labels>
+    <labels>
+        <fullName>No_data_found_in_ZipCode_Mapping</fullName>
+        <categories>ThirdPartyDigitalInvReqServices</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No data found in ZipCode Mapping</shortDescription>
+        <value>No data found for DMA / SR Zone values in ZipCode Mapping</value>
+    </labels>
+    <labels>
+        <fullName>No_record_message</fullName>
+        <categories>Third party Query</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No record message</shortDescription>
+        <value>No {0} records found for user &quot;{1}&quot;</value>
+    </labels>
+    <labels>
+        <fullName>No_records_found_for_Approval</fullName>
+        <categories>InterimAE</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No records found for Approval</shortDescription>
+        <value>No records found for Approval</value>
+    </labels>
+    <labels>
+        <fullName>NullUpdateEndpoint</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NullUpdateEndpoint</shortDescription>
+        <value>https://prod1-boomi.spectrumreach.com//ws/rest/null_update/nullupdate</value>
+    </labels>
+    <labels>
+        <fullName>NullUpdatePassword</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NullUpdatePassword</shortDescription>
+        <value>aad8cd24-372b-4ec2-bcd8-f0f8d1228409</value>
+    </labels>
+    <labels>
+        <fullName>NullUpdateUserName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NullUpdateUserName</shortDescription>
+        <value>null-update@chartersalesforce-VB2XFC</value>
+    </labels>
+    <labels>
+        <fullName>OmsApiKey</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OmsApiKey</shortDescription>
+        <value>PtoQn690uzDoa18VyHq8EQ1t</value>
+    </labels>
+    <labels>
+        <fullName>Only_AccountTeamMember_can_Clone_an_Opportunity</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Only AccountTeamMember can Clone an Opportunity</shortDescription>
+        <value>You are not an Account Team Member for selected Advertiser.</value>
+    </labels>
+    <labels>
+        <fullName>Only_Opportunity_Owner_can_Clone_the_record</fullName>
+        <categories>Clone Opportunity Budget</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Only Opportunity Owner can Clone the record</shortDescription>
+        <value>Only Opportunity Owner can Clone the record</value>
+    </labels>
+    <labels>
+        <fullName>Open_Account_Error_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Open Account Error Message</shortDescription>
+        <value>Removing all Sales Users from an Account Team results in the Account becoming an &quot;Open Account&quot;, which requires an &apos;Open Account DMA&apos; selection.</value>
+    </labels>
+    <labels>
+        <fullName>Oppoertunity_CloseLost</fullName>
+        <categories>Opportunity trigger</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Oppoertunity_CloseLost</shortDescription>
+        <value>Closed Lost</value>
+    </labels>
+    <labels>
+        <fullName>OpportunityList_Mandatory_Error_Message</fullName>
+        <categories>SpectrumReachCreate</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OpportunityList Mandatory Error Message</shortDescription>
+        <value>OpportunityList is mandatory to Insert Opportunity</value>
+    </labels>
+    <labels>
+        <fullName>OpportunityUpdateViaBatchInProgress</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OpportunityUpdateViaBatchInProgress</shortDescription>
+        <value>Opportunity update status is</value>
+    </labels>
+    <labels>
+        <fullName>OpportunityUpdateViaBatchStarted</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OpportunityUpdateViaBatchStarted</shortDescription>
+        <value>Opportunity update has been started</value>
+    </labels>
+    <labels>
+        <fullName>Opportunity_Budget_Error</fullName>
+        <categories>Opportunity Budget Error Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Opportunity Budget Error</shortDescription>
+        <value>Please change either start date or end date.</value>
+    </labels>
+    <labels>
+        <fullName>Opportunity_Budget_Proposal_Deleted</fullName>
+        <categories>showseeker</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Opportunity Budget Proposal Deleted</shortDescription>
+        <value>Opportunity budget Proposal delete successfully</value>
+    </labels>
+    <labels>
+        <fullName>Opportunity_Budget_RecordTypeId</fullName>
+        <categories>Opportunity Budget RecordTypeId</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Opportunity Budget RecordTypeId</shortDescription>
+        <value>01241000000k2zN</value>
+    </labels>
+    <labels>
+        <fullName>Opportunity_CreateActivity_Profile</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Opportunity_CreateActivity_Profile</shortDescription>
+        <value>Master - Account Executive,System Administrator</value>
+    </labels>
+    <labels>
+        <fullName>Opportunity_Create_FlightDate_Profile</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Opportunity_Create_FlightDate_Profile</shortDescription>
+        <value>System Administrator, Master - Account Executive, Master - Account Coordinator, Master - Account Planner, Master - Sales Support Manager, Solution Manager, Contract Manager, Master - Local Sales Manager, Master - Optimization Manager, Master - Optimization Manager 2, Master - Digital Planner, Master - Interconnect Account Planner, Master - Digital Coordinator, Master - Interconnect Account Coordinator</value>
+    </labels>
+    <labels>
+        <fullName>Opportunity_Id_Error</fullName>
+        <categories>ThirdPartySCXUpload</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Opportunity Id Error</shortDescription>
+        <value>Please provide opportunity Id.</value>
+    </labels>
+    <labels>
+        <fullName>OpptyFC_FilterPanel_Offset</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Opportunity Forecasting Filter Panel Offset</shortDescription>
+        <value>top: 163px;</value>
+    </labels>
+    <labels>
+        <fullName>OpptyFC_Header_Offset</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Opportunity Forecasting Header Offset</shortDescription>
+        <value>top: 90px</value>
+    </labels>
+    <labels>
+        <fullName>OpptyFC_SalesPath_Offset</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Opportunity Forecasting Sales Path Offset</shortDescription>
+        <value>padding-top: 63px;</value>
+    </labels>
+    <labels>
+        <fullName>PILOT_PROPOSAL</fullName>
+        <categories>Create Special proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PILOT PROPOSAL</shortDescription>
+        <value>Pilot</value>
+    </labels>
+    <labels>
+        <fullName>PROPOSAL_RECORDTYPE_MESG</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PROPOSAL_RECORDTYPE_MESG</shortDescription>
+        <value>Number of successful updates {0}, 
+Number of records sent to AOS Deal is {1} and
+Number of failed updates is {2}. If you believe there is an error, please contact System Admin.</value>
+    </labels>
+    <labels>
+        <fullName>Page_Size</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Size</shortDescription>
+        <value>98</value>
+    </labels>
+    <labels>
+        <fullName>Pending_InterimAE_Approvals</fullName>
+        <categories>InterimAE</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Pending InterimAE Approvals</shortDescription>
+        <value>PENDING INTERIM AE ACCOUNT APPROVALS</value>
+    </labels>
+    <labels>
+        <fullName>Performance_Section_Header</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Performance Section Header</shortDescription>
+        <value>Performance</value>
+    </labels>
+    <labels>
+        <fullName>Pilot_Order_Id_Pilot_Prop_Id_is_mandatory</fullName>
+        <categories>Advanced Proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Pilot Order Id/Pilot Prop Id is mandatory</shortDescription>
+        <value>Pilot OrderId/ Pilot Proposal Id is Mandatory</value>
+    </labels>
+    <labels>
+        <fullName>PlanningRequestEditableProfiles</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PlanningRequestEditableProfiles</shortDescription>
+        <value>Master - Account Planner,System Administrator,Master - National Account Planner,Master - Sales Support Manager,Master - Interconnect Account Planner,Master - Spectrum Preferred,Master - Account Coordinator,Master - Interconnect Account Coordinator</value>
+    </labels>
+    <labels>
+        <fullName>Political_Account_Merge_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Political Account Merge Error</shortDescription>
+        <value>Political Account cannot merge with non political account.</value>
+    </labels>
+    <labels>
+        <fullName>Political_Interest_Can_t_be_Selected</fullName>
+        <categories>Support Request</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Political Interest Can&apos;t be Selected</shortDescription>
+        <value>Political Interests can only be selected for Political accounts.</value>
+    </labels>
+    <labels>
+        <fullName>Political_RT</fullName>
+        <categories>Proposal recordType</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Political_RT</shortDescription>
+        <value>Political</value>
+    </labels>
+    <labels>
+        <fullName>Political_Section_Header</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Political Section Header</shortDescription>
+        <value>Political Totals</value>
+    </labels>
+    <labels>
+        <fullName>Presentation_Date_Validation_on_Opportunity</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Presentation Date Validation on Opportunity</shortDescription>
+        <value>Presentation Date must be greater or equal to Today Date</value>
+    </labels>
+    <labels>
+        <fullName>PrevButton</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PrevButton</shortDescription>
+        <value>Prev</value>
+    </labels>
+    <labels>
+        <fullName>Prevent_Activity_creation_on_Out_Of_Business_Accounts</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Prevent Activity creation on Out Of Business Accounts</shortDescription>
+        <value>{0} can&apos;t be created for Out Of Business Accounts</value>
+    </labels>
+    <labels>
+        <fullName>ProcessFailedMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProcessFailedMessage</shortDescription>
+        <value>Process failed</value>
+    </labels>
+    <labels>
+        <fullName>ProcessSuccessMesage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProcessSuccessMesage</shortDescription>
+        <value>Record processed successfully</value>
+    </labels>
+    <labels>
+        <fullName>Prod_Type_Full_Avail</fullName>
+        <categories>AOSWebServiceHelper</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Prod Type Full Avail</shortDescription>
+        <value>Full Avail</value>
+    </labels>
+    <labels>
+        <fullName>ProductTypeToDisplay</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProductTypeToDisplay</shortDescription>
+        <value>Linear/News/Sports</value>
+    </labels>
+    <labels>
+        <fullName>Product_is_mandatory_for_Digital_Campaign</fullName>
+        <categories>ThirdPartyDigitalInvReqServices</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Product is mandatory for Digital Campaign</shortDescription>
+        <value>Product value is mandatory for Digital Campaign.</value>
+    </labels>
+    <labels>
+        <fullName>Profile</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Profile_create_REP_firms_Account</shortDescription>
+        <value>System Administrator,Master - FBO,Integration User</value>
+    </labels>
+    <labels>
+        <fullName>ProfileName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProfileName</shortDescription>
+        <value>Profile Name</value>
+    </labels>
+    <labels>
+        <fullName>Profile_For_DC_Edit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProfileForDCEdit</shortDescription>
+        <value>System Administrator,Integration User,Master - Digital Sales,Master - Digital Planner,Master - Yield and Inventory,Master - Optimization Manager,Master - Enterprise Digital,Master - Digital Operations,Master - Digital Traffic,Master - Digital Planner,Master - Sales Leadership,Master - Sales Support Manager,Master - Director of Sales,Master - Interconnect Sales Manager,Master - Local Sales Manager,Master - Sales Leadership,Salesforce API Only System Integrations</value>
+    </labels>
+    <labels>
+        <fullName>ProfilesVisibleAssignedTo_PR</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProfilesVisibleAssignedTo_PR</shortDescription>
+        <value>Integration User,Master - Sales Support Manager,System Administrator,Master - Account Executive,Master - Interconnect Account Executive,Master - Account Planner,Master - Interconnect Account Planner,Master - Interconnect Sales Manager, Master - Local Sales Manager</value>
+    </labels>
+    <labels>
+        <fullName>ProposalAdvertiserButton</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProposalAdvertiserButton</shortDescription>
+        <value>Return to Advertiser</value>
+    </labels>
+    <labels>
+        <fullName>ProposalApproveRejectAllSwitch</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProposalApproveRejectAllSwitch</shortDescription>
+        <value>false</value>
+    </labels>
+    <labels>
+        <fullName>ProposalClosedFromLastNdays</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProposalClosedFromLastNdays</shortDescription>
+        <value>2</value>
+    </labels>
+    <labels>
+        <fullName>ProposalEdit_No_TIMID</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProposalEdit No TIMID</shortDescription>
+        <value>This proposal is not having TIM Id. It cannot be edited.</value>
+    </labels>
+    <labels>
+        <fullName>ProposalNewOverride</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProposalNewOverride</shortDescription>
+        <value>All Proposals must be created from Opportunity.</value>
+    </labels>
+    <labels>
+        <fullName>ProposalNewSyncDuplicateError</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProposalNewSyncDuplicateError</shortDescription>
+        <value>This Proposal already exists in Salesforce. Please use Sync button on existing Proposal record for syncing with TIM.</value>
+    </labels>
+    <labels>
+        <fullName>ProposalPendingStatus</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProposalPendingStatus</shortDescription>
+        <value>Submitted to Sales Management</value>
+    </labels>
+    <labels>
+        <fullName>ProposalZoneMonthlyValueNewOverride</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProposalZoneMonthlyValueNewOverride</shortDescription>
+        <value>All Proposal Zones Monthly Values must be created from Opportunity (while creating Proposals)</value>
+    </labels>
+    <labels>
+        <fullName>ProposalZoneMonthlyValuesCount</fullName>
+        <categories>Opportunity Pipeline</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProposalZoneMonthlyValuesCount</shortDescription>
+        <value>850</value>
+    </labels>
+    <labels>
+        <fullName>ProposalZoneNewOverride</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProposalZoneNewOverride</shortDescription>
+        <value>All Proposal Zones must be created from Opportunity (while creating Proposals)</value>
+    </labels>
+    <labels>
+        <fullName>Proposal_Copy_Titles_Boomi_Endpoint</fullName>
+        <categories>View Copy Titles</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Proposal Copy Titles Boomi Endpoint</shortDescription>
+        <value>https://prod1-boomi.spectrumreach.com/ws/rest/SpectrumReach/v1/eclipseData</value>
+    </labels>
+    <labels>
+        <fullName>Proposal_Origin_SCX_Import</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Proposal Origin SCX Import</shortDescription>
+        <value>SF SCX Import</value>
+    </labels>
+    <labels>
+        <fullName>Proposal_has_Multiple_Traffic_Orders_in_EclipseSystem</fullName>
+        <categories>View Copy Titles</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Proposal has Multiple Traffic Orders in EclipseSystem</shortDescription>
+        <value>Proposal has Multiple Traffic Orders in an Eclipse System. Please contact System Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Proposal_has_Multiple_Traffic_Orders_in_Multiple_Eclipse_Systems</fullName>
+        <categories>View Copy Titles</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Proposal has Multiple Traffic Orders in Multiple Eclipse Systems</shortDescription>
+        <value>Proposal has Multiple Traffic Orders in Multiple Eclipse Systems. Please contact System Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>RR_ProfilesAbleToChangeStatus</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RR_ProfilesAbleToChangeStatus</shortDescription>
+        <value>Master - Account Executive,Master - Interconnect Account Executive,Master - Account Planner,Master - Interconnect Account Planner,Master - National Account Planner,Master - Sales Support Manager</value>
+    </labels>
+    <labels>
+        <fullName>RVP</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SVP, Chief Revenue Officer</shortDescription>
+        <value>00541000004NJdiAAG</value>
+    </labels>
+    <labels>
+        <fullName>RateCards_Not_Found</fullName>
+        <categories>ThirdPartyRateCards</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RateCards Not Found</shortDescription>
+        <value>RateCards not found</value>
+    </labels>
+    <labels>
+        <fullName>RatePlanThresholdAmount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RatePlanThresholdAmount</shortDescription>
+        <value>75000</value>
+    </labels>
+    <labels>
+        <fullName>RatePlanThresholdPercent</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RatePlanThresholdPercent</shortDescription>
+        <value>5</value>
+    </labels>
+    <labels>
+        <fullName>RecordTypeForSuppReqPlannLocked</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RecordTypeForSuppReqPlannLocked</shortDescription>
+        <value>01241000001Ab1HAAS</value>
+    </labels>
+    <labels>
+        <fullName>RecordTypeForSupportReq</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RecordTypeForSupportReqWithAbandonded</shortDescription>
+        <value>01241000001Ab1IAAS</value>
+    </labels>
+    <labels>
+        <fullName>RecordTypes_For_DataCatalogVR</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SRThis Custom Label is used to store the Record Types For DataCatalogVRlogicCha</shortDescription>
+        <value>Inventory Request - Revision - Addressable Video,Inventory Request - Revision - Addressable Display,Inventory Request - Revision - New Ads Everywhere</value>
+    </labels>
+    <labels>
+        <fullName>Record_Type_Opportunity_Budget</fullName>
+        <categories>ProposalActiveInactiveController</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Record Type Opportunity Budget</shortDescription>
+        <value>Opportunity_Budget</value>
+    </labels>
+    <labels>
+        <fullName>Record_not_found</fullName>
+        <categories>showseeker</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Record not found</shortDescription>
+        <value>Record not found.</value>
+    </labels>
+    <labels>
+        <fullName>Record_type_not_available</fullName>
+        <categories>ProposalActiveInactiveController</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Record type not available</shortDescription>
+        <value>&apos;Linear&apos; record type is not available under political opportunity.</value>
+    </labels>
+    <labels>
+        <fullName>Region</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Region</shortDescription>
+        <value>Region</value>
+    </labels>
+    <labels>
+        <fullName>Reject_Budget_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reject Budget Button</shortDescription>
+        <value>Reject 2019 Budget</value>
+    </labels>
+    <labels>
+        <fullName>Reject_Forecast_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reject Forecast Button</shortDescription>
+        <value>Reject 2021 Forecast</value>
+    </labels>
+    <labels>
+        <fullName>Repfirm_RecordType_Error</fullName>
+        <categories>Create Opportunity API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Repfirm RecordType Error</shortDescription>
+        <value>Incorrect recordtype for Repfirm. Please contact System Administrator</value>
+    </labels>
+    <labels>
+        <fullName>Request_Processed</fullName>
+        <categories>InterimAE</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Request Processed</shortDescription>
+        <value>Request processed successfully</value>
+    </labels>
+    <labels>
+        <fullName>Request_sent_to_Showseeker</fullName>
+        <categories>showseeker</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Request sent to Showseeker</shortDescription>
+        <value>Request Sent to ShowSeeker Successfully</value>
+    </labels>
+    <labels>
+        <fullName>Required_Fields_missing_for_Digital_Campaign</fullName>
+        <categories>ThirdPartyDigitalInvReqServices</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required Fields missing for Digital Campaign</shortDescription>
+        <value>Required Fields are missing to Create Digital Campaign</value>
+    </labels>
+    <labels>
+        <fullName>Resend_Production_Service_Success_Message</fullName>
+        <categories>AdminUtility</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Resend Production Service Success Message</shortDescription>
+        <value>Production Service retry request sent successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Resend_Production_Service_Warning_Message</fullName>
+        <categories>AdminUtility</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Resend Production Service Warning Message</shortDescription>
+        <value>Production Service records not found to resend request to Boomi</value>
+    </labels>
+    <labels>
+        <fullName>Resend_Support_Request_Success_Message</fullName>
+        <categories>AdminUtility</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Resend Support Request Success Message</shortDescription>
+        <value>Support Request retry sent successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Resend_Support_Request_Warning_Message</fullName>
+        <categories>AdminUtility</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Resend Support Request Warning Message</shortDescription>
+        <value>Support Request records not found to resend request to Boomi.</value>
+    </labels>
+    <labels>
+        <fullName>RevenueCY</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RevenueCY</shortDescription>
+        <value>2023</value>
+    </labels>
+    <labels>
+        <fullName>RevenueNY</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RevenueNY</shortDescription>
+        <value>2024</value>
+    </labels>
+    <labels>
+        <fullName>RevenuePY</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RevenuePY</shortDescription>
+        <value>2022</value>
+    </labels>
+    <labels>
+        <fullName>Revenue_Adjustment_Profile</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Revenue Adjustment Profile</shortDescription>
+        <value>Master - FBO</value>
+    </labels>
+    <labels>
+        <fullName>SAMDesignationMaxTargetCount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SAMDesignationMaxTargetCount</shortDescription>
+        <value>9</value>
+    </labels>
+    <labels>
+        <fullName>SAMDesignationShutDown</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SAMDesignationShutDown</shortDescription>
+        <value>FALSE</value>
+    </labels>
+    <labels>
+        <fullName>SAM_ConfirmLable1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SAM_ConfirmLable1</shortDescription>
+        <value>You are about to delete</value>
+    </labels>
+    <labels>
+        <fullName>SAM_ConfirmLable2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SAM_ConfirmLable2</shortDescription>
+        <value>SAM records and proceed with the Account SAM Mapping creation.</value>
+    </labels>
+    <labels>
+        <fullName>SCX_Account_Connection_Create_Error</fullName>
+        <categories>ProposalSCXUploadController</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SCX_Account_Connection_Create_Error</shortDescription>
+        <value>Error while creating account connection.</value>
+    </labels>
+    <labels>
+        <fullName>SCX_Account_Connection_Created</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SCX Account Connection Created</shortDescription>
+        <value>Account connection is missing and created successfully.</value>
+    </labels>
+    <labels>
+        <fullName>SCX_Account_Connection_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Proposal SCX Account Connection Error</shortDescription>
+        <value>We could not locate the Account Connection for {0}. Please contact your System Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>SCX_ErrorFromTim</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SCX_ErrorFromTim</shortDescription>
+        <value>TIM rejected the SCX with following Error :</value>
+    </labels>
+    <labels>
+        <fullName>SCX_MissingProposal</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SCX_MissingProposal</shortDescription>
+        <value>Missing Proposal Id</value>
+    </labels>
+    <labels>
+        <fullName>SCX_Opp_Tim_System_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SCX Opp Tim System Error</shortDescription>
+        <value>Opportunity owner does not has any associated Tim System.</value>
+    </labels>
+    <labels>
+        <fullName>SCX_PROPOSAL</fullName>
+        <categories>Create Special proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SCX_PROPOSAL</shortDescription>
+        <value>SCX Upload</value>
+    </labels>
+    <labels>
+        <fullName>SCX_Upload_XML_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SCX Upload XML Error</shortDescription>
+        <value>Error in xml.</value>
+    </labels>
+    <labels>
+        <fullName>SPP</fullName>
+        <categories>Source</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SPP</shortDescription>
+        <value>SPP</value>
+    </labels>
+    <labels>
+        <fullName>SPP_AccountField_Setting_API_Name</fullName>
+        <categories>SpectrumReachCreate</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SPP AccountField Setting API Name</shortDescription>
+        <value>SPP_Account</value>
+    </labels>
+    <labels>
+        <fullName>SPP_Campaign_Field_Setting_API_Name</fullName>
+        <categories>SPP Campaign Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SPP Campaign Field Setting API Name</shortDescription>
+        <value>Campaign</value>
+    </labels>
+    <labels>
+        <fullName>SPP_Proposal_Field_Setting_API_Name</fullName>
+        <categories>SPP Proposal Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SPP Proposal Field Setting API Name</shortDescription>
+        <value>Proposal</value>
+    </labels>
+    <labels>
+        <fullName>SPP_Search</fullName>
+        <categories>SpectrumReachCreate</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SPP Search</shortDescription>
+        <value>SPP Search</value>
+    </labels>
+    <labels>
+        <fullName>SRZone_Not_Found_In_ZipCode_Mapping</fullName>
+        <categories>ThirdPartyDigitalInvReqServices</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SRZone Not Found In ZipCode Mapping</shortDescription>
+        <value>Invalid Spectrum Reach Zone :</value>
+    </labels>
+    <labels>
+        <fullName>SRZones_or_DMA_should_have_value</fullName>
+        <categories>ThirdPartyDigitalInvReqServices</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SRZones or DMA should have value</shortDescription>
+        <value>Either Spectrum Reach Zones or DMA or Zipcodes must have value. Combination not allowed.</value>
+    </labels>
+    <labels>
+        <fullName>Sales_Budget_Aggregate_Batch_Switch</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sales Budget Aggregate Batch Switch</shortDescription>
+        <value>false</value>
+    </labels>
+    <labels>
+        <fullName>Sales_Revenue_Trigger_Switch</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sales Revenue Trigger Switch</shortDescription>
+        <value>False</value>
+    </labels>
+    <labels>
+        <fullName>SalesforceClassicInstance</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SalesforceClassicInstance+</shortDescription>
+        <value>https://spectrumreach--c.na75.visual.force.com</value>
+    </labels>
+    <labels>
+        <fullName>SalesforceLightningInstance</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SalesforceLightningInstance</shortDescription>
+        <value>https://spectrumreach--c.na75.visual.force.com/</value>
+    </labels>
+    <labels>
+        <fullName>SalesforceLightningInstanceRecordId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SalesforceLightningInstanceRecordId</shortDescription>
+        <value>https://spectrumreach.lightning.force.com/lightning/r/</value>
+    </labels>
+    <labels>
+        <fullName>Select_Accounts_to_assign_InterimAE</fullName>
+        <categories>InterimAE</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Accounts to assign InterimAE</shortDescription>
+        <value>Please select Accounts before proceeding</value>
+    </labels>
+    <labels>
+        <fullName>Select_Advertiser_on_Opportunity</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Advertiser on Opportunity</shortDescription>
+        <value>Please select an Advertiser.</value>
+    </labels>
+    <labels>
+        <fullName>Select_Data_Catalog_Values</fullName>
+        <categories>Support Request</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Data Catalog Values</shortDescription>
+        <value>You must select Addressable Online/Streaming TV Catalog.</value>
+    </labels>
+    <labels>
+        <fullName>Select_Effective_Month_Year</fullName>
+        <categories>InterimAE</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Effective Month Year</shortDescription>
+        <value>Please select Effective Month Year before proceeding</value>
+    </labels>
+    <labels>
+        <fullName>Select_Platform_to_select_Status_as_Plan_Submitted</fullName>
+        <categories>Digital Campaign</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Platform to select Status as Plan Submitted</shortDescription>
+        <value>Cannot set Status to Plan Submitted without selecting a Platform.</value>
+    </labels>
+    <labels>
+        <fullName>Select_Restricted_Audiences</fullName>
+        <categories>Support Request</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Restricted Audiences</shortDescription>
+        <value>The data catalog selections you&apos;ve made include zero restricted interests. Please abandon this request.</value>
+    </labels>
+    <labels>
+        <fullName>Select_To_AE_for_Assignment</fullName>
+        <categories>InterimAE</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select To AE for Assignment</shortDescription>
+        <value>Please select To AE before proceeding</value>
+    </labels>
+    <labels>
+        <fullName>Select_all_details_for_InetrimAE_assign</fullName>
+        <categories>InterimAE</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select all details for InetrimAE assign</shortDescription>
+        <value>Please select all the fields before proceeding.</value>
+    </labels>
+    <labels>
+        <fullName>Select_atleast_one_record_for_Approve_Reject</fullName>
+        <categories>InterimAE</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select atleast one record for Approve/Reject</shortDescription>
+        <value>Please select atleast one record for Approve/Reject.</value>
+    </labels>
+    <labels>
+        <fullName>Selected_Account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SelectedAccount</shortDescription>
+        <value>Selected Account</value>
+    </labels>
+    <labels>
+        <fullName>SetTimeOut</fullName>
+        <categories>BoomiWebserviceHelper</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SetTimeOut</shortDescription>
+        <value>120000</value>
+    </labels>
+    <labels>
+        <fullName>SettimeoutforAOS</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SettimeoutforAOS</shortDescription>
+        <value>50000</value>
+    </labels>
+    <labels>
+        <fullName>ShowDevMessages</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ShowDevMessages</shortDescription>
+        <value>false</value>
+    </labels>
+    <labels>
+        <fullName>ShowSeekerAPIError</fullName>
+        <categories>ShowSeekerWebServiceHelper</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ShowSeekerAPIError</shortDescription>
+        <value>Show Seeker Services are experiencing a disruption. Please contact your system administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Show_Seeker</fullName>
+        <categories>Source</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Show Seeker</shortDescription>
+        <value>ShowSeeker</value>
+    </labels>
+    <labels>
+        <fullName>Show_confirmation_msg_for_new_account_creation_in_TIM</fullName>
+        <categories>ConfirmSaveAcctsInTim</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Show confirmation msg for new account creation in TIM</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>Size_for_Batch_Merge_TIDEs</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Size for Batch Merge TIDEs</shortDescription>
+        <value>100</value>
+    </labels>
+    <labels>
+        <fullName>Skip_Account_Trigger_RecordType_Validation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Skip Account Trigger RecordType Validation</shortDescription>
+        <value>No</value>
+    </labels>
+    <labels>
+        <fullName>Splash_Page_Redirect</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Splash Page Redirect</shortDescription>
+        <value>/006/o</value>
+    </labels>
+    <labels>
+        <fullName>Splash_Page_Redirect_Seconds_Desktop</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Splash Page Redirect Seconds Desktop</shortDescription>
+        <value>15</value>
+    </labels>
+    <labels>
+        <fullName>Splash_Page_Redirect_Seconds_Mobile</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Splash Page Redirect Seconds Mobile</shortDescription>
+        <value>15</value>
+    </labels>
+    <labels>
+        <fullName>Sponsorship_Status</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sponsorship Status</shortDescription>
+        <value>Approved,Rejected</value>
+    </labels>
+    <labels>
+        <fullName>Submit_Budget_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Submit Budget Button</shortDescription>
+        <value>Submit 2020 Budget</value>
+    </labels>
+    <labels>
+        <fullName>Submit_Forecast_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Submit Forecast Button</shortDescription>
+        <value>Submit 2021 Forecast</value>
+    </labels>
+    <labels>
+        <fullName>Submit_Support_Request_Component_Label</fullName>
+        <categories>Production Service</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Submit Support Request Component Label</shortDescription>
+        <value>Support Request Auto Confirmation</value>
+    </labels>
+    <labels>
+        <fullName>Submit_Support_Request_Confirmation</fullName>
+        <categories>Production Service</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Submit Support Request Confirmation</shortDescription>
+        <value>Would you like to submit the parent Support Request to Kernel?</value>
+    </labels>
+    <labels>
+        <fullName>Submit_Support_Request_SuccessMsg</fullName>
+        <categories>Production Service</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Submit Support Request SuccessMsg</shortDescription>
+        <value>Successfully submitted the Support Request.</value>
+    </labels>
+    <labels>
+        <fullName>Submitted_For_Approval</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Submitted_For_Approval</shortDescription>
+        <value>08-Submitted for Approval</value>
+    </labels>
+    <labels>
+        <fullName>SupportTeamUpdateProfiles</fullName>
+        <categories>Support Team Update</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SupportTeamUpdateProfiles</shortDescription>
+        <value>System Administrator;Master - Account Planner;Master - Account Coordinator;Master - Sales Support Manager;Master - National Account Planner</value>
+    </labels>
+    <labels>
+        <fullName>Swap_Child_Account_Error_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Swap Child Account Error Message</shortDescription>
+        <value>Please select the Child Account to Swap</value>
+    </labels>
+    <labels>
+        <fullName>Swap_Child_Account_Error_Title</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Swap Child Account Error Title</shortDescription>
+        <value>Select Child Account</value>
+    </labels>
+    <labels>
+        <fullName>SyncProposalBatchEmailBody</fullName>
+        <categories>BatchToSyncProposalLineItems</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SyncProposalBatchEmailBody</shortDescription>
+        <value>Latest updated proposals has been synced from TIM.</value>
+    </labels>
+    <labels>
+        <fullName>SyncProposalBatchProcessingMessage</fullName>
+        <categories>ProposalActiveInactiveController</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SyncProposalBatchProcessingMessage</shortDescription>
+        <value>Sync Proposals Job has been initiated for activated proposals, you will be notified via email once completed.</value>
+    </labels>
+    <labels>
+        <fullName>SyncProposalEmailSubject</fullName>
+        <categories>BatchToSyncProposalLineItems</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SyncProposalEmailSubject</shortDescription>
+        <value>Sync Proposal Batch Job Status.</value>
+    </labels>
+    <labels>
+        <fullName>Sync_Proposal_Error_message</fullName>
+        <categories>Sync Proposal Button</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sync Proposal Error message</shortDescription>
+        <value>Error occurred while synchronizing with Tim.</value>
+    </labels>
+    <labels>
+        <fullName>Sync_Proposal_Success_message</fullName>
+        <categories>Sync Proposal Button</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sync Proposal Success message</shortDescription>
+        <value>Successfully synchronized</value>
+    </labels>
+    <labels>
+        <fullName>Sync_Proposal_Time_in_Millie_Seconds</fullName>
+        <categories>Sync Proposal Button</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sync Proposal Time in Millie Seconds</shortDescription>
+        <value>5000</value>
+    </labels>
+    <labels>
+        <fullName>SyscodeListView</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SyscodeListView</shortDescription>
+        <value>00B41000008wMC9EAM</value>
+    </labels>
+    <labels>
+        <fullName>Syscode_Error</fullName>
+        <categories>ThirdPartyRateCards</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Syscode Error</shortDescription>
+        <value>Syscode id Mandatory</value>
+    </labels>
+    <labels>
+        <fullName>System_Selection</fullName>
+        <categories>Create Special proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>System Selection</shortDescription>
+        <value>Please select one system for proposal creation</value>
+    </labels>
+    <labels>
+        <fullName>TEXT_SELECTION</fullName>
+        <categories>Create Special proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TEXT_SELECTION</shortDescription>
+        <value>Please select record type</value>
+    </labels>
+    <labels>
+        <fullName>TIMAgencySyncError</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TIMAgencySyncError</shortDescription>
+        <value>An error occurred while syncing Agency</value>
+    </labels>
+    <labels>
+        <fullName>TIMCreate_Account_Sync_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TIMCreate Account Sync Error</shortDescription>
+        <value>An error occurred while trying to sync accounts.</value>
+    </labels>
+    <labels>
+        <fullName>TIMCreate_MultipleTimSystem_UserConError</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TIMCreate MultipleTimSystem UserConError</shortDescription>
+        <value>User {0} has multiple User Connections for {1}. Please contact your System Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>TIMCreate_Multiple_UserConError</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TIMCreate Multiple UserConError</shortDescription>
+        <value>User {0} has multiple User Connections. Please contact your System Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>TIMCreate_No_Proposal_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TIMCreate No Proposal Error</shortDescription>
+        <value>Proposal has not been created yet. Create the Proposal first or wait for few seconds and click the Complete Proposal button again.</value>
+    </labels>
+    <labels>
+        <fullName>TIMCreate_No_UserCon_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TIMCreate No UserCon Error</shortDescription>
+        <value>User {0}  does not have a Primary User Connection with valid TIM details associated with it.  Please contact your System Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>TIMCreate_Opportunity_RecordTypeUpdate_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TIMCreate Opportunity RecordTypeUpdate Error</shortDescription>
+        <value>Error occurred while updating the Opportunity Record Type while creating Proposal.</value>
+    </labels>
+    <labels>
+        <fullName>TIMCreate_Sync_ProposalLineItems_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TIMCreate Sync ProposalLineItems Error</shortDescription>
+        <value>Error: An error has occurred while saving Proposal Zones/Monthly Values for this Estimate/Order. Please contact your system administrator.</value>
+    </labels>
+    <labels>
+        <fullName>TIMCreate_UserCon_Details_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TIMCreate UserCon Details Error</shortDescription>
+        <value>User {0} does not have a Primary User Connection with valid TIM details associated with it.  Please contact your system administrator</value>
+    </labels>
+    <labels>
+        <fullName>TIMLoginError</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TIMLoginError</shortDescription>
+        <value>An error occurred while logging into TIM</value>
+    </labels>
+    <labels>
+        <fullName>TIM_ACTIVE_DEACTIVE_ERROR</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TIM_ACTIVE_DEACTIVE_ERROR</shortDescription>
+        <value>Error with record type update</value>
+    </labels>
+    <labels>
+        <fullName>TIM_PROPOSAL</fullName>
+        <categories>Create Special proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TIM_PROPOSAL</shortDescription>
+        <value>TIM System</value>
+    </labels>
+    <labels>
+        <fullName>Take_Ownership_button_Label</fullName>
+        <categories>Proposal Edit</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Take Ownership button Label</shortDescription>
+        <value>Take Ownership</value>
+    </labels>
+    <labels>
+        <fullName>TeamRole</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TeamRole</shortDescription>
+        <value>Team Role</value>
+    </labels>
+    <labels>
+        <fullName>TerminateInterimAEBatchSize</fullName>
+        <categories>Interim AE</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TerminateInterimAEBatchSize</shortDescription>
+        <value>2000</value>
+    </labels>
+    <labels>
+        <fullName>TestTIMId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TestTIMId</shortDescription>
+        <value>00000</value>
+    </labels>
+    <labels>
+        <fullName>ThirdParty_AE_Profiles</fullName>
+        <categories>ThirdPartyGetAEs</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ThirdParty AE Profiles</shortDescription>
+        <value>Master - Account Executive,Master - Interconnect Account Executive,Master - National Sales Manager,Master - National Sales Director,Master - Interconnect Sales Manager</value>
+    </labels>
+    <labels>
+        <fullName>TimBillingSyncApproval_Status</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TimBillingSyncApproval Status</shortDescription>
+        <value>Approved</value>
+    </labels>
+    <labels>
+        <fullName>TimBillingSyncClosed_Status</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TimBillingSyncClosed_Status</shortDescription>
+        <value>Closed</value>
+    </labels>
+    <labels>
+        <fullName>TimBillingSyncPending_Status</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TimBillingSyncPending_Status</shortDescription>
+        <value>Pending</value>
+    </labels>
+    <labels>
+        <fullName>TimBillingSyncRejected_Status</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TimBillingSyncRejected_Status</shortDescription>
+        <value>Rejected</value>
+    </labels>
+    <labels>
+        <fullName>TimBillingSyncStatus</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TimBillingSyncStatus</shortDescription>
+        <value>Approved</value>
+    </labels>
+    <labels>
+        <fullName>TitleofError</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TitleofError</shortDescription>
+        <value>Test Need to Update</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Message_1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Toast_Message_1</shortDescription>
+        <value>File has been successfully uploaded.</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Message_2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Toast_Message_2</shortDescription>
+        <value>Headers in sheet are invalid</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Message_3</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Toast_Message_3</shortDescription>
+        <value>File has been sent successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Message_4</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Toast_Message_4</shortDescription>
+        <value>Failed to send file to Boomi</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Title_1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Toast_Title_1</shortDescription>
+        <value>File Uploaded Successfully</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Title_2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Toast_Title_2</shortDescription>
+        <value>Mismatch !!</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Title_3</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Toast_Title_3</shortDescription>
+        <value>File Sent Successfully</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Title_4</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Toast_Title_4</shortDescription>
+        <value>Error Sending File</value>
+    </labels>
+    <labels>
+        <fullName>TooMuchBroadcastDataExists</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TooMuchBroadcastDataExists</shortDescription>
+        <value>Too much broadcast data exists for this Opportunity. To view information, please open Opportunity and review Proposal Zone Monthly Values.</value>
+    </labels>
+    <labels>
+        <fullName>TooMuchBroadcastDataExistsErrorMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TooMuchBroadcastDataExistsErrorMessage</shortDescription>
+        <value>Too many Proposal Zone Monthly Values exists for an Opportunity on this List View. Please contact your System Administrator!</value>
+    </labels>
+    <labels>
+        <fullName>Total_Pages</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Total Pages</shortDescription>
+        <value>101</value>
+    </labels>
+    <labels>
+        <fullName>Total_Section_Header</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Total Section Header</shortDescription>
+        <value>Totals</value>
+    </labels>
+    <labels>
+        <fullName>TradeDealRevenue</fullName>
+        <categories>User Warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TradeDealRevenue</shortDescription>
+        <value>The Total Deal Revenue for this Trade is Less than 50% of the Proposal Value.</value>
+    </labels>
+    <labels>
+        <fullName>TradeDigitalCampaign</fullName>
+        <categories>User Warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TradeDigitalCampaign</shortDescription>
+        <value>Trade Proposal has Digital Campaign(s).</value>
+    </labels>
+    <labels>
+        <fullName>TradeNew</fullName>
+        <categories>User Warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TradeNew</shortDescription>
+        <value>This Trade has not yet been Submitted for Approval.</value>
+    </labels>
+    <labels>
+        <fullName>TradePercentage</fullName>
+        <categories>User Warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TradePercentage</shortDescription>
+        <value>Trade has less than 50% Cash Component.</value>
+    </labels>
+    <labels>
+        <fullName>TradeProductionServices</fullName>
+        <categories>User Warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TradeProductionServices</shortDescription>
+        <value>Trade Proposal has Production Service(s).</value>
+    </labels>
+    <labels>
+        <fullName>Trade_RT</fullName>
+        <categories>Proposal recordType</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Trade_RT</shortDescription>
+        <value>Trade</value>
+    </labels>
+    <labels>
+        <fullName>Trade_Section_Header</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Trade Section Header</shortDescription>
+        <value>Trade Totals</value>
+    </labels>
+    <labels>
+        <fullName>Traffic_Order_Number_Eclipse_Customer_Number_not_found</fullName>
+        <categories>View Copy Titles</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Traffic Order Number / Eclipse Customer Number not found</shortDescription>
+        <value>Traffic Order Number / Eclipse Customer Number not found on Proposal</value>
+    </labels>
+    <labels>
+        <fullName>Transfer_Status</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Transfer Status</shortDescription>
+        <value>Denied, Transfer Completed,Recalled</value>
+    </labels>
+    <labels>
+        <fullName>USERCONN_MISSING</fullName>
+        <categories>Proposal utility</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>USERCONN_MISSING</shortDescription>
+        <value>For the current record userconnection is not configured correctly</value>
+    </labels>
+    <labels>
+        <fullName>UpdateATMandOTM</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UpdateATMandOTM</shortDescription>
+        <value>UpdateATMandOTM</value>
+    </labels>
+    <labels>
+        <fullName>Update_Lead_before_Lead_Convertion</fullName>
+        <categories>Campaign Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Update Lead before Lead Convertion</shortDescription>
+        <value>Before converting Lead please do update Lead with complete Address</value>
+    </labels>
+    <labels>
+        <fullName>UserData</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UserData</shortDescription>
+        <value>User Data</value>
+    </labels>
+    <labels>
+        <fullName>UserID_Not_esist</fullName>
+        <categories>Third party Query</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UserID Not exist</shortDescription>
+        <value>User with Id &quot;{0}&quot; does not exist or is inactive</value>
+    </labels>
+    <labels>
+        <fullName>User_Connection_Error</fullName>
+        <categories>Create Tim Proposal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>User Connection Error</shortDescription>
+        <value>Error while authenticate could be problem with user connection. Please contact your system administrator</value>
+    </labels>
+    <labels>
+        <fullName>User_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>User Name</shortDescription>
+        <value>User Name</value>
+    </labels>
+    <labels>
+        <fullName>User_Not_Allowed</fullName>
+        <categories>ThirdPartyGetAEs</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>User Not Allowed</shortDescription>
+        <value>User already has required permissions :</value>
+    </labels>
+    <labels>
+        <fullName>Valid_LeadId_Error_Message</fullName>
+        <categories>Campaign Details API</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Valid LeadId Error Message</shortDescription>
+        <value>Please provide valid leadId and userID</value>
+    </labels>
+    <labels>
+        <fullName>Warning_when_create_Opp_for_Agency_RepFirm</fullName>
+        <categories>Clone Opportunity Budget</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Warning when create Opp for Agency/RepFirm</shortDescription>
+        <value>Are you sure you want to create an Opportunity for Agency/RepFirm?</value>
+    </labels>
+    <labels>
+        <fullName>WeightedWaveDashboardId</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>WeightedWaveDashboardId</shortDescription>
+        <value>0FK41000000BjjZGAS</value>
+    </labels>
+    <labels>
+        <fullName>Wide_Orbit_Eclipse_System_Names</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wide_Orbit_Eclipse_System_Names</shortDescription>
+        <value>WO LA SN, WOLA</value>
+    </labels>
+    <labels>
+        <fullName>Yes_create_new_Account_in_Tim</fullName>
+        <categories>ConfirmSaveAcctsInTim</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Yes create new Account in Tim</shortDescription>
+        <value>Yes, Continue</value>
+    </labels>
+    <labels>
+        <fullName>csvLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>csvLabel</shortDescription>
+        <value>Eclipse System,Eclipse Id,Client,TierDesignation</value>
+    </labels>
+    <labels>
+        <fullName>currentYear</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currentYear</shortDescription>
+        <value>2021</value>
+    </labels>
+    <labels>
+        <fullName>dataCatalogRTForSTV</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Streaming Tv Data Catalog RT</shortDescription>
+        <value>Inventory Request - New Ads Everywhere,Inventory Request - Revision - New Ads Everywhere,Makegood - Inventory Request - New Ads Everywhere,New Ads Everywhere</value>
+    </labels>
+    <labels>
+        <fullName>dataCatalogRTforTIG</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>dataCatalogRTforTIG</shortDescription>
+        <value>Inventory Request - Title in Guide,Inventory Request - Title in Guide,Title in Guide</value>
+    </labels>
+    <labels>
+        <fullName>dcSocialExportPermission</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>dcSocialExportPermission</shortDescription>
+        <value>System Administrators,Master - Optimization Manager,Master - Digital Operations</value>
+    </labels>
+    <labels>
+        <fullName>dcSocialExportSchema</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>dcSocialExportSchema</shortDescription>
+        <value>{&quot;DC Advertiser Name&quot;:&quot;Advertiser__r.Name&quot;,&quot;Campaign Name&quot;:&quot;Campaign_Name__c&quot;,&quot;Unique Salesforce ID&quot;:&quot;Digital_Campaign_ID__c&quot;,&quot;DC Social Estimate_ID&quot;:&quot;Social_Estimate_ID__c&quot;,&quot;Campaign_Start_Date__c&quot;:&quot;Campaign_Start_Date__c&quot;,&quot;Campaign_End_Date__c&quot;:&quot;Campaign_End_Date__c&quot;,&quot;CoOp__c&quot;:&quot;CoOp__c&quot;,&quot;Objective&quot;:&quot;Objectives__c&quot;,&quot;Special Ad Category&quot;:&quot;Special_Ad_Category__c&quot;,&quot;Copy Changes Allowed&quot;:&quot;Copy_Changes_Allowed__c&quot;,&quot;Owner Name&quot;:&quot;Digital_Creatives__r.$.Owner.Name&quot;,&quot;DCC Name&quot;:&quot;Digital_Creatives__r.$.Name&quot;,&quot;DCC Advertiser_Name__c&quot;:&quot;Digital_Creatives__r.$.Advertiser_Name__c&quot;,&quot;Creative Name/ISCI&quot;:&quot;Digital_Creatives__r.$.Creative_Name__c&quot;,&quot;Creative_Start_Date__c&quot;:&quot;Digital_Creatives__r.$.Creative_Start_Date__c&quot;,&quot;Creative_End_Date__c&quot;:&quot;Digital_Creatives__r.$.Creative_End_Date__c&quot;,&quot;Custom UTM&quot;:&quot;Digital_Creatives__r.$.Custom_UTM__c&quot;}</value>
+    </labels>
+    <labels>
+        <fullName>dccStatusExcludeFromExport</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>dccStatusExcludeFromExport</shortDescription>
+        <value>&apos;01 Draft Creative&apos;,&apos;00 Abandoned Creative&apos;</value>
+    </labels>
+    <labels>
+        <fullName>displayLinearAsProductType</fullName>
+        <categories>FM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>displayLinearAsProductType</shortDescription>
+        <value>Yes</value>
+    </labels>
+    <labels>
+        <fullName>firstLookforNewOpportunity</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>firstLookforNewOpportunity</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>isActiveAccountConnectionTrigger</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>isActiveAccountConnectionTrigger</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>isActiveOpportunity</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>isActiveOpportunity</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>isActiveProposal</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>isActiveProposal</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>isActiveProposalZoneTrigger</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>isActiveProposalZoneTrigger</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>isActiveUserTrigger</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>isActiveUserTrigger</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>maxExtra</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>maxExtra</shortDescription>
+        <value>15</value>
+    </labels>
+    <labels>
+        <fullName>maxTarget</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>maxTarget</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>messageofError</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>messageofError</shortDescription>
+        <value>Test Need to Update</value>
+    </labels>
+    <labels>
+        <fullName>nonPoliticalAccountGenre</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>nonPoliticalAccountGenre</shortDescription>
+        <value>Republicans,Democrats,Independents,General Voters,Primary Voters</value>
+    </labels>
+    <labels>
+        <fullName>opportunity_negotiation_label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>opportunity_negotiation_label</shortDescription>
+        <value>06-Negotiating</value>
+    </labels>
+    <labels>
+        <fullName>proposalconcurrencymessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>proposalconcurrencymessage</shortDescription>
+        <value>This Record is currently being processed in the background. Take No Action. Visit record after few minutes to validate the changes</value>
+    </labels>
+    <labels>
+        <fullName>rateClassificationMG</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>rateClassificationMG</shortDescription>
+        <value>Makegood-Client,Makegood-Sales,Makegood-Trafficking,Makegood-Underdelivery,Makegood-Vendor,Bonus</value>
+    </labels>
+    <labels>
+        <fullName>saveZeroDollarAccounts</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>saveZeroDollarAccounts</shortDescription>
+        <value>false</value>
+    </labels>
+    <labels>
+        <fullName>supportReqProfiles</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>supportReqProfiles</shortDescription>
+        <value>Master - Account Planner,Master - National Account Planner,Master - Interconnect Account Planner,Master - Sales Support Manager,System Administrator</value>
+    </labels>
+    <labels>
+        <fullName>useDnBStaticJSON</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>useDnBStaticJSON</shortDescription>
+        <value>false</value>
+    </labels>
+</CustomLabels>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Record33</label>
+    <protected>false</protected>
+    <values>
+        <field>Description__c</field>
+        <value xsi:type="xsd:string">A required parameter is missing or a parameter value is missing. Please see the search documentation for information on this parameter.  Potential issues: - Required parameter not found. - String value is longer than maximum allowed length. - String length is shorter than the minimum required length. - Numeric field is smaller than the minimum allowed. - Array contains more than allowed number of values. - Array or object does not include minimum values.</value>
+    </values>
+    <values>
+        <field>ErrorMessage__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>HTTPStatusCode__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>IsDataError__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>errorCode__c</field>
+        <value xsi:type="xsd:string">10002</value>
+    </values>
+    <values>
+        <field>product__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

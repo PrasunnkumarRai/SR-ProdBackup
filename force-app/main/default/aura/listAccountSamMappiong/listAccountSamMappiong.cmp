@@ -1,0 +1,11 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+	<div class="slds-p-around_xxx-small"  style="height:25em; overflow-y:auto;">
+         <lightning:listView aura:id="listViewAccountsammappings"
+        objectApiName="Account_SAM_Mapping__c"
+        listName="My_Acct_SAM_Mappings"
+        rows="15"
+        showActionBar="false" 
+        enableInlineEdit="false"
+        showRowLevelActions="false"/>
+    </div>
+</aura:component>

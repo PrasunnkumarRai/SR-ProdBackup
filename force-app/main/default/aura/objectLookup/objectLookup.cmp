@@ -1,0 +1,535 @@
+<!--
+    Customer/Project:                 Spectrum Reach 
+    Lightning Component Name:          objectLookup
+    Author/Date:                      Brett Ballantyne 2017
+    Release:             
+    Related US:         
+    Purpose:            To provide a generic, implementable component that provides type ahead searching of an object
+                        or list of objects.  To date, this has been implemented by the following lightning components:
+                        accountLookup - Used by New Opportunity 
+                        addAdvertiser
+                        opptyAddAdvertiser
+                        crossObjectlookup - Used by New Account
+                        newContact
+
+    *****  Since this is an abstract, extensible component, please use care when modifying as changes can have impact on other components  *****
+    Modification History : Added by Madhusudhan for AgencyRecordtype for Contact object (SRSF-1352) on Oct-29-18
+-->
+
+<aura:component
+  extensible="true"
+  abstract="true"
+  controller="SObjectLookupController"
+  implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName"
+>
+  <!--   <ltng:require styles="{!$id.SalesforceLightningDesignSystem221 + '/assets/styles/salesforce-lightning-design-system.css'}"/>  -->  
+  <ltng:require
+    styles="{!$id.SLDS + '/assets/styles/salesforce-lightning-design-system.css'}"
+  />
+  <ltng:require scripts="{!$Resource.jquery311}" />
+  <aura:attribute access="public" name="SearchKeyWord" type="string" />
+  <aura:attribute access="public" name="acctId" type="string" />
+  <aura:attribute
+    access="public"
+    name="Message"
+    type="String"
+    default="Search Results..."
+  />
+  <aura:attribute access="public" name="timer" type="Integer" default="0" />
+
+  <aura:attribute access="public" name="record" type="Object" />
+  <aura:attribute access="public" name="recordError" type="String" />
+  <aura:attribute access="public" name="custIdVal" type="String" />
+  <aura:attribute
+    access="public"
+    name="callback"
+    type="String"
+    description="Call this to communicate results the visualforce page "
+  />
+
+  <aura:attribute name="id" type="String" access="public" />
+  <!-- lightning URLs -->
+  <aura:attribute name="LEXBaseURL" type="String" />
+  <aura:attribute name="LEXObjectURL" type="String" />
+
+  <!-- Address fields -->
+  <aura:attribute access="public" name="ShippingStreet" type="String" />
+  <aura:attribute access="public" name="ShippingCity" type="String" />
+  <aura:attribute access="public" name="ShippingState" type="String" />
+  <aura:attribute access="public" name="ShippingPostalCode" type="String" />
+  <aura:attribute access="public" name="ShippingCountry" type="String" />
+
+  <aura:attribute access="public" name="objMap" type="Object[]" />
+  <aura:attribute access="public" name="objectType" type="String" />
+  <aura:attribute access="public" name="objectDetailText" type="String" />
+  <aura:attribute access="public" name="searchResultHTML" type="String" />
+  <aura:attribute access="public" name="selectedObjectHTML" type="String" />
+  <aura:attribute access="public" name="iconForDetailDisplay" type="String" />
+  <aura:attribute access="public" name="lookupResults" type="Object[]" />
+  <aura:attribute access="public" name="recTypeSelect" type="Object[]" />
+
+  <aura:attribute access="public" name="searchFields" type="String" />
+  <aura:attribute access="public" name="whereClause" type="String" />
+  <aura:attribute access="public" name="numRecords" type="String" />
+  <aura:attribute access="public" name="showNewButton" type="Boolean" />
+  <aura:attribute access="public" name="showObjDetails" type="Boolean" />
+  <aura:attribute access="public" name="parentControlsSpinner" type="Boolean" />
+  <aura:attribute access="public" name="additionalMarkup" type="Boolean" />
+  <aura:attribute
+    access="public"
+    name="isCreateOppty"
+    type="Boolean"
+    default="false"
+  />
+  <aura:attribute
+    access="public"
+    name="isCreateContact"
+    type="Boolean"
+    default="false"
+  />
+  <aura:attribute access="public" name="AdContactType" type="Object[]" />
+  <aura:attribute
+    access="public"
+    name="nestedQuerySOQL"
+    type="String"
+    default=""
+  />
+  <aura:attribute
+    access="public"
+    name="opptyStages"
+    type="OpportunityStage[]"
+  />
+  <aura:attribute
+    access="public"
+    name="AccountTeamAEs"
+    type="AccountTeamMember[]"
+  />
+  <aura:attribute access="public" name="curUserId" type="String" />
+  <aura:attribute access="public" name="defaultStage" type="String" />
+  <aura:attribute access="public" name="defaultAE" type="String" />
+  <aura:attribute access="public" name="incomingAcctId" type="String" />
+  <aura:attribute
+    access="public"
+    name="errorThrown"
+    type="Boolean"
+    default="false"
+  />
+  <aura:attribute access="public" name="opptyRecordType" type="String" />
+  <aura:attribute access="public" name="agency" type="String" />
+  <aura:attribute access="public" name="repFirm" type="String" />
+  <aura:attribute access="public" name="NCCAgency" type="String" />
+  <aura:attribute access="public" name="NCCAccountRep" type="String" />
+  <aura:attribute access="public" name="accTeamMembers" type="Object[]" />
+  <aura:attribute access="public" name="networksToAvoid" type="String" />
+  <aura:attribute
+    access="public"
+    name="showRTselector"
+    type="Boolean"
+    default="True"
+  />
+  <aura:attribute
+    access="public"
+    name="accountAgencyRecType"
+    type="String"
+    default=""
+  />
+  <aura:attribute
+    access="public"
+    name="supplementalWhereClause"
+    type="String"
+    default=" "
+  />
+
+  <!-- SRSF-1672  -->
+  <aura:attribute
+    access="public"
+    name="BudgetDMAs"
+    type="String[]"
+    default="['None']"
+  />
+  <aura:attribute access="public" name="DMASelected" type="String" />
+  <aura:attribute access="public" name="dmaMap" type="Map" />
+  <!-- Added : SRSF-2306 -->
+  <aura:attribute access="public" name="currentAEId" type="String" />
+  <aura:attribute access="public" name="UserProfileName" type="String" />
+  <aura:attribute access="public" name="opptySalesProbList" type="String[]" />
+  <aura:attribute access="public" name="getFirstLookList" type="String[]" />
+  <aura:attribute access="public" name="Salesprobability" type="String" />
+  <aura:attribute access="public" name="FirstLookVal" type="String" />
+  <aura:attribute access="public" name="Description" type="String" default="" />
+  <aura:attribute access="public" name="FirstLookContValue" type="Currency" />
+  <!-- START : SRSF-4392 -->
+  <aura:attribute access="public" name="selectedHoldingAcc" type="String" default="Enter Hold Co Name"/>
+  <aura:attribute access="public" name="selectedHoldingAccId" type="String"/>
+  <aura:attribute access="public" name="demandSidePlatform" type="String[]" />
+  <aura:attribute access="public" name="supplySidePlatform" type="String[]" />
+  <aura:attribute access="public" name="seatId" type="String" />
+  <aura:attribute access="public" name="dsPlatformList" type="String[]" />  
+  <aura:attribute access="public" name="ssPlatformList" type="String[]" /> 
+  <!-- END : SRSF-4392 --> 
+  <!-- START : SRSF-4604 -->
+  <aura:attribute access="public" name="businessClassification" type="String"/>
+  <aura:attribute access="public" name="businessClassList" type="String[]"/>
+  <!-- END : SRSF-4604 -->
+  <!-- START : SRSF-4927 -->
+  <!-- <aura:attribute access="public" name="discountCode" type="String"/>
+  <aura:attribute access="public" name="discountCodeList" type="String[]"/> -->
+  <!-- END : SRSF-4927 -->
+  
+  <aura:attribute
+    access="public"
+    name="FlightStartDate"
+    type="Date"
+    default=""
+  />
+  <aura:attribute access="public" name="FlightEndDate" type="Date" default="" />
+  <aura:attribute
+    access="public"
+    name="createActivityChange"
+    type="Boolean"
+    default="false"
+  />
+  <aura:attribute access="public" name="NoOfWeeks" type="Integer" default="0" />
+  <!-- SRSF-3212 -->
+  <aura:attribute
+    access="public"
+    name="showFlightDates"
+    type="Boolean"
+    default="false"
+  /><!-- SRSF-1840 -->
+  <aura:attribute
+    access="public"
+    name="showCreateActivity"
+    type="Boolean"
+    default="false"
+  />
+
+  <aura:handler event="c:AEChangeEvent" action="{!c.getDMAValues}" />
+   <!-- SRSF-1672  -->
+
+  <!-- facets -->
+  <aura:attribute name="insertMarkupAboveSaveButt" type="Aura.Component[]" />
+  <aura:attribute name="insertMarkupAboveSaveButt1" type="Aura.Component[]" />
+  <aura:attribute name="insertMarkup" type="Aura.Component[]" />
+  <aura:attribute name="dynamicMarkup" type="Aura.Component[]" />
+
+  <aura:attribute access="public" name="queryObject" type="Object[]" />
+  <aura:attribute access="public" name="sobjectKeys" type="Map" />
+  <aura:attribute access="public" name="HTMLMarkup" type="Object" />
+  <aura:attribute access="public" name="createButtLabel" type="String" />
+  <aura:attribute access="public" name="createObjectType" type="String" />
+  <aura:attribute access="public" name="AccountId" type="String" />
+  <aura:attribute access="public" name="RecordType" type="String" />
+  <!-- remove -->
+  <aura:attribute access="public" name="selectedRecordType" type="String" />
+  <aura:attribute access="public" name="selectedRecordTypeText" type="String" />
+  <aura:attribute
+    access="public"
+    name="selectedRecordTypeDevName"
+    type="String"
+  />
+  <aura:attribute access="public" name="defaultRecordType" type="String" />
+  <aura:attribute access="public" name="defaultRecordTypeText" type="String" />
+  <aura:attribute access="public" name="myUITheme" type="String" />
+  <aura:attribute access="public" name="selectedAccount" type="Account" />
+  <aura:attribute access="public" name="isUserOnAccountTeam" type="Boolean" />
+  <aura:attribute access="public" name="contactRoles" type="String[]" />
+  <aura:attribute access="public" name="contactRecordTypes" type="Object[]" />
+  <aura:attribute
+    access="public"
+    name="duplicateRecordsFound"
+    type="Object[]"
+  />
+  <aura:attribute access="public" name="accountRecordTypes" type="Object[]" />
+  <aura:attribute
+    access="public"
+    name="IsObjectSearchable"
+    type="Boolean"
+    default="true"
+  />
+  <aura:attribute
+    access="public"
+    name="isUserAE"
+    type="Boolean"
+    default="false"
+  />
+  <aura:attribute access="public" name="contractRecordType" type="String" />
+  <aura:attribute access="public" name="curUserProfile" type="String" />
+  <aura:attribute access="public" name="recordTypeId__c" type="String" />
+  <aura:attribute access="public" name="recordTypeName__c" type="String" />
+  <aura:attribute access="public" name="userType" type="String" />
+  <!--SRSF-4770 start -->
+  <aura:attribute access="public" name="firstLookVisibility" type="Boolean" />
+  <!--SRSF-4770 end -->
+  <!--declare event handlers-->
+  <aura:handler
+    name="oSelectedObjectEvent"
+    event="c:selectedObjectEvent"
+    action="{!c.handleComponentEvent}"
+  />
+  <aura:handler event="aura:waiting" action="{!c.showSpinner}" />
+  <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}" />
+  <aura:handler
+    name="change"
+    value="{!v.id}"
+    action="{!c.selectedObjectChange}"
+  />
+  <aura:handler
+    name="change"
+    value="{!v.isUserOnAccountTeam}"
+    action="{!c.checkAccountTeamMembership}"
+  />
+  <!-- SRSF-873 <aura:handler name="change" value="{!v.opptyRecordType}" action="{!c.setOpptyRecordType}" /> -->
+  <aura:handler
+    name="change"
+    value="{!v.accTeamMembers}"
+    action="{!c.handleAccountTeams}"
+  />
+  <aura:handler
+    name="change"
+    value="{!v.accountAgencyRecType}"
+    action="{!c.generateSupWhere}"
+  />
+  <aura:handler
+    name="change"
+    value="{!v.curUserId}"
+    action="{!c.generateSupWhere}"
+  />
+ 
+  <!--  <aura:handler name="change" value="{!v.selectedAccount}" action="{!c.setAccountInfo}"/> -->
+
+  <div aura:id="ErrorMessageDiv">
+    <!-- app generated error messages go here -->
+  </div>
+
+  <div class="slds-m-around--large">
+    <div
+      aura:id="searchRes"
+      class="slds-form-element slds-lookup slds-is-close"
+      data-select="single"
+    >
+      <aura:if isTrue="{!v.IsObjectSearchable}">
+        <label class="slds-form-element__label" for="lookup-348">
+          {!v.objectType} Search
+        </label>
+        <aura:set attribute="else">
+          <h3
+            class="slds-section__title slds-theme--shade primaryPaletteBorder test-id__section-header-container"
+          >
+            <span
+              class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate"
+            >
+              {!v.objectType}</span
+            >
+          </h3>
+        </aura:set>
+      </aura:if>
+
+      <!--This part is for display search bar for lookup-->
+      <div class="slds-form-element__control">
+        <div class="slds-input-has-icon slds-input-has-icon--right">
+          <c:SVG
+            class="slds-input__icon slds-show"
+            xlinkHref="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#search'}"
+          />
+          <!-- This markup is for when an record is selected -->
+          <div aura:id="lookup-pill" class="slds-pill-container slds-hide">
+            <span class="slds-pill">
+              <span class="slds-pill__label"> {!v.selectedRecord.Name} </span>
+              <button
+                class="slds-button slds-button--icon slds-pill__remove"
+                onclick="{!c.clear}"
+              >
+                <!-- <lightning:icon class="icn" iconName="/assets/icons/utility-sprite/svg/symbols.svg#close" size="x-small" /> -->
+                <c:SVG
+                  class="slds-button__icon slds-icon--small slds-icon"
+                  myIcon="close"
+                  iconBaseType="slds-icon-utility-"
+                  iconClass="utility"
+                  xlinkHref="{!$Resource.SLDS}"
+                />
+                <!--     <c:SVG class="slds-button__icon" xlinkHref="{!$Resource.SalesforceLightningDesignSystem221 + '/assets/icons/utility-sprite/svg/symbols.svg#close'}" /> -->
+                <span class="slds-assistive-text">Remove</span>
+              </button>
+            </span>
+          </div>
+          <div aura:id="lookupField" class="slds-show">
+            <aura:if isTrue="{!v.IsObjectSearchable}">
+              <ui:inputText
+                aura:id="searchBox"
+                updateOn="keyup"
+                keyup="{!c.keyPressController}"
+                class="slds-lookup__search-input slds-input"
+                value="{!v.SearchKeyWord}"
+                placeholder="Search..."
+              />
+              <aura:set attribute="else">
+                <ui:outputText
+                  aura:id="searchBox"
+                  value="{!v.SearchKeyWord}"
+                ></ui:outputText>
+              </aura:set>
+            </aura:if>
+          </div>
+        </div>
+      </div>
+
+      <!-- This part is for Display typehead lookup result List-->
+      <!-- It was easier to implement 2 sets of markup and buttons than to deal with the extremely complex CSS that would have
+              been required to make one set work.  Use the insertMarkupAboveSaveButt and insertMarkupAboveSaveButt1 attributes
+              by any components that implement this to insert custom markup between the type ahead results list and the save/cancel buttons -->
+      <div class="slds-lookup__menu slds" id="lookup-348">
+        <div class="slds-lookup__item--label slds-text-body--small">
+          {!v.Message}
+        </div>
+        <!--     <aura:if isTrue="{!v.parentControlsSpinner}" > -->
+        <center><ui:spinner aura:id="spinner" /></center>
+        <!--    </aura:if> -->
+        <ul class="slds-lookup__list" role="listbox">
+          <aura:iteration items="{!v.lookupResults}" var="singleRec">
+            <c:objectLookupResult oObject="{!singleRec}" />
+          </aura:iteration>
+        </ul>
+
+        <div class="slds-is-relative">
+          <div
+            id="newObjectButtDiv"
+            style="position: absolute; top: 1rem; left: 1rem"
+          >
+            <div aura:id="insertMarkupAboveSaveButtDiv">
+              <aura:if isTrue="{!v.showRTselector}">
+                <br />
+
+                {!v.insertMarkupAboveSaveButt}
+
+                <br />
+              </aura:if>
+            </div>
+
+            <div class="butt-container">
+              <lightning:layout horizontalAlign="space">
+                <lightning:layoutItem flexibility="auto" padding="around-small">
+                  <lightning:button
+                    aura:id="newObjectButton"
+                    variant="brand"
+                    class="slds-hide"
+                    label="{!v.createButtLabel}"
+                    onclick="{!c.createObject}"
+                  />
+                </lightning:layoutItem>
+                <aura:if isTrue="{!v.showRTselector}">
+                  <lightning:layoutItem
+                    flexibility="auto"
+                    padding="around-small"
+                  >
+                    <lightning:button
+                      aura:id="cancelButton"
+                      variant="brand"
+                      class="slds-show"
+                      label="Cancel"
+                      onclick="{!c.cancel}"
+                    />
+                  </lightning:layoutItem>
+                </aura:if>
+              </lightning:layout>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slds-is-relative">
+      <div aura:id="newObjectButtDiv1" class="slds-hide">
+        <div aura:id="insertMarkupAboveSaveButtDiv1">
+          <aura:if isTrue="{!v.showRTselector}">
+            <br />
+
+            {!v.insertMarkupAboveSaveButt1}
+
+            <br />
+          </aura:if>
+        </div>
+
+        <div class="butt-container">
+          <lightning:layout horizontalAlign="space">
+            <aura:if isTrue="{!v.showRTselector}">
+              <lightning:layoutItem flexibility="auto" padding="around-small">
+                <lightning:button
+                  aura:id="newObjectButton1"
+                  variant="brand"
+                  class="slds-hide"
+                  label="{!v.createButtLabel}"
+                  onclick="{!c.createObject}"
+                />
+              </lightning:layoutItem>
+              <lightning:layoutItem flexibility="auto" padding="around-small">
+                <lightning:button
+                  aura:id="cancelButton1"
+                  variant="brand"
+                  class="slds-show"
+                  label="Cancel"
+                  onclick="{!c.cancel}"
+                />
+              </lightning:layoutItem>
+              <aura:set attribute="else">
+                <lightning:layoutItem flexibility="auto" padding="around-small">
+                  <lightning:button
+                    aura:id="newObjectButton1"
+                    variant="brand"
+                    class="slds-hide"
+                    label="{!v.createButtLabel}"
+                    onclick="{!c.addAdvertiser}"
+                  />
+                </lightning:layoutItem>
+              </aura:set>
+            </aura:if>
+          </lightning:layout>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div aura:id="insertMarkupDiv" class="slds-hide">{!v.insertMarkup}</div>
+  <div aura:id="dynamicMarkupDiv" class="slds-hide">{!v.dynamicMarkup}</div>
+
+  <!-- Display a header with details about the record -->
+  <aura:if isTrue="{!v.showObjDetails}">
+    <div
+      aura:id="searchResultBanner"
+      class="slds-page-header slds-hide"
+      role="banner"
+    >
+      <p class="slds-text-heading--label">
+        <!--     <c:SVG class="slds-icon slds-icon- -large slds-icon-text-default" xlinkHref="{!$Resource.SalesforceLightningDesignSystem221 + v.iconForDetailDisplay }" /> -->
+        <div class="slds-grid">
+          <div class="slds-col slds-size_1-of-12">
+            <lightning:icon
+              iconName="{!v.iconForDetailDisplay}"
+              size="medium"
+            />
+          </div>
+          <div class="slds-col slds-size_11-of-12">
+            <aura:unescapedHtml value="{!v.selectedObjectHTML}" />
+          </div>
+        </div>
+      </p>
+      <br />
+
+      <lightning:button
+        variant="brand"
+        label="{!v.objectDetailText}"
+        onclick="{!c.gotoObjectDetail}"
+      />
+    </div>
+  </aura:if>
+  <!-- Display Lightning Data Service errors, if any -->
+  <div>
+    <aura:if isTrue="{!not(empty(v.recordError))}">
+      <div class="recordError">
+        <ui:message title="Error" severity="error" closable="true">
+          {!v.recordError}
+        </ui:message>
+      </div>
+    </aura:if>
+  </div>
+</aura:component>

@@ -1,0 +1,121 @@
+<!--
+    Author : MAndS 
+    Date   : 11/05/2017
+    Description : Geography Target Component for Digital Campaign  
+    Modification History : 
+-->
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction" access="global" controller="CM_DigitalZipCodesLCController">
+	<ltng:require styles="{! $Resource.select2 + '/select2-4.0.3/dist/css/select2.min.css'}" 
+      scripts="{!join(',',             
+        $Resource.Jquery224 ,      
+        $Resource.select2 + '/select2-4.0.3/dist/js/select2.js')
+      }" afterScriptsLoaded="{!c.scriptsLoaded}"/>
+    
+    <!--init handler event call "doInit" function on component load and fetch picklist values-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="recordId" type="String" /><!--default="a0Ig00000084fPgEAI" />-->
+    <!--<aura:attribute name="RecId" type="string" default="a150n0000008r0UAAQ" description="RecordId"/>-->
+    <aura:attribute name="Zipcode" type="string" description="Zipcode Information"/>
+    <aura:attribute name="strLblDM" type="string" description="DMA Label"/>
+    <aura:attribute name="strLblSRZ" type="string" description="Spectrum Reach Zone Label"/>
+   <!-- <aura:attribute name="strLblCD" type="string" description="Congressional District Label"/>-->
+    <aura:attribute name="showDMA" type="Boolean" default="true"/>
+    <aura:attribute name="showSRZ" type="Boolean" default="true"/>
+    <!--<aura:attribute name="showCD" type="Boolean" default="true"/>-->
+    <aura:attribute name="lockRecord" type="Boolean" default="true"/>
+    <aura:attribute name="objDCampaign" type="Digital_Campaign__c"/>
+    
+    <div class="slds">
+        <div class="slds-card slds-m-top--x-large"> 
+            <!-- page header -->
+            <div class="slds-card__header slds-border_bottom slds-p-bottom_small">
+                <header class="slds-align--absolute-center">
+                    <span class="slds-text-heading_small">Geography Target</span>
+                </header>
+            </div>
+            <div class="slds-card__body slds-m-around_medium">              
+                <h3 class="slds-section-title--divider"><b>Available Geographies</b></h3>
+                <div class="slds-grid slds-wrap slds-grid--pull-padded slds-m-horizontal--large">
+                    <div class="slds-p-horizontal--small slds-m-bottom--medium  slds-medium-size--1-of-1 slds-small-size--1-of-1 slds-large-size--1-of-1">
+                        	<div class="{!v.showDMA == true ? 'slds-show' : 'slds-hide'}">
+                                <div class="slds-form-element ">  
+                                    <label for="picklist" class="slds-form-element__label">DMA
+                                    	<c:ToolTipLC tooltipText="{!v.strLblDM}"/>
+                                    </label> <br/>
+                                    <div class="slds-form-element">                
+                                        <div class="slds-select_container" >
+                                            <select style="width:100%" id="picklist2" class="select2Class" multiple="multiple" disabled="{!v.lockRecord}">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                        	</div>
+                        	<div class="{!v.showSRZ == true ? 'slds-show' : 'slds-hide'}">
+                                <div class="slds-form-element slds-m-top--x-large">  
+                                     <label for="picklist" class="slds-form-element__label">Spectrum Reach Zone
+                                         <c:ToolTipLC tooltipText="{!v.strLblSRZ}"/>
+                                     </label> <br/>
+                                     <div class="slds-form-element">                
+                                        <div class="slds-select_container" >
+                                             <select style="width:100%" id="picklist3" class="select2Class" multiple="multiple" disabled="{!v.lockRecord}">
+                                             </select>
+                                         </div>
+                                    </div>
+                                </div>
+                        	</div>
+                    </div>
+                </div>
+                
+                <h3 class="slds-section-title--divider"><b>Selected Geographies</b></h3>
+                <div class="slds-p-horizontal--small slds-m-bottom--medium  slds-medium-size--1-of-1 slds-small-size--1-of-1 slds-large-size--1-of-1">
+                    <div class="slds-m-left--large slds-form slds-form_stacked">
+                        <aura:if isTrue="{!v.showDMA}">
+                        	<div class="slds-form-element ">  
+                                <label for="picklist" class="slds-form-element__label">DMA
+                                    <c:ToolTipLC tooltipText="{!v.strLblDM}"/>
+                                </label>
+                                <div class="slds-form-element">                
+                                    <div class="slds-form-element__control" >
+                                        <ui:inputTextArea aura:id="textareaDMAs" disabled="true" value="{!v.objDCampaign.DMAs__c}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </aura:if>
+                        
+                        <aura:if isTrue="{!v.showSRZ}">
+                            <div class="slds-form-element ">  
+                                <label for="picklist" class="slds-form-element__label">Spectrum Reach Zone
+                                    <c:ToolTipLC tooltipText="{!v.strLblSRZ}"/>
+                                </label>
+                                <div class="slds-form-element">                
+                                    <div class="slds-form-element__control" >
+                                        <ui:inputTextArea aura:id="textareaSRZs" disabled="true" value="{!v.objDCampaign.Spectrum_Reach_Zones__c}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </aura:if>
+                        
+                  <!--      <aura:if isTrue="{!v.showCD}">
+                            <div class="slds-form-element ">  
+                                <label for="picklist" class="slds-form-element__label">Congressional District
+                                    <c:ToolTipLC tooltipText="{!v.strLblCD}"/>
+                                </label>
+                                <div class="slds-form-element">                
+                                    <div class="slds-form-element__control" >
+                                        <ui:inputTextArea aura:id="textareaCRs" disabled="true" value="{!if(empty(v.objDCampaign.Congressional_Districts__c), '', v.objDCampaign.Congressional_Districts__c)}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </aura:if>-->
+                        
+                        <lightning:textarea name="textareaConsolidatedZip" aura:id="textareaConsolidatedZip" value="{!v.objDCampaign.Zip_Codes__c}" label="Zip Codes Information" disabled="{!v.lockRecord}"/>
+                    </div>
+                </div>
+                <div class="slds-align--absolute-center slds-p-top_small slds-m-top--large">
+                    <lightning:button variant="neutral" label="Insert Geography" onclick="{!c.updateZipcode}" disabled="{!v.lockRecord}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

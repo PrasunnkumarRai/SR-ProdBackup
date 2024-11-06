@@ -1,0 +1,17 @@
+.THIS .oppclosedate{
+    width: 90% !important;
+}
+.THIS #previousUserId .slds-pill__remove{
+    display: none !important; 
+}
+.THIS #newuserId .slds-pill__remove{
+    display: none !important; 
+}
+.THIS .slds-modal__container{
+    max-width: 7000vw !important;
+    width:7000vw !important;
+}
+.THIS .slds-modal__large{
+    max-width: 9600px !important;
+    width:8700px !important;    
+}

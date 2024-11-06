@@ -1,0 +1,42 @@
+<aura:component extends="c:objectLookup" implements="force:lightningQuickAction,force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,lightning:actionOverride,lightning:isUrlAddressable">
+   <aura:attribute name="selectedRecord" type="SObject" default="{}" description="Used to store the SELECTED sObject Record"/>
+   <aura:attribute name="listOfSearchRecords" type="sObject[]" description="Used to store the list of search records which are returned from the apex controller"/>
+   <aura:attribute access="public" name="recordId" type="Id" />
+   <aura:set attribute="objectType" value="Account,Contact,Lead" />
+   <aura:set attribute="objectDetailText" value="Object Details" />
+   <aura:set attribute="numRecords" value="50" />
+   <aura:set attribute="createButtLabel" value="New Account" />
+   <aura:set attribute="createObjectType" value="Account" />
+   <aura:set attribute="showNewButton" value="true" />
+   <aura:set attribute="showObjDetails" value="true" />
+   <aura:set attribute="parentControlsSpinner" value="true" />
+
+   <aura:set attribute="isCreateOppty" value="false" />
+
+
+   <aura:set attribute="insertMarkupAboveSaveButt">
+      <ui:inputSelect aura:id="acctRecTypePickList" label="Record Type" change="{!c.recordTypeChange}">
+         <aura:iteration items="{!v.recTypeSelect}" var="rt" indexVar="index">
+            <aura:if isTrue="{!rt.label == v.selectedRecordTypeText}" >
+               <ui:inputSelectOption text="{!rt.value}" label="{!rt.label}" value="true"/>
+            <aura:set attribute="else">
+               <ui:inputSelectOption text="{!rt.value}" label="{!rt.label}" />
+            </aura:set>
+         </aura:if>
+         </aura:iteration>
+      </ui:inputSelect>
+   </aura:set>
+   <aura:set attribute="insertMarkupAboveSaveButt1">
+      <ui:inputSelect aura:id="acctRecTypePickList1" label="Record Type" change="{!c.recordTypeChange1}">
+         <aura:iteration items="{!v.recTypeSelect}" var="rt" indexVar="index">
+            <aura:if isTrue="{!rt.label == v.selectedRecordTypeText}" >
+               <ui:inputSelectOption text="{!rt.value}" label="{!rt.label}" value="true"/>
+            <aura:set attribute="else">
+               <ui:inputSelectOption text="{!rt.value}" label="{!rt.label}" />
+            </aura:set>
+         </aura:if>
+         </aura:iteration>
+      </ui:inputSelect>
+   </aura:set>
+   <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>  
+</aura:component>
